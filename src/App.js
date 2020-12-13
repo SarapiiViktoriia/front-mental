@@ -40,6 +40,63 @@ class Home extends Component {
   }
 }
 class About extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      shreyas_c: 0,
+      caleb_c: 0,
+      taher_c: 0,
+      weihan_c: 0,
+      shreyas_i: 0,
+      caleb_i: 0,
+      taher_i: 0,
+      weihan_i: 0
+    }
+  }
+  componentWillMount() {
+    fetch('https:
+    .then(results => {
+      return results.json();
+    }).then((data) => {
+      var shreyas = 0;
+      var caleb = 0;
+      var taher = 0;
+      var weihan = 0;
+      data.forEach(element => {
+        if (element.committer_name == "Shreyas Tawre" || element.committer_name == "stawre") {
+          shreyas = shreyas + 1;
+        } else if (element.committer_name == "Caleb Hamada") {
+          caleb = caleb + 1;
+        } else if (element.committer_name == "Taher Naeem") {
+          taher = taher + 1;
+        } else if (element.committer_name == "Weihan He") {
+          weihan = weihan + 1;
+        }
+      });
+      this.setState({shreyas_c : shreyas, caleb_c : caleb, taher_c : taher, weihan_c : weihan});
+    })
+    fetch('https:
+    .then(results => {
+      return results.json();
+    }).then((data) => {
+      var shreyas = 0;
+      var caleb = 0;
+      var taher = 0;
+      var weihan = 0;
+      data.forEach(element => {
+        if (element.author.name == "Shreyas Tawre") {
+          shreyas += 1;
+        } else if (element.author.name == "Caleb Hamada") {
+            caleb += 1;
+        } else if (element.author.name == "Taher Naeem") {
+            taher += 1;
+        } else if (element.author.name == "Weihan He") {
+            weihan += 1;
+        }
+      });
+      this.setState({shreyas_i : shreyas, caleb_i : caleb, taher_i : taher, weihan_i : weihan});
+    })
+  }
   render() {
     return (
       <div>
@@ -47,10 +104,10 @@ class About extends Component {
           <Header label1="Home" label2="About" label3="Illnesses" label4="Charities" label5="Hospitals" selected={1} />
         </div>
         <div>
-          <Card title="Caleb" buttonTitle="Learn More" image={Caleb} style={{'position': 'absolute', 'left': '38px', 'top': '130px'}} />
-          <Card title="Shreyas" buttonTitle="Learn More" image={Shreyas} style={{'position': 'absolute', 'left': '448px', 'top': '130px'}} />
-          <Card title="Taher" buttonTitle="Learn More" image={Taher} style={{'position': 'absolute', 'left': '858px', 'top': '130px'}} />
-          <Card title="Weihan" buttonTitle="Learn More" image={Weihan} style={{'position': 'absolute', 'left': '448px', 'top': '675px'}} />
+          <Card title="Caleb" label1={this.state.caleb_c} label2={this.state.caleb_i} image={Caleb} style={{'position': 'absolute', 'left': '38px', 'top': '130px'}} />
+          <Card title="Shreyas" label1={this.state.shreyas_c} label2={this.state.shreyas_i} image={Shreyas} style={{'position': 'absolute', 'left': '448px', 'top': '130px'}} />
+          <Card title="Taher" label1={this.state.taher_c} label2={this.state.taher_i} image={Taher} style={{'position': 'absolute', 'left': '858px', 'top': '130px'}} />
+          <Card title="Weihan" label1={this.state.weihan_c} label2={this.state.weihan_i} image={Weihan} style={{'position': 'absolute', 'left': '448px', 'top': '675px'}} />
         </div>
       </div>
     );
@@ -63,16 +120,20 @@ class Header extends Component {
   }
   render() {
     function handleAboutTabClick(e) {
-      window.location.assign('/about');
-      this.setState({
-        selected: 1
-      });
+      if (window.location.href !== 'http:
+        window.location.assign('/about');
+        this.setState({
+          selected: 1
+        });
+      }
     }
     function handleHomeTabClick(e) {
-      window.location.assign('/');
-      this.setState({
-        selected: 0
-      });
+      if (window.location.href !== 'http:
+        window.location.assign('/');
+        this.setState({
+          selected: 0
+        });
+      }
     }
     return (
       <div className="header">
@@ -100,15 +161,31 @@ class Card extends Component {
             <span className="title">
               <center>
                 <FormLabel className="title" style={{'margin-top': '20px', 'font-size': '1.2rem'}}>
-                {this.props.title}
+                  {this.props.title}
                 </FormLabel>
               </center>
             </span>
             <br/>
             <center>
-              <Button kind="secondary">
-              {this.props.buttonTitle}
-              </Button>
+              {"buttonTitle" in this.props &&
+                <Button kind="secondary">
+                  {this.props.buttonTitle}
+                </Button>
+              }
+              {"label1" in this.props &&
+                <center>
+                  <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+                    Commits: {this.props.label1}
+                  </FormLabel>
+                </center>
+              }
+              {"label2" in this.props &&
+                <center>
+                  <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+                    Issues: {this.props.label2}
+                  </FormLabel>
+                </center>
+              }
             </center>
           </Tile>
       </div>
@@ -116,4 +193,3 @@ class Card extends Component {
   }
 }
 export default App;
-export {About};
