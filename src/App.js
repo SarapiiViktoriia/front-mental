@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from "carbon-components-react";
-import { Tile, Tabs, Tab, FormLabel } from "carbon-components-react";
+import { DataTable, Tile, Tabs, Tab, FormLabel } from "carbon-components-react";
 import logo from './logo.svg';
 import './App.css';
 import illnessesImage from './Mental-Illness-Prevalence-in-Adults.png';
@@ -11,6 +11,15 @@ import Shreyas from './Shreyas.jpg';
 import Taher from './Taher.jpg';
 import Weihan from './Weihan.jpg';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+const {
+  TableContainer,
+  Table,
+  TableHead,
+  TableRow,
+  TableBody,
+  TableCell,
+  TableHeader,
+} = DataTable;
 class App extends Component {
   render() {
     return (
@@ -18,6 +27,9 @@ class App extends Component {
         <div>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
+          <Route path="/illnesses" component={Illnesses} />
+          <Route path="/hospitals" component={Hospitals} />
+          <Route path="/charities" component={Charities} />
         </div>
       </Router>
     );
@@ -28,7 +40,7 @@ class Home extends Component {
     return (
       <div>
         <div>
-          <Header label1="Home" label2="About" label3="Illnesses" label4="Charities" label5="Hospitals" selected={0} />
+          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={0} />
         </div>
         <div>
           <Card title="Illnesses" buttonTitle="Learn More" image={illnessesImage} style={{'position': 'absolute', 'left': '38px', 'top': '130px'}} />
@@ -53,7 +65,7 @@ class About extends Component {
       weihan_i: 0
     }
   }
-  componentWillMount() {
+  componentDidMount() {
     fetch('https:
     .then(results => {
       return results.json();
@@ -63,13 +75,13 @@ class About extends Component {
       var taher = 0;
       var weihan = 0;
       data.forEach(element => {
-        if (element.committer_name == "Shreyas Tawre" || element.committer_name == "stawre") {
+        if (element.committer_name === "Shreyas Tawre" || element.committer_name === "stawre") {
           shreyas = shreyas + 1;
-        } else if (element.committer_name == "Caleb Hamada") {
+        } else if (element.committer_name === "Caleb Hamada") {
           caleb = caleb + 1;
-        } else if (element.committer_name == "Taher Naeem") {
+        } else if (element.committer_name === "Taher Naeem") {
           taher = taher + 1;
-        } else if (element.committer_name == "Weihan He") {
+        } else if (element.committer_name === "Weihan He") {
           weihan = weihan + 1;
         }
       });
@@ -84,24 +96,24 @@ class About extends Component {
       var taher = 0;
       var weihan = 0;
       data.forEach(element => {
-        if (element.author.name == "Shreyas Tawre") {
+        if (element.author.name === "Shreyas Tawre") {
           shreyas += 1;
-        } else if (element.author.name == "Caleb Hamada") {
+        } else if (element.author.name === "Caleb Hamada") {
             caleb += 1;
-        } else if (element.author.name == "Taher Naeem") {
+        } else if (element.author.name === "Taher Naeem") {
             taher += 1;
-        } else if (element.author.name == "Weihan He") {
+        } else if (element.author.name === "Weihan He") {
             weihan += 1;
         }
       });
-      this.setState({shreyas_i : shreyas, caleb_i : caleb, taher_i : taher, weihan_i : weihan});
+      this.setState({shreyas_i: shreyas, caleb_i : caleb, taher_i : taher, weihan_i : weihan});
     })
   }
   render() {
     return (
       <div>
         <div>
-          <Header label1="Home" label2="About" label3="Illnesses" label4="Charities" label5="Hospitals" selected={1} />
+          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={1} />
         </div>
         <div>
           <Card title="Caleb" label1={this.state.caleb_c} label2={this.state.caleb_i} image={Caleb} style={{'position': 'absolute', 'left': '38px', 'top': '130px'}} />
@@ -110,6 +122,151 @@ class About extends Component {
           <Card title="Weihan" label1={this.state.weihan_c} label2={this.state.weihan_i} image={Weihan} style={{'position': 'absolute', 'left': '448px', 'top': '675px'}} />
         </div>
       </div>
+    );
+  }
+}
+class Illnesses extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      illnesses: [],
+      headers: [ 
+        { key: 'name', header: 'Name', }, 
+        { key: 'population', header: 'Population Affected', }, 
+        { key: 'average_age', header: 'Average Age', }, 
+        { key: 'genetic', header: 'Genetic', },
+      ],
+    };
+  }
+  componentDidMount() {
+    fetch('http:
+    .then(results => results.json())
+    .then(
+      (data) => {
+        this.setState({ illnesses: data.objects });
+      }
+    )
+  }
+  render() {
+    const { illnesses, headers } = this.state;
+    return (
+      <div>
+        <div>
+          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={2} />
+        </div>
+        <div>
+          <MyTable rows={illnesses} headers={headers} />
+        </div>
+      </div>
+    );
+  }
+}
+class Hospitals extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hospitals: [],
+      headers: [ 
+        { key: 'name', header: 'Name', }, 
+        { key: 'population', header: 'Population', }, 
+        { key: 'city', header: 'City', }, 
+        { key: 'state', header: 'State', },
+        { key: 'owner', header: 'Owner', },
+      ],
+    };
+  }
+  componentDidMount() {
+    fetch('http:
+    .then(results => results.json())
+    .then(
+      (data) => {
+        this.setState({ hospitals: data.objects });
+      }
+    )
+  }
+  render() {
+    const { hospitals, headers } = this.state;
+    return (
+      <div>
+        <div>
+          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={3} />
+        </div>
+        <div>
+          <MyTable rows={hospitals} headers={headers} />
+        </div>
+      </div>
+    );
+  }
+}
+class Charities extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      charities: [],
+      headers: [ 
+        { key: 'charityName', header: 'Name', }, 
+        { key: 'rating', header: 'Rating', }, 
+        { key: 'assetAmount', header: 'Asset Amount', }, 
+        { key: 'state', header: 'State', },
+        { key: 'deductible', header: 'Deductible', },
+        { key: 'websiteUrl', header: 'URL', },
+      ],
+    };
+  }
+  componentDidMount() {
+    fetch('http:
+    .then(results => results.json())
+    .then(
+      (data) => {
+        this.setState({ charities: data.objects });
+      }
+    )
+  }
+  render() {
+    const { charities, headers } = this.state;
+    return (
+      <div>
+        <div>
+          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={4} />
+        </div>
+        <div>
+          <MyTable rows={charities} headers={headers} />
+        </div>
+      </div>
+    );
+  }
+}
+class MyTable extends Component {
+  render() {
+    return (
+    <DataTable rows={this.props.rows} headers={this.props.headers}
+      render={({ rows, headers }) => (
+      <TableContainer style={{'padding-top': '30px', 'padding-left': '47px', 'padding-right': '47px'}}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              {headers.map(header => (
+              <TableHeader>
+                {header.header}
+              </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map(row => (
+            <TableRow key={row.id}>
+              {row.cells.map(cell => (
+              <TableCell key={cell.id}>
+                {cell.value}
+              </TableCell>
+              ))}
+            </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      )}
+    />
     );
   }
 }
@@ -124,6 +281,30 @@ class Header extends Component {
         window.location.assign('/about');
         this.setState({
           selected: 1
+        });
+      }
+    }
+    function handleIllnessesTabClick(e) {
+      if (window.location.href !== 'http:
+        window.location.assign('/illnesses');
+        this.setState({
+          selected: 2
+        });
+      }
+    }
+    function handleHospitalsTabClick(e) {
+      if (window.location.href !== 'http:
+        window.location.assign('/hospitals');
+        this.setState({
+          selected: 3
+        });
+      }
+    }
+    function handleCharitiesTabClick(e) {
+      if (window.location.href !== 'http:
+        window.location.assign('/charities');
+        this.setState({
+          selected: 3
         });
       }
     }
@@ -142,9 +323,9 @@ class Header extends Component {
           <Tabs className="some-class" selected={this.props.selected} style={{'margin-left': '750px', 'margin-top': '5px', 'margin-bottom': '0px'}}>
             <Tab className="another-class" label={this.props.label1} onClick={handleHomeTabClick} />
             <Tab className="another-class" label={this.props.label2} onClick={handleAboutTabClick} />
-            <Tab className="another-class" label={this.props.label3} />
-            <Tab className="another-class" label={this.props.label4} />
-            <Tab className="another-class" label={this.props.label5} />
+            <Tab className="another-class" label={this.props.label3} onClick={handleIllnessesTabClick} />
+            <Tab className="another-class" label={this.props.label4} onClick={handleHospitalsTabClick} />
+            <Tab className="another-class" label={this.props.label5} onClick={handleCharitiesTabClick} />
           </Tabs>
         </Tile>
       </div>
