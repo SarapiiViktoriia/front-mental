@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from "carbon-components-react";
-import { DataTable, Tile, Tabs, Tab, FormLabel } from "carbon-components-react";
+import { DataTable, Tile, Tabs, Tab, FormLabel, PaginationV2 } from "carbon-components-react";
 import logo from './logo.svg';
 import './App.css';
 import illnessesImage from './Mental-Illness-Prevalence-in-Adults.png';
@@ -157,6 +157,9 @@ class Illnesses extends Component {
         <div>
           <MyTable rows={illnesses} headers={headers} />
         </div>
+        <div>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} style={{'position': 'absolute', 'left': '48px', 'top': '680px'}}/>
+        </div>
       </div>
     );
   }
@@ -204,12 +207,12 @@ class Charities extends Component {
     this.state = {
       charities: [],
       headers: [ 
-        { key: 'charityName', header: 'Name', }, 
+        { key: 'name', header: 'Name', }, 
         { key: 'rating', header: 'Rating', }, 
         { key: 'assetAmount', header: 'Asset Amount', }, 
         { key: 'state', header: 'State', },
         { key: 'deductible', header: 'Deductible', },
-        { key: 'websiteUrl', header: 'URL', },
+        { key: 'website_url', header: 'URL', },
       ],
     };
   }
