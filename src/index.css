@@ -8696,7 +8696,7 @@ span.flatpickr-weekday {
 }
 .bx--pagination {
   font-family: "ibm-plex-sans", Helvetica Neue, Arial, sans-serif;
-  width: 92.5%;
+  width: 60%;
   background-color: #fff;
   padding: 0.5rem 1rem;
   display: -ms-flexbox;

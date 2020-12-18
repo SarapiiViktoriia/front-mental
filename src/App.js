@@ -129,13 +129,9 @@ class Illnesses extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
       illnesses: [],
-      headers: [ 
-        { key: 'name', header: 'Name', }, 
-        { key: 'population', header: 'Population Affected', }, 
-        { key: 'average_age', header: 'Average Age', }, 
-        { key: 'genetic', header: 'Genetic', },
-      ],
+      illnesses_slice: [],
     };
   }
   componentDidMount() {
@@ -144,21 +140,25 @@ class Illnesses extends Component {
     .then(
       (data) => {
         this.setState({ illnesses: data.objects });
+        this.setState({ illnesses_slice: data.objects.slice(0, 3) });
       }
     )
   }
   render() {
-    const { illnesses, headers } = this.state;
+    const { illnesses_slice } = this.state;
     return (
       <div>
         <div>
           <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={2} />
         </div>
         <div>
-          <MyTable rows={illnesses} headers={headers} />
+          {}
+            {illnesses_slice.map(illness => (
+              <Card title={illness.name} image={illness.image_url} style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} />
+            ))}
         </div>
         <div>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} style={{'position': 'absolute', 'left': '48px', 'top': '680px'}}/>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '640px'}}/>
         </div>
       </div>
     );
@@ -168,14 +168,9 @@ class Hospitals extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
       hospitals: [],
-      headers: [ 
-        { key: 'name', header: 'Name', }, 
-        { key: 'population', header: 'Population', }, 
-        { key: 'city', header: 'City', }, 
-        { key: 'state', header: 'State', },
-        { key: 'owner', header: 'Owner', },
-      ],
+      hospitals_slice: [],
     };
   }
   componentDidMount() {
@@ -184,18 +179,25 @@ class Hospitals extends Component {
     .then(
       (data) => {
         this.setState({ hospitals: data.objects });
+        this.setState({ hospitals_slice: data.objects.slice(0, 3) });
       }
     )
   }
   render() {
-    const { hospitals, headers } = this.state;
+    const { hospitals_slice } = this.state;
     return (
       <div>
         <div>
           <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={3} />
         </div>
         <div>
-          <MyTable rows={hospitals} headers={headers} />
+          {}
+            {hospitals_slice.map(hospital => (
+              <Card title={hospital.name} image={hospital.image_url} style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} />
+            ))}
+        </div>
+        <div>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '640px'}}/>
         </div>
       </div>
     );
@@ -205,15 +207,9 @@ class Charities extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      page: 1,
       charities: [],
-      headers: [ 
-        { key: 'name', header: 'Name', }, 
-        { key: 'rating', header: 'Rating', }, 
-        { key: 'assetAmount', header: 'Asset Amount', }, 
-        { key: 'state', header: 'State', },
-        { key: 'deductible', header: 'Deductible', },
-        { key: 'website_url', header: 'URL', },
-      ],
+      charities_slice: [],
     };
   }
   componentDidMount() {
@@ -221,19 +217,32 @@ class Charities extends Component {
     .then(results => results.json())
     .then(
       (data) => {
+        console.log(data.objects.slice(0, 3));
         this.setState({ charities: data.objects });
+        this.setState({ charities_slice: data.objects.slice(0, 3) });
       }
     )
   }
+  handlePageChange = evt => {
+    let slice1 = 0 + 3*(evt.target.value - 1);
+    let slice2 = 3 + 3*(evt.target.value - 1);
+    this.setState({ page: evt.target.value, charities_slice: this.state.charities.slice(slice1, slice2) });      
+  };
   render() {
-    const { charities, headers } = this.state;
+    const {charities_slice } = this.state;    
     return (
       <div>
         <div>
           <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={4} />
         </div>
         <div>
-          <MyTable rows={charities} headers={headers} />
+          {}
+            {charities_slice.map(charity => (
+              <Card title={charity.name} image={charity.image_url} style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} />
+            ))}
+        </div>
+        <div>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '640px'}}/>
         </div>
       </div>
     );
@@ -241,6 +250,8 @@ class Charities extends Component {
 }
 class MyTable extends Component {
   render() {
+    function onChange() {
+    }
     return (
     <DataTable rows={this.props.rows} headers={this.props.headers}
       render={({ rows, headers }) => (
@@ -338,41 +349,39 @@ class Header extends Component {
 class Card extends Component {
   render() {
     return (
-      <div className="card">
-        <Tile style={this.props.style}>
-            <img src={this.props.image} width="350" height="370" />
-            <br/>
-            <span className="title">
+      <Tile style={this.props.style}>
+          <img src={this.props.image} width="350" height="370" />
+          <br/>
+          <span className="title">
+            <center>
+              <FormLabel className="title" style={{'margin-top': '20px', 'font-size': '1.2rem'}}>
+                {this.props.title}
+              </FormLabel>
+            </center>
+          </span>
+          <br/>
+          <center>
+            {"buttonTitle" in this.props &&
+              <Button kind="secondary">
+                {this.props.buttonTitle}
+              </Button>
+            }
+            {"label1" in this.props &&
               <center>
-                <FormLabel className="title" style={{'margin-top': '20px', 'font-size': '1.2rem'}}>
-                  {this.props.title}
+                <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+                  Commits: {this.props.label1}
                 </FormLabel>
               </center>
-            </span>
-            <br/>
-            <center>
-              {"buttonTitle" in this.props &&
-                <Button kind="secondary">
-                  {this.props.buttonTitle}
-                </Button>
-              }
-              {"label1" in this.props &&
-                <center>
-                  <FormLabel className="title" style={{'font-size': '0.9rem'}}>
-                    Commits: {this.props.label1}
-                  </FormLabel>
-                </center>
-              }
-              {"label2" in this.props &&
-                <center>
-                  <FormLabel className="title" style={{'font-size': '0.9rem'}}>
-                    Issues: {this.props.label2}
-                  </FormLabel>
-                </center>
-              }
-            </center>
-          </Tile>
-      </div>
+            }
+            {"label2" in this.props &&
+              <center>
+                <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+                  Issues: {this.props.label2}
+                </FormLabel>
+              </center>
+            }
+          </center>
+        </Tile>
     );
   }
 }
