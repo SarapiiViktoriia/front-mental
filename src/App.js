@@ -116,10 +116,10 @@ class About extends Component {
           <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={1} />
         </div>
         <div>
-          <Card title="Caleb" label1={this.state.caleb_c} label2={this.state.caleb_i} image={Caleb} style={{'position': 'absolute', 'left': '38px', 'top': '130px'}} />
-          <Card title="Shreyas" label1={this.state.shreyas_c} label2={this.state.shreyas_i} image={Shreyas} style={{'position': 'absolute', 'left': '448px', 'top': '130px'}} />
-          <Card title="Taher" label1={this.state.taher_c} label2={this.state.taher_i} image={Taher} style={{'position': 'absolute', 'left': '858px', 'top': '130px'}} />
-          <Card title="Weihan" label1={this.state.weihan_c} label2={this.state.weihan_i} image={Weihan} style={{'position': 'absolute', 'left': '448px', 'top': '675px'}} />
+          <Card title="Caleb" label1_heading="Commits" label1={this.state.caleb_c} label2_heading="Issues" label2={this.state.caleb_i} image={Caleb} style={{'position': 'absolute', 'left': '38px', 'top': '130px'}} />
+          <Card title="Shreyas" label1_heading="Commits" label1={this.state.shreyas_c} label2_heading="Issues" label2={this.state.shreyas_i} image={Shreyas} style={{'position': 'absolute', 'left': '448px', 'top': '130px'}} />
+          <Card title="Taher" label1_heading="Commits" label1={this.state.taher_c} label2_heading="Issues" label2={this.state.taher_i} image={Taher} style={{'position': 'absolute', 'left': '858px', 'top': '130px'}} />
+          <Card title="Weihan" label1_heading="Commits" label1={this.state.weihan_c} label2_heading="Issues" label2={this.state.weihan_i} image={Weihan} style={{'position': 'absolute', 'left': '448px', 'top': '675px'}} />
         </div>
       </div>
     );
@@ -134,7 +134,7 @@ class Illnesses extends Component {
       illnesses_slice: [],
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     fetch('http:
     .then(results => results.json())
     .then(
@@ -154,11 +154,16 @@ class Illnesses extends Component {
         <div>
           {}
             {illnesses_slice.map(illness => (
-              <Card title={illness.name} image={illness.image_url} style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} />
+              <Card title={illness.name} image={illness.image_url} 
+              style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}}
+              label1_heading="Curable" label1={illness.curable} 
+              label2_heading="Chronic" label2={illness.chronic} 
+              label3_heading="Genetic" label3={illness.genetic} 
+              label4_heading="Average Age" label4={String(illness.average_age)} />
             ))}
         </div>
         <div>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '640px'}}/>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '740px'}}/>
         </div>
       </div>
     );
@@ -173,7 +178,7 @@ class Hospitals extends Component {
       hospitals_slice: [],
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     fetch('http:
     .then(results => results.json())
     .then(
@@ -193,11 +198,16 @@ class Hospitals extends Component {
         <div>
           {}
             {hospitals_slice.map(hospital => (
-              <Card title={hospital.name} image={hospital.image_url} style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} />
+              <Card title={hospital.name} image={hospital.image_url} 
+              style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} 
+              label1_heading="City" label1={hospital.city} 
+              label2_heading="State" label2={hospital.state} 
+              label3_heading="Owner" label3={hospital.owner} 
+              label4_heading="Population" label4={hospital.population} />
             ))}
         </div>
         <div>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '640px'}}/>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '740px'}}/>
         </div>
       </div>
     );
@@ -212,7 +222,7 @@ class Charities extends Component {
       charities_slice: [],
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     fetch('http:
     .then(results => results.json())
     .then(
@@ -238,11 +248,16 @@ class Charities extends Component {
         <div>
           {}
             {charities_slice.map(charity => (
-              <Card title={charity.name} image={charity.image_url} style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} />
+              <Card title={charity.name} image={charity.image_url} 
+              style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} 
+              label1_heading="Rating" label1={String(charity.rating)} 
+              label2_heading="State" label2={charity.state} 
+              label3_heading="Deductible" label3={charity.deductible} 
+              label4_heading="Income" label4={String(charity.incomeAmount)} />
             ))}
         </div>
         <div>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '640px'}}/>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '740px'}}/>
         </div>
       </div>
     );
@@ -369,14 +384,28 @@ class Card extends Component {
             {"label1" in this.props &&
               <center>
                 <FormLabel className="title" style={{'font-size': '0.9rem'}}>
-                  Commits: {this.props.label1}
+                {this.props.label1_heading}: {this.props.label1}
                 </FormLabel>
               </center>
             }
             {"label2" in this.props &&
               <center>
                 <FormLabel className="title" style={{'font-size': '0.9rem'}}>
-                  Issues: {this.props.label2}
+                {this.props.label2_heading}: {this.props.label2}
+                </FormLabel>
+              </center>
+            }
+            {"label3" in this.props &&
+              <center>
+                <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+                {this.props.label3_heading}: {this.props.label3}
+                </FormLabel>
+              </center>
+            }
+            {"label4" in this.props &&
+              <center>
+                <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+                {this.props.label4_heading}: {this.props.label4}
                 </FormLabel>
               </center>
             }
