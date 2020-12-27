@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from "carbon-components-react";
-import { DataTable, Tile, Tabs, Tab, FormLabel, PaginationV2 } from "carbon-components-react";
+import { DataTable, ClickableTile, Tile, Tabs, Tab, FormLabel, PaginationV2 } from "carbon-components-react";
 import logo from './logo.svg';
 import './App.css';
 import illnessesImage from './Mental-Illness-Prevalence-in-Adults.png';
@@ -22,6 +22,14 @@ const {
 } = DataTable;
 class App extends Component {
   render() {
+    const queryString = require('query-string');
+    const parsed = queryString.parse(window.location.search);
+    let charities;
+    if ('id' in parsed) {
+      charities = <Route path="/charities" render={(props) => <Charity {...props} id={parsed.id} />} />;
+    } else {
+      charities = <Route path="/charities" component={Charities} />;
+    }
     return (
       <Router>
         <div>
@@ -29,7 +37,7 @@ class App extends Component {
           <Route path="/about" component={About} />
           <Route path="/illnesses" component={Illnesses} />
           <Route path="/hospitals" component={Hospitals} />
-          <Route path="/charities" component={Charities} />
+          {charities}
         </div>
       </Router>
     );
@@ -163,7 +171,10 @@ class Illnesses extends Component {
             ))}
         </div>
         <div>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '740px'}}/>
+          <center>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
+          style={{'position': 'relative', 'marginTop': '40px'}} />
+          </center>
         </div>
       </div>
     );
@@ -207,7 +218,10 @@ class Hospitals extends Component {
             ))}
         </div>
         <div>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '740px'}}/>
+          <center>
+            <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
+            style={{'position': 'relative', 'marginTop': '40px'}} />
+          </center>
         </div>
       </div>
     );
@@ -239,7 +253,7 @@ class Charities extends Component {
     this.setState({ page: evt.target.value, charities_slice: this.state.charities.slice(slice1, slice2) });      
   };
   render() {
-    const {charities_slice } = this.state;    
+    const { charities_slice } = this.state;    
     return (
       <div>
         <div>
@@ -253,11 +267,73 @@ class Charities extends Component {
               label1_heading="Rating" label1={String(charity.rating)} 
               label2_heading="State" label2={charity.state} 
               label3_heading="Deductible" label3={charity.deductible} 
-              label4_heading="Income" label4={String(charity.incomeAmount)} />
+              label4_heading="Income" label4={charity.incomeAmount.toLocaleString('en')} 
+              href={`http:
             ))}
         </div>
         <div>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} style={{'position': 'absolute', 'left': '270px', 'top': '740px'}}/>
+          <center>
+          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
+          style={{'position': 'relative', 'marginTop': '40px'}} />
+          </center>
+        </div>
+      </div>
+    );
+  }
+}
+class Charity extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.id,
+      charity: {},
+    };
+  }
+  componentWillMount() {
+    fetch(`http:
+    .then(results => results.json())
+    .then(
+      (data) => {
+        console.log(data);
+        this.setState({ charity: data });
+      }
+    )
+  }
+  render() {
+    return (
+      <div>
+        <div>
+          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={4} />
+        </div>
+        <div>
+          <Tile style={{'position': 'relative', 'marginLeft': '32px', 'marginRight': '32px', 'marginTop': '38px'}}>
+            <div>
+              <span>
+                <p>
+                <img src={this.state.charity.image_url} width="350" height="370" style={{'display': 'inline-block', 'vertical-align': 'top'}} />
+                <FormLabel className="title" 
+                style={{'position': 'relative', 'marginLeft': '50px', 'marginTop': '0px', 'font-size': '1.875rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
+                {this.state.charity.name}
+                </FormLabel>
+                <FormLabel className="title" 
+                style={{'position': 'absolute', 'left': '420px', 'right': '40px', 'top': '80px', 'font-size': '1.0rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
+                "{this.state.charity.tagLine}"
+                </FormLabel>
+                <FormLabel className="title" 
+                style={{'position': 'absolute', 'left': '420px', 'right': '40px', 'top': '120px', 'font-size': '1.0rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
+                Asset Amount: {(this.state.charity.assetAmount)}
+                </FormLabel>
+                <FormLabel className="title" 
+                style={{'position': 'absolute', 'left': '420px', 'right': '40px', 'top': '160px', 'font-size': '1.0rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
+                Mission: {this.state.charity.mission}
+                </FormLabel>
+                </p>
+                <p>
+                <a href={this.state.charity.website_url} style={{'position': 'relative', 'marginLeft': '405px', 'marginRight': '40px', 'marginTop': '20px', 'font-size': '1.0rem' }} >{this.state.charity.website_url}</a>
+                </p>
+              </span>
+            </div>
+          </Tile>
         </div>
       </div>
     );
@@ -348,14 +424,20 @@ class Header extends Component {
     return (
       <div className="header">
         <Tile>
-          {}
-          <Tabs className="some-class" selected={this.props.selected} style={{'margin-left': '750px', 'margin-top': '5px', 'margin-bottom': '0px'}}>
-            <Tab className="another-class" label={this.props.label1} onClick={handleHomeTabClick} />
-            <Tab className="another-class" label={this.props.label2} onClick={handleAboutTabClick} />
-            <Tab className="another-class" label={this.props.label3} onClick={handleIllnessesTabClick} />
-            <Tab className="another-class" label={this.props.label4} onClick={handleHospitalsTabClick} />
-            <Tab className="another-class" label={this.props.label5} onClick={handleCharitiesTabClick} />
-          </Tabs>
+          <span>
+            <FormLabel className="title" 
+            style={{'position': 'relative', 'marginLeft': '16px', 'marginTop': '10px', 'font-size': '1.875rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
+              mentalhelp.me
+            </FormLabel>
+            <Tabs className="some-class" selected={this.props.selected} 
+            style={{'position': 'relative', 'marginLeft': '535px', 'marginTop': '5px', 'marginBottom': '0px', 'display': 'inline-block', 'vertical-align': 'top'}} >
+              <Tab className="another-class" label={this.props.label1} onClick={handleHomeTabClick} />
+              <Tab className="another-class" label={this.props.label2} onClick={handleAboutTabClick} />
+              <Tab className="another-class" label={this.props.label3} onClick={handleIllnessesTabClick} />
+              <Tab className="another-class" label={this.props.label4} onClick={handleHospitalsTabClick} />
+              <Tab className="another-class" label={this.props.label5} onClick={handleCharitiesTabClick} />
+            </Tabs>
+          </span>
         </Tile>
       </div>
     );
@@ -364,7 +446,7 @@ class Header extends Component {
 class Card extends Component {
   render() {
     return (
-      <Tile style={this.props.style}>
+      <ClickableTile href={this.props.href} style={this.props.style}>
           <img src={this.props.image} width="350" height="370" />
           <br/>
           <span className="title">
@@ -410,7 +492,7 @@ class Card extends Component {
               </center>
             }
           </center>
-        </Tile>
+        </ClickableTile>
     );
   }
 }
