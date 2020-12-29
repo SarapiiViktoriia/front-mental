@@ -152,6 +152,12 @@ class Illnesses extends Component {
       }
     )
   }
+  handlePageChange = evt => {
+    console.log(evt);
+    let slice1 = 0 + 3*(evt.page - 1);
+    let slice2 = 3 + 3*(evt.page - 1);
+    this.setState({ page: evt.page, illnesses_slice: this.state.illnesses.slice(slice1, slice2) });      
+  };
   render() {
     const { illnesses_slice } = this.state;
     return (
@@ -173,7 +179,7 @@ class Illnesses extends Component {
         <div>
           <center>
           <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
-          style={{'position': 'relative', 'marginTop': '40px'}} />
+          style={{'position': 'relative', 'marginTop': '40px', 'marginBottom': '20px' }} />
           </center>
         </div>
       </div>
@@ -199,6 +205,12 @@ class Hospitals extends Component {
       }
     )
   }
+  handlePageChange = evt => {
+    console.log(evt);
+    let slice1 = 0 + 3*(evt.page - 1);
+    let slice2 = 3 + 3*(evt.page - 1);
+    this.setState({ page: evt.page, hospitals_slice: this.state.hospitals.slice(slice1, slice2) });      
+  };
   render() {
     const { hospitals_slice } = this.state;
     return (
@@ -220,7 +232,7 @@ class Hospitals extends Component {
         <div>
           <center>
             <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
-            style={{'position': 'relative', 'marginTop': '40px'}} />
+            style={{'position': 'relative', 'marginTop': '40px', 'marginBottom': '20px'}} />
           </center>
         </div>
       </div>
@@ -248,9 +260,10 @@ class Charities extends Component {
     )
   }
   handlePageChange = evt => {
-    let slice1 = 0 + 3*(evt.target.value - 1);
-    let slice2 = 3 + 3*(evt.target.value - 1);
-    this.setState({ page: evt.target.value, charities_slice: this.state.charities.slice(slice1, slice2) });      
+    console.log(evt);
+    let slice1 = 0 + 3*(evt.page - 1);
+    let slice2 = 3 + 3*(evt.page - 1);
+    this.setState({ page: evt.page, charities_slice: this.state.charities.slice(slice1, slice2) });      
   };
   render() {
     const { charities_slice } = this.state;    
@@ -274,7 +287,7 @@ class Charities extends Component {
         <div>
           <center>
           <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
-          style={{'position': 'relative', 'marginTop': '40px'}} />
+          style={{'position': 'relative', 'marginTop': '40px', 'marginBottom': '20px'}} />
           </center>
         </div>
       </div>
@@ -312,7 +325,7 @@ class Charity extends Component {
                 <p>
                 <img src={this.state.charity.image_url} width="350" height="370" style={{'display': 'inline-block', 'vertical-align': 'top'}} />
                 <FormLabel className="title" 
-                style={{'position': 'relative', 'marginLeft': '50px', 'marginTop': '0px', 'font-size': '1.875rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
+                style={{'position': 'relative', 'marginLeft': '50px', 'marginTop': '0px', 'font-size': '1.475rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
                 {this.state.charity.name}
                 </FormLabel>
                 <FormLabel className="title" 
