@@ -102,10 +102,12 @@ class About extends Component {
       caleb_c: 0,
       taher_c: 0,
       weihan_c: 0,
+      jason_c: 0,
       shreyas_i: 0,
       caleb_i: 0,
       taher_i: 0,
-      weihan_i: 0
+      weihan_i: 0,
+      jason_i: 0
     };
   }
   componentDidMount() {
@@ -118,6 +120,7 @@ class About extends Component {
         var caleb = 0;
         var taher = 0;
         var weihan = 0;
+        var jason = 0;
         data.forEach(element => {
           if (
             element.committer_name === "Shreyas Tawre" ||
@@ -130,13 +133,16 @@ class About extends Component {
             taher = taher + 1;
           } else if (element.committer_name === "Weihan He") {
             weihan = weihan + 1;
+          } else if (element.committer_name === "Jason Cheng") {
+            jason = jason + 1;
           }
         });
         this.setState({
           shreyas_c: shreyas,
           caleb_c: caleb,
           taher_c: taher,
-          weihan_c: weihan
+          weihan_c: weihan,
+          jason_c: jason
         });
       });
     fetch("https:
@@ -157,13 +163,16 @@ class About extends Component {
             taher += 1;
           } else if (element.author.name === "Weihan He") {
             weihan += 1;
+          } else if (element.committer_name === "Jason Cheng") {
+            jason = jason + 1;
           }
         });
         this.setState({
           shreyas_i: shreyas,
           caleb_i: caleb,
           taher_i: taher,
-          weihan_i: weihan
+          weihan_i: weihan,
+          jason_i: jason
         });
       });
   }
@@ -254,10 +263,10 @@ class About extends Component {
           <Card
             title="Jason"
             label1_heading="Commits"
-            label1={""}
+            label1={this.state.jason_c}
             label2_heading="Issues"
-            label2={""}
-            image={""}
+            label2={this.state.jason_i}
+            image={Jason}
             style={{
               position: "relative",
               marginLeft: "32px",
