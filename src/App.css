@@ -18,10 +18,6 @@
 .App-link {
   color: #61dafb;
 }
-div.title {
-  text-align: center;
-  vertical-align: middle;
-}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
