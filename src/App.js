@@ -1,16 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Button } from "carbon-components-react";
-import { DataTable, ClickableTile, Tile, Tabs, Tab, FormLabel, PaginationV2 } from "carbon-components-react";
-import logo from './logo.svg';
-import './App.css';
-import illnessesImage from './Mental-Illness-Prevalence-in-Adults.png';
-import charitiesImage from './charities.png';
-import hospitalsImage from './hospitals.png';
-import Caleb from './Caleb.jpg';
-import Shreyas from './Shreyas.jpg';
-import Taher from './Taher.jpg';
-import Weihan from './Weihan.jpg';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import {
+  DataTable,
+  ClickableTile,
+  Tile,
+  Tabs,
+  Tab,
+  FormLabel,
+  PaginationV2
+} from "carbon-components-react";
+import logo from "./logo.svg";
+import "./App.css";
+import illnessesImage from "./Mental-Illness-Prevalence-in-Adults.png";
+import charitiesImage from "./charities.png";
+import hospitalsImage from "./hospitals.png";
+import Caleb from "./Caleb.jpg";
+import Shreyas from "./Shreyas.jpg";
+import Taher from "./Taher.jpg";
+import Weihan from "./Weihan.jpg";
+import Jason from "./Jason.JPG"
+import { BrowserRouter as Router, Route } from "react-router-dom";
 const {
   TableContainer,
   Table,
@@ -18,15 +27,20 @@ const {
   TableRow,
   TableBody,
   TableCell,
-  TableHeader,
+  TableHeader
 } = DataTable;
 class App extends Component {
   render() {
-    const queryString = require('query-string');
+    const queryString = require("query-string");
     const parsed = queryString.parse(window.location.search);
     let charities;
-    if ('id' in parsed) {
-      charities = <Route path="/charities" render={(props) => <Charity {...props} id={parsed.id} />} />;
+    if ("id" in parsed) {
+      charities = (
+        <Route
+          path="/charities"
+          render={props => <Charity {...props} id={parsed.id} />}
+        />
+      );
     } else {
       charities = <Route path="/charities" component={Charities} />;
     }
@@ -48,13 +62,35 @@ class Home extends Component {
     return (
       <div>
         <div>
-          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={0} />
+          <Header
+            label1="Home"
+            label2="About"
+            label3="Illnesses"
+            label4="Hospitals"
+            label5="Charities"
+            selected={0}
+          />
         </div>
         <div>
-          <Card title="Illnesses" buttonTitle="Learn More" image={illnessesImage} style={{'position': 'absolute', 'left': '38px', 'top': '130px'}} />
-          <Card title="Charities" buttonTitle="Learn More" image={charitiesImage} style={{'position': 'absolute', 'left': '448px', 'top': '130px'}} />
-          <Card title="Hospitals" buttonTitle="Learn More" image={hospitalsImage} style={{'position': 'absolute', 'left': '858px', 'top': '130px'}} />
-        </div> 
+          <Card
+            title="Illnesses"
+            buttonTitle="Learn More"
+            image={illnessesImage}
+            style={{ position: "absolute", left: "38px", top: "130px" }}
+          />
+          <Card
+            title="Charities"
+            buttonTitle="Learn More"
+            image={charitiesImage}
+            style={{ position: "absolute", left: "448px", top: "130px" }}
+          />
+          <Card
+            title="Hospitals"
+            buttonTitle="Learn More"
+            image={hospitalsImage}
+            style={{ position: "absolute", left: "858px", top: "130px" }}
+          />
+        </div>
       </div>
     );
   }
@@ -67,11 +103,13 @@ class About extends Component {
       caleb_c: 0,
       taher_c: 0,
       weihan_c: 0,
+      jason_c: 0,
       shreyas_i: 0,
       caleb_i: 0,
       taher_i: 0,
-      weihan_i: 0
-    }
+      weihan_i: 0,
+      jason_i: 0
+    };
   }
   componentDidMount() {
     fetch('https:
@@ -114,41 +152,197 @@ class About extends Component {
           weihan = weihan + 1;
         }
       });
-      this.setState({shreyas_c : shreyas, caleb_c : caleb, taher_c : taher, weihan_c : weihan});
     })
-    fetch('https:
-    .then(results => {
-      return results.json();
-    }).then((data) => {
-      var shreyas = 0;
-      var caleb = 0;
-      var taher = 0;
-      var weihan = 0;
-      data.forEach(element => {
-        if (element.author.name === "Shreyas Tawre") {
-          shreyas += 1;
-        } else if (element.author.name === "Caleb Hamada") {
-            caleb += 1;
-        } else if (element.author.name === "Taher Naeem") {
-            taher += 1;
-        } else if (element.author.name === "Weihan He") {
-            weihan += 1;
-        }
+    fetch("https:
+      .then(results => {
+        return results.json();
+      })
+      .then(data => {
+        var shreyas = 0;
+        var caleb = 0;
+        var taher = 0;
+        var weihan = 0;
+        var jason = 0;
+        data.forEach(element => {
+          if (
+            element.committer_name === "Shreyas Tawre" ||
+            element.committer_name === "stawre"
+          ) {
+            shreyas = shreyas + 1;
+          } else if (element.committer_name === "Caleb Hamada") {
+            caleb = caleb + 1;
+          } else if (element.committer_name === "Taher Naeem") {
+            taher = taher + 1;
+          } else if (element.committer_name === "Weihan He") {
+            weihan = weihan + 1;
+          } else if (element.committer_name === "Jason Cheng") {
+            jason = jason + 1;
+          }
+        });
+        this.setState({
+          shreyas_c: shreyas,
+          caleb_c: caleb,
+          taher_c: taher,
+          weihan_c: weihan,
+          jason_c: jason
+        });
       });
-      this.setState({shreyas_i: shreyas, caleb_i : caleb, taher_i : taher, weihan_i : weihan});
-    })
+    fetch("https:
+      .then(results => {
+        return results.json();
+      })
+      .then(data => {
+        var shreyas = 0;
+        var caleb = 0;
+        var taher = 0;
+        var weihan = 0;
+        var jason = 0;
+        data.forEach(element => {
+          if (element.author.name === "Shreyas Tawre") {
+            shreyas += 1;
+          } else if (element.author.name === "Caleb Hamada") {
+            caleb += 1;
+          } else if (element.author.name === "Taher Naeem") {
+            taher += 1;
+          } else if (element.author.name === "Weihan He") {
+            weihan += 1;
+          } else if (element.committer_name === "Jason Cheng") {
+            jason = jason + 1;
+          }
+        });
+        this.setState({
+          shreyas_i: shreyas,
+          caleb_i: caleb,
+          taher_i: taher,
+          weihan_i: weihan,
+          jason_i: jason
+        });
+      });
   }
   render() {
     return (
       <div>
         <div>
-          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={1} />
+          <Header
+            label1="Home"
+            label2="About"
+            label3="Illnesses"
+            label4="Hospitals"
+            label5="Charities"
+            selected={1}
+          />
+        </div>
+        <div className="title">
+          <br />
+          <br />
+          <br />
+          <h1>Group Members</h1>
         </div>
         <div>
-          <Card title="Caleb" label1_heading="Commits" label1={this.state.caleb_c} label2_heading="Issues" label2={this.state.caleb_i} image={Caleb} style={{'position': 'absolute', 'left': '38px', 'top': '130px'}} />
-          <Card title="Shreyas" label1_heading="Commits" label1={this.state.shreyas_c} label2_heading="Issues" label2={this.state.shreyas_i} image={Shreyas} style={{'position': 'absolute', 'left': '448px', 'top': '130px'}} />
-          <Card title="Taher" label1_heading="Commits" label1={this.state.taher_c} label2_heading="Issues" label2={this.state.taher_i} image={Taher} style={{'position': 'absolute', 'left': '858px', 'top': '130px'}} />
-          <Card title="Weihan" label1_heading="Commits" label1={this.state.weihan_c} label2_heading="Issues" label2={this.state.weihan_i} image={Weihan} style={{'position': 'absolute', 'left': '448px', 'top': '675px'}} />
+          <Card
+            title="Caleb"
+            label1_heading="Commits"
+            label1={this.state.caleb_c}
+            label2_heading="Issues"
+            label2={this.state.caleb_i}
+            image={Caleb}
+            style={{
+              position: "relative",
+              marginLeft: "32px",
+              marginTop: "38px",
+              "max-width": "385px",
+              display: "inline-block",
+              "vertical-align": "top"
+            }}
+          />
+          <Card
+            title="Shreyas"
+            label1_heading="Commits"
+            label1={this.state.shreyas_c}
+            label2_heading="Issues"
+            label2={this.state.shreyas_i}
+            image={Shreyas}
+            style={{
+              position: "relative",
+              marginLeft: "32px",
+              marginTop: "38px",
+              "max-width": "385px",
+              display: "inline-block",
+              "vertical-align": "top"
+            }}
+          />
+          <Card
+            title="Taher"
+            label1_heading="Commits"
+            label1={this.state.taher_c}
+            label2_heading="Issues"
+            label2={this.state.taher_i}
+            image={Taher}
+            style={{
+              position: "relative",
+              marginLeft: "32px",
+              marginTop: "38px",
+              "max-width": "385px",
+              display: "inline-block",
+              "vertical-align": "top"
+            }}
+          />
+          <Card
+            title="Weihan"
+            label1_heading="Commits"
+            label1={this.state.weihan_c}
+            label2_heading="Issues"
+            label2={this.state.weihan_i}
+            image={Weihan}
+            style={{
+              position: "relative",
+              marginLeft: "32px",
+              marginTop: "38px",
+              "max-width": "385px",
+              display: "inline-block",
+              "vertical-align": "top"
+            }}
+          />
+          <Card
+            title="Jason"
+            label1_heading="Commits"
+            label1={this.state.jason_c}
+            label2_heading="Issues"
+            label2={this.state.jason_i}
+            image={Jason}
+            style={{
+              position: "relative",
+              marginLeft: "32px",
+              marginTop: "38px",
+              "max-width": "385px",
+              display: "inline-block",
+              "vertical-align": "top"
+            }}
+          />
+          <div className="title">
+            <br />
+            <br />
+            <br />
+            <h1>Repository Stats</h1>
+          </div>
+          <div className="title">
+            <br />
+            <br />
+            <br />
+            <h1>Data Sources</h1>
+          </div>
+          <div className="title">
+            <br />
+            <br />
+            <br />
+            <h1>Tools Used</h1>
+          </div>
+          <div className="title">
+            <br />
+            <br />
+            <br />
+            <h1>Project Links</h1>
+          </div>
         </div>
       </div>
     );
@@ -160,47 +354,78 @@ class Illnesses extends Component {
     this.state = {
       page: 1,
       illnesses: [],
-      illnesses_slice: [],
+      illnesses_slice: []
     };
   }
   componentWillMount() {
-    fetch('http:
-    .then(results => results.json())
-    .then(
-      (data) => {
+    fetch("http:
+      .then(results => results.json())
+      .then(data => {
         this.setState({ illnesses: data.objects });
         this.setState({ illnesses_slice: data.objects.slice(0, 3) });
-      }
-    )
+      });
   }
   handlePageChange = evt => {
     console.log(evt);
-    let slice1 = 0 + 3*(evt.page - 1);
-    let slice2 = 3 + 3*(evt.page - 1);
-    this.setState({ page: evt.page, illnesses_slice: this.state.illnesses.slice(slice1, slice2) });      
+    let slice1 = 0 + 3 * (evt.page - 1);
+    let slice2 = 3 + 3 * (evt.page - 1);
+    this.setState({
+      page: evt.page,
+      illnesses_slice: this.state.illnesses.slice(slice1, slice2)
+    });
   };
   render() {
     const { illnesses_slice } = this.state;
     return (
       <div>
         <div>
-          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={2} />
+          <Header
+            label1="Home"
+            label2="About"
+            label3="Illnesses"
+            label4="Hospitals"
+            label5="Charities"
+            selected={2}
+          />
         </div>
         <div>
           {}
-            {illnesses_slice.map(illness => (
-              <Card title={illness.name} image={illness.image_url} 
-              style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}}
-              label1_heading="Curable" label1={illness.curable} 
-              label2_heading="Chronic" label2={illness.chronic} 
-              label3_heading="Genetic" label3={illness.genetic} 
-              label4_heading="Average Age" label4={String(illness.average_age)} />
-            ))}
+          {illnesses_slice.map(illness => (
+            <Card
+              title={illness.name}
+              image={illness.image_url}
+              style={{
+                position: "relative",
+                marginLeft: "32px",
+                marginTop: "38px",
+                "max-width": "385px",
+                display: "inline-block",
+                "vertical-align": "top"
+              }}
+              label1_heading="Curable"
+              label1={illness.curable}
+              label2_heading="Chronic"
+              label2={illness.chronic}
+              label3_heading="Genetic"
+              label3={illness.genetic}
+              label4_heading="Average Age"
+              label4={String(illness.average_age)}
+            />
+          ))}
         </div>
         <div>
           <center>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
-          style={{'position': 'relative', 'marginTop': '40px', 'marginBottom': '20px' }} />
+            <PaginationV2
+              totalItems={10}
+              pageSize={3}
+              pageSizes={[3]}
+              onChange={this.handlePageChange}
+              style={{
+                position: "relative",
+                marginTop: "40px",
+                marginBottom: "20px"
+              }}
+            />
           </center>
         </div>
       </div>
@@ -213,47 +438,78 @@ class Hospitals extends Component {
     this.state = {
       page: 1,
       hospitals: [],
-      hospitals_slice: [],
+      hospitals_slice: []
     };
   }
   componentWillMount() {
-    fetch('http:
-    .then(results => results.json())
-    .then(
-      (data) => {
+    fetch("http:
+      .then(results => results.json())
+      .then(data => {
         this.setState({ hospitals: data.objects });
         this.setState({ hospitals_slice: data.objects.slice(0, 3) });
-      }
-    )
+      });
   }
   handlePageChange = evt => {
     console.log(evt);
-    let slice1 = 0 + 3*(evt.page - 1);
-    let slice2 = 3 + 3*(evt.page - 1);
-    this.setState({ page: evt.page, hospitals_slice: this.state.hospitals.slice(slice1, slice2) });      
+    let slice1 = 0 + 3 * (evt.page - 1);
+    let slice2 = 3 + 3 * (evt.page - 1);
+    this.setState({
+      page: evt.page,
+      hospitals_slice: this.state.hospitals.slice(slice1, slice2)
+    });
   };
   render() {
     const { hospitals_slice } = this.state;
     return (
       <div>
         <div>
-          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={3} />
+          <Header
+            label1="Home"
+            label2="About"
+            label3="Illnesses"
+            label4="Hospitals"
+            label5="Charities"
+            selected={3}
+          />
         </div>
         <div>
           {}
-            {hospitals_slice.map(hospital => (
-              <Card title={hospital.name} image={hospital.image_url} 
-              style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '38px', 'max-width': '385px', 'display': 'inline-block', 'vertical-align': 'top'}} 
-              label1_heading="City" label1={hospital.city} 
-              label2_heading="State" label2={hospital.state} 
-              label3_heading="Owner" label3={hospital.owner} 
-              label4_heading="Population" label4={hospital.population} />
-            ))}
+          {hospitals_slice.map(hospital => (
+            <Card
+              title={hospital.name}
+              image={hospital.image_url}
+              style={{
+                position: "relative",
+                marginLeft: "32px",
+                marginTop: "38px",
+                "max-width": "385px",
+                display: "inline-block",
+                "vertical-align": "top"
+              }}
+              label1_heading="City"
+              label1={hospital.city}
+              label2_heading="State"
+              label2={hospital.state}
+              label3_heading="Owner"
+              label3={hospital.owner}
+              label4_heading="Population"
+              label4={hospital.population}
+            />
+          ))}
         </div>
         <div>
           <center>
-            <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
-            style={{'position': 'relative', 'marginTop': '40px', 'marginBottom': '20px'}} />
+            <PaginationV2
+              totalItems={10}
+              pageSize={3}
+              pageSizes={[3]}
+              onChange={this.handlePageChange}
+              style={{
+                position: "relative",
+                marginTop: "40px",
+                marginBottom: "20px"
+              }}
+            />
           </center>
         </div>
       </div>
@@ -266,49 +522,78 @@ class Charities extends Component {
     this.state = {
       page: 1,
       charities: [],
-      charities_slice: [],
+      charities_slice: []
     };
   }
   componentWillMount() {
-    fetch('http:
-    .then(results => results.json())
-    .then(
-      (data) => {
+    fetch("http:
+      .then(results => results.json())
+      .then(data => {
         console.log(data.objects.slice(0, 3));
         this.setState({ charities: data.objects });
         this.setState({ charities_slice: data.objects.slice(0, 3) });
-      }
-    )
+      });
   }
   handlePageChange = evt => {
     console.log(evt);
-    let slice1 = 0 + 3*(evt.page - 1);
-    let slice2 = 3 + 3*(evt.page - 1);
-    this.setState({ page: evt.page, charities_slice: this.state.charities.slice(slice1, slice2) });      
+    let slice1 = 0 + 3 * (evt.page - 1);
+    let slice2 = 3 + 3 * (evt.page - 1);
+    this.setState({
+      page: evt.page,
+      charities_slice: this.state.charities.slice(slice1, slice2)
+    });
   };
   render() {
-    const { charities_slice } = this.state;    
+    const { charities_slice } = this.state;
     return (
       <div>
         <div>
-          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={4} />
+          <Header
+            label1="Home"
+            label2="About"
+            label3="Illnesses"
+            label4="Hospitals"
+            label5="Charities"
+            selected={4}
+          />
         </div>
         <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }} >
           {}
-            {charities_slice.map(charity => (
-              <Card title={charity.name} image={charity.image_url} 
-              style={{'position': 'relative', 'marginLeft': '32px', 'marginTop': '32px', 'max-width': '385px' }} 
-              label1_heading="Rating" label1={String(charity.rating)} 
-              label2_heading="State" label2={charity.state} 
-              label3_heading="Deductible" label3={charity.deductible} 
-              label4_heading="Income" label4={charity.incomeAmount.toLocaleString('en')} 
+          {charities_slice.map(charity => (
+            <Card
+              title={charity.name}
+              image={charity.image_url}
+              style={{
+                marginLeft: "15px",
+                marginRight: "15px",
+                marginTop: "40px",
+                maxWidth: "385px",
+              }}
+              label1_heading="Rating"
+              label1={String(charity.rating)}
+              label2_heading="State"
+              label2={charity.state}
+              label3_heading="Deductible"
+              label3={charity.deductible}
+              label4_heading="Income"
+              label4={charity.incomeAmount.toLocaleString("en")}
               href={`http:
-            ))}
+            />
+          ))}
         </div>
         <div>
           <center>
-          <PaginationV2 totalItems={10} pageSize={3} pageSizes={[3]} onChange={this.handlePageChange} 
-          style={{'position': 'relative', 'marginTop': '40px', 'marginBottom': '20px'}} />
+            <PaginationV2
+              totalItems={10}
+              pageSize={3}
+              pageSizes={[3]}
+              onChange={this.handlePageChange}
+              style={{
+                position: "relative",
+                marginTop: "20px",
+                marginBottom: "20px"
+              }}
+            />
           </center>
         </div>
       </div>
@@ -320,50 +605,117 @@ class Charity extends Component {
     super(props);
     this.state = {
       id: this.props.id,
-      charity: {},
+      charity: {}
     };
   }
   componentWillMount() {
     fetch(`http:
-    .then(results => results.json())
-    .then(
-      (data) => {
+      .then(results => results.json())
+      .then(data => {
         console.log(data);
         this.setState({ charity: data });
-      }
-    )
+      });
   }
   render() {
     return (
       <div>
         <div>
-          <Header label1="Home" label2="About" label3="Illnesses" label4="Hospitals" label5="Charities" selected={4} />
+          <Header
+            label1="Home"
+            label2="About"
+            label3="Illnesses"
+            label4="Hospitals"
+            label5="Charities"
+            selected={4}
+          />
         </div>
         <div>
-          <Tile style={{'position': 'relative', 'marginLeft': '32px', 'marginRight': '32px', 'marginTop': '38px'}}>
+          <Tile
+            style={{
+              position: "relative",
+              marginLeft: "32px",
+              marginRight: "32px",
+              marginTop: "38px"
+            }}
+          >
             <div>
               <span>
                 <p>
-                <img src={this.state.charity.image_url} width="350" height="370" style={{'display': 'inline-block', 'vertical-align': 'top'}} />
-                <FormLabel className="title" 
-                style={{'position': 'relative', 'marginLeft': '50px', 'marginTop': '0px', 'font-size': '1.475rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
-                {this.state.charity.name}
-                </FormLabel>
-                <FormLabel className="title" 
-                style={{'position': 'absolute', 'left': '420px', 'right': '40px', 'top': '80px', 'font-size': '1.0rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
-                "{this.state.charity.tagLine}"
-                </FormLabel>
-                <FormLabel className="title" 
-                style={{'position': 'absolute', 'left': '420px', 'right': '40px', 'top': '120px', 'font-size': '1.0rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
-                Asset Amount: {(this.state.charity.assetAmount)}
-                </FormLabel>
-                <FormLabel className="title" 
-                style={{'position': 'absolute', 'left': '420px', 'right': '40px', 'top': '160px', 'font-size': '1.0rem', 'display': 'inline-block', 'vertical-align': 'top'}} >
-                Mission: {this.state.charity.mission}
-                </FormLabel>
+                  <img
+                    src={this.state.charity.image_url}
+                    width="350"
+                    height="370"
+                    style={{ display: "inline-block", "vertical-align": "top" }}
+                  />
+                  <FormLabel
+                    className="title"
+                    style={{
+                      position: "relative",
+                      marginLeft: "50px",
+                      marginTop: "0px",
+                      "font-size": "1.475rem",
+                      display: "inline-block",
+                      "vertical-align": "top"
+                    }}
+                  >
+                    {this.state.charity.name}
+                  </FormLabel>
+                  <FormLabel
+                    className="title"
+                    style={{
+                      position: "absolute",
+                      left: "420px",
+                      right: "40px",
+                      top: "80px",
+                      "font-size": "1.0rem",
+                      display: "inline-block",
+                      "vertical-align": "top"
+                    }}
+                  >
+                    "{this.state.charity.tagLine}"
+                  </FormLabel>
+                  <FormLabel
+                    className="title"
+                    style={{
+                      position: "absolute",
+                      left: "420px",
+                      right: "40px",
+                      top: "120px",
+                      "font-size": "1.0rem",
+                      display: "inline-block",
+                      "vertical-align": "top"
+                    }}
+                  >
+                    Asset Amount: {this.state.charity.assetAmount}
+                  </FormLabel>
+                  <FormLabel
+                    className="title"
+                    style={{
+                      position: "absolute",
+                      left: "420px",
+                      right: "40px",
+                      top: "160px",
+                      "font-size": "1.0rem",
+                      display: "inline-block",
+                      "vertical-align": "top"
+                    }}
+                  >
+                    Mission: {this.state.charity.mission}
+                  </FormLabel>
                 </p>
                 <p>
-                <a href={this.state.charity.website_url} style={{'position': 'relative', 'marginLeft': '405px', 'marginRight': '40px', 'marginTop': '20px', 'font-size': '1.0rem' }} >{this.state.charity.website_url}</a>
+                  <a
+                    href={this.state.charity.website_url}
+                    style={{
+                      position: "relative",
+                      marginLeft: "405px",
+                      marginRight: "40px",
+                      marginTop: "20px",
+                      "font-size": "1.0rem"
+                    }}
+                  >
+                    {this.state.charity.website_url}
+                  </a>
                 </p>
               </span>
             </div>
@@ -375,81 +727,84 @@ class Charity extends Component {
 }
 class MyTable extends Component {
   render() {
-    function onChange() {
-    }
+    function onChange() {}
     return (
-    <DataTable rows={this.props.rows} headers={this.props.headers}
-      render={({ rows, headers }) => (
-      <TableContainer style={{'padding-top': '30px', 'padding-left': '47px', 'padding-right': '47px'}}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {headers.map(header => (
-              <TableHeader>
-                {header.header}
-              </TableHeader>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map(row => (
-            <TableRow key={row.id}>
-              {row.cells.map(cell => (
-              <TableCell key={cell.id}>
-                {cell.value}
-              </TableCell>
-              ))}
-            </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      )}
-    />
+      <DataTable
+        rows={this.props.rows}
+        headers={this.props.headers}
+        render={({ rows, headers }) => (
+          <TableContainer
+            style={{
+              "padding-top": "30px",
+              "padding-left": "47px",
+              "padding-right": "47px"
+            }}
+          >
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {headers.map(header => (
+                    <TableHeader>{header.header}</TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map(row => (
+                  <TableRow key={row.id}>
+                    {row.cells.map(cell => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      />
     );
   }
 }
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = {selected: 0};
+    this.state = { selected: 0 };
   }
   render() {
     function handleAboutTabClick(e) {
-      if (window.location.href !== 'http:
-        window.location.assign('/about');
+      if (window.location.href !== "http:
+        window.location.assign("/about");
         this.setState({
           selected: 1
         });
       }
     }
     function handleIllnessesTabClick(e) {
-      if (window.location.href !== 'http:
-        window.location.assign('/illnesses');
+      if (window.location.href !== "http:
+        window.location.assign("/illnesses");
         this.setState({
           selected: 2
         });
       }
     }
     function handleHospitalsTabClick(e) {
-      if (window.location.href !== 'http:
-        window.location.assign('/hospitals');
+      if (window.location.href !== "http:
+        window.location.assign("/hospitals");
         this.setState({
           selected: 3
         });
       }
     }
     function handleCharitiesTabClick(e) {
-      if (window.location.href !== 'http:
-        window.location.assign('/charities');
+      if (window.location.href !== "http:
+        window.location.assign("/charities");
         this.setState({
           selected: 3
         });
       }
     }
     function handleHomeTabClick(e) {
-      if (window.location.href !== 'http:
-        window.location.assign('/');
+      if (window.location.href !== "http:
+        window.location.assign("/");
         this.setState({
           selected: 0
         });
@@ -457,23 +812,60 @@ class Header extends Component {
     }
     return (
       <div className="header">
-        <Tile style={{ 'display': 'flex', 'flexDirection': 'row' }} >
-          <div style={{ 'justifyContent': 'flexStart' }} >
-            <FormLabel className="title" 
-            style={{ 'position': 'relative', 'marginLeft': '12px', 'marginTop': '10px', 'font-size': '1.875rem' }} >
+        <Tile>
+          <span>
+            <FormLabel
+              className="title"
+              style={{
+                position: "relative",
+                marginLeft: "16px",
+                marginTop: "10px",
+                "font-size": "1.875rem",
+                display: "inline-block",
+                "vertical-align": "top"
+              }}
+            >
               mentalhelp.me
             </FormLabel>
-          </div>
-          <div style={{ 'justifyContent': 'flexEnd' }} >
-            <Tabs className="some-class" selected={this.props.selected} 
-            style={{ 'position': 'relative', 'marginTop': '5px', 'marginLeft': '540px', 'marginBottom': '0px' }} >
-              <Tab className="another-class" label={this.props.label1} onClick={handleHomeTabClick} />
-              <Tab className="another-class" label={this.props.label2} onClick={handleAboutTabClick} />
-              <Tab className="another-class" label={this.props.label3} onClick={handleIllnessesTabClick} />
-              <Tab className="another-class" label={this.props.label4} onClick={handleHospitalsTabClick} />
-              <Tab className="another-class" label={this.props.label5} onClick={handleCharitiesTabClick} />
+            <Tabs
+              className="some-class"
+              selected={this.props.selected}
+              style={{
+                position: "relative",
+                marginLeft: "535px",
+                marginTop: "5px",
+                marginBottom: "0px",
+                display: "inline-block",
+                "vertical-align": "top"
+              }}
+            >
+              <Tab
+                className="another-class"
+                label={this.props.label1}
+                onClick={handleHomeTabClick}
+              />
+              <Tab
+                className="another-class"
+                label={this.props.label2}
+                onClick={handleAboutTabClick}
+              />
+              <Tab
+                className="another-class"
+                label={this.props.label3}
+                onClick={handleIllnessesTabClick}
+              />
+              <Tab
+                className="another-class"
+                label={this.props.label4}
+                onClick={handleHospitalsTabClick}
+              />
+              <Tab
+                className="another-class"
+                label={this.props.label5}
+                onClick={handleCharitiesTabClick}
+              />
             </Tabs>
-          </div>
+          </span>
         </Tile>
       </div>
     );
@@ -483,52 +875,53 @@ class Card extends Component {
   render() {
     return (
       <ClickableTile href={this.props.href} style={this.props.style}>
-          <img src={this.props.image} width="350" height="370" />
-          <br/>
-          <span className="title">
+        <img src={this.props.image} width="350" height="370" />
+        <br />
+        <span className="title">
+          <center>
+            <FormLabel
+              className="title"
+              style={{ "margin-top": "20px", "font-size": "1.2rem" }}
+            >
+              {this.props.title}
+            </FormLabel>
+          </center>
+        </span>
+        <br />
+        <center>
+          {"buttonTitle" in this.props && (
+            <Button kind="secondary">{this.props.buttonTitle}</Button>
+          )}
+          {"label1" in this.props && (
             <center>
-              <FormLabel className="title" style={{'margin-top': '20px', 'font-size': '1.2rem'}}>
-                {this.props.title}
+              <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                {this.props.label1_heading}: {this.props.label1}
               </FormLabel>
             </center>
-          </span>
-          <br/>
-          <center>
-            {"buttonTitle" in this.props &&
-              <Button kind="secondary">
-                {this.props.buttonTitle}
-              </Button>
-            }
-            {"label1" in this.props &&
-              <center>
-                <FormLabel className="title" style={{'font-size': '0.9rem'}}>
-                {this.props.label1_heading}: {this.props.label1}
-                </FormLabel>
-              </center>
-            }
-            {"label2" in this.props &&
-              <center>
-                <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+          )}
+          {"label2" in this.props && (
+            <center>
+              <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
                 {this.props.label2_heading}: {this.props.label2}
-                </FormLabel>
-              </center>
-            }
-            {"label3" in this.props &&
-              <center>
-                <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+              </FormLabel>
+            </center>
+          )}
+          {"label3" in this.props && (
+            <center>
+              <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
                 {this.props.label3_heading}: {this.props.label3}
-                </FormLabel>
-              </center>
-            }
-            {"label4" in this.props &&
-              <center>
-                <FormLabel className="title" style={{'font-size': '0.9rem'}}>
+              </FormLabel>
+            </center>
+          )}
+          {"label4" in this.props && (
+            <center>
+              <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
                 {this.props.label4_heading}: {this.props.label4}
-                </FormLabel>
-              </center>
-            }
-          </center>
-        </ClickableTile>
+              </FormLabel>
+            </center>
+          )}
+        </center>
+      </ClickableTile>
     );
   }
 }
