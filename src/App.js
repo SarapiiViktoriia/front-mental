@@ -238,7 +238,7 @@ class About extends Component {
           <br />
           <h1>Group Members</h1>
         </div>
-        <div>
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }} >
           <Card
             title="Caleb"
             label1_heading="Commits"
@@ -247,12 +247,10 @@ class About extends Component {
             label2={this.state.caleb_i}
             image={Caleb}
             style={{
-              position: "relative",
-              marginLeft: "32px",
-              marginTop: "38px",
-              "max-width": "385px",
-              display: "inline-block",
-              "vertical-align": "top"
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px",
             }}
           />
           <Card
@@ -263,12 +261,10 @@ class About extends Component {
             label2={this.state.shreyas_i}
             image={Shreyas}
             style={{
-              position: "relative",
-              marginLeft: "32px",
-              marginTop: "38px",
-              "max-width": "385px",
-              display: "inline-block",
-              "vertical-align": "top"
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px",
             }}
           />
           <Card
@@ -279,14 +275,14 @@ class About extends Component {
             label2={this.state.taher_i}
             image={Taher}
             style={{
-              position: "relative",
-              marginLeft: "32px",
-              marginTop: "38px",
-              "max-width": "385px",
-              display: "inline-block",
-              "vertical-align": "top"
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px",
             }}
           />
+        </div>
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }} >
           <Card
             title="Weihan"
             label1_heading="Commits"
@@ -295,12 +291,10 @@ class About extends Component {
             label2={this.state.weihan_i}
             image={Weihan}
             style={{
-              position: "relative",
-              marginLeft: "32px",
-              marginTop: "38px",
-              "max-width": "385px",
-              display: "inline-block",
-              "vertical-align": "top"
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px",
             }}
           />
           <Card
@@ -311,14 +305,14 @@ class About extends Component {
             label2={this.state.jason_i}
             image={Jason}
             style={{
-              position: "relative",
-              marginLeft: "32px",
-              marginTop: "38px",
-              "max-width": "385px",
-              display: "inline-block",
-              "vertical-align": "top"
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px",
             }}
           />
+        </div>
+        <div>
           <div className="title">
             <br />
             <br />
@@ -388,19 +382,17 @@ class Illnesses extends Component {
             selected={2}
           />
         </div>
-        <div>
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }} >
           {}
           {illnesses_slice.map(illness => (
             <Card
               title={illness.name}
               image={illness.image_url}
               style={{
-                position: "relative",
-                marginLeft: "32px",
-                marginTop: "38px",
-                "max-width": "385px",
-                display: "inline-block",
-                "vertical-align": "top"
+                marginLeft: "15px",
+                marginRight: "15px",
+                marginTop: "40px",
+                maxWidth: "385px",
               }}
               label1_heading="Curable"
               label1={illness.curable}
@@ -472,19 +464,17 @@ class Hospitals extends Component {
             selected={3}
           />
         </div>
-        <div>
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }}>
           {}
           {hospitals_slice.map(hospital => (
             <Card
               title={hospital.name}
               image={hospital.image_url}
               style={{
-                position: "relative",
-                marginLeft: "32px",
-                marginTop: "38px",
-                "max-width": "385px",
-                display: "inline-block",
-                "vertical-align": "top"
+                marginLeft: "15px",
+                marginRight: "15px",
+                marginTop: "40px",
+                maxWidth: "385px",
               }}
               label1_heading="City"
               label1={hospital.city}
