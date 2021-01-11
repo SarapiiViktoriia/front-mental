@@ -34,6 +34,7 @@ class App extends Component {
     const queryString = require("query-string");
     const parsed = queryString.parse(window.location.search);
     let charities;
+    let hospitals;
     if ("id" in parsed) {
       charities = (
         <Route
@@ -44,13 +45,23 @@ class App extends Component {
     } else {
       charities = <Route path="/charities" component={Charities} />;
     }
+    if ("id" in parsed) {
+      hospitals = (
+        <Route
+          path="/hospitals"
+          render={props => <Hospital {...props} id={parsed.id} />}
+        />
+      );
+    } else {
+      hospitals = <Route path="/hospitals" component={Hospitals} />;
+    }
     return (
       <Router>
         <div>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
           <Route path="/illnesses" component={Illnesses} />
-          <Route path="/hospitals" component={Hospitals} />
+          {hospitals}
           {charities}
         </div>
       </Router>
@@ -152,41 +163,8 @@ class About extends Component {
           weihan = weihan + 1;
         }
       });
+      this.setState({shreyas_c : shreyas, caleb_c : caleb, taher_c : taher, weihan_c : weihan});
     })
-    fetch("https:
-      .then(results => {
-        return results.json();
-      })
-      .then(data => {
-        var shreyas = 0;
-        var caleb = 0;
-        var taher = 0;
-        var weihan = 0;
-        var jason = 0;
-        data.forEach(element => {
-          if (
-            element.committer_name === "Shreyas Tawre" ||
-            element.committer_name === "stawre"
-          ) {
-            shreyas = shreyas + 1;
-          } else if (element.committer_name === "Caleb Hamada") {
-            caleb = caleb + 1;
-          } else if (element.committer_name === "Taher Naeem") {
-            taher = taher + 1;
-          } else if (element.committer_name === "Weihan He") {
-            weihan = weihan + 1;
-          } else if (element.committer_name === "Jason Cheng") {
-            jason = jason + 1;
-          }
-        });
-        this.setState({
-          shreyas_c: shreyas,
-          caleb_c: caleb,
-          taher_c: taher,
-          weihan_c: weihan,
-          jason_c: jason
-        });
-      });
     fetch("https:
       .then(results => {
         return results.json();
@@ -238,7 +216,7 @@ class About extends Component {
           <br />
           <h1>Group Members</h1>
         </div>
-        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }} >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           <Card
             title="Caleb"
             label1_heading="Commits"
@@ -282,7 +260,7 @@ class About extends Component {
             }}
           />
         </div>
-        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }} >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           <Card
             title="Weihan"
             label1_heading="Commits"
@@ -382,7 +360,7 @@ class Illnesses extends Component {
             selected={2}
           />
         </div>
-        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }} >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           {}
           {illnesses_slice.map(illness => (
             <Card
@@ -464,7 +442,7 @@ class Hospitals extends Component {
             selected={3}
           />
         </div>
-        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }}>
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }}>
           {}
           {hospitals_slice.map(hospital => (
             <Card
@@ -484,6 +462,7 @@ class Hospitals extends Component {
               label3={hospital.owner}
               label4_heading="Population"
               label4={hospital.population}
+              href={`http:
             />
           ))}
         </div>
@@ -547,7 +526,7 @@ class Charities extends Component {
             selected={4}
           />
         </div>
-        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center' }} >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           {}
           {charities_slice.map(charity => (
             <Card
@@ -715,6 +694,145 @@ class Charity extends Component {
     );
   }
 }
+class Hospital extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.id,
+      hospital: {}
+    };
+  }
+  componentWillMount() {
+    fetch(`http:
+      .then(results => results.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ hospital: data });
+      });
+  }
+  render() {
+    return (
+      <div>
+        <div>
+          <Header
+            label1="Home"
+            label2="About"
+            label3="Illnesses"
+            label4="Hospitals"
+            label5="Charities"
+            selected={3}
+          />
+        </div>
+        <div>
+          <Tile
+            style={{
+              position: "relative",
+              marginLeft: "32px",
+              marginRight: "32px",
+              marginTop: "38px",
+              display: 'flex',
+              flexDirection: 'row', 
+              justifyContent: 'center', 
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ justifyContent: 'flex-start' }} >
+              <img
+                src={this.state.hospital.image_url}
+                width="350"
+                height="370"
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column' }} >
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.475rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                {this.state.hospital.name}
+              </FormLabel>
+              <br/>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Street Address: {this.state.hospital.address}
+              </FormLabel>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                City: {this.state.hospital.city}
+              </FormLabel>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                State: {this.state.hospital.state}
+              </FormLabel>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Zip Code: {this.state.hospital.zip_code}
+              </FormLabel>
+              <br/>
+              <a
+                href={this.state.hospital.website_url}
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem"
+                }}
+              >
+                {this.state.hospital.website_url}
+              </a>
+            </div>
+          </Tile>
+        </div>
+      </div>
+    );
+  }
+}
 class MyTable extends Component {
   render() {
     function onChange() {}
@@ -822,7 +940,7 @@ class Header extends Component {
               selected={this.props.selected}
               style={{
                 position: "relative",
-                marginLeft: "535px",
+                marginLeft: "532px",
                 marginTop: "5px",
                 marginBottom: "0px",
                 display: "inline-block",
