@@ -35,6 +35,7 @@ class App extends Component {
     const parsed = queryString.parse(window.location.search);
     let charities;
     let hospitals;
+    let illnesses;
     if ("id" in parsed) {
       charities = (
         <Route
@@ -55,12 +56,22 @@ class App extends Component {
     } else {
       hospitals = <Route path="/hospitals" component={Hospitals} />;
     }
+    if ("id" in parsed) {
+      illnesses = (
+        <Route
+          path="/illnesses"
+          render={props => <Illness {...props} id={parsed.id} />}
+        />
+      );
+    } else {
+      illnesses = <Route path="/illnesses" component={Illnesses} />;
+    }
     return (
       <Router>
         <div>
           <Route exact path="/" component={Home} />
           <Route path="/about" component={About} />
-          <Route path="/illnesses" component={Illnesses} />
+          {illnesses}
           {hospitals}
           {charities}
         </div>
@@ -380,6 +391,7 @@ class Illnesses extends Component {
               label3={illness.genetic}
               label4_heading="Average Age"
               label4={String(illness.average_age)}
+              href={`http:
             />
           ))}
         </div>
@@ -815,6 +827,34 @@ class Hospital extends Component {
                 Zip Code: {this.state.hospital.zip_code}
               </FormLabel>
               <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Owner: {this.state.hospital.owner}
+              </FormLabel>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Population: {this.state.hospital.population}
+              </FormLabel>
+              <br/>
               <a
                 href={this.state.hospital.website_url}
                 style={{
@@ -826,6 +866,110 @@ class Hospital extends Component {
               >
                 {this.state.hospital.website_url}
               </a>
+            </div>
+          </Tile>
+        </div>
+      </div>
+    );
+  }
+}
+class Illness extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      id: this.props.id,
+      illness: {}
+    };
+  }
+  componentWillMount() {
+    fetch(`http:
+      .then(results => results.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ illness: data });
+      });
+  }
+  render() {
+    return (
+      <div>
+        <div>
+          <Header
+            label1="Home"
+            label2="About"
+            label3="Illnesses"
+            label4="Hospitals"
+            label5="Charities"
+            selected={2}
+          />
+        </div>
+        <div>
+          <Tile
+            style={{
+              position: "relative",
+              marginLeft: "32px",
+              marginRight: "32px",
+              marginTop: "38px",
+              marginBottom: "38px",
+              display: 'flex',
+              flexDirection: 'row', 
+              justifyContent: 'center', 
+              flexWrap: 'wrap',
+            }}
+          >
+            <div style={{ justifyContent: 'flex-start' }} >
+              <img
+                src={this.state.illness.image_url}
+                height="370"
+              />
+            </div>
+            <br/>
+            <br/>
+            <div style={{ justifyContent: 'flex-start', flexDirection: 'column', flexWrap: 'wrap' }} >
+              <p>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.475rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                {this.state.illness.name}
+              </FormLabel>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Symptoms: {this.state.illness.symptoms}
+              </FormLabel>
+              <br/>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Treatments: {this.state.illness.treatments}
+              </FormLabel>
+              <br/>
+              </p>
             </div>
           </Tile>
         </div>
