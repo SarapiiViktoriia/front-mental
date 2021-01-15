@@ -940,6 +940,7 @@ class Illness extends Component {
                 {this.state.illness.name}
               </FormLabel>
               <br/>
+              <br/>
               <FormLabel
                 className="title"
                 style={{
