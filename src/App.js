@@ -93,24 +93,39 @@ class Home extends Component {
             selected={0}
           />
         </div>
-        <div>
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           <Card
             title="Illnesses"
             buttonTitle="Learn More"
             image={illnessesImage}
-            style={{ position: "absolute", left: "38px", top: "130px" }}
+            style={{
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px",
+            }}
           />
           <Card
             title="Charities"
             buttonTitle="Learn More"
             image={charitiesImage}
-            style={{ position: "absolute", left: "448px", top: "130px" }}
+            style={{
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px",
+            }}
           />
           <Card
             title="Hospitals"
             buttonTitle="Learn More"
             image={hospitalsImage}
-            style={{ position: "absolute", left: "858px", top: "130px" }}
+            style={{
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px",
+            }}
           />
         </div>
       </div>
@@ -195,6 +210,37 @@ class About extends Component {
             taher += 1;
           } else if (element.author.name === "Weihan He") {
             weihan += 1;
+          } else if (element.committer_name === "Jason Cheng") {
+            jason = jason + 1;
+          }
+        });
+        this.setState({
+          shreyas_i: shreyas,
+          caleb_i: caleb,
+          taher_i: taher,
+          weihan_i: weihan,
+          jason_i: jason
+        });
+      });
+      fetch("https:
+      .then(results => {
+        return results.json();
+      })
+      .then(data => {
+        var shreyas = this.state.shreyas_i;
+        var caleb = this.state.caleb_i;
+        var taher = this.state.taher_i;
+        var weihan = this.state.weihan_i;
+        var jason = this.state.jason_i;
+        data.forEach(element => {
+          if (element.author.name === "stawre") {
+            shreyas = shreyas + 1;
+          } else if (element.author.name === "chamada1") {
+            caleb = caleb + 1;
+          } else if (element.author.name === "Taher Naeem") {
+            taher = taher + 1;
+          } else if (element.author.name === "Weihan He") {
+            weihan = weihan + 1;
           } else if (element.committer_name === "Jason Cheng") {
             jason = jason + 1;
           }
@@ -916,14 +962,18 @@ class Illness extends Component {
               flexWrap: 'wrap',
             }}
           >
-            <div style={{ justifyContent: 'flex-start' }} >
+            <div style={{ 
+              position: "relative",
+              marginTop: "20px",
+              marginBottom: "20px",
+              justifyContent: 'flex-start',
+              }} 
+            >
               <img
                 src={this.state.illness.image_url}
                 height="370"
               />
             </div>
-            <br/>
-            <br/>
             <div style={{ justifyContent: 'flex-start', flexDirection: 'column', flexWrap: 'wrap' }} >
               <p>
               <FormLabel
