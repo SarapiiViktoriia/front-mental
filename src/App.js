@@ -18,7 +18,7 @@ import Caleb from "./Caleb.jpg";
 import Shreyas from "./Shreyas.jpg";
 import Taher from "./Taher.jpg";
 import Weihan from "./Weihan.jpg";
-import Jason from "./Jason.JPG";
+import Jason from "./Jason.JPG"
 import { BrowserRouter as Router, Route } from "react-router-dom";
 const {
   TableContainer,
@@ -93,14 +93,7 @@ class Home extends Component {
             selected={0}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           <Card
             title="Illnesses"
             buttonTitle="Learn More"
@@ -109,7 +102,7 @@ class Home extends Component {
               marginLeft: "15px",
               marginRight: "15px",
               marginTop: "40px",
-              maxWidth: "385px"
+              maxWidth: "385px",
             }}
           />
           <Card
@@ -120,7 +113,7 @@ class Home extends Component {
               marginLeft: "15px",
               marginRight: "15px",
               marginTop: "40px",
-              maxWidth: "385px"
+              maxWidth: "385px",
             }}
           />
           <Card
@@ -131,7 +124,7 @@ class Home extends Component {
               marginLeft: "15px",
               marginRight: "15px",
               marginTop: "40px",
-              maxWidth: "385px"
+              maxWidth: "385px",
             }}
           />
         </div>
@@ -156,69 +149,48 @@ class About extends Component {
     };
   }
   componentDidMount() {
-    fetch("https:
-      .then(results => {
-        return results.json();
-      })
-      .then(data => {
-        var shreyas = 0;
-        var caleb = 0;
-        var taher = 0;
-        var weihan = 0;
-        data.forEach(element => {
-          if (
-            element.committer_name === "Shreyas Tawre" ||
-            element.committer_name === "stawre"
-          ) {
-            shreyas = shreyas + 1;
-          } else if (element.committer_name === "Caleb Hamada") {
-            caleb = caleb + 1;
-          } else if (
-            element.committer_name === "Taher Naeem" ||
-            element.author_email === "tahern52@cs.utexas.edu"
-          ) {
-            taher = taher + 1;
-          } else if (element.committer_name === "Weihan He") {
-            weihan = weihan + 1;
-          }
-        });
-        this.setState({
-          shreyas_c: shreyas,
-          caleb_c: caleb,
-          taher_c: taher,
-          weihan_c: weihan
-        });
+    fetch('https:
+    .then(results => {
+      return results.json();
+    }).then((data) => {
+      var shreyas = 0;
+      var caleb = 0;
+      var taher = 0;
+      var weihan = 0;
+      data.forEach(element => {
+        if (element.committer_name === "Shreyas Tawre" || element.committer_name === "stawre") {
+          shreyas = shreyas + 1;
+        } else if (element.committer_name === "Caleb Hamada") {
+          caleb = caleb + 1;
+        } else if (element.committer_name === "Taher Naeem" || element.author_email === "tahern52@cs.utexas.edu") {
+          taher = taher + 1;
+        } else if (element.committer_name === "Weihan He") {
+          weihan = weihan + 1;
+        }
       });
-    fetch("https:
-      .then(results => {
-        return results.json();
-      })
-      .then(data => {
-        var shreyas = this.state.shreyas_c;
-        var caleb = this.state.caleb_c;
-        var taher = this.state.taher_c;
-        var weihan = this.state.weihan_c;
-        data.forEach(element => {
-          if (
-            element.committer_name === "Shreyas Tawre" ||
-            element.committer_email === "tawre.shreyas@gmail.com"
-          ) {
-            shreyas = shreyas + 1;
-          } else if (element.committer_name === "Caleb Hamada") {
-            caleb = caleb + 1;
-          } else if (element.committer_name === "Taher Naeem") {
-            taher = taher + 1;
-          } else if (element.committer_name === "Weihan He") {
-            weihan = weihan + 1;
-          }
-        });
-        this.setState({
-          shreyas_c: shreyas,
-          caleb_c: caleb,
-          taher_c: taher,
-          weihan_c: weihan
-        });
+      this.setState({shreyas_c : shreyas, caleb_c : caleb, taher_c : taher, weihan_c : weihan});
+    })
+    fetch('https:
+    .then(results => {
+      return results.json();
+    }).then((data) => {
+      var shreyas = this.state.shreyas_c;
+      var caleb = this.state.caleb_c;
+      var taher = this.state.taher_c;
+      var weihan = this.state.weihan_c;
+      data.forEach(element => {
+        if (element.committer_name === "Shreyas Tawre" || element.committer_email === "tawre.shreyas@gmail.com") {
+          shreyas = shreyas + 1;
+        } else if (element.committer_name === "Caleb Hamada") {
+          caleb = caleb + 1;
+        } else if (element.committer_name === "Taher Naeem") {
+          taher = taher + 1;
+        } else if (element.committer_name === "Weihan He") {
+          weihan = weihan + 1;
+        }
       });
+      this.setState({shreyas_c : shreyas, caleb_c : caleb, taher_c : taher, weihan_c : weihan});
+    })
     fetch("https:
       .then(results => {
         return results.json();
@@ -250,7 +222,7 @@ class About extends Component {
           jason_i: jason
         });
       });
-    fetch("https:
+      fetch("https:
       .then(results => {
         return results.json();
       })
@@ -301,111 +273,77 @@ class About extends Component {
           <br />
           <h1>Group Members</h1>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           <Card
             title="Caleb"
-            label1_heading="Description"
-            label1={""}
-            label2_heading="Commits"
-            label2={this.state.caleb_c}
-            label3_heading="Issues"
-            label3={this.state.caleb_i}
-            label4_heading="Unit Tests"
-            label4={""}
+            label1_heading="Commits"
+            label1={this.state.caleb_c}
+            label2_heading="Issues"
+            label2={this.state.caleb_i}
             image={Caleb}
             style={{
               marginLeft: "15px",
               marginRight: "15px",
               marginTop: "40px",
-              maxWidth: "385px"
+              maxWidth: "385px",
             }}
           />
           <Card
             title="Shreyas"
-            label1_heading="Description"
-            label1={""}
-            label2_heading="Commits"
-            label2={this.state.shreyas_c}
-            label3_heading="Issues"
-            label3={this.state.shreyas_i}
-            label4_heading="Unit Tests"
-            label4={""}
+            label1_heading="Commits"
+            label1={this.state.shreyas_c}
+            label2_heading="Issues"
+            label2={this.state.shreyas_i}
             image={Shreyas}
             style={{
               marginLeft: "15px",
               marginRight: "15px",
               marginTop: "40px",
-              maxWidth: "385px"
+              maxWidth: "385px",
             }}
           />
           <Card
             title="Taher"
-            label1_heading="Description"
-            label1={""}
-            label2_heading="Commits"
-            label2={this.state.taher_c}
-            label3_heading="Issues"
-            label3={this.state.taher_i}
-            label4_heading="Unit Tests"
-            label4={""}
+            label1_heading="Commits"
+            label1={this.state.taher_c}
+            label2_heading="Issues"
+            label2={this.state.taher_i}
             image={Taher}
             style={{
               marginLeft: "15px",
               marginRight: "15px",
               marginTop: "40px",
-              maxWidth: "385px"
+              maxWidth: "385px",
             }}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           <Card
             title="Weihan"
-            label1_heading="Description"
-            label1={""}
-            label2_heading="Commits"
-            label2={this.state.weihan_c}
-            label3_heading="Issues"
-            label3={this.state.weihan_i}
-            label4_heading="Unit Tests"
-            label4={""}
+            label1_heading="Commits"
+            label1={this.state.weihan_c}
+            label2_heading="Issues"
+            label2={this.state.weihan_i}
             image={Weihan}
             style={{
               marginLeft: "15px",
               marginRight: "15px",
               marginTop: "40px",
-              maxWidth: "385px"
+              maxWidth: "385px",
             }}
           />
           <Card
             title="Jason"
-            label1_heading="Description"
-            label1={""}
-            label2_heading="Commits"
-            label2={this.state.jason_c}
-            label3_heading="Issues"
-            label3={this.state.jason_i}
-            label4_heading="Unit Tests"
-            label4={""}
+            label1_heading="Commits"
+            label1={this.state.jason_c}
+            label2_heading="Issues"
+            label2={this.state.jason_i}
             image={Jason}
             style={{
               marginLeft: "15px",
               marginRight: "15px",
               marginTop: "40px",
-              maxWidth: "385px"
+              maxWidth: "385px",
             }}
           />
         </div>
@@ -444,6 +382,7 @@ class Illnesses extends Component {
     super(props);
     this.state = {
       page: 1,
+      pageSize: 3,
       illnesses: [],
       illnesses_slice: []
     };
@@ -453,15 +392,16 @@ class Illnesses extends Component {
       .then(results => results.json())
       .then(data => {
         this.setState({ illnesses: data.objects });
-        this.setState({ illnesses_slice: data.objects.slice(0, 3) });
+        this.setState({ illnesses_slice: data.objects.slice(0, this.state.pageSize) });
       });
   }
   handlePageChange = evt => {
     console.log(evt);
-    let slice1 = 0 + 3 * (evt.page - 1);
-    let slice2 = 3 + 3 * (evt.page - 1);
+    let slice1 = 0 + evt.pageSize * (evt.page - 1);
+    let slice2 = evt.pageSize + evt.pageSize * (evt.page - 1);
     this.setState({
       page: evt.page,
+      pageSize: evt.pageSize,
       illnesses_slice: this.state.illnesses.slice(slice1, slice2)
     });
   };
@@ -479,14 +419,7 @@ class Illnesses extends Component {
             selected={2}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           {}
           {illnesses_slice.map(illness => (
             <Card
@@ -496,7 +429,7 @@ class Illnesses extends Component {
                 marginLeft: "15px",
                 marginRight: "15px",
                 marginTop: "40px",
-                maxWidth: "385px"
+                maxWidth: "385px",
               }}
               label1_heading="Curable"
               label1={illness.curable}
@@ -515,7 +448,7 @@ class Illnesses extends Component {
             <PaginationV2
               totalItems={10}
               pageSize={3}
-              pageSizes={[3]}
+              pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
               style={{
                 position: "relative",
@@ -534,6 +467,7 @@ class Hospitals extends Component {
     super(props);
     this.state = {
       page: 1,
+      pageSize: 3,
       hospitals: [],
       hospitals_slice: []
     };
@@ -543,15 +477,16 @@ class Hospitals extends Component {
       .then(results => results.json())
       .then(data => {
         this.setState({ hospitals: data.objects });
-        this.setState({ hospitals_slice: data.objects.slice(0, 3) });
+        this.setState({ hospitals_slice: data.objects.slice(0, this.state.pageSize) });
       });
   }
   handlePageChange = evt => {
     console.log(evt);
-    let slice1 = 0 + 3 * (evt.page - 1);
-    let slice2 = 3 + 3 * (evt.page - 1);
+    let slice1 = 0 + evt.pageSize * (evt.page - 1);
+    let slice2 = evt.pageSize + evt.pageSize * (evt.page - 1);
     this.setState({
       page: evt.page,
+      pageSize: evt.pageSize,
       hospitals_slice: this.state.hospitals.slice(slice1, slice2)
     });
   };
@@ -569,14 +504,7 @@ class Hospitals extends Component {
             selected={3}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }}>
           {}
           {hospitals_slice.map(hospital => (
             <Card
@@ -586,7 +514,7 @@ class Hospitals extends Component {
                 marginLeft: "15px",
                 marginRight: "15px",
                 marginTop: "40px",
-                maxWidth: "385px"
+                maxWidth: "385px",
               }}
               label1_heading="City"
               label1={hospital.city}
@@ -605,7 +533,7 @@ class Hospitals extends Component {
             <PaginationV2
               totalItems={10}
               pageSize={3}
-              pageSizes={[3]}
+              pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
               style={{
                 position: "relative",
@@ -624,6 +552,7 @@ class Charities extends Component {
     super(props);
     this.state = {
       page: 1,
+      pageSize: 3,
       charities: [],
       charities_slice: []
     };
@@ -634,15 +563,16 @@ class Charities extends Component {
       .then(data => {
         console.log(data.objects.slice(0, 3));
         this.setState({ charities: data.objects });
-        this.setState({ charities_slice: data.objects.slice(0, 3) });
+        this.setState({ charities_slice: data.objects.slice(0, this.state.pageSize) });
       });
   }
   handlePageChange = evt => {
     console.log(evt);
-    let slice1 = 0 + 3 * (evt.page - 1);
-    let slice2 = 3 + 3 * (evt.page - 1);
+    let slice1 = 0 + evt.pageSize * (evt.page - 1);
+    let slice2 = evt.pageSize + evt.pageSize * (evt.page - 1);
     this.setState({
       page: evt.page,
+      pageSize: evt.pageSize,
       charities_slice: this.state.charities.slice(slice1, slice2)
     });
   };
@@ -660,14 +590,7 @@ class Charities extends Component {
             selected={4}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+        <div style={{ 'display': 'flex', 'flexDirection': 'row', 'justifyContent': 'center', 'flexWrap': 'wrap' }} >
           {}
           {charities_slice.map(charity => (
             <Card
@@ -677,7 +600,7 @@ class Charities extends Component {
                 marginLeft: "15px",
                 marginRight: "15px",
                 marginTop: "40px",
-                maxWidth: "385px"
+                maxWidth: "385px",
               }}
               label1_heading="Rating"
               label1={String(charity.rating)}
@@ -696,7 +619,7 @@ class Charities extends Component {
             <PaginationV2
               totalItems={10}
               pageSize={3}
-              pageSizes={[3]}
+              pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
               style={{
                 position: "relative",
@@ -871,20 +794,20 @@ class Hospital extends Component {
               marginLeft: "32px",
               marginRight: "32px",
               marginTop: "38px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              flexWrap: "wrap"
+              display: 'flex',
+              flexDirection: 'row', 
+              justifyContent: 'center', 
+              flexWrap: 'wrap',
             }}
           >
-            <div style={{ justifyContent: "flex-start" }}>
+            <div style={{ justifyContent: 'flex-start' }} >
               <img
                 src={this.state.hospital.image_url}
                 width="350"
                 height="370"
               />
             </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }} >
               <FormLabel
                 className="title"
                 style={{
@@ -898,8 +821,8 @@ class Hospital extends Component {
               >
                 {this.state.hospital.name}
               </FormLabel>
-              <br />
-              <br />
+              <br/>
+              <br/>
               <FormLabel
                 className="title"
                 style={{
@@ -913,7 +836,7 @@ class Hospital extends Component {
               >
                 Street Address: {this.state.hospital.address}
               </FormLabel>
-              <br />
+              <br/>
               <FormLabel
                 className="title"
                 style={{
@@ -927,7 +850,7 @@ class Hospital extends Component {
               >
                 City: {this.state.hospital.city}
               </FormLabel>
-              <br />
+              <br/>
               <FormLabel
                 className="title"
                 style={{
@@ -941,7 +864,7 @@ class Hospital extends Component {
               >
                 State: {this.state.hospital.state}
               </FormLabel>
-              <br />
+              <br/>
               <FormLabel
                 className="title"
                 style={{
@@ -955,7 +878,7 @@ class Hospital extends Component {
               >
                 Zip Code: {this.state.hospital.zip_code}
               </FormLabel>
-              <br />
+              <br/>
               <FormLabel
                 className="title"
                 style={{
@@ -969,7 +892,7 @@ class Hospital extends Component {
               >
                 Owner: {this.state.hospital.owner}
               </FormLabel>
-              <br />
+              <br/>
               <FormLabel
                 className="title"
                 style={{
@@ -983,7 +906,7 @@ class Hospital extends Component {
               >
                 Population: {this.state.hospital.population}
               </FormLabel>
-              <br />
+              <br/>
               <a
                 href={this.state.hospital.website_url}
                 style={{
@@ -1039,69 +962,70 @@ class Illness extends Component {
               marginRight: "32px",
               marginTop: "38px",
               marginBottom: "38px",
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              flexWrap: "wrap"
+              display: 'flex',
+              flexDirection: 'row', 
+              justifyContent: 'center', 
+              flexWrap: 'wrap',
             }}
           >
-            <div style={{ justifyContent: "flex-start" }}>
-              <img src={this.state.illness.image_url} height="370" />
-            </div>
-            <br />
-            <br />
-            <div
-              style={{
-                justifyContent: "flex-start",
-                flexDirection: "column",
-                flexWrap: "wrap"
-              }}
+            <div style={{ 
+              position: "relative",
+              marginTop: "20px",
+              marginBottom: "20px",
+              justifyContent: 'flex-start',
+              }} 
             >
+              <img
+                src={this.state.illness.image_url}
+                height="370"
+              />
+            </div>
+            <div style={{ justifyContent: 'flex-start', flexDirection: 'column', flexWrap: 'wrap' }} >
               <p>
-                <FormLabel
-                  className="title"
-                  style={{
-                    position: "relative",
-                    marginLeft: "50px",
-                    marginTop: "0px",
-                    "font-size": "1.475rem",
-                    display: "inline-block",
-                    "vertical-align": "top"
-                  }}
-                >
-                  {this.state.illness.name}
-                </FormLabel>
-                <br />
-                <br />
-                <FormLabel
-                  className="title"
-                  style={{
-                    position: "relative",
-                    marginLeft: "50px",
-                    marginTop: "0px",
-                    "font-size": "1.0rem",
-                    display: "inline-block",
-                    "vertical-align": "top"
-                  }}
-                >
-                  Symptoms: {this.state.illness.symptoms}
-                </FormLabel>
-                <br />
-                <br />
-                <FormLabel
-                  className="title"
-                  style={{
-                    position: "relative",
-                    marginLeft: "50px",
-                    marginTop: "0px",
-                    "font-size": "1.0rem",
-                    display: "inline-block",
-                    "vertical-align": "top"
-                  }}
-                >
-                  Treatments: {this.state.illness.treatments}
-                </FormLabel>
-                <br />
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.475rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                {this.state.illness.name}
+              </FormLabel>
+              <br/>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Symptoms: {this.state.illness.symptoms}
+              </FormLabel>
+              <br/>
+              <br/>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  "font-size": "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Treatments: {this.state.illness.treatments}
+              </FormLabel>
+              <br/>
               </p>
             </div>
           </Tile>
