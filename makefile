@@ -1,12 +1,9 @@
-all: setup start
-reset: stop clean setup start
-setup:
-	sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
+all: run
 build:
 	npm install
-start:	
-	forever -l forever.log -o out.log -e err.log --sourceDir . -c "npm start" / &
+run:
+	npm start
 stop:
-	forever stopall
-clean:
-	rm -f *.log nohup.out
+	npm stop
+restart:
+	npm restart

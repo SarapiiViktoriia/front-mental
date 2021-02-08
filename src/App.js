@@ -19,7 +19,7 @@ import Shreyas from "./Shreyas.jpg";
 import Taher from "./Taher.jpg";
 import Weihan from "./Weihan.jpg";
 import Jason from "./Jason.JPG";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 const {
   TableContainer,
   Table,
@@ -498,7 +498,10 @@ class Illnesses extends Component {
                 marginLeft: "15px",
                 marginRight: "15px",
                 marginTop: "40px",
-                maxWidth: "385px"
+                maxWidth: "385px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
               }}
               label1_heading="Curable"
               label1={illness.curable}
@@ -590,7 +593,10 @@ class Hospitals extends Component {
                 marginLeft: "15px",
                 marginRight: "15px",
                 marginTop: "40px",
-                maxWidth: "385px"
+                maxWidth: "385px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
               }}
               label1_heading="City"
               label1={hospital.city}
@@ -683,7 +689,10 @@ class Charities extends Component {
                 marginLeft: "15px",
                 marginRight: "15px",
                 marginTop: "40px",
-                maxWidth: "385px"
+                maxWidth: "385px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
               }}
               label1_heading="Rating"
               label1={String(charity.rating)}
@@ -1069,7 +1078,7 @@ class Illness extends Component {
                   style={{
                     position: "relative",
                     marginLeft: "50px",
-                    marginTop: "0px",
+                    marginTop: "40px",
                     "font-size": "1.475rem",
                     display: "inline-block",
                     "vertical-align": "top"
@@ -1202,73 +1211,71 @@ class Header extends Component {
       }
     }
     return (
-      <div className="header">
-        <Tile>
-          <span>
-            <FormLabel
-              className="title"
-              style={{
-                position: "relative",
-                marginLeft: "16px",
-                marginTop: "10px",
-                "font-size": "1.875rem",
-                display: "inline-block",
-                "vertical-align": "top"
-              }}
-            >
-              mentalhelp.me
-            </FormLabel>
-            <Tabs
-              className="some-class"
-              selected={this.props.selected}
-              style={{
-                position: "relative",
-                marginLeft: "532px",
-                marginTop: "5px",
-                marginBottom: "0px",
-                display: "inline-block",
-                "vertical-align": "top"
-              }}
-            >
-              <Tab
-                className="another-class"
-                label={this.props.label1}
-                onClick={handleHomeTabClick}
-              />
-              <Tab
-                className="another-class"
-                label={this.props.label2}
-                onClick={handleAboutTabClick}
-              />
-              <Tab
-                className="another-class"
-                label={this.props.label3}
-                onClick={handleIllnessesTabClick}
-              />
-              <Tab
-                className="another-class"
-                label={this.props.label4}
-                onClick={handleHospitalsTabClick}
-              />
-              <Tab
-                className="another-class"
-                label={this.props.label5}
-                onClick={handleCharitiesTabClick}
-              />
-            </Tabs>
-          </span>
-        </Tile>
-      </div>
+      <Tile
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          flexWrap: "wrap",
+        }}
+      >
+        <FormLabel
+          className="title"
+          style={{
+            position: "relative",
+            marginTop: "10px",
+            "font-size": "1.875rem",
+          }}
+        >
+          mentalhelp.me
+        </FormLabel>
+        <Tabs
+          className="some-class"
+          selected={this.props.selected}
+          style={{
+            position: "relative",
+            marginLeft: "0px",
+          }}
+        >
+          <Tab
+            className="another-class"
+            label={this.props.label1}
+            onClick={handleHomeTabClick}
+          />
+          <Tab
+            className="another-class"
+            label={this.props.label2}
+            onClick={handleAboutTabClick}
+          />
+          <Tab
+            className="another-class"
+            label={this.props.label3}
+            onClick={handleIllnessesTabClick}
+          />
+          <Tab
+            className="another-class"
+            label={this.props.label4}
+            onClick={handleHospitalsTabClick}
+          />
+          <Tab
+            className="another-class"
+            label={this.props.label5}
+            onClick={handleCharitiesTabClick}
+          />
+        </Tabs>
+      </Tile>
     );
   }
 }
 class Card extends Component {
   render() {
     return (
-      <ClickableTile href={this.props.href} style={this.props.style}>
-        <img src={this.props.image} width="350" height="370" />
-        <br />
-        <span className="title">
+      <ClickableTile href={this.props.href} style={this.props.style} >
+        <div>
+          <img src={this.props.image} width="350" max-height="370" />
+        </div>
+        <br/>
+        <div>
           <center>
             <FormLabel
               className="title"
@@ -1277,41 +1284,41 @@ class Card extends Component {
               {this.props.title}
             </FormLabel>
           </center>
-        </span>
-        <br />
-        <center>
-          {"buttonTitle" in this.props && (
-            <Button kind="secondary">{this.props.buttonTitle}</Button>
-          )}
-          {"label1" in this.props && (
-            <center>
-              <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
-                {this.props.label1_heading}: {this.props.label1}
-              </FormLabel>
-            </center>
-          )}
-          {"label2" in this.props && (
-            <center>
-              <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
-                {this.props.label2_heading}: {this.props.label2}
-              </FormLabel>
-            </center>
-          )}
-          {"label3" in this.props && (
-            <center>
-              <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
-                {this.props.label3_heading}: {this.props.label3}
-              </FormLabel>
-            </center>
-          )}
-          {"label4" in this.props && (
-            <center>
-              <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
-                {this.props.label4_heading}: {this.props.label4}
-              </FormLabel>
-            </center>
-          )}
-        </center>
+          <br />
+          <center>
+            {"buttonTitle" in this.props && (
+              <Button kind="secondary">{this.props.buttonTitle}</Button>
+            )}
+            {"label1" in this.props && (
+              <center>
+                <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                  {this.props.label1_heading}: {this.props.label1}
+                </FormLabel>
+              </center>
+            )}
+            {"label2" in this.props && (
+              <center>
+                <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                  {this.props.label2_heading}: {this.props.label2}
+                </FormLabel>
+              </center>
+            )}
+            {"label3" in this.props && (
+              <center>
+                <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                  {this.props.label3_heading}: {this.props.label3}
+                </FormLabel>
+              </center>
+            )}
+            {"label4" in this.props && (
+              <center>
+                <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                  {this.props.label4_heading}: {this.props.label4}
+                </FormLabel>
+              </center>
+            )}
+          </center>
+        </div>
       </ClickableTile>
     );
   }
