@@ -143,16 +143,16 @@ class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shreyas_c: 0,
-      caleb_c: 0,
-      taher_c: 0,
-      weihan_c: 0,
-      jason_c: 0,
-      shreyas_i: 0,
-      caleb_i: 0,
-      taher_i: 0,
-      weihan_i: 0,
-      jason_i: 0
+      shreyas_c1: 0, shreyas_c2: 0,
+      caleb_c1: 0, caleb_c2: 0,
+      taher_c1: 0, taher_c2: 0,
+      weihan_c1: 0, weihan_c2: 0,
+      jason_c1: 0, jason_c2: 0, 
+      shreyas_i1: 0, shreyas_i2: 0,
+      caleb_i1: 0, caleb_i2: 0,
+      taher_i1: 0, taher_i2: 0,
+      weihan_i1: 0, weihan_i2: 0,
+      jason_i1: 0, jason_i2: 0,
     };
   }
   componentDidMount() {
@@ -165,28 +165,41 @@ class About extends Component {
         var caleb = 0;
         var taher = 0;
         var weihan = 0;
+        var jason = 0;
         data.forEach(element => {
           if (
-            element.committer_name === "Shreyas Tawre" ||
-            element.committer_name === "stawre"
+            element.author_name === "Shreyas Tawre" ||
+            element.author_email === "tawre.shreyas@gmail.com"
           ) {
             shreyas = shreyas + 1;
-          } else if (element.committer_name === "Caleb Hamada") {
+          } else if (
+            element.author_name === "Caleb Hamada" ||
+            element.author_email === "chamada1@me.com"
+          ) {
             caleb = caleb + 1;
           } else if (
-            element.committer_name === "Taher Naeem" ||
+            element.author_name === "Taher Naeem" ||
             element.author_email === "tahern52@cs.utexas.edu"
           ) {
             taher = taher + 1;
-          } else if (element.committer_name === "Weihan He") {
+          } else if (
+            element.author_name === "Weihan He" ||
+            element.author_email === "weihan.he@gmail.com"
+          ) {
             weihan = weihan + 1;
+          } else if (
+            element.author_name === "Jason Cheng" ||
+            element.author_email === "hc27469@utexas.edu"
+          ) {
+            jason = jason + 1;
           }
         });
         this.setState({
-          shreyas_c: shreyas,
-          caleb_c: caleb,
-          taher_c: taher,
-          weihan_c: weihan
+          shreyas_c1: shreyas,
+          caleb_c1: caleb,
+          taher_c1: taher,
+          weihan_c1: weihan,
+          jason_c1: jason
         });
       });
     fetch("https:
@@ -194,29 +207,45 @@ class About extends Component {
         return results.json();
       })
       .then(data => {
-        var shreyas = this.state.shreyas_c;
-        var caleb = this.state.caleb_c;
-        var taher = this.state.taher_c;
-        var weihan = this.state.weihan_c;
+        var shreyas = 0;
+        var caleb = 0;
+        var taher = 0;
+        var weihan = 0;
+        var jason = 0;
         data.forEach(element => {
           if (
-            element.committer_name === "Shreyas Tawre" ||
-            element.committer_email === "tawre.shreyas@gmail.com"
+            element.author_name === "Shreyas Tawre" ||
+            element.author_email === "tawre.shreyas@gmail.com"
           ) {
             shreyas = shreyas + 1;
-          } else if (element.committer_name === "Caleb Hamada") {
+          } else if (
+            element.author_name === "Caleb Hamada" ||
+            element.author_email === "chamada1@me.com"
+          ) {
             caleb = caleb + 1;
-          } else if (element.committer_name === "Taher Naeem") {
+          } else if (
+            element.author_name === "Taher Naeem" ||
+            element.author_email === "tahern52@cs.utexas.edu"
+          ) {
             taher = taher + 1;
-          } else if (element.committer_name === "Weihan He") {
+          } else if (
+            element.author_name === "Weihan He" ||
+            element.author_email === "weihan.he@gmail.com"
+          ) {
             weihan = weihan + 1;
+          } else if (
+            element.author_name === "Jason Cheng" ||
+            element.author_email === "hc27469@utexas.edu"
+          ) {
+            jason = jason + 1;
           }
         });
         this.setState({
-          shreyas_c: shreyas,
-          caleb_c: caleb,
-          taher_c: taher,
-          weihan_c: weihan
+          shreyas_c2: shreyas,
+          caleb_c2: caleb,
+          taher_c2: taher,
+          weihan_c2: weihan,
+          jason_c2: jason
         });
       });
     fetch("https:
@@ -238,16 +267,16 @@ class About extends Component {
             taher += 1;
           } else if (element.author.name === "Weihan He") {
             weihan += 1;
-          } else if (element.committer_name === "Jason Cheng") {
+          } else if (element.author.name === "Jason Cheng") {
             jason = jason + 1;
           }
         });
         this.setState({
-          shreyas_i: shreyas,
-          caleb_i: caleb,
-          taher_i: taher,
-          weihan_i: weihan,
-          jason_i: jason
+          shreyas_i1: shreyas,
+          caleb_i1: caleb,
+          taher_i1: taher,
+          weihan_i1: weihan,
+          jason_i1: jason
         });
       });
     fetch("https:
@@ -255,11 +284,11 @@ class About extends Component {
         return results.json();
       })
       .then(data => {
-        var shreyas = this.state.shreyas_i;
-        var caleb = this.state.caleb_i;
-        var taher = this.state.taher_i;
-        var weihan = this.state.weihan_i;
-        var jason = this.state.jason_i;
+        var shreyas = 0;
+        var caleb = 0;
+        var taher = 0;
+        var weihan = 0;
+        var jason = 0;
         data.forEach(element => {
           if (element.author.name === "stawre") {
             shreyas = shreyas + 1;
@@ -269,16 +298,16 @@ class About extends Component {
             taher = taher + 1;
           } else if (element.author.name === "Weihan He") {
             weihan = weihan + 1;
-          } else if (element.committer_name === "Jason Cheng") {
+          } else if (element.author.name === "Jason Cheng") {
             jason = jason + 1;
           }
         });
         this.setState({
-          shreyas_i: shreyas,
-          caleb_i: caleb,
-          taher_i: taher,
-          weihan_i: weihan,
-          jason_i: jason
+          shreyas_i2: shreyas,
+          caleb_i2: caleb,
+          taher_i2: taher,
+          weihan_i2: weihan,
+          jason_i2: jason
         });
       });
   }
@@ -314,9 +343,9 @@ class About extends Component {
             label1_heading="Description"
             label1={""}
             label2_heading="Commits"
-            label2={this.state.caleb_c}
+            label2={this.state.caleb_c1 + this.state.caleb_c2}
             label3_heading="Issues"
-            label3={this.state.caleb_i}
+            label3={this.state.caleb_i1 + this.state.caleb_i2}
             label4_heading="Unit Tests"
             label4={""}
             image={Caleb}
@@ -332,9 +361,9 @@ class About extends Component {
             label1_heading="Description"
             label1={""}
             label2_heading="Commits"
-            label2={this.state.shreyas_c}
+            label2={this.state.shreyas_c1 + this.state.shreyas_c2}
             label3_heading="Issues"
-            label3={this.state.shreyas_i}
+            label3={this.state.shreyas_i1 + this.state.shreyas_i2}
             label4_heading="Unit Tests"
             label4={""}
             image={Shreyas}
@@ -350,9 +379,9 @@ class About extends Component {
             label1_heading="Description"
             label1={""}
             label2_heading="Commits"
-            label2={this.state.taher_c}
+            label2={this.state.taher_c1 + this.state.taher_c2}
             label3_heading="Issues"
-            label3={this.state.taher_i}
+            label3={this.state.taher_i1 + this.state.taher_i2}
             label4_heading="Unit Tests"
             label4={""}
             image={Taher}
@@ -377,9 +406,9 @@ class About extends Component {
             label1_heading="Description"
             label1={""}
             label2_heading="Commits"
-            label2={this.state.weihan_c}
+            label2={this.state.weihan_c1 + this.state.weihan_c2}
             label3_heading="Issues"
-            label3={this.state.weihan_i}
+            label3={this.state.weihan_i1 + this.state.weihan_i2}
             label4_heading="Unit Tests"
             label4={""}
             image={Weihan}
@@ -395,9 +424,9 @@ class About extends Component {
             label1_heading="Description"
             label1={""}
             label2_heading="Commits"
-            label2={this.state.jason_c}
+            label2={this.state.jason_c1 + this.state.jason_c2}
             label3_heading="Issues"
-            label3={this.state.jason_i}
+            label3={this.state.jason_i1 + this.state.jason_i2}
             label4_heading="Unit Tests"
             label4={""}
             image={Jason}
@@ -511,7 +540,7 @@ class Illnesses extends Component {
               label3={illness.genetic}
               label4_heading="Average Age"
               label4={String(illness.average_age)}
-              href={`http:
+              href={`/illnesses?id=${illness.id}`}
             />
           ))}
         </div>
@@ -606,7 +635,7 @@ class Hospitals extends Component {
               label3={hospital.owner}
               label4_heading="Population"
               label4={hospital.population}
-              href={`http:
+              href={`/hospitals?id=${hospital.id}`}
             />
           ))}
         </div>
@@ -702,7 +731,7 @@ class Charities extends Component {
               label3={charity.deductible}
               label4_heading="Income"
               label4={charity.incomeAmount.toLocaleString("en")}
-              href={`http:
+              href={`/charities?id=${charity.id}`}
             />
           ))}
         </div>
@@ -1292,7 +1321,7 @@ class Card extends Component {
             {"label1" in this.props && (
               <center>
                 <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
-                  {this.props.label1_heading}: {this.props.label1}
+                  {(this.props.label1_heading !== undefined) ? this.props.label1_heading + ':' : ""} {this.props.label1}
                 </FormLabel>
               </center>
             )}
