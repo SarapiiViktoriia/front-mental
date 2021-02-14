@@ -290,9 +290,9 @@ class About extends Component {
         var weihan = 0;
         var jason = 0;
         data.forEach(element => {
-          if (element.author.name === "stawre") {
+          if (element.author.name === "Shreyas Tawre") {
             shreyas = shreyas + 1;
-          } else if (element.author.name === "chamada1") {
+          } else if (element.author.name === "Caleb Hamada") {
             caleb = caleb + 1;
           } else if (element.author.name === "Taher Naeem") {
             taher = taher + 1;
