@@ -1301,7 +1301,7 @@ class Card extends Component {
     return (
       <ClickableTile href={this.props.href} style={this.props.style} >
         <div>
-          <img src={this.props.image} width="350" max-height="370" />
+          <img src={this.props.image} width="350" height="370" />
         </div>
         <br/>
         <div>
