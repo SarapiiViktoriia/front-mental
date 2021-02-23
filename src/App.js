@@ -358,8 +358,7 @@ class About extends Component {
           />
           <Card
             title="Shreyas"
-            label1_heading="Description"
-            label1={""}
+            label1={"I am a senior year CS student."}
             label2_heading="Commits"
             label2={this.state.shreyas_c1 + this.state.shreyas_c2}
             label3_heading="Issues"
