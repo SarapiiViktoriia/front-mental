@@ -153,6 +153,8 @@ class About extends Component {
       taher_i1: 0, taher_i2: 0,
       weihan_i1: 0, weihan_i2: 0,
       jason_i1: 0, jason_i2: 0,
+      total_c1: 0, total_c2: 0,
+      total_i1: 0, total_i2: 0,
     };
   }
   componentDidMount() {
@@ -166,7 +168,9 @@ class About extends Component {
         var taher = 0;
         var weihan = 0;
         var jason = 0;
+        var total = 0;
         data.forEach(element => {
+          total = total + 1;
           if (
             element.author_name === "Shreyas Tawre" ||
             element.author_email === "tawre.shreyas@gmail.com"
@@ -199,7 +203,8 @@ class About extends Component {
           caleb_c1: caleb,
           taher_c1: taher,
           weihan_c1: weihan,
-          jason_c1: jason
+          jason_c1: jason,
+          total_c1: total
         });
       });
     fetch("https:
@@ -212,7 +217,9 @@ class About extends Component {
         var taher = 0;
         var weihan = 0;
         var jason = 0;
+        var total = 0
         data.forEach(element => {
+          total = total + 1;
           if (
             element.author_name === "Shreyas Tawre" ||
             element.author_email === "tawre.shreyas@gmail.com"
@@ -245,7 +252,8 @@ class About extends Component {
           caleb_c2: caleb,
           taher_c2: taher,
           weihan_c2: weihan,
-          jason_c2: jason
+          jason_c2: jason,
+          total_c2: total
         });
       });
     fetch("https:
@@ -258,7 +266,9 @@ class About extends Component {
         var taher = 0;
         var weihan = 0;
         var jason = 0;
+        var total = 0;
         data.forEach(element => {
+          total = total + 1;
           if (element.author.name === "Shreyas Tawre") {
             shreyas += 1;
           } else if (element.author.name === "Caleb Hamada") {
@@ -276,7 +286,8 @@ class About extends Component {
           caleb_i1: caleb,
           taher_i1: taher,
           weihan_i1: weihan,
-          jason_i1: jason
+          jason_i1: jason,
+          total_i1: total,
         });
       });
     fetch("https:
@@ -289,7 +300,9 @@ class About extends Component {
         var taher = 0;
         var weihan = 0;
         var jason = 0;
+        var total = 0;
         data.forEach(element => {
+          total = total + 1;
           if (element.author.name === "Shreyas Tawre") {
             shreyas = shreyas + 1;
           } else if (element.author.name === "Caleb Hamada") {
@@ -307,7 +320,8 @@ class About extends Component {
           caleb_i2: caleb,
           taher_i2: taher,
           weihan_i2: weihan,
-          jason_i2: jason
+          jason_i2: jason,
+          total_i2: total
         });
       });
   }
@@ -326,6 +340,43 @@ class About extends Component {
         </div>
         <div className="title">
           <br />
+          <br />
+          <br />
+          <h1>Mission</h1>
+          <br />
+          <Tile
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              marginLeft: "35px",
+              marginRight: "35px",
+            }}
+          >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              marginLeft: "35px",
+              marginRight: "35px",
+              marginBottom: "35px",
+              marginTop: "35px",
+            }}
+          >
+            <p>
+              We decided to make a website about mental health awareness because of the lack of easily accessible 
+              information available to people concerning mental health. Many people do not know about specific mental 
+              illnesses, so our site will help educate people about them. There are a lot of misconceptions about 
+              mental illness, and we hope our website will help clear some of them up with the information we will be 
+              displaying. The best way for there to be more mental health awareness is to help fund charities 
+              dedicated to researching mental illnesses, educating the public, and supporting peoples’ needs. There 
+              are not many psychiatric hospitals in the United States, so we want to provide people information about 
+              the hospitals closest to them. This information will be useful to both people in need and those wanting 
+              to support friends and family members who need help.
+            </p>
+          </div>
+          </Tile>
           <br />
           <br />
           <h1>Group Members</h1>
@@ -443,24 +494,46 @@ class About extends Component {
             <br />
             <br />
             <h1>Repository Stats</h1>
+            <br/>
+              <p>
+                Total Commits on <a href="https:
+                <br/>
+                Total Issues on <a href="https:
+                <br/>
+                Total Unit Tests: 10.
+              </p>
           </div>
           <div className="title">
-            <br />
-            <br />
             <br />
             <h1>Data Sources</h1>
           </div>
           <div className="title">
             <br />
-            <br />
+            <p>
+              Charity data was scraped from <a href="https:
+              <br/>
+              <br/>
+              Hospital data was scraped from <a href="https:
+              <br/>
+              <br/>
+              Illness: <a href="https:
+            </p>
             <br />
             <h1>Tools Used</h1>
+            <br/>
           </div>
           <div className="title">
             <br />
             <br />
             <br />
             <h1>Project Links</h1>
+            <p style={{ marginBottom: "30px" }}>
+              <a href="https:
+              <br/>
+              <a href="https:
+              <br/>
+              <a href="https:
+            </p>
           </div>
         </div>
       </div>
