@@ -104,6 +104,7 @@ class Home extends Component {
           <Card
             title="Illnesses"
             buttonTitle="Learn More"
+            buttonHref="/illnesses"
             image={illnessesImage}
             style={{
               marginLeft: "15px",
@@ -115,6 +116,7 @@ class Home extends Component {
           <Card
             title="Charities"
             buttonTitle="Learn More"
+            buttonHref="/charities"
             image={charitiesImage}
             style={{
               marginLeft: "15px",
@@ -126,6 +128,7 @@ class Home extends Component {
           <Card
             title="Hospitals"
             buttonTitle="Learn More"
+            buttonHref="/hospitals"
             image={hospitalsImage}
             style={{
               marginLeft: "15px",
@@ -391,8 +394,9 @@ class About extends Component {
         >
           <Card
             title="Caleb"
-            label1_heading="Description"
-            label1={""}
+            description={"I am a Junior and I enjoy coding and video games."}
+            label1_heading="Responsibilities"
+            label1={"Data scraping, Selenium, UI/UX"}
             label2_heading="Commits"
             label2={this.state.caleb_c1 + this.state.caleb_c2}
             label3_heading="Issues"
@@ -409,7 +413,9 @@ class About extends Component {
           />
           <Card
             title="Shreyas"
-            label1={"I am a senior year CS student."}
+            description={"I am a senior year CS student and I enjoy reading and playing video-games 🎮."}
+            label1_heading="Responsibilities"
+            label1="Frontend development and UI/UX"
             label2_heading="Commits"
             label2={this.state.shreyas_c1 + this.state.shreyas_c2}
             label3_heading="Issues"
@@ -426,8 +432,9 @@ class About extends Component {
           />
           <Card
             title="Taher"
-            label1_heading="Description"
-            label1={""}
+            description="I am a senior in computer science and enjoy eating and sleeping but I never get to 😔"
+            label1_heading="Responsibilities"
+            label1="API and backend development."
             label2_heading="Commits"
             label2={this.state.taher_c1 + this.state.taher_c2}
             label3_heading="Issues"
@@ -453,8 +460,9 @@ class About extends Component {
         >
           <Card
             title="Weihan"
-            label1_heading="Description"
-            label1={""}
+            description="I'm a junior CS student. I love League of Legends."
+            label1_heading="Responsibilities"
+            label1={"MySQL Database"}
             label2_heading="Commits"
             label2={this.state.weihan_c1 + this.state.weihan_c2}
             label3_heading="Issues"
@@ -471,8 +479,9 @@ class About extends Component {
           />
           <Card
             title="Jason"
-            label1_heading="Description"
-            label1={""}
+            description="I am a junior cs student. Find me to play PUBG together 😏"
+            label1_heading="Responsibilities"
+            label1={"Frontend testing"}
             label2_heading="Commits"
             label2={this.state.jason_c1 + this.state.jason_c2}
             label3_heading="Issues"
@@ -510,13 +519,13 @@ class About extends Component {
           <div className="title">
             <br />
             <p>
-              Charity data was scraped from <a href="https:
+              Charities data was scraped from <a href="https:
               <br/>
               <br/>
-              Hospital data was scraped from <a href="https:
+              Hospitals data was scraped from <a href="https:
               <br/>
               <br/>
-              Illness: <a href="https:
+              Illnesses data was scraped from <a href="https:
             </p>
             <br />
             <h1>Tools Used</h1>
@@ -527,6 +536,7 @@ class About extends Component {
             <br />
             <br />
             <h1>Project Links</h1>
+            <br/>
             <p style={{ marginBottom: "30px" }}>
               <a href="https:
               <br/>
@@ -879,7 +889,7 @@ class Charity extends Component {
                       position: "relative",
                       marginLeft: "50px",
                       marginTop: "0px",
-                      "font-size": "1.475rem",
+                      fontSize: "1.475rem",
                       display: "inline-block",
                       "vertical-align": "top"
                     }}
@@ -893,7 +903,7 @@ class Charity extends Component {
                       left: "420px",
                       right: "40px",
                       top: "80px",
-                      "font-size": "1.0rem",
+                      fontSize: "1.0rem",
                       display: "inline-block",
                       "vertical-align": "top"
                     }}
@@ -907,7 +917,7 @@ class Charity extends Component {
                       left: "420px",
                       right: "40px",
                       top: "120px",
-                      "font-size": "1.0rem",
+                      fontSize: "1.0rem",
                       display: "inline-block",
                       "vertical-align": "top"
                     }}
@@ -921,7 +931,7 @@ class Charity extends Component {
                       left: "420px",
                       right: "40px",
                       top: "160px",
-                      "font-size": "1.0rem",
+                      fontSize: "1.0rem",
                       display: "inline-block",
                       "vertical-align": "top"
                     }}
@@ -937,7 +947,7 @@ class Charity extends Component {
                       marginLeft: "405px",
                       marginRight: "40px",
                       marginTop: "20px",
-                      "font-size": "1.0rem"
+                      fontSize: "1.0rem"
                     }}
                   >
                     {this.state.charity.website_url}
@@ -1007,7 +1017,7 @@ class Hospital extends Component {
                   position: "relative",
                   marginLeft: "50px",
                   marginTop: "0px",
-                  "font-size": "1.475rem",
+                  fontSize: "1.475rem",
                   display: "inline-block",
                   "vertical-align": "top"
                 }}
@@ -1022,7 +1032,7 @@ class Hospital extends Component {
                   position: "relative",
                   marginLeft: "50px",
                   marginTop: "0px",
-                  "font-size": "1.0rem",
+                  fontSize: "1.0rem",
                   display: "inline-block",
                   "vertical-align": "top"
                 }}
@@ -1036,7 +1046,7 @@ class Hospital extends Component {
                   position: "relative",
                   marginLeft: "50px",
                   marginTop: "0px",
-                  "font-size": "1.0rem",
+                  fontSize: "1.0rem",
                   display: "inline-block",
                   "vertical-align": "top"
                 }}
@@ -1050,7 +1060,7 @@ class Hospital extends Component {
                   position: "relative",
                   marginLeft: "50px",
                   marginTop: "0px",
-                  "font-size": "1.0rem",
+                  fontSize: "1.0rem",
                   display: "inline-block",
                   "vertical-align": "top"
                 }}
@@ -1064,7 +1074,7 @@ class Hospital extends Component {
                   position: "relative",
                   marginLeft: "50px",
                   marginTop: "0px",
-                  "font-size": "1.0rem",
+                  fontSize: "1.0rem",
                   display: "inline-block",
                   "vertical-align": "top"
                 }}
@@ -1078,7 +1088,7 @@ class Hospital extends Component {
                   position: "relative",
                   marginLeft: "50px",
                   marginTop: "0px",
-                  "font-size": "1.0rem",
+                  fontSize: "1.0rem",
                   display: "inline-block",
                   "vertical-align": "top"
                 }}
@@ -1092,7 +1102,7 @@ class Hospital extends Component {
                   position: "relative",
                   marginLeft: "50px",
                   marginTop: "0px",
-                  "font-size": "1.0rem",
+                  fontSize: "1.0rem",
                   display: "inline-block",
                   "vertical-align": "top"
                 }}
@@ -1106,7 +1116,7 @@ class Hospital extends Component {
                   position: "relative",
                   marginLeft: "50px",
                   marginTop: "0px",
-                  "font-size": "1.0rem"
+                  fontSize: "1.0rem"
                 }}
               >
                 {this.state.hospital.website_url}
@@ -1180,7 +1190,7 @@ class Illness extends Component {
                     position: "relative",
                     marginLeft: "50px",
                     marginTop: "40px",
-                    "font-size": "1.475rem",
+                    fontSize: "1.475rem",
                     display: "inline-block",
                     "vertical-align": "top"
                   }}
@@ -1195,7 +1205,7 @@ class Illness extends Component {
                     position: "relative",
                     marginLeft: "50px",
                     marginTop: "0px",
-                    "font-size": "1.0rem",
+                    fontSize: "1.0rem",
                     display: "inline-block",
                     "vertical-align": "top"
                   }}
@@ -1210,7 +1220,7 @@ class Illness extends Component {
                     position: "relative",
                     marginLeft: "50px",
                     marginTop: "0px",
-                    "font-size": "1.0rem",
+                    fontSize: "1.0rem",
                     display: "inline-block",
                     "vertical-align": "top"
                   }}
@@ -1325,7 +1335,7 @@ class Header extends Component {
           style={{
             position: "relative",
             marginTop: "10px",
-            "font-size": "1.875rem",
+            fontSize: "1.875rem",
           }}
         >
           mentalhelp.me
@@ -1380,7 +1390,7 @@ class Card extends Component {
           <center>
             <FormLabel
               className="title"
-              style={{ "margin-top": "20px", "font-size": "1.2rem" }}
+              style={{ "margin-top": "20px", fontSize: "1.2rem" }}
             >
               {this.props.title}
             </FormLabel>
@@ -1388,32 +1398,39 @@ class Card extends Component {
           <br />
           <center>
             {"buttonTitle" in this.props && (
-              <Button kind="secondary">{this.props.buttonTitle}</Button>
+              <Button kind="secondary" href={this.props.buttonHref}>{this.props.buttonTitle}</Button>
+            )}
+            {"description" in this.props && (
+              <center>
+                <FormLabel className="title" style={{ fontSize: "1.0rem", marginBottom: "20px" }}>
+                  {this.props.description}
+                </FormLabel>
+              </center>
             )}
             {"label1" in this.props && (
               <center>
-                <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                <FormLabel className="title" style={{ fontSize: "0.9rem" }}>
                   {(this.props.label1_heading !== undefined) ? this.props.label1_heading + ':' : ""} {this.props.label1}
                 </FormLabel>
               </center>
             )}
             {"label2" in this.props && (
               <center>
-                <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                <FormLabel className="title" style={{ fontSize: "0.9rem" }}>
                   {this.props.label2_heading}: {this.props.label2}
                 </FormLabel>
               </center>
             )}
             {"label3" in this.props && (
               <center>
-                <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                <FormLabel className="title" style={{ fontSize: "0.9rem" }}>
                   {this.props.label3_heading}: {this.props.label3}
                 </FormLabel>
               </center>
             )}
             {"label4" in this.props && (
               <center>
-                <FormLabel className="title" style={{ "font-size": "0.9rem" }}>
+                <FormLabel className="title" style={{ fontSize: "0.9rem" }}>
                   {this.props.label4_heading}: {this.props.label4}
                 </FormLabel>
               </center>
