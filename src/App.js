@@ -146,18 +146,30 @@ class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      shreyas_c1: 0, shreyas_c2: 0,
-      caleb_c1: 0, caleb_c2: 0,
-      taher_c1: 0, taher_c2: 0,
-      weihan_c1: 0, weihan_c2: 0,
-      jason_c1: 0, jason_c2: 0, 
-      shreyas_i1: 0, shreyas_i2: 0,
-      caleb_i1: 0, caleb_i2: 0,
-      taher_i1: 0, taher_i2: 0,
-      weihan_i1: 0, weihan_i2: 0,
-      jason_i1: 0, jason_i2: 0,
-      total_c1: 0, total_c2: 0,
-      total_i1: 0, total_i2: 0,
+      shreyas_c1: 0,
+      shreyas_c2: 0,
+      caleb_c1: 0,
+      caleb_c2: 0,
+      taher_c1: 0,
+      taher_c2: 0,
+      weihan_c1: 0,
+      weihan_c2: 0,
+      jason_c1: 0,
+      jason_c2: 0,
+      shreyas_i1: 0,
+      shreyas_i2: 0,
+      caleb_i1: 0,
+      caleb_i2: 0,
+      taher_i1: 0,
+      taher_i2: 0,
+      weihan_i1: 0,
+      weihan_i2: 0,
+      jason_i1: 0,
+      jason_i2: 0,
+      total_c1: 0,
+      total_c2: 0,
+      total_i1: 0,
+      total_i2: 0
     };
   }
   componentDidMount() {
@@ -220,7 +232,7 @@ class About extends Component {
         var taher = 0;
         var weihan = 0;
         var jason = 0;
-        var total = 0
+        var total = 0;
         data.forEach(element => {
           total = total + 1;
           if (
@@ -290,7 +302,7 @@ class About extends Component {
           taher_i1: taher,
           weihan_i1: weihan,
           jason_i1: jason,
-          total_i1: total,
+          total_i1: total
         });
       });
     fetch("https:
@@ -353,32 +365,37 @@ class About extends Component {
               flexDirection: "column",
               justifyContent: "center",
               marginLeft: "35px",
-              marginRight: "35px",
+              marginRight: "35px"
             }}
           >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              marginLeft: "35px",
-              marginRight: "35px",
-              marginBottom: "35px",
-              marginTop: "35px",
-            }}
-          >
-            <p>
-              We decided to make a website about mental health awareness because of the lack of easily accessible 
-              information available to people concerning mental health. Many people do not know about specific mental 
-              illnesses, so our site will help educate people about them. There are a lot of misconceptions about 
-              mental illness, and we hope our website will help clear some of them up with the information we will be 
-              displaying. The best way for there to be more mental health awareness is to help fund charities 
-              dedicated to researching mental illnesses, educating the public, and supporting peoples’ needs. There 
-              are not many psychiatric hospitals in the United States, so we want to provide people information about 
-              the hospitals closest to them. This information will be useful to both people in need and those wanting 
-              to support friends and family members who need help.
-            </p>
-          </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                marginLeft: "35px",
+                marginRight: "35px",
+                marginBottom: "35px",
+                marginTop: "35px"
+              }}
+            >
+              <p>
+                We decided to make a website about mental health awareness
+                because of the lack of easily accessible information available
+                to people concerning mental health. Many people do not know
+                about specific mental illnesses, so our site will help educate
+                people about them. There are a lot of misconceptions about
+                mental illness, and we hope our website will help clear some of
+                them up with the information we will be displaying. The best way
+                for there to be more mental health awareness is to help fund
+                charities dedicated to researching mental illnesses, educating
+                the public, and supporting peoples’ needs. There are not many
+                psychiatric hospitals in the United States, so we want to
+                provide people information about the hospitals closest to them.
+                This information will be useful to both people in need and those
+                wanting to support friends and family members who need help.
+              </p>
+            </div>
           </Tile>
           <br />
           <br />
@@ -413,7 +430,9 @@ class About extends Component {
           />
           <Card
             title="Shreyas"
-            description={"I am a senior year CS student and I enjoy reading and playing video-games 🎮."}
+            description={
+              "I am a senior year CS student and I enjoy reading and playing video-games 🎮."
+            }
             label1_heading="Responsibilities"
             label1="Frontend development and UI/UX"
             label2_heading="Commits"
@@ -503,15 +522,26 @@ class About extends Component {
             <br />
             <br />
             <h1>Repository Stats</h1>
-            <br/>
-              <p>
-                Total Commits on <a href="https:
-                <br/>
-                Total Issues on <a href="https:
-                <br/>
-                Total Unit Tests: 10.
-              </p>
+            <br />
+            <p>
+              Total Commits on{" "}
+              <a href="https:
+                Frontend
+              </a>{" "}
+              and <a href="https:
+              = {this.state.total_c1 + this.state.total_c2}.<br />
+              <br />
+              Total Issues on{" "}
+              <a href="https:
+                Frontend
+              </a>{" "}
+              and <a href="https:
+              = {this.state.total_i1 + this.state.total_i2}.<br />
+              <br />
+              Total Unit Tests: 10.
+            </p>
           </div>
+          <br />
           <div className="title">
             <br />
             <h1>Data Sources</h1>
@@ -519,30 +549,74 @@ class About extends Component {
           <div className="title">
             <br />
             <p>
-              Charities data was scraped from <a href="https:
-              <br/>
-              <br/>
-              Hospitals data was scraped from <a href="https:
-              <br/>
-              <br/>
-              Illnesses data was scraped from <a href="https:
+              Charities data was scraped from{" "}
+              <a href="https:
+              using the python `requests` library.
+              <br />
+              <br />
+              Hospitals data was scraped from{" "}
+              <a href="https:
+                HIFLD
+              </a>{" "}
+              using the python `requests` library.
+              <br />
+              <br />
+              Illnesses data was scraped from{" "}
+              <a href="https:
+              python `requests` library.
             </p>
             <br />
+            <br />
             <h1>Tools Used</h1>
-            <br/>
+            <br />
+            <p>
+              Gitlab &nbsp; &nbsp; AWS EC2 &nbsp; &nbsp; AWS RDS &nbsp; &nbsp;
+              MySQL
+              <br />
+              <br />
+              MySQL &nbsp; &nbsp; Workbench &nbsp; &nbsp; Postman &nbsp; &nbsp;
+              Namecheap
+              <br />
+              <br />
+              React &nbsp; &nbsp; React-Router &nbsp; &nbsp; Slack &nbsp; &nbsp;
+              Flask
+              <br />
+              <br />
+              Flask-Restless &nbsp; &nbsp; GUnicorn &nbsp; &nbsp; Enzyme
+              <br />
+              <br />
+              Mocha &nbsp; &nbsp; Selenium &nbsp; &nbsp; PlantUML
+              <br />
+              <br />
+              IBM carbon-components-react
+            </p>
+            <br />
           </div>
           <div className="title">
             <br />
-            <br />
-            <br />
             <h1>Project Links</h1>
-            <br/>
+            <br />
             <p style={{ marginBottom: "30px" }}>
-              <a href="https:
-              <br/>
-              <a href="https:
-              <br/>
-              <a href="https:
+              <a
+                href="https:
+                style={{ fontSize: "1.4rem" }}
+              >
+                Postman
+              </a>
+              <br />
+              <a
+                href="https:
+                style={{ fontSize: "1.4rem" }}
+              >
+                Frontend Repo
+              </a>
+              <br />
+              <a
+                href="https:
+                style={{ fontSize: "1.4rem" }}
+              >
+                Backend Repo
+              </a>
             </p>
           </div>
         </div>
@@ -565,7 +639,9 @@ class Illnesses extends Component {
       .then(results => results.json())
       .then(data => {
         this.setState({ illnesses: data.objects });
-        this.setState({ illnesses_slice: data.objects.slice(0, this.state.pageSize) });
+        this.setState({
+          illnesses_slice: data.objects.slice(0, this.state.pageSize)
+        });
       });
   }
   handlePageChange = evt => {
@@ -612,7 +688,7 @@ class Illnesses extends Component {
                 maxWidth: "385px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "space-between"
               }}
               label1_heading="Curable"
               label1={illness.curable}
@@ -660,7 +736,9 @@ class Hospitals extends Component {
       .then(results => results.json())
       .then(data => {
         this.setState({ hospitals: data.objects });
-        this.setState({ hospitals_slice: data.objects.slice(0, this.state.pageSize) });
+        this.setState({
+          hospitals_slice: data.objects.slice(0, this.state.pageSize)
+        });
       });
   }
   handlePageChange = evt => {
@@ -707,7 +785,7 @@ class Hospitals extends Component {
                 maxWidth: "385px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "space-between"
               }}
               label1_heading="City"
               label1={hospital.city}
@@ -756,7 +834,9 @@ class Charities extends Component {
       .then(data => {
         console.log(data.objects.slice(0, 3));
         this.setState({ charities: data.objects });
-        this.setState({ charities_slice: data.objects.slice(0, this.state.pageSize) });
+        this.setState({
+          charities_slice: data.objects.slice(0, this.state.pageSize)
+        });
       });
   }
   handlePageChange = evt => {
@@ -803,7 +883,7 @@ class Charities extends Component {
                 maxWidth: "385px",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "space-between"
               }}
               label1_heading="Rating"
               label1={String(charity.rating)}
@@ -1327,7 +1407,7 @@ class Header extends Component {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-around",
-          flexWrap: "wrap",
+          flexWrap: "wrap"
         }}
       >
         <FormLabel
@@ -1335,7 +1415,7 @@ class Header extends Component {
           style={{
             position: "relative",
             marginTop: "10px",
-            fontSize: "1.875rem",
+            fontSize: "1.875rem"
           }}
         >
           mentalhelp.me
@@ -1345,7 +1425,7 @@ class Header extends Component {
           selected={this.props.selected}
           style={{
             position: "relative",
-            marginLeft: "0px",
+            marginLeft: "0px"
           }}
         >
           <Tab
@@ -1381,11 +1461,11 @@ class Header extends Component {
 class Card extends Component {
   render() {
     return (
-      <ClickableTile href={this.props.href} style={this.props.style} >
+      <ClickableTile href={this.props.href} style={this.props.style}>
         <div>
           <img src={this.props.image} width="350" height="370" />
         </div>
-        <br/>
+        <br />
         <div>
           <center>
             <FormLabel
@@ -1398,11 +1478,16 @@ class Card extends Component {
           <br />
           <center>
             {"buttonTitle" in this.props && (
-              <Button kind="secondary" href={this.props.buttonHref}>{this.props.buttonTitle}</Button>
+              <Button kind="secondary" href={this.props.buttonHref}>
+                {this.props.buttonTitle}
+              </Button>
             )}
             {"description" in this.props && (
               <center>
-                <FormLabel className="title" style={{ fontSize: "1.0rem", marginBottom: "20px" }}>
+                <FormLabel
+                  className="title"
+                  style={{ fontSize: "1.0rem", marginBottom: "20px" }}
+                >
                   {this.props.description}
                 </FormLabel>
               </center>
@@ -1410,7 +1495,10 @@ class Card extends Component {
             {"label1" in this.props && (
               <center>
                 <FormLabel className="title" style={{ fontSize: "0.9rem" }}>
-                  {(this.props.label1_heading !== undefined) ? this.props.label1_heading + ':' : ""} {this.props.label1}
+                  {this.props.label1_heading !== undefined
+                    ? this.props.label1_heading + ":"
+                    : ""}{" "}
+                  {this.props.label1}
                 </FormLabel>
               </center>
             )}
