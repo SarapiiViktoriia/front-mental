@@ -114,10 +114,10 @@ class Home extends Component {
             }}
           />
           <Card
-            title="Charities"
+            title="Hospitals"
             buttonTitle="Learn More"
-            buttonHref="/charities"
-            image={charitiesImage}
+            buttonHref="/hospitals"
+            image={hospitalsImage}
             style={{
               marginLeft: "15px",
               marginRight: "15px",
@@ -126,10 +126,10 @@ class Home extends Component {
             }}
           />
           <Card
-            title="Hospitals"
+            title="Charities"
             buttonTitle="Learn More"
-            buttonHref="/hospitals"
-            image={hospitalsImage}
+            buttonHref="/charities"
+            image={charitiesImage}
             style={{
               marginLeft: "15px",
               marginRight: "15px",
