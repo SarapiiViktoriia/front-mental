@@ -419,7 +419,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.caleb_i1 + this.state.caleb_i2}
             label4_heading="Unit Tests"
-            label4={""}
+            label4={"8"}
             image={Caleb}
             style={{
               marginLeft: "15px",
@@ -440,7 +440,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.shreyas_i1 + this.state.shreyas_i2}
             label4_heading="Unit Tests"
-            label4={""}
+            label4={"0"}
             image={Shreyas}
             style={{
               marginLeft: "15px",
@@ -459,7 +459,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.taher_i1 + this.state.taher_i2}
             label4_heading="Unit Tests"
-            label4={""}
+            label4={"8"}
             image={Taher}
             style={{
               marginLeft: "15px",
@@ -487,7 +487,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.weihan_i1 + this.state.weihan_i2}
             label4_heading="Unit Tests"
-            label4={""}
+            label4={"0"}
             image={Weihan}
             style={{
               marginLeft: "15px",
@@ -506,7 +506,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.jason_i1 + this.state.jason_i2}
             label4_heading="Unit Tests"
-            label4={""}
+            label4={"8"}
             image={Jason}
             style={{
               marginLeft: "15px",
@@ -538,7 +538,7 @@ class About extends Component {
               and <a href="https:
               = {this.state.total_i1 + this.state.total_i2}.<br />
               <br />
-              Total Unit Tests: 10.
+              Total Unit Tests: 24.
             </p>
           </div>
           <br />
