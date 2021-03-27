@@ -642,6 +642,7 @@ class Illnesses extends Component {
         this.setState({
           illnesses_slice: data.objects.slice(0, this.state.pageSize)
         });
+        this.setState({illness_count: data.num_results});
       });
   }
   handlePageChange = evt => {
@@ -705,7 +706,7 @@ class Illnesses extends Component {
         <div>
           <center>
             <PaginationV2
-              totalItems={10}
+              totalItems={this.state.illness_count}
               pageSize={3}
               pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
@@ -739,6 +740,7 @@ class Hospitals extends Component {
         this.setState({
           hospitals_slice: data.objects.slice(0, this.state.pageSize)
         });
+        this.setState({hospital_count: data.num_results});
       });
   }
   handlePageChange = evt => {
@@ -802,7 +804,7 @@ class Hospitals extends Component {
         <div>
           <center>
             <PaginationV2
-              totalItems={10}
+              totalItems={this.state.hospital_count}
               pageSize={3}
               pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
@@ -837,6 +839,7 @@ class Charities extends Component {
         this.setState({
           charities_slice: data.objects.slice(0, this.state.pageSize)
         });
+        this.setState({charity_count: data.num_results});
       });
   }
   handlePageChange = evt => {
@@ -900,7 +903,7 @@ class Charities extends Component {
         <div>
           <center>
             <PaginationV2
-              totalItems={10}
+              totalItems={this.state.charity_count}
               pageSize={3}
               pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
