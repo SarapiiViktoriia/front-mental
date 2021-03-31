@@ -2,7 +2,6 @@ import "./App.css";
 import logo from "./logo.svg";
 import React, { Component } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { Navbar, NavbarBrand } from "mdbreact";
 import { Tile } from 'carbon-components-react';
 import Main from './page/main';
 import Home from './page/home';
@@ -10,7 +9,7 @@ import About from './page/about';
 import { Hospitals, Hospital } from './page/hospital';
 import { Illnesses, Illness } from './page/illness';
 import { Charities, Charity } from './page/charity';
-import { Header } from './custom';
+import { Navigation } from './custom';
 class App extends Component {
   render() {
     const queryString = require("query-string");
@@ -28,6 +27,9 @@ class App extends Component {
     }
     return (
       <div className="page">
+        <div className="nav">
+          <Navigation/>
+        </div>
         <div className="page-body">
           <Switch>
             <Route exact path="/" component={Home} />
@@ -42,14 +44,14 @@ class App extends Component {
               display: "flex",
               flexDirection: "column",
               textAlign: "center",
+              maxHeight: "20px",
           }}>
             <div style={{
                 display: "flex",
                 flexDirection: "column",
                 textAlign: "center",
-            }}>
-              {" "}<a href='http:
-              </a> &copy; {new Date().getFullYear()}: CS 373 Group 11am-9
+            }}>Mental Health Help
+              &copy; {new Date().getFullYear()}: CS 373 Group 11am-9
             </div> 
           </Tile> 
         </div>

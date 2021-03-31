@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable } from "carbon-components-react";
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import './page/basic.css'
 const { TableContainer, Table, TableHead, TableRow, TableBody, TableCell, TableHeader } = DataTable;
 export class Card extends Component {
   render() {
     return (
-      <ClickableTile href={this.props.href} style={this.props.style}>
+      <ClickableTile className="cards" href={this.props.href} style={this.props.style}>
         <div>
           <img src={this.props.image} width="350" height="370" />
         </div>
@@ -69,6 +71,57 @@ export class Card extends Component {
           </center>
         </div>
       </ClickableTile>
+    );
+  }
+}
+export class Navigation extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    function handleAboutTabClick(e) {
+      if (window.location.href !== "http:
+        window.location.assign("/about");
+      }
+    }
+    function handleIllnessesTabClick(e) {
+      if (window.location.href !== "http:
+        window.location.assign("/illnesses");
+      }
+    }
+    function handleHospitalsTabClick(e) {
+      if (window.location.href !== "http:
+        window.location.assign("/hospitals");
+      }
+    }
+    function handleCharitiesTabClick(e) {
+      if (window.location.href !== "http:
+        window.location.assign("/charities");
+      }
+    }
+    function handleHomeTabClick(e) {
+      if (window.location.href !== "http:
+        window.location.assign("/");
+      }
+    }
+    return (
+      <div className="navbar-top">
+        <FormLabel className="title"
+          style={{
+            position: "relative",
+            marginLeft: "120px",
+            marginTop: "30px",
+            fontSize: "1.6rem",
+            color: "white"
+        }}> Mental Health Help </FormLabel>
+        <nav class="bx--breadcrumb bx--breadcrumb--no-trailing-slash" aria-label="breadcrumb">
+          <div class="bx--breadcrumb-item"><a href="/" class="bx--link">Home</a></div>
+          <div class="bx--breadcrumb-item"><a href="/illnesses" class="bx--link">Illnesses</a></div>
+          <div class="bx--breadcrumb-item"><a href="/hospitals" class="bx--link">Hospitals</a></div>
+          <div class="bx--breadcrumb-item"><a href="/charities" class="bx--link">Charities</a></div>
+          <div class="bx--breadcrumb-item"><a href="/about" class="bx--link">About Us</a></div>
+        </nav>
+      </div>
     );
   }
 }

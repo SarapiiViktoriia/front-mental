@@ -36,6 +36,10 @@ export class Illnesses extends Component {
     const { illnesses_slice } = this.state;
     return (
       <div>
+        <div className="page-title">
+          <h1>Illnesses</h1>
+          <p style={{fontSize:"25px", opacity:"0.75"}} >Explore the most common mental illnesses</p>
+        </div>
         <div
           style={{
             display: "flex",
@@ -78,6 +82,7 @@ export class Illnesses extends Component {
               pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
               style={{
+                opacity: "0.6",
                 position: "relative",
                 marginTop: "40px",
                 marginBottom: "20px"

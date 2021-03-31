@@ -219,7 +219,9 @@ class About extends Component {
               flexDirection: "column",
               justifyContent: "center",
               marginLeft: "35px",
-              marginRight: "35px"
+              marginRight: "35px",
+              color: "black",
+              opacity: "0.55"
             }}
           >
             <div

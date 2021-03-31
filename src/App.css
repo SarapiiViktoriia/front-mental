@@ -18,9 +18,23 @@
 .App-link {
   color: #61dafb;
 }
+html,
+body {
+  height: 100%;
+  background: #780206;  
+  background: -webkit-linear-gradient(to left, #061161, #780206);  
+  background: linear-gradient(to left, #061161, #780206); 
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
 div.title {
   text-align: center;
   vertical-align: middle;
+  color: white;
+}
+.cards {
+  opacity: .6;
 }
 .page {
   position: relative;
@@ -28,16 +42,18 @@ div.title {
   min-height: 100vh;
 }
 .page-body {
+  padding-top: 60px;
   height: 100%;
   margin: 0;
   padding-bottom: 60px;
 }
 .footer {
-position: absolute;
-left: 0;
-bottom: 0;
-right: 0;
-height: 60px;
+  opacity: 0.6;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 60px;
 }
 @keyframes App-logo-spin {
   from {

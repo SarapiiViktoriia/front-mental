@@ -36,6 +36,10 @@ export class Hospitals extends Component {
     const { hospitals_slice } = this.state;
     return (
       <div>
+        <div className="page-title">
+          <h1>Hospitals</h1>
+          <p style={{fontSize:"25px", opacity:"0.75"}} >Find the hospital best suited to your needs</p>
+        </div>
         <div
           style={{
             display: "flex",
@@ -78,6 +82,7 @@ export class Hospitals extends Component {
               pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
               style={{
+                opacity: "0.6",
                 position: "relative",
                 marginTop: "40px",
                 marginBottom: "20px"

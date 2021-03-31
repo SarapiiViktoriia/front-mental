@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from '../custom';
 import { Tile, FormLabel, PaginationV2 } from "carbon-components-react";
+import './basic.css'
 export class Charities extends Component {
   constructor(props) {
     super(props);
@@ -37,6 +38,10 @@ export class Charities extends Component {
     const { charities_slice } = this.state;
     return (
       <div>
+        <div className="page-title">
+          <h1>Charities</h1>
+          <p style={{fontSize:"25px", opacity:"0.75"}} >Discover charities who are doing their part</p>
+        </div>
         <div
           style={{
             display: "flex",
@@ -79,6 +84,7 @@ export class Charities extends Component {
               pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
               style={{
+                opacity: "0.6",
                 position: "relative",
                 marginTop: "20px",
                 marginBottom: "20px"
