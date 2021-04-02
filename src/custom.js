@@ -74,57 +74,6 @@ export class Card extends Component {
     );
   }
 }
-export class Navigation extends Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    function handleAboutTabClick(e) {
-      if (window.location.href !== "http:
-        window.location.assign("/about");
-      }
-    }
-    function handleIllnessesTabClick(e) {
-      if (window.location.href !== "http:
-        window.location.assign("/illnesses");
-      }
-    }
-    function handleHospitalsTabClick(e) {
-      if (window.location.href !== "http:
-        window.location.assign("/hospitals");
-      }
-    }
-    function handleCharitiesTabClick(e) {
-      if (window.location.href !== "http:
-        window.location.assign("/charities");
-      }
-    }
-    function handleHomeTabClick(e) {
-      if (window.location.href !== "http:
-        window.location.assign("/");
-      }
-    }
-    return (
-      <div className="navbar-top">
-        <FormLabel className="title"
-          style={{
-            position: "relative",
-            marginLeft: "120px",
-            marginTop: "30px",
-            fontSize: "1.6rem",
-            color: "white"
-        }}> Mental Health Help </FormLabel>
-        <nav class="bx--breadcrumb bx--breadcrumb--no-trailing-slash" aria-label="breadcrumb">
-          <div class="bx--breadcrumb-item"><a href="/" class="bx--link">Home</a></div>
-          <div class="bx--breadcrumb-item"><a href="/illnesses" class="bx--link">Illnesses</a></div>
-          <div class="bx--breadcrumb-item"><a href="/hospitals" class="bx--link">Hospitals</a></div>
-          <div class="bx--breadcrumb-item"><a href="/charities" class="bx--link">Charities</a></div>
-          <div class="bx--breadcrumb-item"><a href="/about" class="bx--link">About Us</a></div>
-        </nav>
-      </div>
-    );
-  }
-}
 export class MyTable extends Component {
   render() {
     function onChange() {}
@@ -161,6 +110,76 @@ export class MyTable extends Component {
           </TableContainer>
         )}
       />
+    );
+  }
+}
+export class Navigation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selected: -1 };
+  }
+  render() {
+    function handleAboutTabClick(e) {
+      e.preventDefault();
+      if (window.location.href !== "http:
+        window.location.assign("/about");
+        this.setState({selected: 4});
+      }
+    }
+    function handleIllnessesTabClick(e) {
+      e.preventDefault();
+      if (window.location.href !== "http:
+        window.location.assign("/illnesses");
+        this.setState({selected: 1});
+      }
+    }
+    function handleHospitalsTabClick(e) {
+      e.preventDefault();
+      if (window.location.href !== "http:
+        window.location.assign("/hospitals");
+        this.setState({selected: 2});
+      }
+    }
+    function handleCharitiesTabClick(e) {
+      e.preventDefault();
+      if (window.location.href !== "http:
+        window.location.assign("/charities");
+        this.setState({selected: 3});
+      }
+    }
+    function handleHomeTabClick(e) {
+      e.preventDefault();
+      if (window.location.href !== "http:
+        window.location.assign("/");
+        this.setState({selected: 0});
+      }
+    }
+    return (
+      <Tile className="navbar-top">
+        <FormLabel className="navbar-title">Mental Health Help</FormLabel>
+        <Tabs className="navbar-tabs" selected={this.state.selected}>
+          <Tab className="navbar-tab"
+            label={"Home"}
+            onClick={handleHomeTabClick}
+          />
+          <Tab className="navbar-tab"
+            label={"Illnesses"}
+            onClick={handleIllnessesTabClick}
+          />
+          <Tab className="navbar-tab"
+            label={"Hospitals"}
+            onClick={handleHospitalsTabClick}
+          />
+          <Tab className="navbar-tab"
+            label={"Charities"}
+            onClick={handleCharitiesTabClick}
+          />
+          <Tab className="navbar-tab"
+            label={"About"}
+            onClick={handleAboutTabClick}
+          />
+        </Tabs>
+      </Tile>
     );
   }
 }

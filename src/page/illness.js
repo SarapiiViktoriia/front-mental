@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from '../custom';
+import { Card, Navigation } from '../custom';
 import { Tile, FormLabel, PaginationV2 } from "carbon-components-react";
 export class Illnesses extends Component {
   constructor(props) {
@@ -36,6 +36,9 @@ export class Illnesses extends Component {
     const { illnesses_slice } = this.state;
     return (
       <div>
+      <div className="navbar">
+        <Navigation selected={1}/>
+      </div>
         <div className="page-title">
           <h1>Illnesses</h1>
           <p style={{fontSize:"25px", opacity:"0.75"}} >Explore the most common mental illnesses</p>
@@ -113,6 +116,9 @@ export class Illness extends Component {
   render() {
     return (
       <div>
+      <div className="navbar">
+        <Navigation selected={1}/>
+      </div>
         <div>
           <Tile
             style={{

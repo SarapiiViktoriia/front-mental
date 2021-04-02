@@ -27,9 +27,6 @@ class App extends Component {
     }
     return (
       <div className="page">
-        <div className="nav">
-          <Navigation/>
-        </div>
         <div className="page-body">
           <Switch>
             <Route exact path="/" component={Home} />

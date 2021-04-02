@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from '../custom';
+import { Card, Navigation } from '../custom';
 import { Tile } from 'carbon-components-react';
 import Caleb from "../img/team/Caleb.jpg";
 import Shreyas from "../img/team/Shreyas.jpg";
@@ -206,7 +206,10 @@ class About extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="about-page">
+      <div className="navbar">
+        <Navigation selected={4}/>
+      </div>
         <div className="title">
           <br />
           <br />

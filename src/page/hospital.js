@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from '../custom';
+import { Card, Navigation } from '../custom';
 import { Tile, FormLabel, PaginationV2 } from "carbon-components-react";
 export class Hospitals extends Component {
   constructor(props) {
@@ -36,6 +36,9 @@ export class Hospitals extends Component {
     const { hospitals_slice } = this.state;
     return (
       <div>
+      <div className="navbar">
+        <Navigation selected={2}/>
+      </div>
         <div className="page-title">
           <h1>Hospitals</h1>
           <p style={{fontSize:"25px", opacity:"0.75"}} >Find the hospital best suited to your needs</p>
@@ -113,6 +116,9 @@ export class Hospital extends Component {
   render() {
     return (
       <div>
+      <div className="navbar">
+        <Navigation selected={3}/>
+      </div>
         <div>
           <Tile
             style={{

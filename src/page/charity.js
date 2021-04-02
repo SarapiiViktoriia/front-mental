@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card } from '../custom';
+import { Card, Navigation } from '../custom';
 import { Tile, FormLabel, PaginationV2 } from "carbon-components-react";
 import './basic.css'
 export class Charities extends Component {
@@ -38,6 +38,9 @@ export class Charities extends Component {
     const { charities_slice } = this.state;
     return (
       <div>
+      <div className="navbar">
+        <Navigation selected={3}/>
+      </div>
         <div className="page-title">
           <h1>Charities</h1>
           <p style={{fontSize:"25px", opacity:"0.75"}} >Discover charities who are doing their part</p>
@@ -115,6 +118,9 @@ export class Charity extends Component {
   render() {
     return (
       <div>
+      <div className="navbar">
+        <Navigation selected={3}/>
+      </div>
         <div>
           <Tile
             style={{

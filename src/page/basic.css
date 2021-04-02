@@ -34,13 +34,32 @@ div.home-page {
   vertical-align: middle;
 }
 .navbar-top {
-  justify-content: space-between;
-  opacity: 0.6;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: .9;
   background-color: transparent;
+  vertical-align: middle;
+  border-color: transparent;
+  height: 50px;
 }
-nav.bx--breadcrumb {
-  display: inline;
-  float: right;
-  font-size: 25px;
+.navbar-tab {
+  position: relative;
+  font-size: 115%;
   color: white;
+  opacity: 0.8;
+}
+.navbar-tabs {
+  position: relative;
+  margin-left: 0px;
+  color: white;
+  float: right;
+}
+.navbar-title {
+  position: relative;
+  color: white;
+  margin-top: 10px;
+  font-size: 1.5rem;
+  float: left;
 }
