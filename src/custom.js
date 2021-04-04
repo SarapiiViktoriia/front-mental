@@ -114,50 +114,26 @@ export class MyTable extends Component {
   }
 }
 export class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { selected: -1 };
-  }
   render() {
     function handleAboutTabClick(e) {
-      e.preventDefault();
-      if (window.location.href !== "http:
-        window.location.assign("/about");
-        this.setState({selected: 4});
-      }
+      window.location.assign("/about");
     }
     function handleIllnessesTabClick(e) {
-      e.preventDefault();
-      if (window.location.href !== "http:
-        window.location.assign("/illnesses");
-        this.setState({selected: 1});
-      }
+      window.location.assign("/illnesses");
     }
     function handleHospitalsTabClick(e) {
-      e.preventDefault();
-      if (window.location.href !== "http:
-        window.location.assign("/hospitals");
-        this.setState({selected: 2});
-      }
+      window.location.assign("/hospitals");
     }
     function handleCharitiesTabClick(e) {
-      e.preventDefault();
-      if (window.location.href !== "http:
-        window.location.assign("/charities");
-        this.setState({selected: 3});
-      }
+      window.location.assign("/charities");
     }
     function handleHomeTabClick(e) {
-      e.preventDefault();
-      if (window.location.href !== "http:
-        window.location.assign("/");
-        this.setState({selected: 0});
-      }
+      window.location.assign("/"); 
     }
     return (
       <Tile className="navbar-top">
         <FormLabel className="navbar-title">Mental Health Help</FormLabel>
-        <Tabs className="navbar-tabs" selected={this.state.selected}>
+        <Tabs className="navbar-tabs" selected={this.props.selected}>
           <Tab className="navbar-tab"
             label={"Home"}
             onClick={handleHomeTabClick}

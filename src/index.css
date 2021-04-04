@@ -6850,7 +6850,7 @@ span.flatpickr-weekday {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "ibm-plex-sans", Helvetica Neue, Arial, sans-serif;
-  color: #152935;
+  color: white;
   font-weight: 600;
   height: auto;
   width: 10%;
@@ -6899,7 +6899,7 @@ span.flatpickr-weekday {
   color: #152935;
 }
 .bx--tabs-trigger-text:focus {
-  outline: 1px solid #3d70b2;
+  outline: 1px solid white;
 }
 .bx--tabs__nav {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
@@ -6973,10 +6973,10 @@ span.flatpickr-weekday {
     border-bottom: 2px solid #3d70b2;
   }
   .bx--tabs__nav-item--selected .bx--tabs__nav-link {
-    color: #3d70b2;
+    color: white;
   }
   .bx--tabs__nav-item--selected .bx--tabs__nav-link:focus {
-    color: #3d70b2;
+    color: white;
   }
 }
 .bx--tabs__nav-item:hover .bx--tabs__nav-link {
@@ -6984,12 +6984,12 @@ span.flatpickr-weekday {
 }
 @media screen and (min-width: 768px) {
   .bx--tabs__nav-item:hover .bx--tabs__nav-link {
-    color: #3d70b2;
+    color: red;
   }
 }
 .bx--tabs__nav-link {
   display: inline-block;
-  color: #152935;
+  color: white;
   text-decoration: none;
   padding: 1rem;
   width: 100%;
