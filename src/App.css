@@ -36,6 +36,9 @@ div.title {
 .cards {
   opacity: .8;
 }
+.instance {
+  opacity: .8;
+}
 .page {
   position: relative;
   min-height: 100%;

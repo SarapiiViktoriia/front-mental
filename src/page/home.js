@@ -8,9 +8,9 @@ class Home extends Component {
   render() {
     return (
       <div className='home-page'>
-      <div className="navbar">
-        <Navigation selected={0}/>
-      </div>
+        <div className="navbar">
+          <Navigation selected={0}/>
+        </div>
         <Typing>
           <span style={{fontSize:"50px"}}>Hello from the home page!</span>
         </Typing>

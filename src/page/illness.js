@@ -120,7 +120,7 @@ export class Illness extends Component {
         <Navigation selected={1}/>
       </div>
         <div>
-          <Tile
+          <Tile className="instance"
             style={{
               position: "relative",
               marginLeft: "32px",

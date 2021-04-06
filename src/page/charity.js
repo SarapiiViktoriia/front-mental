@@ -122,7 +122,7 @@ export class Charity extends Component {
         <Navigation selected={3}/>
       </div>
         <div>
-          <Tile
+          <Tile className="instance"
             style={{
               position: "relative",
               marginLeft: "32px",
