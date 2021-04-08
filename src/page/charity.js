@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2 } from "carbon-components-react";
+import { Tile, FormLabel, PaginationV2, Search, SearchFilterButton } from "carbon-components-react";
 import './basic.css'
+const searchProps = () => ({
+  className: 'some-class',
+  small: false,
+  light: true,
+  labelText: 'Search',
+  placeHolderText: 'Search',
+});
 export class Charities extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +51,18 @@ export class Charities extends Component {
         <div className="page-title">
           <h1>Charities</h1>
           <p style={{fontSize:"25px", opacity:"0.75"}} >Discover charities who are doing their part</p>
+        </div>
+        <br/>
+        <br/>
+        <div 
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center'
+          }}
+        >
+          <Search {...searchProps()}/> 
+          <SearchFilterButton />
         </div>
         <div
           style={{
@@ -122,7 +141,7 @@ export class Charity extends Component {
         <Navigation selected={3}/>
       </div>
         <div>
-          <Tile className="instance"
+          <Tile
             style={{
               position: "relative",
               marginLeft: "32px",

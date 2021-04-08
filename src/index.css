@@ -2534,7 +2534,7 @@ input:not(output):not([data-invalid]):-moz-ui-invalid {
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  width: 100%;
+  width: 30%;
 }
 .bx--search .bx--label {
   position: absolute;
@@ -6984,7 +6984,7 @@ span.flatpickr-weekday {
 }
 @media screen and (min-width: 768px) {
   .bx--tabs__nav-item:hover .bx--tabs__nav-link {
-    color: red;
+    color: #3d70b2;
   }
 }
 .bx--tabs__nav-link {

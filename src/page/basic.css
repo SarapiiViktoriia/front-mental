@@ -44,9 +44,9 @@ div.home-page {
 }
 .navbar-tab {
   position: relative;
-  font-size: 115%;
+  font-size: 90%;
   color: white;
-  opacity: 0.7;
+  opacity: 1.0;
 }
 .navbar-tabs {
   position: relative;

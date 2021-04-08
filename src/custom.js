@@ -1,22 +1,26 @@
-import './page/basic.css'
 import React, { Component } from 'react';
-import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel } from "carbon-components-react";
+import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable } from "carbon-components-react";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import './page/basic.css'
+const { TableContainer, Table, TableHead, TableRow, TableBody, TableCell, TableHeader } = DataTable;
 export class Card extends Component {
   render() {
     return (
       <ClickableTile className="cards" href={this.props.href} style={this.props.style}>
         <div>
-          <img src={this.props.image} width="350" height="370" alt="pic"/>
+          <img src={this.props.image} width="350" height="370" />
         </div>
-        <br/>
+        <br />
         <div>
           <center>
-            <FormLabel className="title" style={{ "margin-top": "20px", fontSize: "1.2rem" }}>
+            <FormLabel
+              className="title"
+              style={{ "margin-top": "20px", fontSize: "1.2rem" }}
+            >
               {this.props.title}
             </FormLabel>
           </center>
-          <br/>
+          <br />
           <center>
             {"buttonTitle" in this.props && (
               <Button kind="secondary" href={this.props.buttonHref}>
@@ -25,8 +29,10 @@ export class Card extends Component {
             )}
             {"description" in this.props && (
               <center>
-                <FormLabel className="title"
-                style={{ fontSize: "1.0rem", marginBottom: "20px" }}>
+                <FormLabel
+                  className="title"
+                  style={{ fontSize: "1.0rem", marginBottom: "20px" }}
+                >
                   {this.props.description}
                 </FormLabel>
               </center>
@@ -65,6 +71,45 @@ export class Card extends Component {
           </center>
         </div>
       </ClickableTile>
+    );
+  }
+}
+export class MyTable extends Component {
+  render() {
+    function onChange() {}
+    return (
+      <DataTable
+        rows={this.props.rows}
+        headers={this.props.headers}
+        render={({ rows, headers }) => (
+          <TableContainer
+            style={{
+              "padding-top": "30px",
+              "padding-left": "47px",
+              "padding-right": "47px"
+            }}
+          >
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {headers.map(header => (
+                    <TableHeader>{header.header}</TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map(row => (
+                  <TableRow key={row.id}>
+                    {row.cells.map(cell => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      />
     );
   }
 }

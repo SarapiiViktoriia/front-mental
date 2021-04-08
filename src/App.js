@@ -47,6 +47,7 @@ class App extends Component {
                 display: "flex",
                 flexDirection: "column",
                 textAlign: "center",
+                marginTop: "7px",
             }}>Mental Health Help
               &copy; {new Date().getFullYear()}: CS 373 Group 11am-9
             </div> 
