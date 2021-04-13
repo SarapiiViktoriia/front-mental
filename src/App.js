@@ -1,7 +1,7 @@
 import "./App.css";
 import logo from "./logo.svg";
 import React, { Component } from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Tile } from 'carbon-components-react';
 import Main from './page/main';
 import Home from './page/home';
@@ -28,13 +28,15 @@ class App extends Component {
     return (
       <div className="page">
         <div className="page-body">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            {illness_path}
-            {hospital_path}
-            {charity_path}
-          </Switch>
+          <Router>
+            <div className="routes">
+              <Route exact path="/" component={Home} />
+              <Route path="/about" component={About} />
+              {illness_path}
+              {hospital_path}
+              {charity_path}
+            </div>
+          </Router>
         </div>
         <div className="footer">
           <Tile style={{

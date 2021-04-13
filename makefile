@@ -1,6 +1,6 @@
 FILES :=                                  \
 	makefile                              \
-	tests/appTest.js
+	tests/test.js
 all: setup start
 reset: stop clean setup start
 setup:
@@ -13,6 +13,6 @@ stop:
 	forever stopall
 clean:
 	rm -f *.log nohup.out
-TestWebsite.jsx: tests/appTest.js
+TestWebsite.jsx: tests/test.js
 	npm test
 run: TestWebsite.jsx
