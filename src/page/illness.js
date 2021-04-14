@@ -39,6 +39,25 @@ export class Illnesses extends Component {
       illnesses_slice: this.state.illnesses.slice(slice1, slice2)
     });
   };
+  handleSort(){
+    const illnesses = [].concat(this.state.illnesses_slice);
+    const sortedIllnesses = illnesses.sort(
+      (a,b)=> {
+        var nameA = a.name.toUpperCase(); 
+        var nameB = b.name.toUpperCase(); 
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      } 
+    );
+    this.setState({
+      illnesses_slice: sortedIllnesses,
+    });
+  }
   render() {
     const { illnesses_slice } = this.state;
     return (
@@ -60,7 +79,9 @@ export class Illnesses extends Component {
           }}
         >
           <Search {...searchProps()}/> 
-          <SearchFilterButton />
+          <SearchFilterButton
+            onClick={ ()=> this.handleSort() }
+          />
         </div>
         <div
           style={{
