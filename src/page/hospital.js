@@ -39,6 +39,25 @@ export class Hospitals extends Component {
       hospitals_slice: this.state.hospitals.slice(slice1, slice2)
     });
   };
+  handleSort(){
+    const hospitals = [].concat(this.state.hospitals_slice);
+    const sortedHospitals = hospitals.sort(
+      (a,b)=> {
+        var nameA = a.name.toUpperCase(); 
+        var nameB = b.name.toUpperCase(); 
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      } 
+    );
+    this.setState({
+      hospitals_slice: sortedHospitals,
+    });
+  }
   render() {
     const { hospitals_slice } = this.state;
     return (
@@ -60,7 +79,9 @@ export class Hospitals extends Component {
           }}
         >
           <Search {...searchProps()}/> 
-          <SearchFilterButton />
+          <SearchFilterButton
+            onClick={ ()=> this.handleSort() }
+          />
         </div>
         <div
           style={{
