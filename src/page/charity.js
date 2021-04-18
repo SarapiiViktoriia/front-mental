@@ -41,6 +41,25 @@ export class Charities extends Component {
       charities_slice: this.state.charities.slice(slice1, slice2)
     });
   };
+  handleSort(){
+    const charities = [].concat(this.state.charities_slice);
+    const sortedCharities = charities.sort(
+      (a,b)=> {
+        var nameA = a.name.toUpperCase(); 
+        var nameB = b.name.toUpperCase(); 
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      } 
+    );
+    this.setState({
+      charities_slice: sortedCharities,
+    });
+  }
   render() {
     const { charities_slice } = this.state;
     return (
@@ -62,7 +81,9 @@ export class Charities extends Component {
           }}
         >
           <Search {...searchProps()}/> 
-          <SearchFilterButton />
+          <SearchFilterButton
+            onClick={ ()=> this.handleSort() }
+          />
         </div>
         <div
           style={{
