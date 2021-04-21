@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2, Search, SearchFilterButton } from "carbon-components-react";
-const searchProps = () => ({
-  className: 'some-class',
-  small: false,
-  light: true,
-  labelText: 'Search',
-  placeHolderText: 'Search',
-});
+import { Card, Navigation, FilterModal } from '../custom';
+import { Tile, FormLabel, PaginationV2, SearchFilterButton } from "carbon-components-react";
 export class Hospitals extends Component {
   constructor(props) {
     super(props);
@@ -62,27 +55,32 @@ export class Hospitals extends Component {
     const { hospitals_slice } = this.state;
     return (
       <div>
-      <div className="navbar">
-        <Navigation selected={2}/>
-      </div>
+        {}
+        <div className="navbar">
+          <Navigation selected={2}/>
+        </div>
         <div className="page-title">
           <h1>Hospitals</h1>
           <p style={{fontSize:"25px", opacity:"0.75"}} >Find the hospital best suited to your needs</p>
         </div>
         <br/>
-        <br/>
-        <div 
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center'
-          }}
-        >
-          <Search {...searchProps()}/> 
-          <SearchFilterButton
-            onClick={ ()=> this.handleSort() }
+        <center>
+          <PaginationV2
+            totalItems={this.state.hospital_count}
+            pageSize={3}
+            pageSizes={[3, 6, 9, 10]}
+            onChange={this.handlePageChange}
+            style={{
+              opacity: "0.7",
+              position: "relative",
+              marginTop: "40px",
+              marginBottom: "20px"
+            }}
           />
-        </div>
+          <a style={{ fontSize: '15px' }} >Filter </a>
+          <SearchFilterButton style={{ backgroundColor: 'transparent' }}/>
+        </center>
+        {}
         <div
           style={{
             display: "flex",
@@ -116,22 +114,6 @@ export class Hospitals extends Component {
               href={`/hospitals?id=${hospital.id}`}
             />
           ))}
-        </div>
-        <div>
-          <center>
-            <PaginationV2
-              totalItems={this.state.hospital_count}
-              pageSize={3}
-              pageSizes={[3, 6, 9, 10]}
-              onChange={this.handlePageChange}
-              style={{
-                opacity: "0.6",
-                position: "relative",
-                marginTop: "40px",
-                marginBottom: "20px"
-              }}
-            />
-          </center>
         </div>
       </div>
     );

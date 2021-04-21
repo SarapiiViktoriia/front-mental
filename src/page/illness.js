@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2, Search, SearchFilterButton } from "carbon-components-react";
-const searchProps = () => ({
-  className: 'some-class',
-  small: false,
-  light: true,
-  labelText: 'Search',
-  placeHolderText: 'Search',
-});
+import { Tile, FormLabel, PaginationV2 } from "carbon-components-react";
 export class Illnesses extends Component {
   constructor(props) {
     super(props);
@@ -70,19 +63,6 @@ export class Illnesses extends Component {
           <p style={{fontSize:"25px", opacity:"0.75"}} >Explore the most common mental illnesses</p>
         </div>
         <br/>
-        <br/>
-        <div 
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center'
-          }}
-        >
-          <Search {...searchProps()}/> 
-          <SearchFilterButton
-            onClick={ ()=> this.handleSort() }
-          />
-        </div>
         <div
           style={{
             display: "flex",

@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import { Card, Navigation } from '../custom';
 import Typing from 'react-typing-animation';
-import { Search } from "carbon-components-react";
 import illnessesImage from "../img/images/Mental-Illness-Prevalence-in-Adults.png";
 import charitiesImage from "../img/images/charities.png";
 import hospitalsImage from "../img/images/hospitals.png";
-const props = () => ({
-  className: 'some-class',
-  small: false,
-  light: true,
-  labelText: 'Search',
-  placeHolderText: 'Search',
-});
 class Home extends Component {
   render() {
     return (
@@ -33,11 +25,6 @@ class Home extends Component {
         </Typing>
         <br/>
         <br/>
-        <div>
-          <center>
-            <Search {...props()}/>
-          </center>
-        </div>
       </div>
     );
   }

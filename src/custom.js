@@ -1,8 +1,64 @@
 import React, { Component } from 'react';
-import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable } from "carbon-components-react";
+import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable, Search, Modal, MultiSelect } from "carbon-components-react";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import './page/basic.css'
 const { TableContainer, Table, TableHead, TableRow, TableBody, TableCell, TableHeader } = DataTable;
+const filterModalProps = () => ({
+  className: 'some-class',
+  open: true,
+  passiveModal: false,
+  danger: false,
+  shouldSubmitOnEnter: true,
+  modalHeading: "Choose Filters",
+  primaryButtonText: "Apply",
+  secondaryButtonText: "Reset",
+  iconDescription: "Close",
+});
+const searchProps = () => ({
+  className: 'some-class',
+  small: false,
+  light: false,
+  labelText: 'Search',
+  placeHolderText: 'Search',
+});
+const items = [
+  {
+    id: 'item-1',
+    text: 'Item 1',
+  },
+  {
+    id: 'item-2',
+    text: 'Item 2',
+  },
+];
+export class FilterModal extends Component {
+  onChange = evt => {
+    console.log(evt);
+  }
+  render() {
+    return (
+      <div className="filter-modal">
+        <Modal {...filterModalProps()}>
+          <div>
+            <MultiSelect
+              items={items}
+              placeholder={"States"}
+              useTitleInItem={false}
+              type="default"
+              label="State"
+              invalid={false}
+              invalidText="Invalid Selection"
+              onChange={this.onChange}
+              items={[{id: 'item-1',text: 'Item 1'},{id: 'item-2',text: 'Item 2'}]}
+              placeholder="State"
+            >
+            </MultiSelect>
+          </div>
+        </Modal>
+      </div>
+    );
+  }
+}
 export class Card extends Component {
   render() {
     return (
@@ -132,29 +188,36 @@ export class Navigation extends Component {
     }
     return (
       <Tile className="navbar-top">
-        <FormLabel className="navbar-title">Mental Health Help</FormLabel>
-        <Tabs className="navbar-tabs" selected={this.props.selected}>
-          <Tab className="navbar-tab"
-            label={"Home"}
-            onClick={handleHomeTabClick}
-          />
-          <Tab className="navbar-tab"
-            label={"Illnesses"}
-            onClick={handleIllnessesTabClick}
-          />
-          <Tab className="navbar-tab"
-            label={"Hospitals"}
-            onClick={handleHospitalsTabClick}
-          />
-          <Tab className="navbar-tab"
-            label={"Charities"}
-            onClick={handleCharitiesTabClick}
-          />
-          <Tab className="navbar-tab"
-            label={"About"}
-            onClick={handleAboutTabClick}
-          />
-        </Tabs>
+        <div style = {{ 'width': '20%' }}>
+          <FormLabel className="navbar-title">Mental Health Help</FormLabel>
+        </div>
+        <div style={{ width: '30%', marginTop: '3px' }} >
+          <Search {...searchProps()} />
+        </div>
+        <div>
+          <Tabs className="navbar-tabs" selected={this.props.selected}>
+            <Tab className="navbar-tab"
+              label={"Home"}
+              onClick={handleHomeTabClick}
+            />
+            <Tab className="navbar-tab"
+              label={"Illnesses"}
+              onClick={handleIllnessesTabClick}
+            />
+            <Tab className="navbar-tab"
+              label={"Hospitals"}
+              onClick={handleHospitalsTabClick}
+            />
+            <Tab className="navbar-tab"
+              label={"Charities"}
+              onClick={handleCharitiesTabClick}
+            />
+            <Tab className="navbar-tab"
+              label={"About"}
+              onClick={handleAboutTabClick}
+            />
+          </Tabs>
+        </div>
       </Tile>
     );
   }

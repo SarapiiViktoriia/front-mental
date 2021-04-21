@@ -41,6 +41,7 @@ div.home-page {
   background-color: transparent;
   vertical-align: middle;
   border-color: transparent;
+  width: '100%';
 }
 .navbar-tab {
   position: relative;
@@ -56,8 +57,14 @@ div.home-page {
 }
 .navbar-title {
   position: relative;
+  align-self: flex-start;
   color: white;
   opacity: 0.9;
   margin-top: 10px;
   font-size: 1.5rem;
+}
+.filter-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
