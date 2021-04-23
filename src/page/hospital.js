@@ -8,7 +8,8 @@ export class Hospitals extends Component {
       page: 1,
       pageSize: 3,
       hospitals: [],
-      hospitals_slice: []
+      hospitals_slice: [],
+      modalOpen: false,
     };
   }
   componentWillMount() {
@@ -32,6 +33,11 @@ export class Hospitals extends Component {
       hospitals_slice: this.state.hospitals.slice(slice1, slice2)
     });
   };
+  openModal = () => {
+    this.setState({
+      modalOpen: true
+    });
+  }
   handleSort(){
     const hospitals = [].concat(this.state.hospitals_slice);
     const sortedHospitals = hospitals.sort(
@@ -55,7 +61,7 @@ export class Hospitals extends Component {
     const { hospitals_slice } = this.state;
     return (
       <div>
-        {}
+        <FilterModal open={this.state.modalOpen} />
         <div className="navbar">
           <Navigation selected={2}/>
         </div>
@@ -78,9 +84,8 @@ export class Hospitals extends Component {
             }}
           />
           <a style={{ fontSize: '15px' }} >Filter </a>
-          <SearchFilterButton style={{ backgroundColor: 'transparent' }}/>
+          <SearchFilterButton style={{ backgroundColor: 'transparent' }} onClick={this.openModal}/>
         </center>
-        {}
         <div
           style={{
             display: "flex",

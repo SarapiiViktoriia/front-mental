@@ -5,7 +5,6 @@ import './page/basic.css'
 const { TableContainer, Table, TableHead, TableRow, TableBody, TableCell, TableHeader } = DataTable;
 const filterModalProps = () => ({
   className: 'some-class',
-  open: true,
   passiveModal: false,
   danger: false,
   shouldSubmitOnEnter: true,
@@ -32,27 +31,40 @@ const items = [
   },
 ];
 export class FilterModal extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      open: this.props.open
+    }
+  }
+  componentWillReceiveProps() {
+    console.log(this.props.open);
+    this.setState({ open: this.props.open });
+  }
   onChange = evt => {
     console.log(evt);
+  }
+  toggleModal = () => {
+    this.setState({
+      open: !this.state.open
+    });
   }
   render() {
     return (
       <div className="filter-modal">
-        <Modal {...filterModalProps()}>
+        <Modal {...filterModalProps()} open={this.state.open} onRequestClose={this.toggleModal}>
           <div>
-            <MultiSelect
+            <MultiSelect.Filterable
               items={items}
               placeholder={"States"}
-              useTitleInItem={false}
-              type="default"
+              useTitleInItem={true}
               label="State"
-              invalid={false}
+              invalid={true}
               invalidText="Invalid Selection"
               onChange={this.onChange}
-              items={[{id: 'item-1',text: 'Item 1'},{id: 'item-2',text: 'Item 2'}]}
+              itemToString={item => (item ? item.text : '')}
               placeholder="State"
-            >
-            </MultiSelect>
+            />
           </div>
         </Modal>
       </div>
