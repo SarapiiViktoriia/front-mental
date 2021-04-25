@@ -1,7 +1,7 @@
+import './basic.css'
 import React, { Component } from 'react';
 import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2, Search, SearchFilterButton } from "carbon-components-react";
-import './basic.css'
+import { Tile, FormLabel, PaginationV2, ModalWrapper } from "carbon-components-react";
 export class Charities extends Component {
   constructor(props) {
     super(props);
@@ -34,25 +34,6 @@ export class Charities extends Component {
       charities_slice: this.state.charities.slice(slice1, slice2)
     });
   };
-  handleSort(){
-    const charities = [].concat(this.state.charities_slice);
-    const sortedCharities = charities.sort(
-      (a,b)=> {
-        var nameA = a.name.toUpperCase(); 
-        var nameB = b.name.toUpperCase(); 
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      } 
-    );
-    this.setState({
-      charities_slice: sortedCharities,
-    });
-  }
   render() {
     const { charities_slice } = this.state;
     return (
@@ -65,14 +46,18 @@ export class Charities extends Component {
           <p style={{fontSize:"25px", opacity:"0.75"}} >Discover charities who are doing their part</p>
         </div>
         <br/>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+        <Tile className='filter_pagination-bar'>
+          <PaginationV2 className='pagination'
+            totalItems={this.state.charity_count}
+            pageSize={3}
+            pageSizes={[3, 6, 9, 10]}
+            onChange={this.handlePageChange}
+          />
+          <div className="filter-button">
+            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'/>
+          </div>
+        </Tile>
+        <div className="instance-grid">
           {}
           {charities_slice.map(charity => (
             <Card
@@ -81,7 +66,7 @@ export class Charities extends Component {
               style={{
                 marginLeft: "15px",
                 marginRight: "15px",
-                marginTop: "40px",
+                marginTop: "30px",
                 maxWidth: "385px",
                 display: "flex",
                 flexDirection: "column",
@@ -98,22 +83,6 @@ export class Charities extends Component {
               href={`/charities?id=${charity.id}`}
             />
           ))}
-        </div>
-        <div>
-          <center>
-            <PaginationV2
-              totalItems={this.state.charity_count}
-              pageSize={3}
-              pageSizes={[3, 6, 9, 10]}
-              onChange={this.handlePageChange}
-              style={{
-                opacity: "0.6",
-                position: "relative",
-                marginTop: "20px",
-                marginBottom: "20px"
-              }}
-            />
-          </center>
         </div>
       </div>
     );
@@ -147,7 +116,8 @@ export class Charity extends Component {
               position: "relative",
               marginLeft: "32px",
               marginRight: "32px",
-              marginTop: "38px"
+              marginTop: "38px",
+              opacity: ".8"
             }}
           >
             <div>

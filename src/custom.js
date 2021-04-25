@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable, Search, Modal, MultiSelect } from "carbon-components-react";
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import './page/basic.css'
+import React, { Component } from 'react';
+import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable, Search, MultiSelect } from "carbon-components-react";
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 const { TableContainer, Table, TableHead, TableRow, TableBody, TableCell, TableHeader } = DataTable;
 const filterModalProps = () => ({
   className: 'some-class',
@@ -31,45 +31,6 @@ const items = [
   },
 ];
 export class FilterModal extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      open: this.props.open
-    }
-  }
-  componentWillReceiveProps() {
-    console.log(this.props.open);
-    this.setState({ open: this.props.open });
-  }
-  onChange = evt => {
-    console.log(evt);
-  }
-  toggleModal = () => {
-    this.setState({
-      open: !this.state.open
-    });
-  }
-  render() {
-    return (
-      <div className="filter-modal">
-        <Modal {...filterModalProps()} open={this.state.open} onRequestClose={this.toggleModal}>
-          <div>
-            <MultiSelect.Filterable
-              items={items}
-              placeholder={"States"}
-              useTitleInItem={true}
-              label="State"
-              invalid={true}
-              invalidText="Invalid Selection"
-              onChange={this.onChange}
-              itemToString={item => (item ? item.text : '')}
-              placeholder="State"
-            />
-          </div>
-        </Modal>
-      </div>
-    );
-  }
 }
 export class Card extends Component {
   render() {

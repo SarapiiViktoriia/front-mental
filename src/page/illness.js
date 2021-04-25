@@ -1,6 +1,7 @@
+import './basic.css'
 import React, { Component } from 'react';
 import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2 } from "carbon-components-react";
+import { Tile, FormLabel, PaginationV2, ModalWrapper } from "carbon-components-react";
 export class Illnesses extends Component {
   constructor(props) {
     super(props);
@@ -32,25 +33,6 @@ export class Illnesses extends Component {
       illnesses_slice: this.state.illnesses.slice(slice1, slice2)
     });
   };
-  handleSort(){
-    const illnesses = [].concat(this.state.illnesses_slice);
-    const sortedIllnesses = illnesses.sort(
-      (a,b)=> {
-        var nameA = a.name.toUpperCase(); 
-        var nameB = b.name.toUpperCase(); 
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      } 
-    );
-    this.setState({
-      illnesses_slice: sortedIllnesses,
-    });
-  }
   render() {
     const { illnesses_slice } = this.state;
     return (
@@ -63,14 +45,18 @@ export class Illnesses extends Component {
           <p style={{fontSize:"25px", opacity:"0.75"}} >Explore the most common mental illnesses</p>
         </div>
         <br/>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+        <Tile className='filter_pagination-bar'>
+          <PaginationV2 className='pagination'
+            totalItems={this.state.illness_count}
+            pageSize={3}
+            pageSizes={[3, 6, 9, 10]}
+            onChange={this.handlePageChange}
+          />
+          <div className="filter-button">
+            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'/>
+          </div>
+        </Tile>
+        <div className="instance-grid">
           {}
           {illnesses_slice.map(illness => (
             <Card
@@ -96,22 +82,6 @@ export class Illnesses extends Component {
               href={`/illnesses?id=${illness.id}`}
             />
           ))}
-        </div>
-        <div>
-          <center>
-            <PaginationV2
-              totalItems={this.state.illness_count}
-              pageSize={3}
-              pageSizes={[3, 6, 9, 10]}
-              onChange={this.handlePageChange}
-              style={{
-                opacity: "0.6",
-                position: "relative",
-                marginTop: "40px",
-                marginBottom: "20px"
-              }}
-            />
-          </center>
         </div>
       </div>
     );
@@ -145,12 +115,13 @@ export class Illness extends Component {
               position: "relative",
               marginLeft: "32px",
               marginRight: "32px",
-              marginTop: "38px",
+              marginTop: "30px",
               marginBottom: "38px",
               display: "flex",
               flexDirection: "row",
               justifyContent: "center",
-              flexWrap: "wrap"
+              flexWrap: "wrap",
+              opacity: ".8"
             }}
           >
             <div style={{ justifyContent: "flex-start" }}>

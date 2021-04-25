@@ -3,15 +3,7 @@ a:focus,
 a:hover {
   color: #ffffff;
 }
-.btn-secondary,
-.btn-secondary:hover,
-.btn-secondary:focus {
-  color: #333;
-  text-shadow: none; 
-  background-color: #fff;
-  border: .05rem solid #fff;
-}
-div.page-title {
+.page-title {
   color: white;
   opacity: 0.9;
   display: flex;
@@ -24,14 +16,47 @@ div.page-title {
   text-align: center;
   vertical-align: middle;
 }
-div.home-page {
+.home-page {
   color: white;
-  opacity: 0.6;
+  opacity: ;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
   vertical-align: middle;
+}
+.instance-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pagination {
+  position: relative;
+  opacity: 0.7;
+  width: 60%;
+}
+.filter_pagination-bar {
+  background-color: transparent;
+  border: 0px;
+  box-shadow: none;
+  vertical-align: middle;
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  position: -webkit-sticky; 
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
 }
 .navbar-top {
   display: flex;
@@ -41,7 +66,6 @@ div.home-page {
   background-color: transparent;
   vertical-align: middle;
   border-color: transparent;
-  width: '100%';
 }
 .navbar-tab {
   position: relative;
@@ -66,5 +90,19 @@ div.home-page {
 .filter-modal {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
+}
+.modal-trigger {
+  background-color: white;
+  border-color: white;
+  color: #5a6872;
+  opacity: 0.7;
+}
+.modal-trigger:hover {
+  background-color: transparent;
+  color: white;
+}
+.modal-trigger:focus {
+  background-color: transparent;
+  color: white;
 }

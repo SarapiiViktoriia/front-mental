@@ -1,6 +1,7 @@
+import './basic.css';
 import React, { Component } from 'react';
-import { Card, Navigation, FilterModal } from '../custom';
-import { Tile, FormLabel, PaginationV2, SearchFilterButton } from "carbon-components-react";
+import { Card, Navigation } from '../custom';
+import { Tile, FormLabel, PaginationV2, ModalWrapper } from "carbon-components-react";
 export class Hospitals extends Component {
   constructor(props) {
     super(props);
@@ -9,7 +10,6 @@ export class Hospitals extends Component {
       pageSize: 3,
       hospitals: [],
       hospitals_slice: [],
-      modalOpen: false,
     };
   }
   componentWillMount() {
@@ -33,35 +33,10 @@ export class Hospitals extends Component {
       hospitals_slice: this.state.hospitals.slice(slice1, slice2)
     });
   };
-  openModal = () => {
-    this.setState({
-      modalOpen: true
-    });
-  }
-  handleSort(){
-    const hospitals = [].concat(this.state.hospitals_slice);
-    const sortedHospitals = hospitals.sort(
-      (a,b)=> {
-        var nameA = a.name.toUpperCase(); 
-        var nameB = b.name.toUpperCase(); 
-        if (nameA < nameB) {
-          return -1;
-        }
-        if (nameA > nameB) {
-          return 1;
-        }
-        return 0;
-      } 
-    );
-    this.setState({
-      hospitals_slice: sortedHospitals,
-    });
-  }
   render() {
     const { hospitals_slice } = this.state;
     return (
       <div>
-        <FilterModal open={this.state.modalOpen} />
         <div className="navbar">
           <Navigation selected={2}/>
         </div>
@@ -70,30 +45,18 @@ export class Hospitals extends Component {
           <p style={{fontSize:"25px", opacity:"0.75"}} >Find the hospital best suited to your needs</p>
         </div>
         <br/>
-        <center>
-          <PaginationV2
+        <Tile className='filter_pagination-bar'>
+          <PaginationV2 className='pagination'
             totalItems={this.state.hospital_count}
             pageSize={3}
             pageSizes={[3, 6, 9, 10]}
             onChange={this.handlePageChange}
-            style={{
-              opacity: "0.7",
-              position: "relative",
-              marginTop: "40px",
-              marginBottom: "20px"
-            }}
           />
-          <a style={{ fontSize: '15px' }} >Filter </a>
-          <SearchFilterButton style={{ backgroundColor: 'transparent' }} onClick={this.openModal}/>
-        </center>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            flexWrap: "wrap"
-          }}
-        >
+          <div className="filter-button">
+            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'/>
+          </div>
+        </Tile>
+        <div className="instance-grid">
           {}
           {hospitals_slice.map(hospital => (
             <Card
@@ -102,7 +65,7 @@ export class Hospitals extends Component {
               style={{
                 marginLeft: "15px",
                 marginRight: "15px",
-                marginTop: "40px",
+                marginTop: "30px",
                 maxWidth: "385px",
                 display: "flex",
                 flexDirection: "column",
@@ -128,7 +91,6 @@ export class Hospital extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.id,
       hospital: {}
     };
   }
@@ -144,7 +106,7 @@ export class Hospital extends Component {
     return (
       <div>
       <div className="navbar">
-        <Navigation selected={3}/>
+        <Navigation selected={2}/>
       </div>
         <div>
           <Tile
@@ -156,7 +118,8 @@ export class Hospital extends Component {
               display: "flex",
               flexDirection: "row",
               justifyContent: "center",
-              flexWrap: "wrap"
+              flexWrap: "wrap",
+              opacity: ".8"
             }}
           >
             <div style={{ justifyContent: "flex-start" }}>
