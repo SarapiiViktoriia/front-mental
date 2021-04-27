@@ -77,7 +77,7 @@ export class Hospitals extends Component {
               label2={hospital.state}
               label3_heading="Owner"
               label3={hospital.owner}
-              label4_heading="Population"
+              label4_heading="Number of patients"
               label4={hospital.population}
               href={`/hospitals?id=${hospital.id}`}
             />
