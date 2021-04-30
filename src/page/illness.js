@@ -1,5 +1,6 @@
 import './basic.css'
 import React, { Component } from 'react';
+import YouTube from 'react-youtube';
 import { Card, Navigation } from '../custom';
 import { Tile, FormLabel, PaginationV2, ModalWrapper } from "carbon-components-react";
 export class Illnesses extends Component {
@@ -42,7 +43,7 @@ export class Illnesses extends Component {
       </div>
         <div className="page-title">
           <h1>Illnesses</h1>
-          <p style={{fontSize:"25px", opacity:"0.75"}} >Explore the most common mental illnesses</p>
+          <p style={{fontSize:"25px", opacity:"0.75"}} >Explore the most common mental conditions</p>
         </div>
         <br/>
         <Tile className='filter_pagination-bar'>
@@ -104,12 +105,19 @@ export class Illness extends Component {
       });
   }
   render() {
+    const opts = {
+      height: '390',
+      width: '640',
+      playerVars: { 
+        autoplay: 1
+      }
+    };
     return (
       <div>
       <div className="navbar">
         <Navigation selected={1}/>
       </div>
-        <div>
+        <div> {}
           <Tile
             style={{
               position: "relative",
@@ -118,14 +126,28 @@ export class Illness extends Component {
               marginTop: "30px",
               marginBottom: "38px",
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
+              flexDirection: "column",
               flexWrap: "wrap",
               opacity: ".8"
             }}
           >
-            <div style={{ justifyContent: "flex-start" }}>
-              <img src={this.state.illness.image_url} height="370" />
+            <div 
+              style={{ 
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around'
+              }}
+            >
+              <div>
+                <img src={this.state.illness.image_url} height="370" />
+              </div>
+              <div>
+                <YouTube
+                videoId="2g811Eo7K8U"
+                opts={opts}
+                onReady={this._onReady}
+                />
+              </div>
             </div>
             <br />
             <br />
@@ -136,8 +158,8 @@ export class Illness extends Component {
                 flexWrap: "wrap"
               }}
             >
-              <p>
-                <FormLabel
+              <p> {}
+                <FormLabel 
                   className="title"
                   style={{
                     position: "relative",
@@ -151,7 +173,7 @@ export class Illness extends Component {
                   {this.state.illness.name}
                 </FormLabel>
                 <br />
-                <br />
+                <br /> {}
                 <FormLabel
                   className="title"
                   style={{
@@ -187,5 +209,8 @@ export class Illness extends Component {
         </div>
       </div>
     );
+  }
+  _onReady(event) {
+    event.target.pauseVideo();
   }
 }
