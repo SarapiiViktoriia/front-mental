@@ -1,8 +1,23 @@
 import './basic.css'
 import React, { Component } from 'react';
-import YouTube from 'react-youtube';
 import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2, ModalWrapper } from "carbon-components-react";
+import { Tile, FormLabel, PaginationV2, ModalWrapper, Toggle, MultiSelect, Slider } from "carbon-components-react";
+const sliderProps = () => ({
+  name: '',
+  inputType: '',
+  ariaLabelInput: '',
+  disabled: false,
+  light: false,
+  hideTextInput: false,
+  value: 30,
+  min: 0,
+  max: 80,
+  step: 1,
+  stepMuliplier: 4,
+  labelText: 'Average Age',
+  minLabel: '',
+  maxLabel: '',
+});
 export class Illnesses extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +58,7 @@ export class Illnesses extends Component {
       </div>
         <div className="page-title">
           <h1>Illnesses</h1>
-          <p style={{fontSize:"25px", opacity:"0.75"}} >Explore the most common mental conditions</p>
+          <p style={{fontSize:"25px", opacity:"0.75"}} >Explore the most common mental illnesses</p>
         </div>
         <br/>
         <Tile className='filter_pagination-bar'>
@@ -54,7 +69,30 @@ export class Illnesses extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
-            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'/>
+            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'>
+              <div>
+                <Toggle labelB="Sort A-Z" />
+              </div>
+              <div>
+                <Toggle labelB="Sort by average age" />
+              </div>
+              <br/>
+              <div>
+                <FormLabel>Curable</FormLabel>
+                <Toggle labelA="No" labelB="Yes" />
+              </div>
+              <div>
+                <FormLabel>Chronic</FormLabel>
+                <Toggle labelA="No" labelB="Yes" />
+              </div>
+              <div>
+                <FormLabel>Genetic</FormLabel>
+                <Toggle labelA="No" labelB="Yes" />
+              </div>
+              <div style={{ marginTop: '2rem' }}>
+                <Slider id="slider" {...sliderProps()} />
+              </div>
+            </ModalWrapper>
           </div>
         </Tile>
         <div className="instance-grid">
@@ -105,19 +143,12 @@ export class Illness extends Component {
       });
   }
   render() {
-    const opts = {
-      height: '390',
-      width: '640',
-      playerVars: { 
-        autoplay: 1
-      }
-    };
     return (
       <div>
       <div className="navbar">
         <Navigation selected={1}/>
       </div>
-        <div> {}
+        <div>
           <Tile
             style={{
               position: "relative",
@@ -126,28 +157,14 @@ export class Illness extends Component {
               marginTop: "30px",
               marginBottom: "38px",
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
+              justifyContent: "center",
               flexWrap: "wrap",
               opacity: ".8"
             }}
           >
-            <div 
-              style={{ 
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around'
-              }}
-            >
-              <div>
-                <img src={this.state.illness.image_url} height="370" />
-              </div>
-              <div>
-                <YouTube
-                videoId="2g811Eo7K8U"
-                opts={opts}
-                onReady={this._onReady}
-                />
-              </div>
+            <div style={{ justifyContent: "flex-start" }}>
+              <img src={this.state.illness.image_url} height="370" />
             </div>
             <br />
             <br />
@@ -158,8 +175,8 @@ export class Illness extends Component {
                 flexWrap: "wrap"
               }}
             >
-              <p> {}
-                <FormLabel 
+              <p>
+                <FormLabel
                   className="title"
                   style={{
                     position: "relative",
@@ -173,7 +190,7 @@ export class Illness extends Component {
                   {this.state.illness.name}
                 </FormLabel>
                 <br />
-                <br /> {}
+                <br />
                 <FormLabel
                   className="title"
                   style={{
@@ -209,8 +226,5 @@ export class Illness extends Component {
         </div>
       </div>
     );
-  }
-  _onReady(event) {
-    event.target.pauseVideo();
   }
 }
