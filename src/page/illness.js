@@ -2,23 +2,7 @@ import './basic.css'
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, Toggle, MultiSelect, Slider } from "carbon-components-react";
-const sliderProps = () => ({
-  name: '',
-  inputType: '',
-  ariaLabelInput: '',
-  disabled: false,
-  light: false,
-  hideTextInput: false,
-  value: 30,
-  min: 0,
-  max: 80,
-  step: 1,
-  stepMuliplier: 4,
-  labelText: 'Average Age',
-  minLabel: '',
-  maxLabel: '',
-});
+import { Tile, FormLabel, PaginationV2, ModalWrapper } from "carbon-components-react";
 export class Illnesses extends Component {
   constructor(props) {
     super(props);
@@ -70,30 +54,7 @@ export class Illnesses extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
-            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'>
-              <div>
-                <Toggle labelB="Sort A-Z" />
-              </div>
-              <div>
-                <Toggle labelB="Sort by average age" />
-              </div>
-              <br/>
-              <div>
-                <FormLabel>Curable</FormLabel>
-                <Toggle labelA="No" labelB="Yes" />
-              </div>
-              <div>
-                <FormLabel>Chronic</FormLabel>
-                <Toggle labelA="No" labelB="Yes" />
-              </div>
-              <div>
-                <FormLabel>Genetic</FormLabel>
-                <Toggle labelA="No" labelB="Yes" />
-              </div>
-              <div style={{ marginTop: '2rem' }}>
-                <Slider id="slider" {...sliderProps()} />
-              </div>
-            </ModalWrapper>
+            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'/>
           </div>
         </Tile>
         <div className="instance-grid">
@@ -156,7 +117,7 @@ export class Illness extends Component {
       <div className="navbar">
         <Navigation selected={1}/>
       </div>
-        <div> {}
+        <div> 
           <Tile
             style={{
               position: "relative",
@@ -177,12 +138,12 @@ export class Illness extends Component {
                 justifyContent: 'space-around'
               }}
             >
-              <div>
-                <img src={this.state.illness.image_url} height="370" />
+              <div> {}
+                <img src={this.state.illness.image_url} height="390" />
               </div>
-              <div>
+              <div> {}
                 <YouTube
-                videoId="2g811Eo7K8U"
+                videoId={this.state.illness.videoId}
                 opts={opts}
                 onReady={this._onReady}
                 />
