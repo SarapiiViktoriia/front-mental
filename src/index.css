@@ -6989,7 +6989,7 @@ span.flatpickr-weekday {
 }
 .bx--tabs__nav-link {
   display: inline-block;
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   padding: 1rem;
   width: 100%;
@@ -6999,7 +6999,7 @@ span.flatpickr-weekday {
 .bx--tabs__nav-link:focus {
   outline: 1px solid transparent;
   background-color: #3d70b2;
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 @media screen and (min-width: 768px) {
   .bx--tabs__nav-link {
