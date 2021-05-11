@@ -10,6 +10,7 @@
     "enzyme": "^3.7.0",
     "forever": "^0.15.3",
     "forever-monitor": "^1.7.1",
+    "google-map-react": "^1.1.0",
     "mdbreact": "^4.8.2",
     "mocha": "^5.2.0",
     "query-string": "^6.2.0",

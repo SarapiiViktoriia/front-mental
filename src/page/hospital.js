@@ -1,5 +1,6 @@
 import './basic.css';
 import React, { Component } from 'react';
+import GoogleMapReact from 'google-map-react'; 
 import { Card, Navigation } from '../custom';
 import { Tile, FormLabel, PaginationV2, ModalWrapper, Toggle, MultiSelect, Slider } from "carbon-components-react";
 const states = [
@@ -396,7 +397,7 @@ export class Hospital extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hospital: {}
+      hospital: {},
     };
   }
   componentWillMount() {
@@ -532,6 +533,8 @@ export class Hospital extends Component {
                 }}
               >
                 Population: {this.state.hospital.population}
+                latitude: {this.state.hospital.latitude}
+                longitude: {this.state.hospital.longitude}
               </FormLabel>
               <br />
               <a
@@ -547,6 +550,17 @@ export class Hospital extends Component {
               </a>
             </div>
           </Tile>
+          <div style={{ height: '100vh', width: '100%' }}>
+            <GoogleMapReact
+            bootstrapURLKeys={{ key: "AIzaSyBkcDQD1qCPhHLYbl8yjsdaeydLNsW4C5U" }}
+            center={{
+              lat: this.state.hospital.latitude,
+              lng: this.state.hospital.longitude
+            }}
+            defaultZoom={11}
+            >
+            </GoogleMapReact>
+          </div>
         </div>
       </div>
     );
