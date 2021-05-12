@@ -1,285 +1,44 @@
 import './basic.css';
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react'; 
-import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, Toggle, MultiSelect, Slider } from "carbon-components-react";
-const states = [
-  {
-      "name": "Alabama",
-      "abbreviation": "AL"
-  },
-  {
-      "name": "Alaska",
-      "abbreviation": "AK"
-  },
-  {
-      "name": "American Samoa",
-      "abbreviation": "AS"
-  },
-  {
-      "name": "Arizona",
-      "abbreviation": "AZ"
-  },
-  {
-      "name": "Arkansas",
-      "abbreviation": "AR"
-  },
-  {
-      "name": "California",
-      "abbreviation": "CA"
-  },
-  {
-      "name": "Colorado",
-      "abbreviation": "CO"
-  },
-  {
-      "name": "Connecticut",
-      "abbreviation": "CT"
-  },
-  {
-      "name": "Delaware",
-      "abbreviation": "DE"
-  },
-  {
-      "name": "District Of Columbia",
-      "abbreviation": "DC"
-  },
-  {
-      "name": "Federated States Of Micronesia",
-      "abbreviation": "FM"
-  },
-  {
-      "name": "Florida",
-      "abbreviation": "FL"
-  },
-  {
-      "name": "Georgia",
-      "abbreviation": "GA"
-  },
-  {
-      "name": "Guam",
-      "abbreviation": "GU"
-  },
-  {
-      "name": "Hawaii",
-      "abbreviation": "HI"
-  },
-  {
-      "name": "Idaho",
-      "abbreviation": "ID"
-  },
-  {
-      "name": "Illinois",
-      "abbreviation": "IL"
-  },
-  {
-      "name": "Indiana",
-      "abbreviation": "IN"
-  },
-  {
-      "name": "Iowa",
-      "abbreviation": "IA"
-  },
-  {
-      "name": "Kansas",
-      "abbreviation": "KS"
-  },
-  {
-      "name": "Kentucky",
-      "abbreviation": "KY"
-  },
-  {
-      "name": "Louisiana",
-      "abbreviation": "LA"
-  },
-  {
-      "name": "Maine",
-      "abbreviation": "ME"
-  },
-  {
-      "name": "Marshall Islands",
-      "abbreviation": "MH"
-  },
-  {
-      "name": "Maryland",
-      "abbreviation": "MD"
-  },
-  {
-      "name": "Massachusetts",
-      "abbreviation": "MA"
-  },
-  {
-      "name": "Michigan",
-      "abbreviation": "MI"
-  },
-  {
-      "name": "Minnesota",
-      "abbreviation": "MN"
-  },
-  {
-      "name": "Mississippi",
-      "abbreviation": "MS"
-  },
-  {
-      "name": "Missouri",
-      "abbreviation": "MO"
-  },
-  {
-      "name": "Montana",
-      "abbreviation": "MT"
-  },
-  {
-      "name": "Nebraska",
-      "abbreviation": "NE"
-  },
-  {
-      "name": "Nevada",
-      "abbreviation": "NV"
-  },
-  {
-      "name": "New Hampshire",
-      "abbreviation": "NH"
-  },
-  {
-      "name": "New Jersey",
-      "abbreviation": "NJ"
-  },
-  {
-      "name": "New Mexico",
-      "abbreviation": "NM"
-  },
-  {
-      "name": "New York",
-      "abbreviation": "NY"
-  },
-  {
-      "name": "North Carolina",
-      "abbreviation": "NC"
-  },
-  {
-      "name": "North Dakota",
-      "abbreviation": "ND"
-  },
-  {
-      "name": "Northern Mariana Islands",
-      "abbreviation": "MP"
-  },
-  {
-      "name": "Ohio",
-      "abbreviation": "OH"
-  },
-  {
-      "name": "Oklahoma",
-      "abbreviation": "OK"
-  },
-  {
-      "name": "Oregon",
-      "abbreviation": "OR"
-  },
-  {
-      "name": "Palau",
-      "abbreviation": "PW"
-  },
-  {
-      "name": "Pennsylvania",
-      "abbreviation": "PA"
-  },
-  {
-      "name": "Puerto Rico",
-      "abbreviation": "PR"
-  },
-  {
-      "name": "Rhode Island",
-      "abbreviation": "RI"
-  },
-  {
-      "name": "South Carolina",
-      "abbreviation": "SC"
-  },
-  {
-      "name": "South Dakota",
-      "abbreviation": "SD"
-  },
-  {
-      "name": "Tennessee",
-      "abbreviation": "TN"
-  },
-  {
-      "name": "Texas",
-      "abbreviation": "TX"
-  },
-  {
-      "name": "Utah",
-      "abbreviation": "UT"
-  },
-  {
-      "name": "Vermont",
-      "abbreviation": "VT"
-  },
-  {
-      "name": "Virgin Islands",
-      "abbreviation": "VI"
-  },
-  {
-      "name": "Virginia",
-      "abbreviation": "VA"
-  },
-  {
-      "name": "Washington",
-      "abbreviation": "WA"
-  },
-  {
-      "name": "West Virginia",
-      "abbreviation": "WV"
-  },
-  {
-      "name": "Wisconsin",
-      "abbreviation": "WI"
-  },
-  {
-      "name": "Wyoming",
-      "abbreviation": "WY"
-  }
-]
+import { Card, Navigation, modalProps, states } from '../custom';
+import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Select, SelectItem, Slider } from "carbon-components-react";
 const owners = [
-  {
-    'text': 'Proprietary'
-  },
-  {
-    'text': 'Non-Profit'
-  },
-  {
-    'text': 'Government - State'
-  },
-  {
-    'text': 'Government - District/Authority'
-  }
+  {'text': 'Proprietary'},
+  {'text': 'Non-Profit'},
+  {'text': 'Government - State'},
+  {'text': 'Government - District/Authority'}
 ]
 const multiSelectProps = () => ({
   filterable: true,
   disabled: false,
   light: false,
   useTitleInItem: false,
-  label: "Choose States",
+  label: "none",
   invalid: false,
   invalidText: "Invalid selection",
 });
+const selectProps = () => ({
+  labelText: "Sort By",
+  hideLabel: true,
+  light: false,
+  inline: false,
+  helperText: '',
+  defaultValue: 'no-sorting'
+});
 const sliderProps = () => ({
-  name: '',
-  inputType: '',
-  ariaLabelInput: '',
-  disabled: false,
   light: false,
   hideTextInput: false,
-  value: 50,
   min: 0,
-  max: 150,
+  max: 500,
   step: 1,
   stepMuliplier: 4,
-  labelText: 'Population (less than)',
-  minLabel: '',
-  maxLabel: '',
+  labelText: ''
 });
+const query_object = {
+  order_by: [],
+  filters: []
+};
 export class Hospitals extends Component {
   constructor(props) {
     super(props);
@@ -288,9 +47,11 @@ export class Hospitals extends Component {
       pageSize: 3,
       hospitals: [],
       hospitals_slice: [],
+      update_flag: false
     };
   }
   componentWillMount() {
+    console.log("This is the API request string rn: "+JSON.stringify(query_object))
     fetch("http:
       .then(results => results.json())
       .then(data => {
@@ -310,6 +71,40 @@ export class Hospitals extends Component {
       pageSize: evt.pageSize,
       hospitals_slice: this.state.hospitals.slice(slice1, slice2)
     });
+  };
+  handleSortOptions = evt => {this.sort_value = evt.target.value;};
+  handleStates = evt => {this.state_filter_list = evt.selectedItems;};
+  handleOwners = evt => {this.owner_filter_list = evt.selectedItems;};
+  handleMinPop = evt => {this.min_pop = evt.value;};
+  handleMaxPop = evt => {this.max_pop = evt.value;};
+  handleSubmit = evt => {
+    console.log("Here is the query string before I do shit: "+JSON.stringify(query_object));
+    if(this.sort_value === 'name-asc')
+      query_object.order_by = [{'field': 'name', 'direction':'asc'}];
+    else if(this.sort_value === 'name-desc')
+      query_object.order_by = [{'field': 'name', 'direction':'desc'}];
+    else if(this.sort_value === 'pop-asc')
+      query_object.order_by = [{'field': 'population', 'direction':'asc'}];
+    else if(this.sort_value === 'pop-desc')
+      query_object.order_by = [{'field': 'population', 'direction':'desc'}];
+    if(this.state_filter_list.length){
+      let temp = [];
+      for (let i=0; i < this.state_filter_list.length; i++)
+        temp.push(this.state_filter_list[i].abbreviation);
+      query_object.filters.push({'name':'state', 'op':'in', 'val':temp});
+    }
+    if(this.owner_filter_list.length){
+      let temp = [];
+      for (let i=0; i < this.owner_filter_list.length; i++)
+        temp.push(this.owner_filter_list[i].text);
+      query_object.filters.push({'name':'state', 'op':'in', 'val':temp});
+    }
+    query_object.filters.push({'name':'population', 'op':'ge', 'val':this.min_pop});
+    query_object.filters.push({'name':'population', 'op':'le', 'val':this.max_pop});
+    console.log("Here is the reloaded query: "+JSON.stringify(query_object));
+    this.setState({update_flag: !this.state.update_flag});
+    this.forceUpdate();
+    return true;
   };
   render() {
     const { hospitals_slice } = this.state;
@@ -331,33 +126,43 @@ export class Hospitals extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
-            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'>
-              <div>
-                <Toggle labelB="Sort A-Z" />
-              </div>
-              <div>
-                <Toggle labelB="Sort by population" />
-              </div>
-              <br/>
-              <div>
-                <MultiSelect.Filterable
-                  {...multiSelectProps}
-                  items={states}
-                  itemToString={item => (item ? item.name : '')}
-                  placeholder="States"
-                />
+            <ModalWrapper handleSubmit={this.handleSubmit} {...modalProps()}>
+              <div className='sort-options'>
+                <h3 style={{paddingBottom: '5px'}}>Sort By</h3>
+                <Select onChange={this.handleSortOptions} {...selectProps()}>
+                  <SelectItem value='no-sorting' text="None"/>
+                  <SelectItem value='name-asc' text="Name: A to Z"/>
+                  <SelectItem value='name-desc' text="Name: Z to A"/>
+                  <SelectItem value='pop-asc' text="Size: Low to High"/>
+                  <SelectItem value='pop-desc' text="Size: High to Low"/>
+                </Select>
               </div>
               <br/>
-              <div>
-                <MultiSelect.Filterable
-                  {...multiSelectProps}
-                  items={owners}
-                  itemToString={item => (item ? item.text : '')}
-                  placeholder="Owner"
-                />
-              </div>
-              <div style={{ marginTop: '2rem' }}>
-                <Slider id="slider" {...sliderProps()} />
+              <hr color='#3d70b2'/>
+              <br/><br/>
+              <div className='filter-options'>
+                <h3 style={{paddingBottom: '5px'}}>Filter By</h3>
+                <div className='multiselect-filter'>
+                  <MultiSelect.Filterable id="hospital-state" {...multiSelectProps} items={states} placeholder="State"
+                    itemToString={item => (item ? item.name : '')} onChange={this.handleStates}/>
+                </div>
+                <br/><br/>
+                <div className='multiselect-filter'>
+                  <MultiSelect.Filterable id="hospital-owner" {...multiSelectProps} items={owners} placeholder="Owner"
+                    itemToString={item => (item ? item.text : '')} onChange={this.handleOwners}/>
+                </div>
+                <br/><br/>
+                <div className='slider-filter'>
+                  <h6>Hospital size</h6>
+                  <div style={{display: 'inline'}}>
+                    <span>min: </span>
+                    <Slider id="min-slider" value='0' onChange={this.handleMinPop} {...sliderProps()}/>
+                  </div><br/>
+                  <div style={{display: 'inline'}}>
+                    <span>max: </span>
+                    <Slider id="max-slider" value='500' onChange={this.handleMaxPop} {...sliderProps()}/>
+                  </div>
+                </div><br/>
               </div>
             </ModalWrapper>
           </div>
@@ -433,6 +238,7 @@ export class Hospital extends Component {
                 src={this.state.hospital.image_url}
                 width="350"
                 height="370"
+                alt='hospital-pic'
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>

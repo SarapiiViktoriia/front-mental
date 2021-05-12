@@ -1,24 +1,21 @@
 import './basic.css'
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
-import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, Toggle, MultiSelect, Slider } from "carbon-components-react";
+import { Card, Navigation, modalProps } from '../custom';
+import { Tile, FormLabel, PaginationV2, ModalWrapper, Slider, Select, SelectItem } from "carbon-components-react";
 const sliderProps = () => ({
-  name: '',
-  inputType: '',
-  ariaLabelInput: '',
-  disabled: false,
   light: false,
   hideTextInput: false,
-  value: 30,
   min: 0,
-  max: 80,
+  max: 50,
   step: 1,
-  stepMuliplier: 4,
-  labelText: 'Average Age',
-  minLabel: '',
-  maxLabel: '',
+  stepMuliplier: 2,
+  labelText: ''
 });
+const query_object = {
+  order_by: [],
+  filters: []
+};
 export class Illnesses extends Component {
   constructor(props) {
     super(props);
@@ -26,10 +23,12 @@ export class Illnesses extends Component {
       page: 1,
       pageSize: 3,
       illnesses: [],
-      illnesses_slice: []
+      illnesses_slice: [],
+      update_flag: false
     };
   }
   componentWillMount() {
+    console.log("This is the API request string rn: "+JSON.stringify(query_object))
     fetch("http:
       .then(results => results.json())
       .then(data => {
@@ -49,6 +48,41 @@ export class Illnesses extends Component {
       pageSize: evt.pageSize,
       illnesses_slice: this.state.illnesses.slice(slice1, slice2)
     });
+  };
+  handleSortOptions = evt => {this.sort_value = evt.target.value;};
+  handleCurable = evt => {this.curable = evt.target.value;};
+  handleGenetic = evt => {this.genetic = evt.target.value;};
+  handleChronic = evt => {this.chronic = evt.target.value;};
+  handleMinAge = evt => {this.min_age = evt.value;};
+  handleMaxAge = evt => {this.max_age = evt.value;};
+  handleSubmit = evt => {
+    console.log("Here is the query string before I do shit: "+JSON.stringify(query_object));
+    if(this.sort_value === 'name-asc')
+      query_object.order_by = [{'field': 'name', 'direction':'asc'}];
+    else if(this.sort_value === 'name-desc')
+      query_object.order_by = [{'field': 'name', 'direction':'desc'}];
+    else if(this.sort_value === 'age-asc')
+      query_object.order_by = [{'field': 'age', 'direction':'asc'}];
+    else if(this.sort_value === 'age-desc')
+      query_object.order_by = [{'field': 'age', 'direction':'desc'}];
+    if(this.curable === 'curable-true')
+      query_object.filters.push({'name':'curable', 'op':'eq', 'val':'Yes'});
+    else if(this.curable === 'curable-false')
+      query_object.filters.push({'name':'curable', 'op':'eq', 'val':'No'});
+    if(this.chronic === 'chronic-true')
+      query_object.filters.push({'name':'chronic', 'op':'eq', 'val':'Yes'});
+    else if(this.chronic === 'chronic-false')
+      query_object.filters.push({'name':'chronic', 'op':'eq', 'val':'No'});
+    if(this.genetic === 'genetic-true')
+      query_object.filters.push({'name':'genetic', 'op':'eq', 'val':'Yes'});
+    else if(this.genetic === 'genetic-false')
+      query_object.filters.push({'name':'genetic', 'op':'eq', 'val':'No'});
+    query_object.filters.push({'name':'average_age', 'op':'ge', 'val':this.min_age});
+    query_object.filters.push({'name':'average_age', 'op':'le', 'val':this.max_age});
+    console.log("Here is the reloaded query: "+JSON.stringify(query_object));
+    this.setState({update_flag: !this.state.update_flag});
+    this.forceUpdate();
+    return true;
   };
   render() {
     const { illnesses_slice } = this.state;
@@ -70,28 +104,54 @@ export class Illnesses extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
-            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'>
-              <div>
-                <Toggle labelB="Sort A-Z" />
-              </div>
-              <div>
-                <Toggle labelB="Sort by average age" />
+            <ModalWrapper handleSubmit={this.handleSubmit} {...modalProps()}>
+              <div className='sort-options'>
+                <h3 style={{paddingBottom: '5px'}}>Sort By</h3>
+                <Select onChange={this.handleSortOptions} hideLabel='true'>
+                  <SelectItem value='no-sorting' text="None"/>
+                  <SelectItem value='name-asc' text="Name: A to Z"/>
+                  <SelectItem value='name-desc' text="Name: Z to A"/>
+                  <SelectItem value='age-asc' text="Average Age: Low to High"/>
+                  <SelectItem value='age-desc' text="Average Age: High to Low"/>
+                </Select>
               </div>
               <br/>
-              <div>
-                <FormLabel>Curable</FormLabel>
-                <Toggle labelA="No" labelB="Yes" />
-              </div>
-              <div>
-                <FormLabel>Chronic</FormLabel>
-                <Toggle labelA="No" labelB="Yes" />
-              </div>
-              <div>
-                <FormLabel>Genetic</FormLabel>
-                <Toggle labelA="No" labelB="Yes" />
-              </div>
-              <div style={{ marginTop: '2rem' }}>
-                <Slider id="slider" {...sliderProps()} />
+              <hr color='#3d70b2'/>
+              <br/><br/>
+              <div className='filter-options'>
+                <h3 style={{paddingBottom: '5px'}}>Filter By</h3>
+                <div className='select-filter'>
+                  <Select onChange={this.handleCurable} labelText='Curable' inline='true' defaultValue='curable-default'>
+                    <SelectItem value='curable-default' text="None"/>
+                    <SelectItem value='curable-true' text="Yes"/>
+                    <SelectItem value='curable-false' text="No"/>
+                  </Select>
+                </div>
+                <div className='select-filter'>
+                  <Select onChange={this.handleChronic} labelText='Chronic' inline='true' defaultValue='chronic-default'>
+                    <SelectItem value='chronic-default' text="None"/>
+                    <SelectItem value='chronic-true' text="Yes"/>
+                    <SelectItem value='chronic-false' text="No"/>
+                  </Select>
+                </div>
+                <div className='select-filter'>
+                  <Select onChange={this.handleGenetic} labelText='Genetic' inline='true' defaultValue='genetic-default'>
+                    <SelectItem value='genetic-default' text="None"/>
+                    <SelectItem value='genetic-true' text="Yes"/>
+                    <SelectItem value='genetic-false' text="No"/>
+                  </Select>
+                </div><br/>
+                <div className='slider-filter'>
+                  <h6>Average Age</h6>
+                  <div style={{display: 'inline'}}>
+                    <text>min: </text>
+                    <Slider id="min-slider" value='0' onChange={this.handleMinAge} {...sliderProps()}/>
+                  </div><br/>
+                  <div style={{display: 'inline'}}>
+                    <text>max: </text>
+                    <Slider id="max-slider" value='50' onChange={this.handleMaxAge} {...sliderProps()}/>
+                  </div>
+                </div><br/>
               </div>
             </ModalWrapper>
           </div>

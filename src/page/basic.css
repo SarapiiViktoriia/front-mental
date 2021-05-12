@@ -18,7 +18,6 @@ a:hover {
 }
 .home-page {
   color: white;
-  opacity: ;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -92,17 +91,20 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
   display: flex;
   flex-direction: column; 
 }
-.modal-trigger {
+.modal-trigger-btn {
   background-color: white;
   border-color: white;
   color: #5a6872;
   opacity: 0.7;
 }
-.modal-trigger:hover {
+.modal-trigger-btn:hover {
   background-color: transparent;
   color: white;
 }
-.modal-trigger:focus {
+.modal-trigger-btn:focus {
   background-color: transparent;
   color: white;
+}
+.filter-options {
+  justify-content: space-around;
 }

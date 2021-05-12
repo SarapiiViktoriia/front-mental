@@ -2192,7 +2192,7 @@ input:not(output):not([data-invalid]):-moz-ui-invalid {
   font-weight: 400;
 }
 .bx--list-box input[role='combobox']::placeholder {
-  color: #cdd1d4;
+  color: #000000;
   font-weight: 400;
 }
 .bx--list-box--disabled input[role='combobox'] {
@@ -2920,10 +2920,10 @@ input:not(output):not([data-invalid]):-moz-ui-invalid {
       order: 1;
 }
 .bx--text-input:-ms-input-placeholder {
-  color: #cdd1d4;
+  color: #000000;
 }
 .bx--text-input::placeholder {
-  color: #cdd1d4;
+  color: #000000;
 }
 .bx--text-input:focus {
   outline: none;

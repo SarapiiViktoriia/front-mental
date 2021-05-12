@@ -3,7 +3,6 @@ import logo from "./logo.svg";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Tile } from 'carbon-components-react';
-import Main from './page/main';
 import Home from './page/home';
 import About from './page/about';
 import { Hospitals, Hospital } from './page/hospital';

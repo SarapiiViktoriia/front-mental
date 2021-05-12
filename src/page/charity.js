@@ -1,270 +1,46 @@
 import './basic.css'
 import React, { Component } from 'react';
-import { Card, Navigation } from '../custom';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, Toggle, MultiSelect, Slider } from "carbon-components-react";
-const states = [
-  {
-      "name": "Alabama",
-      "abbreviation": "AL"
-  },
-  {
-      "name": "Alaska",
-      "abbreviation": "AK"
-  },
-  {
-      "name": "American Samoa",
-      "abbreviation": "AS"
-  },
-  {
-      "name": "Arizona",
-      "abbreviation": "AZ"
-  },
-  {
-      "name": "Arkansas",
-      "abbreviation": "AR"
-  },
-  {
-      "name": "California",
-      "abbreviation": "CA"
-  },
-  {
-      "name": "Colorado",
-      "abbreviation": "CO"
-  },
-  {
-      "name": "Connecticut",
-      "abbreviation": "CT"
-  },
-  {
-      "name": "Delaware",
-      "abbreviation": "DE"
-  },
-  {
-      "name": "District Of Columbia",
-      "abbreviation": "DC"
-  },
-  {
-      "name": "Federated States Of Micronesia",
-      "abbreviation": "FM"
-  },
-  {
-      "name": "Florida",
-      "abbreviation": "FL"
-  },
-  {
-      "name": "Georgia",
-      "abbreviation": "GA"
-  },
-  {
-      "name": "Guam",
-      "abbreviation": "GU"
-  },
-  {
-      "name": "Hawaii",
-      "abbreviation": "HI"
-  },
-  {
-      "name": "Idaho",
-      "abbreviation": "ID"
-  },
-  {
-      "name": "Illinois",
-      "abbreviation": "IL"
-  },
-  {
-      "name": "Indiana",
-      "abbreviation": "IN"
-  },
-  {
-      "name": "Iowa",
-      "abbreviation": "IA"
-  },
-  {
-      "name": "Kansas",
-      "abbreviation": "KS"
-  },
-  {
-      "name": "Kentucky",
-      "abbreviation": "KY"
-  },
-  {
-      "name": "Louisiana",
-      "abbreviation": "LA"
-  },
-  {
-      "name": "Maine",
-      "abbreviation": "ME"
-  },
-  {
-      "name": "Marshall Islands",
-      "abbreviation": "MH"
-  },
-  {
-      "name": "Maryland",
-      "abbreviation": "MD"
-  },
-  {
-      "name": "Massachusetts",
-      "abbreviation": "MA"
-  },
-  {
-      "name": "Michigan",
-      "abbreviation": "MI"
-  },
-  {
-      "name": "Minnesota",
-      "abbreviation": "MN"
-  },
-  {
-      "name": "Mississippi",
-      "abbreviation": "MS"
-  },
-  {
-      "name": "Missouri",
-      "abbreviation": "MO"
-  },
-  {
-      "name": "Montana",
-      "abbreviation": "MT"
-  },
-  {
-      "name": "Nebraska",
-      "abbreviation": "NE"
-  },
-  {
-      "name": "Nevada",
-      "abbreviation": "NV"
-  },
-  {
-      "name": "New Hampshire",
-      "abbreviation": "NH"
-  },
-  {
-      "name": "New Jersey",
-      "abbreviation": "NJ"
-  },
-  {
-      "name": "New Mexico",
-      "abbreviation": "NM"
-  },
-  {
-      "name": "New York",
-      "abbreviation": "NY"
-  },
-  {
-      "name": "North Carolina",
-      "abbreviation": "NC"
-  },
-  {
-      "name": "North Dakota",
-      "abbreviation": "ND"
-  },
-  {
-      "name": "Northern Mariana Islands",
-      "abbreviation": "MP"
-  },
-  {
-      "name": "Ohio",
-      "abbreviation": "OH"
-  },
-  {
-      "name": "Oklahoma",
-      "abbreviation": "OK"
-  },
-  {
-      "name": "Oregon",
-      "abbreviation": "OR"
-  },
-  {
-      "name": "Palau",
-      "abbreviation": "PW"
-  },
-  {
-      "name": "Pennsylvania",
-      "abbreviation": "PA"
-  },
-  {
-      "name": "Puerto Rico",
-      "abbreviation": "PR"
-  },
-  {
-      "name": "Rhode Island",
-      "abbreviation": "RI"
-  },
-  {
-      "name": "South Carolina",
-      "abbreviation": "SC"
-  },
-  {
-      "name": "South Dakota",
-      "abbreviation": "SD"
-  },
-  {
-      "name": "Tennessee",
-      "abbreviation": "TN"
-  },
-  {
-      "name": "Texas",
-      "abbreviation": "TX"
-  },
-  {
-      "name": "Utah",
-      "abbreviation": "UT"
-  },
-  {
-      "name": "Vermont",
-      "abbreviation": "VT"
-  },
-  {
-      "name": "Virgin Islands",
-      "abbreviation": "VI"
-  },
-  {
-      "name": "Virginia",
-      "abbreviation": "VA"
-  },
-  {
-      "name": "Washington",
-      "abbreviation": "WA"
-  },
-  {
-      "name": "West Virginia",
-      "abbreviation": "WV"
-  },
-  {
-      "name": "Wisconsin",
-      "abbreviation": "WI"
-  },
-  {
-      "name": "Wyoming",
-      "abbreviation": "WY"
-  }
-]
+import { Card, Navigation, modalProps, states } from '../custom';
+import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
 const multiSelectProps = () => ({
   filterable: true,
   disabled: false,
   light: false,
   useTitleInItem: false,
-  label: "Choose States",
+  label: "",
   invalid: false,
   invalidText: "Invalid selection",
 });
-const sliderProps = () => ({
-  name: '',
-  inputType: '',
-  ariaLabelInput: '',
-  disabled: false,
+const selectProps = () => ({
+  labelText: "Sort By",
+  hideLabel: true,
+  light: false,
+  inline: false,
+  helperText: '',
+  defaultValue: 'no-sorting'
+});
+const sliderPropsIncome = () => ({
   light: false,
   hideTextInput: false,
-  value: 50,
-  min: 0,
-  max: 150,
+  min: 5,
+  max: 340,
   step: 1,
-  stepMuliplier: 4,
-  labelText: 'Population (less than)',
-  minLabel: '',
-  maxLabel: '',
+  stepMuliplier: 3,
+  labelText: ''
 });
+const sliderPropsRating = () => ({
+  light: false,
+  hideTextInput: false,
+  min: 80,
+  max: 100,
+  step: .1,
+  stepMuliplier: 10,
+  labelText: ''
+});
+const query_object = {
+  order_by: [],
+  filters: []
+};
 export class Charities extends Component {
   constructor(props) {
     super(props);
@@ -272,10 +48,12 @@ export class Charities extends Component {
       page: 1,
       pageSize: 3,
       charities: [],
-      charities_slice: []
+      charities_slice: [],
+      update_flag: false
     };
   }
   componentWillMount() {
+    console.log("This is the API request string rn: "+JSON.stringify(query_object))
     fetch("http:
       .then(results => results.json())
       .then(data => {
@@ -297,6 +75,46 @@ export class Charities extends Component {
       charities_slice: this.state.charities.slice(slice1, slice2)
     });
   };
+  handleSortOptions = evt => {this.sort_value = evt.target.value;};
+  handleStates = evt => {this.state_filter_list = evt.selectedItems;};
+  handleDeductible = evt => {this.deductible = evt.target.value;};
+  handleMinRating = evt => {this.min_rating = evt.value;};
+  handleMaxRating = evt => {this.max_rating = evt.value;};
+  handleMinIncome = evt => {this.min_income = evt.value;};
+  handleMaxIncome = evt => {this.max_income = evt.value;};
+  handleSubmit = evt => {
+    console.log("Here is the query string before I do shit: "+JSON.stringify(query_object));
+    if(this.sort_value === 'name-asc')
+      query_object.order_by = [{'field': 'name', 'direction':'asc'}];
+    else if(this.sort_value === 'name-desc')
+      query_object.order_by = [{'field': 'name', 'direction':'desc'}];
+    else if(this.sort_value === 'rating-asc')
+      query_object.order_by = [{'field': 'rating', 'direction':'asc'}];
+    else if(this.sort_value === 'rating-desc')
+      query_object.order_by = [{'field': 'rating', 'direction':'desc'}];
+    else if(this.sort_value === 'income-asc')
+      query_object.order_by = [{'field': 'incomeAmount', 'direction':'asc'}];
+    else if(this.sort_value === 'income-desc')
+      query_object.order_by = [{'field': 'incomeAmount', 'direction':'desc'}];
+    if(this.state_filter_list.length){
+      let temp = [];
+      for (let i=0; i < this.state_filter_list.length; i++)
+        temp.push(this.state_filter_list[i].abbreviation);
+      query_object.filters.push({'name':'state', 'op':'in', 'val':temp});
+    }
+    if(this.deductible === 'deductible-true')
+      query_object.filters.push({'name':'deductible', 'op':'eq', 'val':'Yes'});
+    else if(this.deductible === 'deductible-false')
+      query_object.filters.push({'name':'deductible', 'op':'eq', 'val':'No'});
+    query_object.filters.push({'name':'rating', 'op':'ge', 'val':this.min_rating});
+    query_object.filters.push({'name':'rating', 'op':'le', 'val':this.max_rating});
+    query_object.filters.push({'name':'incomeAmount', 'op':'ge', 'val':this.min_income});
+    query_object.filters.push({'name':'incomeAmount', 'op':'le', 'val':this.max_income});
+    console.log("Here is the reloaded query: "+JSON.stringify(query_object));
+    this.setState({update_flag: !this.state.update_flag});
+    this.forceUpdate();
+    return true;
+  };
   render() {
     const { charities_slice } = this.state;
     return (
@@ -317,29 +135,57 @@ export class Charities extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
-            <ModalWrapper id='input-modal' buttonTriggerClassName="modal-trigger" buttonTriggerText='Filter'>
-              <div>
-                <Toggle labelB="Sort A-Z" />
-              </div>
-              <div>
-                <Toggle labelB="Sort by rating" />
-              </div>
-              <br/>
-              <div>
-                <MultiSelect.Filterable
-                  {...multiSelectProps}
-                  items={states}
-                  itemToString={item => (item ? item.name : '')}
-                  placeholder="States"
-                />
+            <ModalWrapper handleSubmit={this.handleSubmit} {...modalProps()}>
+              <div className='sort-options'>
+                <h3 style={{paddingBottom: '5px'}}>Sort By</h3>
+                <Select onChange={this.handleSortOptions} {...selectProps()}>
+                  <SelectItem value='no-sorting' text="None"/>
+                  <SelectItem value='name-asc' text="Name: A to Z"/>
+                  <SelectItem value='name-desc' text="Name: Z to A"/>
+                  <SelectItem value='rating-asc' text="Rating: Low to High"/>
+                  <SelectItem value='rating-desc' text="Rating: High to Low"/>
+                  <SelectItem value='income-asc' text="Income: Low to High"/>
+                  <SelectItem value='income-desc' text="Income: High to Low"/>
+                </Select>
               </div>
               <br/>
-              <div>
-                <FormLabel>Deductibility</FormLabel>
-                <Toggle labelA="No" labelB="Yes" />
-              </div>
-              <div style={{ marginTop: '2rem' }}>
-                <Slider id="slider" {...sliderProps()} />
+              <hr color='#3d70b2'/>
+              <br/><br/>
+              <div className='filter-options'>
+                <h3 style={{paddingBottom: '5px'}}>Filter By</h3>
+                <div className='select-filter'>
+                  <Select onChange={this.handleDeductible} labelText='Deductible' inline='true' defaultValue='deductible-default'>
+                    <SelectItem value='deductible-default' text="None"/>
+                    <SelectItem value='deductible-true' text="Yes"/>
+                    <SelectItem value='deductible-false' text="No"/>
+                  </Select>
+                </div><br/>
+                <div className='multiselect-filter'>
+                  <MultiSelect.Filterable id='charity-state' {...multiSelectProps} items={states} placeholder="State"
+                    itemToString={item => (item ? item.name : '')} onChange={this.handleStates}/>
+                </div><br/><br/>
+                <div className='slider-filter'>
+                  <h6>Rating</h6>
+                  <div style={{display: 'inline'}}>
+                    <text>min: </text>
+                    <Slider id="min-slider" value='80' onChange={this.handleMinRating} {...sliderPropsRating()}/>
+                  </div><br/>
+                  <div style={{display: 'inline'}}>
+                    <text>max: </text>
+                    <Slider id="max-slider" value='100' onChange={this.handleMaxRating} {...sliderPropsRating()}/>
+                  </div>
+                </div><br/>
+                <div className='slider-filter'>
+                  <h6>Income ($100000s)</h6>
+                  <div style={{display: 'inline'}}>
+                    <text>min: </text>
+                    <Slider id="min-slider" value='5' onChange={this.handleMinIncome} {...sliderPropsIncome()}/>
+                  </div><br/>
+                  <div style={{display: 'inline'}}>
+                    <text>max: </text>
+                    <Slider id="max-slider" value='340' onChange={this.handleMaxIncome} {...sliderPropsIncome()}/>
+                  </div>
+                </div><br/>
               </div>
             </ModalWrapper>
           </div>
