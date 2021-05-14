@@ -49,20 +49,31 @@ export class Charities extends Component {
       pageSize: 3,
       charities: [],
       charities_slice: [],
-      update_flag: false
+      query: JSON.stringify(query_object)
     };
   }
-  componentWillMount() {
-    console.log("This is the API request string rn: "+JSON.stringify(query_object))
+  componentDidMount() {
     fetch("http:
       .then(results => results.json())
       .then(data => {
-        console.log(data.objects.slice(0, 3));
-        this.setState({ charities: data.objects });
         this.setState({
-          charities_slice: data.objects.slice(0, this.state.pageSize)
+          charities: data.objects,
+          charities_slice: data.objects.slice(0, this.state.pageSize),
+          charity_count: data.num_results
         });
-        this.setState({charity_count: data.num_results});
+      });
+  }
+  componentDidUpdate(_, prevState) {
+    console.log("The state contains this q-string now: "+this.state.query);
+    if (prevState.query !== this.state.query)
+      fetch("http:
+      .then(results => results.json())
+      .then(data => {
+        this.setState({
+          charities: data.objects,
+          charities_slice: data.objects.slice(0, this.state.pageSize),
+          charity_count: data.num_results
+        });
       });
   }
   handlePageChange = evt => {
@@ -83,8 +94,11 @@ export class Charities extends Component {
   handleMinIncome = evt => {this.min_income = evt.value;};
   handleMaxIncome = evt => {this.max_income = evt.value;};
   handleSubmit = evt => {
+    query_object.filters = [];
     console.log("Here is the query string before I do shit: "+JSON.stringify(query_object));
-    if(this.sort_value === 'name-asc')
+    if(this.sort_value === 'no-sorting')
+      query_object.order_by = [];
+    else if(this.sort_value === 'name-asc')
       query_object.order_by = [{'field': 'name', 'direction':'asc'}];
     else if(this.sort_value === 'name-desc')
       query_object.order_by = [{'field': 'name', 'direction':'desc'}];
@@ -96,7 +110,7 @@ export class Charities extends Component {
       query_object.order_by = [{'field': 'incomeAmount', 'direction':'asc'}];
     else if(this.sort_value === 'income-desc')
       query_object.order_by = [{'field': 'incomeAmount', 'direction':'desc'}];
-    if(this.state_filter_list.length){
+    if(this.state_filter_list !== undefined && this.state_filter_list.length){
       let temp = [];
       for (let i=0; i < this.state_filter_list.length; i++)
         temp.push(this.state_filter_list[i].abbreviation);
@@ -108,11 +122,10 @@ export class Charities extends Component {
       query_object.filters.push({'name':'deductible', 'op':'eq', 'val':'No'});
     query_object.filters.push({'name':'rating', 'op':'ge', 'val':this.min_rating});
     query_object.filters.push({'name':'rating', 'op':'le', 'val':this.max_rating});
-    query_object.filters.push({'name':'incomeAmount', 'op':'ge', 'val':this.min_income});
-    query_object.filters.push({'name':'incomeAmount', 'op':'le', 'val':this.max_income});
+    query_object.filters.push({'name':'incomeAmount', 'op':'ge', 'val':this.min_income*100000});
+    query_object.filters.push({'name':'incomeAmount', 'op':'le', 'val':this.max_income*100000});
     console.log("Here is the reloaded query: "+JSON.stringify(query_object));
-    this.setState({update_flag: !this.state.update_flag});
-    this.forceUpdate();
+    this.setState({query: JSON.stringify(query_object)});
     return true;
   };
   render() {

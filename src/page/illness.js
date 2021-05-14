@@ -24,19 +24,31 @@ export class Illnesses extends Component {
       pageSize: 3,
       illnesses: [],
       illnesses_slice: [],
-      update_flag: false
+      query: JSON.stringify(query_object)
     };
   }
-  componentWillMount() {
-    console.log("This is the API request string rn: "+JSON.stringify(query_object))
+  componentDidMount() {
     fetch("http:
       .then(results => results.json())
       .then(data => {
-        this.setState({ illnesses: data.objects });
         this.setState({
-          illnesses_slice: data.objects.slice(0, this.state.pageSize)
+          illnesses: data.objects,
+          illnesses_slice: data.objects.slice(0, this.state.pageSize),
+          illness_count: data.num_results
         });
-        this.setState({illness_count: data.num_results});
+      });
+  }
+  componentDidUpdate(_, prevState) {
+    console.log("The state contains this q-string now: "+this.state.query);
+    if (prevState.query !== this.state.query)
+      fetch("http:
+      .then(results => results.json())
+      .then(data => {
+        this.setState({
+          illnesses: data.objects,
+          illnesses_slice: data.objects.slice(0, this.state.pageSize),
+          illness_count: data.num_results
+        });
       });
   }
   handlePageChange = evt => {
@@ -57,14 +69,16 @@ export class Illnesses extends Component {
   handleMaxAge = evt => {this.max_age = evt.value;};
   handleSubmit = evt => {
     console.log("Here is the query string before I do shit: "+JSON.stringify(query_object));
-    if(this.sort_value === 'name-asc')
+    if(this.sort_value === 'no-sorting')
+      query_object.order_by = [];
+    else if(this.sort_value === 'name-asc')
       query_object.order_by = [{'field': 'name', 'direction':'asc'}];
     else if(this.sort_value === 'name-desc')
       query_object.order_by = [{'field': 'name', 'direction':'desc'}];
     else if(this.sort_value === 'age-asc')
-      query_object.order_by = [{'field': 'age', 'direction':'asc'}];
+      query_object.order_by = [{'field': 'average_age', 'direction':'asc'}];
     else if(this.sort_value === 'age-desc')
-      query_object.order_by = [{'field': 'age', 'direction':'desc'}];
+      query_object.order_by = [{'field': 'average_age', 'direction':'desc'}];
     if(this.curable === 'curable-true')
       query_object.filters.push({'name':'curable', 'op':'eq', 'val':'Yes'});
     else if(this.curable === 'curable-false')
@@ -80,8 +94,7 @@ export class Illnesses extends Component {
     query_object.filters.push({'name':'average_age', 'op':'ge', 'val':this.min_age});
     query_object.filters.push({'name':'average_age', 'op':'le', 'val':this.max_age});
     console.log("Here is the reloaded query: "+JSON.stringify(query_object));
-    this.setState({update_flag: !this.state.update_flag});
-    this.forceUpdate();
+    this.setState({query: JSON.stringify(query_object)});
     return true;
   };
   render() {

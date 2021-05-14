@@ -9,7 +9,8 @@ export const modalProps = () => ({
   secondaryButtonText: 'Reset Filters',
   buttonTriggerText: 'Filter',
   buttonTriggerClassName: 'modal-trigger-btn',
-  shouldCloseAfterSubmit: true
+  shouldCloseAfterSubmit: true,
+  useTitleInItem: true
 });
 export const states = [
   {"name": "Alabama", "abbreviation": "AL"},

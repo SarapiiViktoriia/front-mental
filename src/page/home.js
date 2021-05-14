@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, Navigation } from '../custom';
 import Typing from 'react-typing-animation';
 import illnessesImage from "../img/images/Mental-Illness-Prevalence-in-Adults.png";
@@ -20,8 +21,15 @@ class Home extends Component {
         </div>
         <br/>
         <br/>
-        <Typing>
-          <span style={{fontSize:"50px"}}>Hello, it's me, I was wondering if after all these years you'd like to meet</span>
+        <Typing speed={50}>
+          <span style={{fontSize:"50px"}}>Hello, it's me, I was wondering if after all these years 
+            you'd like to meet to go over everything...</span>
+        </Typing>
+        <br/><br/>
+        <Typing speed={25}>
+          <span style={{fontSize:"35px"}}>This page is currently under construction. In the meantime, check out 
+            our <Link to='/illnesses'>illnesses</Link>, <Link to='/hospitals'>hospitals</Link>, 
+            and <Link to='/charities'>charities</Link>.</span>
         </Typing>
         <br/>
         <br/>
