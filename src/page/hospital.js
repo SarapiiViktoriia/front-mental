@@ -1,14 +1,23 @@
-import './basic.css';
-import React, { Component } from 'react';
-import GoogleMapReact from 'google-map-react'; 
-import { Card, Navigation, modalProps, states } from '../custom';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Select, SelectItem, Slider } from "carbon-components-react";
+import "./basic.css";
+import React, { Component } from "react";
+import GoogleMapReact from "google-map-react";
+import { Card, Navigation, modalProps, states } from "../custom";
+import {
+  Tile,
+  FormLabel,
+  PaginationV2,
+  ModalWrapper,
+  MultiSelect,
+  Select,
+  SelectItem,
+  Slider
+} from "carbon-components-react";
 const owners = [
-  {'text': 'Proprietary'},
-  {'text': 'Non-Profit'},
-  {'text': 'Government - State'},
-  {'text': 'Government - District/Authority'}
-]
+  { text: "Proprietary" },
+  { text: "Non-Profit" },
+  { text: "Government - State" },
+  { text: "Government - District/Authority" }
+];
 const multiSelectProps = () => ({
   filterable: true,
   disabled: false,
@@ -23,8 +32,8 @@ const selectProps = () => ({
   hideLabel: true,
   light: false,
   inline: false,
-  helperText: '',
-  defaultValue: 'no-sorting'
+  helperText: "",
+  defaultValue: "no-sorting"
 });
 const sliderProps = () => ({
   light: false,
@@ -33,7 +42,7 @@ const sliderProps = () => ({
   max: 500,
   step: 1,
   stepMuliplier: 4,
-  labelText: ''
+  labelText: ""
 });
 const query_object = {
   order_by: [],
@@ -62,17 +71,17 @@ export class Hospitals extends Component {
       });
   }
   componentDidUpdate(_, prevState) {
-    console.log("The state contains this q-string now: "+this.state.query);
+    console.log("The state contains this q-string now: " + this.state.query);
     if (prevState.query !== this.state.query)
       fetch("http:
-      .then(results => results.json())
-      .then(data => {
-        this.setState({
-          hospitals: data.objects,
-          hospitals_slice: data.objects.slice(0, this.state.pageSize),
-          hospital_count: data.num_results
+        .then(results => results.json())
+        .then(data => {
+          this.setState({
+            hospitals: data.objects,
+            hospitals_slice: data.objects.slice(0, this.state.pageSize),
+            hospital_count: data.num_results
+          });
         });
-      });
   }
   handlePageChange = evt => {
     console.log(evt);
@@ -84,40 +93,60 @@ export class Hospitals extends Component {
       hospitals_slice: this.state.hospitals.slice(slice1, slice2)
     });
   };
-  handleSortOptions = evt => {this.sort_value = evt.target.value;};
-  handleStates = evt => {this.state_filter_list = evt.selectedItems;};
-  handleOwners = evt => {this.owner_filter_list = evt.selectedItems;};
-  handleMinPop = evt => {this.min_pop = evt.value;};
-  handleMaxPop = evt => {this.max_pop = evt.value;};
+  handleSortOptions = evt => {
+    this.sort_value = evt.target.value;
+  };
+  handleStates = evt => {
+    this.state_filter_list = evt.selectedItems;
+  };
+  handleOwners = evt => {
+    this.owner_filter_list = evt.selectedItems;
+  };
+  handleMinPop = evt => {
+    this.min_pop = evt.value;
+  };
+  handleMaxPop = evt => {
+    this.max_pop = evt.value;
+  };
   handleSubmit = evt => {
     query_object.filters = [];
-    console.log("Here is the query string before I do shit: "+JSON.stringify(query_object));
-    if(this.sort_value === 'no-sorting')
-      query_object.order_by = [];
-    else if(this.sort_value === 'name-asc')
-      query_object.order_by = [{'field': 'name', 'direction':'asc'}];
-    else if(this.sort_value === 'name-desc')
-      query_object.order_by = [{'field': 'name', 'direction':'desc'}];
-    else if(this.sort_value === 'pop-asc')
-      query_object.order_by = [{'field': 'population', 'direction':'asc'}];
-    else if(this.sort_value === 'pop-desc')
-      query_object.order_by = [{'field': 'population', 'direction':'desc'}];
-    if(this.state_filter_list !== undefined && this.state_filter_list.length){
+    console.log(
+      "Here is the query string before I do shit: " +
+        JSON.stringify(query_object)
+    );
+    if (this.sort_value === "no-sorting") query_object.order_by = [];
+    else if (this.sort_value === "name-asc")
+      query_object.order_by = [{ field: "name", direction: "asc" }];
+    else if (this.sort_value === "name-desc")
+      query_object.order_by = [{ field: "name", direction: "desc" }];
+    else if (this.sort_value === "pop-asc")
+      query_object.order_by = [{ field: "population", direction: "asc" }];
+    else if (this.sort_value === "pop-desc")
+      query_object.order_by = [{ field: "population", direction: "desc" }];
+    if (this.state_filter_list !== undefined && this.state_filter_list.length) {
       let temp = [];
-      for (let i=0; i < this.state_filter_list.length; i++)
+      for (let i = 0; i < this.state_filter_list.length; i++)
         temp.push(this.state_filter_list[i].abbreviation);
-      query_object.filters.push({'name':'state', 'op':'in', 'val':temp});
+      query_object.filters.push({ name: "state", op: "in", val: temp });
     }
-    if(this.owner_filter_list !== undefined && this.owner_filter_list.length){
+    if (this.owner_filter_list !== undefined && this.owner_filter_list.length) {
       let temp = [];
-      for (let i=0; i < this.owner_filter_list.length; i++)
+      for (let i = 0; i < this.owner_filter_list.length; i++)
         temp.push(this.owner_filter_list[i].text);
-      query_object.filters.push({'name':'state', 'op':'in', 'val':temp});
+      query_object.filters.push({ name: "state", op: "in", val: temp });
     }
-    query_object.filters.push({'name':'population', 'op':'ge', 'val':this.min_pop});
-    query_object.filters.push({'name':'population', 'op':'le', 'val':this.max_pop});
-    console.log("Here is the reloaded query: "+JSON.stringify(query_object));
-    this.setState({query: JSON.stringify(query_object)});
+    query_object.filters.push({
+      name: "population",
+      op: "ge",
+      val: this.min_pop
+    });
+    query_object.filters.push({
+      name: "population",
+      op: "le",
+      val: this.max_pop
+    });
+    console.log("Here is the reloaded query: " + JSON.stringify(query_object));
+    this.setState({ query: JSON.stringify(query_object) });
     return true;
   };
   render() {
@@ -125,15 +154,18 @@ export class Hospitals extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={2}/>
+          <Navigation selected={2} />
         </div>
         <div className="page-title">
           <h1>Hospitals</h1>
-          <p style={{fontSize:"25px", opacity:"0.75"}} >Find the hospital best suited to your needs</p>
+          <p style={{ fontSize: "25px", opacity: "0.75" }}>
+            Find the hospital best suited to your needs
+          </p>
         </div>
-        <br/>
-        <Tile className='filter_pagination-bar'>
-          <PaginationV2 className='pagination'
+        <br />
+        <Tile className="filter_pagination-bar">
+          <PaginationV2
+            className="pagination"
             totalItems={this.state.hospital_count}
             pageSize={3}
             pageSizes={[3, 6, 9, 10]}
@@ -141,42 +173,69 @@ export class Hospitals extends Component {
           />
           <div className="filter-button">
             <ModalWrapper handleSubmit={this.handleSubmit} {...modalProps()}>
-              <div className='sort-options'>
-                <h3 style={{paddingBottom: '5px'}}>Sort By</h3>
+              <div className="sort-options">
+                <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
                 <Select onChange={this.handleSortOptions} {...selectProps()}>
-                  <SelectItem value='no-sorting' text="None"/>
-                  <SelectItem value='name-asc' text="Name: A to Z"/>
-                  <SelectItem value='name-desc' text="Name: Z to A"/>
-                  <SelectItem value='pop-asc' text="Size: Low to High"/>
-                  <SelectItem value='pop-desc' text="Size: High to Low"/>
+                  <SelectItem value="no-sorting" text="None" />
+                  <SelectItem value="name-asc" text="Name: A to Z" />
+                  <SelectItem value="name-desc" text="Name: Z to A" />
+                  <SelectItem value="pop-asc" text="Size: Low to High" />
+                  <SelectItem value="pop-desc" text="Size: High to Low" />
                 </Select>
               </div>
-              <br/>
-              <hr color='#3d70b2'/>
-              <br/><br/>
-              <div className='filter-options'>
-                <h3 style={{paddingBottom: '5px'}}>Filter By</h3>
-                <div className='multiselect-filter'>
-                  <MultiSelect.Filterable id="hospital-state" {...multiSelectProps} items={states} placeholder="State"
-                    itemToString={item => (item ? item.name : '')} onChange={this.handleStates}/>
+              <br />
+              <hr color="#3d70b2" />
+              <br />
+              <br />
+              <div className="filter-options">
+                <h3 style={{ paddingBottom: "5px" }}>Filter By</h3>
+                <div className="multiselect-filter">
+                  <MultiSelect.Filterable
+                    id="hospital-state"
+                    {...multiSelectProps}
+                    items={states}
+                    placeholder="State"
+                    itemToString={item => (item ? item.name : "")}
+                    onChange={this.handleStates}
+                  />
                 </div>
-                <br/><br/>
-                <div className='multiselect-filter'>
-                  <MultiSelect.Filterable id="hospital-owner" {...multiSelectProps} items={owners} placeholder="Owner"
-                    itemToString={item => (item ? item.text : '')} onChange={this.handleOwners}/>
+                <br />
+                <br />
+                <div className="multiselect-filter">
+                  <MultiSelect.Filterable
+                    id="hospital-owner"
+                    {...multiSelectProps}
+                    items={owners}
+                    placeholder="Owner"
+                    itemToString={item => (item ? item.text : "")}
+                    onChange={this.handleOwners}
+                  />
                 </div>
-                <br/><br/>
-                <div className='slider-filter'>
+                <br />
+                <br />
+                <div className="slider-filter">
                   <h6>Hospital size</h6>
-                  <div style={{display: 'inline'}}>
+                  <div style={{ display: "inline" }}>
                     <span>min: </span>
-                    <Slider id="min-slider" value='0' onChange={this.handleMinPop} {...sliderProps()}/>
-                  </div><br/>
-                  <div style={{display: 'inline'}}>
-                    <span>max: </span>
-                    <Slider id="max-slider" value='500' onChange={this.handleMaxPop} {...sliderProps()}/>
+                    <Slider
+                      id="min-slider"
+                      value="0"
+                      onChange={this.handleMinPop}
+                      {...sliderProps()}
+                    />
                   </div>
-                </div><br/>
+                  <br />
+                  <div style={{ display: "inline" }}>
+                    <span>max: </span>
+                    <Slider
+                      id="max-slider"
+                      value="500"
+                      onChange={this.handleMaxPop}
+                      {...sliderProps()}
+                    />
+                  </div>
+                </div>
+                <br />
               </div>
             </ModalWrapper>
           </div>
@@ -216,7 +275,7 @@ export class Hospital extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hospital: {},
+      hospital: {}
     };
   }
   componentWillMount() {
@@ -228,11 +287,18 @@ export class Hospital extends Component {
       });
   }
   render() {
+    const Marker = ({ text }) => {
+      return (
+        <div>
+          <b>{text}</b>
+        </div>
+      );
+    };
     return (
       <div>
-      <div className="navbar">
-        <Navigation selected={2}/>
-      </div>
+        <div className="navbar">
+          <Navigation selected={2} />
+        </div>
         <div>
           <Tile
             style={{
@@ -250,9 +316,8 @@ export class Hospital extends Component {
             <div style={{ justifyContent: "flex-start" }}>
               <img
                 src={this.state.hospital.image_url}
-                width="350"
-                height="370"
-                alt='hospital-pic'
+                height="280"
+                alt="hospital-pic"
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
@@ -353,8 +418,6 @@ export class Hospital extends Component {
                 }}
               >
                 Population: {this.state.hospital.population}
-                latitude: {this.state.hospital.latitude}
-                longitude: {this.state.hospital.longitude}
               </FormLabel>
               <br />
               <a
@@ -369,18 +432,33 @@ export class Hospital extends Component {
                 {this.state.hospital.website_url}
               </a>
             </div>
-          </Tile>
-          <div style={{ height: '100vh', width: '100%' }}>
-            <GoogleMapReact
-            bootstrapURLKeys={{ key: "AIzaSyBkcDQD1qCPhHLYbl8yjsdaeydLNsW4C5U" }}
-            center={{
-              lat: this.state.hospital.latitude,
-              lng: this.state.hospital.longitude
-            }}
-            defaultZoom={11}
+            <div
+              style={{
+                height: "40vh",
+                width: "50vh" ,
+                marginLeft: "2%",
+                display: "inline-block",
+                "vertical-align": "top"
+              }}
             >
-            </GoogleMapReact>
-          </div>
+              <GoogleMapReact
+                bootstrapURLKeys={{
+                  key: "AIzaSyBkcDQD1qCPhHLYbl8yjsdaeydLNsW4C5U"
+                }}
+                center={{
+                  lat: this.state.hospital.latitude,
+                  lng: this.state.hospital.longitude
+                }}
+                defaultZoom={16}
+              >
+                <Marker
+                  lat={this.state.hospital.latitude}
+                  lng={this.state.hospital.longitude}
+                  text={this.state.hospital.name}
+                />
+              </GoogleMapReact>
+            </div>
+          </Tile>
         </div>
       </div>
     );
