@@ -1,5 +1,6 @@
 import './basic.css'
 import React, { Component } from 'react';
+import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
 import { Card, Navigation, modalProps, states } from '../custom';
 import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
 const multiSelectProps = () => ({
@@ -345,6 +346,19 @@ export class Charity extends Component {
                     {this.state.charity.website_url}
                   </a>
                 </p>
+                <div 
+              style={{ 
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around'
+              }}
+            >
+                <TwitterTimelineEmbed
+                sourceType="profile"
+                screenName="saurabhnemade"
+                options={{height: 400}}
+              />
+              </div>
               </span>
             </div>
           </Tile>
