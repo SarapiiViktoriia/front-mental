@@ -434,8 +434,8 @@ export class Hospital extends Component {
             </div>
             <div
               style={{
-                height: "40vh",
-                width: "50vh" ,
+                height: "60vh",
+                width: "100vh" ,
                 marginLeft: "2%",
                 display: "inline-block",
                 "vertical-align": "top"
@@ -449,7 +449,7 @@ export class Hospital extends Component {
                   lat: this.state.hospital.latitude,
                   lng: this.state.hospital.longitude
                 }}
-                defaultZoom={16}
+                defaultZoom={18}
               >
                 <Marker
                   lat={this.state.hospital.latitude}
