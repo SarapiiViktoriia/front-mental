@@ -51,30 +51,30 @@ class About extends Component {
         data.forEach(element => {
           total = total + 1;
           if (
-            element.author_name === "Shreyas Tawre" ||
-            element.author_email === "tawre.shreyas@gmail.com"
+            element.name === "Shreyas Tawre" ||
+            element.email === "tawre.shreyas@gmail.com"
           ) {
-            shreyas = shreyas + 1;
+            shreyas = element.commits;
           } else if (
-            element.author_name === "Caleb Hamada" ||
-            element.author_email === "chamada1@me.com"
+            element.name === "Caleb Hamada" ||
+            element.email === "chamada1@me.com"
           ) {
-            caleb = caleb + 1;
+            caleb = element.commits;
           } else if (
-            element.author_name === "Taher Naeem" ||
-            element.author_email === "tahern52@cs.utexas.edu"
+            element.name === "Taher Naeem" ||
+            element.email === "tahern52@cs.utexas.edu"
           ) {
-            taher = taher + 1;
+            taher = element.commits;
           } else if (
-            element.author_name === "Weihan He" ||
-            element.author_email === "weihan.he@gmail.com"
+            element.name === "Weihan He" ||
+            element.email === "weihan.he@gmail.com"
           ) {
-            weihan = weihan + 1;
+            weihan = element.commits;
           } else if (
-            element.author_name === "Jason Cheng" ||
-            element.author_email === "hc27469@utexas.edu"
+            element.name === "Jason Cheng" ||
+            element.email === "hc27469@utexas.edu"
           ) {
-            jason = jason + 1;
+            jason = element.commits;
           }
         });
         this.setState({
@@ -100,30 +100,30 @@ class About extends Component {
         data.forEach(element => {
           total = total + 1;
           if (
-            element.author_name === "Shreyas Tawre" ||
-            element.author_email === "tawre.shreyas@gmail.com"
+            element.name === "Shreyas Tawre" ||
+            element.email === "tawre.shreyas@gmail.com"
           ) {
-            shreyas = shreyas + 1;
+            shreyas = element.commits;
           } else if (
-            element.author_name === "Caleb Hamada" ||
-            element.author_email === "chamada1@me.com"
+            element.name === "Caleb Hamada" ||
+            element.email === "chamada1@me.com"
           ) {
-            caleb = caleb + 1;
+            caleb = element.commits;
           } else if (
-            element.author_name === "Taher Naeem" ||
-            element.author_email === "tahern52@cs.utexas.edu"
+            element.name === "Taher Naeem" ||
+            element.email === "tahern52@cs.utexas.edu"
           ) {
-            taher = taher + 1;
+            taher = element.commits;
           } else if (
-            element.author_name === "Weihan He" ||
-            element.author_email === "weihan.he@gmail.com"
+            element.name === "Weihan He" ||
+            element.email === "weihan.he@gmail.com"
           ) {
-            weihan = weihan + 1;
+            weihan = element.commits;
           } else if (
-            element.author_name === "Jason Cheng" ||
-            element.author_email === "hc27469@utexas.edu"
+            element.name === "Jason Cheng" ||
+            element.email === "hc27469@utexas.edu"
           ) {
-            jason = jason + 1;
+            jason = element.commits;
           }
         });
         this.setState({
