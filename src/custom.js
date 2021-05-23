@@ -184,51 +184,45 @@ export class MyTable extends Component {
   }
 }
 export class Navigation extends Component {
-  render() {
-    function handleAboutTabClick(e) {
-      window.location.assign("/about");
-    }
-    function handleIllnessesTabClick(e) {
-      window.location.assign("/illnesses");
-    }
-    function handleHospitalsTabClick(e) {
-      window.location.assign("/hospitals");
-    }
-    function handleCharitiesTabClick(e) {
-      window.location.assign("/charities");
-    }
-    function handleHomeTabClick(e) {
-      window.location.assign("/"); 
-    }
+  handleAboutTabClick = evt => { window.location.assign('/about'); }
+  handleIllnessesTabClick = evt => { window.location.assign('/illnesses'); }
+  handleHospitalsTabClick = evt => { window.location.assign('/hospitals'); }
+  handleCharitiesTabClick = evt => { window.location.assign('/charities'); }
+  handleHomeTabClick = evt => { window.location.assign('/'); }
+  handleSearch = evt => { 
+    if (evt.key === 'Enter')
+      window.location.assign('/search?value='+evt.target.value) 
+  }
+  render(){
     return (
       <Tile className="navbar-top">
         <div style = {{ 'width': '20%' }}>
           <FormLabel className="navbar-title">Mental Health Help</FormLabel>
         </div>
-        <div style={{ width: '30%', marginTop: '3px' }} >
-          <Search labelText='' placeHolderText="Search" />
+        <div style={{ width: '30%', marginTop: '3px' }}>
+          <Search onKeyPress={this.handleSearch} labelText='' placeHolderText="Search"/>
         </div>
         <div>
           <Tabs className="navbar-tabs" selected={this.props.selected}>
             <Tab className="navbar-tab"
               label={"Home"}
-              onClick={handleHomeTabClick}
+              onClick={this.handleHomeTabClick}
             />
             <Tab className="navbar-tab"
               label={"Illnesses"}
-              onClick={handleIllnessesTabClick}
+              onClick={this.handleIllnessesTabClick}
             />
             <Tab className="navbar-tab"
               label={"Hospitals"}
-              onClick={handleHospitalsTabClick}
+              onClick={this.handleHospitalsTabClick}
             />
             <Tab className="navbar-tab"
               label={"Charities"}
-              onClick={handleCharitiesTabClick}
+              onClick={this.handleCharitiesTabClick}
             />
             <Tab className="navbar-tab"
               label={"About"}
-              onClick={handleAboutTabClick}
+              onClick={this.handleAboutTabClick}
             />
           </Tabs>
         </div>
