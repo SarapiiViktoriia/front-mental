@@ -1,8 +1,16 @@
-import './basic.css'
-import React, { Component } from 'react';
-import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
-import { Card, Navigation, modalProps, states } from '../custom';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
+import "./basic.css";
+import React, { Component } from "react";
+import { Card, Navigation, modalProps, states } from "../custom";
+import {
+  Tile,
+  FormLabel,
+  PaginationV2,
+  ModalWrapper,
+  MultiSelect,
+  Slider,
+  Select,
+  SelectItem
+} from "carbon-components-react";
 const multiSelectProps = () => ({
   filterable: true,
   disabled: false,
@@ -10,15 +18,15 @@ const multiSelectProps = () => ({
   useTitleInItem: false,
   label: "",
   invalid: false,
-  invalidText: "Invalid selection",
+  invalidText: "Invalid selection"
 });
 const selectProps = () => ({
   labelText: "Sort By",
   hideLabel: true,
   light: false,
   inline: false,
-  helperText: '',
-  defaultValue: 'no-sorting'
+  helperText: "",
+  defaultValue: "no-sorting"
 });
 const sliderPropsIncome = () => ({
   light: false,
@@ -27,16 +35,16 @@ const sliderPropsIncome = () => ({
   max: 340,
   step: 1,
   stepMuliplier: 3,
-  labelText: ''
+  labelText: ""
 });
 const sliderPropsRating = () => ({
   light: false,
   hideTextInput: false,
   min: 80,
   max: 100,
-  step: .1,
+  step: 0.1,
   stepMuliplier: 10,
-  labelText: ''
+  labelText: ""
 });
 const query_object = {
   order_by: [],
@@ -65,17 +73,17 @@ export class Charities extends Component {
       });
   }
   componentDidUpdate(_, prevState) {
-    console.log("The state contains this q-string now: "+this.state.query);
+    console.log("The state contains this q-string now: " + this.state.query);
     if (prevState.query !== this.state.query)
       fetch("http:
-      .then(results => results.json())
-      .then(data => {
-        this.setState({
-          charities: data.objects,
-          charities_slice: data.objects.slice(0, this.state.pageSize),
-          charity_count: data.num_results
+        .then(results => results.json())
+        .then(data => {
+          this.setState({
+            charities: data.objects,
+            charities_slice: data.objects.slice(0, this.state.pageSize),
+            charity_count: data.num_results
+          });
         });
-      });
   }
   handlePageChange = evt => {
     console.log(evt);
@@ -87,62 +95,97 @@ export class Charities extends Component {
       charities_slice: this.state.charities.slice(slice1, slice2)
     });
   };
-  handleSortOptions = evt => {this.sort_value = evt.target.value;};
-  handleStates = evt => {this.state_filter_list = evt.selectedItems;};
-  handleDeductible = evt => {this.deductible = evt.target.value;};
-  handleMinRating = evt => {this.min_rating = evt.value;};
-  handleMaxRating = evt => {this.max_rating = evt.value;};
-  handleMinIncome = evt => {this.min_income = evt.value;};
-  handleMaxIncome = evt => {this.max_income = evt.value;};
+  handleSortOptions = evt => {
+    this.sort_value = evt.target.value;
+  };
+  handleStates = evt => {
+    this.state_filter_list = evt.selectedItems;
+  };
+  handleDeductible = evt => {
+    this.deductible = evt.target.value;
+  };
+  handleMinRating = evt => {
+    this.min_rating = evt.value;
+  };
+  handleMaxRating = evt => {
+    this.max_rating = evt.value;
+  };
+  handleMinIncome = evt => {
+    this.min_income = evt.value;
+  };
+  handleMaxIncome = evt => {
+    this.max_income = evt.value;
+  };
   handleSubmit = evt => {
     query_object.filters = [];
-    console.log("Here is the query string before I do shit: "+JSON.stringify(query_object));
-    if(this.sort_value === 'no-sorting')
-      query_object.order_by = [];
-    else if(this.sort_value === 'name-asc')
-      query_object.order_by = [{'field': 'name', 'direction':'asc'}];
-    else if(this.sort_value === 'name-desc')
-      query_object.order_by = [{'field': 'name', 'direction':'desc'}];
-    else if(this.sort_value === 'rating-asc')
-      query_object.order_by = [{'field': 'rating', 'direction':'asc'}];
-    else if(this.sort_value === 'rating-desc')
-      query_object.order_by = [{'field': 'rating', 'direction':'desc'}];
-    else if(this.sort_value === 'income-asc')
-      query_object.order_by = [{'field': 'incomeAmount', 'direction':'asc'}];
-    else if(this.sort_value === 'income-desc')
-      query_object.order_by = [{'field': 'incomeAmount', 'direction':'desc'}];
-    if(this.state_filter_list !== undefined && this.state_filter_list.length){
+    console.log(
+      "Here is the query string before I do shit: " +
+        JSON.stringify(query_object)
+    );
+    if (this.sort_value === "no-sorting") query_object.order_by = [];
+    else if (this.sort_value === "name-asc")
+      query_object.order_by = [{ field: "name", direction: "asc" }];
+    else if (this.sort_value === "name-desc")
+      query_object.order_by = [{ field: "name", direction: "desc" }];
+    else if (this.sort_value === "rating-asc")
+      query_object.order_by = [{ field: "rating", direction: "asc" }];
+    else if (this.sort_value === "rating-desc")
+      query_object.order_by = [{ field: "rating", direction: "desc" }];
+    else if (this.sort_value === "income-asc")
+      query_object.order_by = [{ field: "incomeAmount", direction: "asc" }];
+    else if (this.sort_value === "income-desc")
+      query_object.order_by = [{ field: "incomeAmount", direction: "desc" }];
+    if (this.state_filter_list !== undefined && this.state_filter_list.length) {
       let temp = [];
-      for (let i=0; i < this.state_filter_list.length; i++)
+      for (let i = 0; i < this.state_filter_list.length; i++)
         temp.push(this.state_filter_list[i].abbreviation);
-      query_object.filters.push({'name':'state', 'op':'in', 'val':temp});
+      query_object.filters.push({ name: "state", op: "in", val: temp });
     }
-    if(this.deductible === 'deductible-true')
-      query_object.filters.push({'name':'deductible', 'op':'eq', 'val':'Yes'});
-    else if(this.deductible === 'deductible-false')
-      query_object.filters.push({'name':'deductible', 'op':'eq', 'val':'No'});
-    query_object.filters.push({'name':'rating', 'op':'ge', 'val':this.min_rating});
-    query_object.filters.push({'name':'rating', 'op':'le', 'val':this.max_rating});
-    query_object.filters.push({'name':'incomeAmount', 'op':'ge', 'val':this.min_income*100000});
-    query_object.filters.push({'name':'incomeAmount', 'op':'le', 'val':this.max_income*100000});
-    console.log("Here is the reloaded query: "+JSON.stringify(query_object));
-    this.setState({query: JSON.stringify(query_object)});
+    if (this.deductible === "deductible-true")
+      query_object.filters.push({ name: "deductible", op: "eq", val: "Yes" });
+    else if (this.deductible === "deductible-false")
+      query_object.filters.push({ name: "deductible", op: "eq", val: "No" });
+    query_object.filters.push({
+      name: "rating",
+      op: "ge",
+      val: this.min_rating
+    });
+    query_object.filters.push({
+      name: "rating",
+      op: "le",
+      val: this.max_rating
+    });
+    query_object.filters.push({
+      name: "incomeAmount",
+      op: "ge",
+      val: this.min_income * 100000
+    });
+    query_object.filters.push({
+      name: "incomeAmount",
+      op: "le",
+      val: this.max_income * 100000
+    });
+    console.log("Here is the reloaded query: " + JSON.stringify(query_object));
+    this.setState({ query: JSON.stringify(query_object) });
     return true;
   };
   render() {
     const { charities_slice } = this.state;
     return (
       <div>
-      <div className="navbar">
-        <Navigation selected={3}/>
-      </div>
+        <div className="navbar">
+          <Navigation selected={3} />
+        </div>
         <div className="page-title">
           <h1>Charities</h1>
-          <p style={{fontSize:"25px", opacity:"0.75"}} >Discover charities who are doing their part</p>
+          <p style={{ fontSize: "25px", opacity: "0.75" }}>
+            Discover charities who are doing their part
+          </p>
         </div>
-        <br/>
-        <Tile className='filter_pagination-bar'>
-          <PaginationV2 className='pagination'
+        <br />
+        <Tile className="filter_pagination-bar">
+          <PaginationV2
+            className="pagination"
             totalItems={this.state.charity_count}
             pageSize={3}
             pageSizes={[3, 6, 9, 10]}
@@ -150,56 +193,95 @@ export class Charities extends Component {
           />
           <div className="filter-button">
             <ModalWrapper handleSubmit={this.handleSubmit} {...modalProps()}>
-              <div className='sort-options'>
-                <h3 style={{paddingBottom: '5px'}}>Sort By</h3>
+              <div className="sort-options">
+                <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
                 <Select onChange={this.handleSortOptions} {...selectProps()}>
-                  <SelectItem value='no-sorting' text="None"/>
-                  <SelectItem value='name-asc' text="Name: A to Z"/>
-                  <SelectItem value='name-desc' text="Name: Z to A"/>
-                  <SelectItem value='rating-asc' text="Rating: Low to High"/>
-                  <SelectItem value='rating-desc' text="Rating: High to Low"/>
-                  <SelectItem value='income-asc' text="Income: Low to High"/>
-                  <SelectItem value='income-desc' text="Income: High to Low"/>
+                  <SelectItem value="no-sorting" text="None" />
+                  <SelectItem value="name-asc" text="Name: A to Z" />
+                  <SelectItem value="name-desc" text="Name: Z to A" />
+                  <SelectItem value="rating-asc" text="Rating: Low to High" />
+                  <SelectItem value="rating-desc" text="Rating: High to Low" />
+                  <SelectItem value="income-asc" text="Income: Low to High" />
+                  <SelectItem value="income-desc" text="Income: High to Low" />
                 </Select>
               </div>
-              <br/>
-              <hr color='#3d70b2'/>
-              <br/><br/>
-              <div className='filter-options'>
-                <h3 style={{paddingBottom: '5px'}}>Filter By</h3>
-                <div className='select-filter'>
-                  <Select onChange={this.handleDeductible} labelText='Deductible' inline='true' defaultValue='deductible-default'>
-                    <SelectItem value='deductible-default' text="None"/>
-                    <SelectItem value='deductible-true' text="Yes"/>
-                    <SelectItem value='deductible-false' text="No"/>
+              <br />
+              <hr color="#3d70b2" />
+              <br />
+              <br />
+              <div className="filter-options">
+                <h3 style={{ paddingBottom: "5px" }}>Filter By</h3>
+                <div className="select-filter">
+                  <Select
+                    onChange={this.handleDeductible}
+                    labelText="Deductible"
+                    inline="true"
+                    defaultValue="deductible-default"
+                  >
+                    <SelectItem value="deductible-default" text="None" />
+                    <SelectItem value="deductible-true" text="Yes" />
+                    <SelectItem value="deductible-false" text="No" />
                   </Select>
-                </div><br/>
-                <div className='multiselect-filter'>
-                  <MultiSelect.Filterable id='charity-state' {...multiSelectProps} items={states} placeholder="State"
-                    itemToString={item => (item ? item.name : '')} onChange={this.handleStates}/>
-                </div><br/><br/>
-                <div className='slider-filter'>
+                </div>
+                <br />
+                <div className="multiselect-filter">
+                  <MultiSelect.Filterable
+                    id="charity-state"
+                    {...multiSelectProps}
+                    items={states}
+                    placeholder="State"
+                    itemToString={item => (item ? item.name : "")}
+                    onChange={this.handleStates}
+                  />
+                </div>
+                <br />
+                <br />
+                <div className="slider-filter">
                   <h6>Rating</h6>
-                  <div style={{display: 'inline'}}>
+                  <div style={{ display: "inline" }}>
                     <text>min: </text>
-                    <Slider id="min-slider" value='80' onChange={this.handleMinRating} {...sliderPropsRating()}/>
-                  </div><br/>
-                  <div style={{display: 'inline'}}>
-                    <text>max: </text>
-                    <Slider id="max-slider" value='100' onChange={this.handleMaxRating} {...sliderPropsRating()}/>
+                    <Slider
+                      id="min-slider"
+                      value="80"
+                      onChange={this.handleMinRating}
+                      {...sliderPropsRating()}
+                    />
                   </div>
-                </div><br/>
-                <div className='slider-filter'>
+                  <br />
+                  <div style={{ display: "inline" }}>
+                    <text>max: </text>
+                    <Slider
+                      id="max-slider"
+                      value="100"
+                      onChange={this.handleMaxRating}
+                      {...sliderPropsRating()}
+                    />
+                  </div>
+                </div>
+                <br />
+                <div className="slider-filter">
                   <h6>Income ($100000s)</h6>
-                  <div style={{display: 'inline'}}>
+                  <div style={{ display: "inline" }}>
                     <text>min: </text>
-                    <Slider id="min-slider" value='5' onChange={this.handleMinIncome} {...sliderPropsIncome()}/>
-                  </div><br/>
-                  <div style={{display: 'inline'}}>
-                    <text>max: </text>
-                    <Slider id="max-slider" value='340' onChange={this.handleMaxIncome} {...sliderPropsIncome()}/>
+                    <Slider
+                      id="min-slider"
+                      value="5"
+                      onChange={this.handleMinIncome}
+                      {...sliderPropsIncome()}
+                    />
                   </div>
-                </div><br/>
+                  <br />
+                  <div style={{ display: "inline" }}>
+                    <text>max: </text>
+                    <Slider
+                      id="max-slider"
+                      value="340"
+                      onChange={this.handleMaxIncome}
+                      {...sliderPropsIncome()}
+                    />
+                  </div>
+                </div>
+                <br />
               </div>
             </ModalWrapper>
           </div>
@@ -254,9 +336,9 @@ export class Charity extends Component {
   render() {
     return (
       <div>
-      <div className="navbar">
-        <Navigation selected={3}/>
-      </div>
+        <div className="navbar">
+          <Navigation selected={3} />
+        </div>
         <div>
           <Tile
             style={{
@@ -264,102 +346,107 @@ export class Charity extends Component {
               marginLeft: "32px",
               marginRight: "32px",
               marginTop: "38px",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              flexWrap: "wrap",
               opacity: ".8"
             }}
           >
-            <div>
-              <span>
-                <p>
-                  <img
-                    src={this.state.charity.image_url}
-                    width="350"
-                    height="370"
-                    style={{ display: "inline-block", "vertical-align": "top" }}
-                  />
-                  <FormLabel
-                    className="title"
-                    style={{
-                      position: "relative",
-                      marginLeft: "50px",
-                      marginTop: "0px",
-                      fontSize: "1.475rem",
-                      display: "inline-block",
-                      "vertical-align": "top"
-                    }}
-                  >
-                    {this.state.charity.name}
-                  </FormLabel>
-                  <FormLabel
-                    className="title"
-                    style={{
-                      position: "absolute",
-                      left: "420px",
-                      right: "40px",
-                      top: "80px",
-                      fontSize: "1.0rem",
-                      display: "inline-block",
-                      "vertical-align": "top"
-                    }}
-                  >
-                    "{this.state.charity.tagLine}"
-                  </FormLabel>
-                  <FormLabel
-                    className="title"
-                    style={{
-                      position: "absolute",
-                      left: "420px",
-                      right: "40px",
-                      top: "120px",
-                      fontSize: "1.0rem",
-                      display: "inline-block",
-                      "vertical-align": "top"
-                    }}
-                  >
-                    Asset Amount: {this.state.charity.assetAmount}
-                  </FormLabel>
-                  <FormLabel
-                    className="title"
-                    style={{
-                      position: "absolute",
-                      left: "420px",
-                      right: "40px",
-                      top: "160px",
-                      fontSize: "1.0rem",
-                      display: "inline-block",
-                      "vertical-align": "top"
-                    }}
-                  >
-                    Mission: {this.state.charity.mission}
-                  </FormLabel>
-                </p>
-                <p>
-                  <a
-                    href={this.state.charity.website_url}
-                    style={{
-                      position: "relative",
-                      marginLeft: "405px",
-                      marginRight: "40px",
-                      marginTop: "20px",
-                      fontSize: "1.0rem"
-                    }}
-                  >
-                    {this.state.charity.website_url}
-                  </a>
-                </p>
-                <div 
-              style={{ 
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-around'
+            <div style={{ justifyContent: "flex-start" }}>
+              <img
+                src={this.state.charity.image_url}
+                width="350"
+                height="280"
+              />
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginTop: "2%"
               }}
             >
-                <TwitterTimelineEmbed
-                sourceType="profile"
-                screenName="saurabhnemade"
-                options={{height: 400}}
-              />
-              </div>
-              </span>
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  fontSize: "1.475rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                {this.state.charity.name}
+              </FormLabel>
+              <br />
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  fontSize: "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Tagline: "{this.state.charity.tagLine}"
+              </FormLabel>
+              <br />
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  fontSize: "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Asset Amount: ${this.state.charity.assetAmount}
+              </FormLabel>
+              <br />
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  fontSize: "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                URL:
+                <a
+                  href={this.state.charity.website_url}
+                  style={{ color: "#cc0000" }}
+                >
+                  {this.state.charity.website_url}
+                </a>
+              </FormLabel>
+              <br />
+              <FormLabel
+                className="title"
+                style={{
+                  position: "relative",
+                  marginLeft: "50px",
+                  marginTop: "0px",
+                  fontSize: "1.0rem",
+                  display: "inline-block",
+                  "vertical-align": "top"
+                }}
+              >
+                Mission:
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: this.state.charity.mission
+                  }}
+                />
+              </FormLabel>
             </div>
           </Tile>
         </div>
