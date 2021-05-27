@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Tile } from 'carbon-components-react';
 import Home from './page/home';
 import About from './page/about';
+import SearchPage from './page/search';
 import { Hospitals, Hospital } from './page/hospital';
 import { Illnesses, Illness } from './page/illness';
 import { Charities, Charity } from './page/charity';
@@ -24,6 +25,11 @@ class App extends Component {
       illness_path = <Route path="/illnesses"
           render={props => <Illness {...props} id={parsed.id} />}/>;
     }
+    let search_path = <Route path='/search' component={SearchPage} />;
+    if ("value" in parsed){
+      search_path = <Route path="/search" 
+        render={props => <SearchPage {...props} value={parsed.value}/>}/>;
+    }
     return (
       <div className="page">
         <div className="page-body">
@@ -34,6 +40,7 @@ class App extends Component {
               {illness_path}
               {hospital_path}
               {charity_path}
+              {search_path}
             </div>
           </Router>
         </div>

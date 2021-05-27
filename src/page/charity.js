@@ -1,5 +1,17 @@
 import "./basic.css";
 import React, { Component } from "react";
+import {
+  TwitterTimelineEmbed,
+  TwitterShareButton,
+  TwitterFollowButton,
+  TwitterHashtagButton,
+  TwitterMentionButton,
+  TwitterTweetEmbed,
+  TwitterMomentShare,
+  TwitterDMButton,
+  TwitterVideoEmbed,
+  TwitterOnAirButton
+} from "react-twitter-embed";
 import { Card, Navigation, modalProps, states } from "../custom";
 import {
   Tile,
@@ -353,11 +365,26 @@ export class Charity extends Component {
               opacity: ".8"
             }}
           >
-            <div style={{ justifyContent: "flex-start" }}>
-              <img
-                src={this.state.charity.image_url}
-                width="350"
-                height="280"
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around"
+              }}
+            >
+              <div
+              >
+                {}
+                <img
+                  src={this.state.charity.image_url}
+                  width="500"
+                  height="400"
+                />
+              </div>
+              <TwitterTimelineEmbed
+                sourceType="profile"
+                screenName="saurabhnemade"
+                options={{ height: 400 }}
               />
             </div>
             <div
