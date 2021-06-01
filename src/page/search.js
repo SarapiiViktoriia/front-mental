@@ -27,7 +27,6 @@ class SearchPage extends Component{
     .then(data => {
       this.setState({charities: data.objects});
     })
-    query_object.filters.push({'name':'city', 'op':'like', 'val':'%'+this.props.value+'%'});
     fetch("http:
     .then(results => results.json())
     .then(data => {
@@ -60,7 +59,7 @@ class SearchPage extends Component{
           <Navigation selected={-1}/>
         </div>
         <div className="page-title">
-            <h1>Showing search results for {this.props.value}</h1>
+            <h1>Showing search results for "{this.props.value}"</h1>
         </div>
         <br/>
         <div className="page-title">
