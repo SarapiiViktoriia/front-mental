@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable, Search, MultiSelect } from "carbon-components-react";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 const { TableContainer, Table, TableHead, TableRow, TableBody, TableCell, TableHeader } = DataTable;
+var Highlight = require('react-highlighter');
 export const modalProps = () => ({
   id: 'input-modal',
   primaryButtonText: 'Apply Filters',
@@ -87,7 +88,7 @@ export class Card extends Component {
               className="title"
               style={{ "marginTop": "20px", fontSize: "1.2rem" }}
             >
-              {this.props.title}
+              <Highlight search={this.props.searchValue}>{this.props.title}</Highlight>
             </FormLabel>
           </center>
           <br />
@@ -113,7 +114,7 @@ export class Card extends Component {
                   {this.props.label1_heading !== undefined
                     ? this.props.label1_heading + ":"
                     : ""}{" "}
-                  {this.props.label1}
+                  <Highlight search={this.props.searchValue}>{this.props.label1}</Highlight>
                 </FormLabel>
               </center>
             )}
