@@ -13,10 +13,10 @@ import {
   Slider
 } from "carbon-components-react";
 const owners = [
-  { text: "Proprietary" },
-  { text: "Non-Profit" },
-  { text: "Government - State" },
-  { text: "Government - District/Authority" }
+  { text: "PROPRIETARY" },
+  { text: "NON-PROFIT" },
+  { text: "GOVERNMENT - STATE" },
+  { text: "GOVERNMENT - DISTRICT/AUTHORITY" }
 ];
 const multiSelectProps = () => ({
   filterable: true,
@@ -52,6 +52,7 @@ export class Hospitals extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      key: 123,
       page: 1,
       pageSize: 3,
       hospitals: [],
@@ -108,6 +109,16 @@ export class Hospitals extends Component {
   handleMaxPop = evt => {
     this.max_pop = evt.value;
   };
+  handleSecondarySubmit = evt => {
+    this.setState({
+      key: ~this.state.key,
+    })
+    this.sort_value = 'no-sorting';
+    this.owner_filter_list = [];
+    this.state_filter_list = [];
+    this.min_pop = 0;
+    this.max_pop = 500;
+  }
   handleSubmit = evt => {
     query_object.filters = [];
     console.log(
@@ -133,7 +144,7 @@ export class Hospitals extends Component {
       let temp = [];
       for (let i = 0; i < this.owner_filter_list.length; i++)
         temp.push(this.owner_filter_list[i].text);
-      query_object.filters.push({ name: "state", op: "in", val: temp });
+      query_object.filters.push({ name: "owner", op: "in", val: temp });
     }
     query_object.filters.push({
       name: "population",
@@ -172,70 +183,72 @@ export class Hospitals extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
-            <ModalWrapper handleSubmit={this.handleSubmit} {...modalProps()}>
-              <div className="sort-options">
-                <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
-                <Select onChange={this.handleSortOptions} {...selectProps()}>
-                  <SelectItem value="no-sorting" text="None" />
-                  <SelectItem value="name-asc" text="Name: A to Z" />
-                  <SelectItem value="name-desc" text="Name: Z to A" />
-                  <SelectItem value="pop-asc" text="Size: Low to High" />
-                  <SelectItem value="pop-desc" text="Size: High to Low" />
-                </Select>
-              </div>
-              <br />
-              <hr color="#3d70b2" />
-              <br />
-              <br />
-              <div className="filter-options">
-                <h3 style={{ paddingBottom: "5px" }}>Filter By</h3>
-                <div className="multiselect-filter">
-                  <MultiSelect.Filterable
-                    id="hospital-state"
-                    {...multiSelectProps}
-                    items={states}
-                    placeholder="State"
-                    itemToString={item => (item ? item.name : "")}
-                    onChange={this.handleStates}
-                  />
+            <ModalWrapper handleSubmit={this.handleSubmit} onSecondarySubmit={this.handleSecondarySubmit} {...modalProps()}>
+              <div key={this.state.key}>
+                <div className="sort-options">
+                  <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
+                  <Select onChange={this.handleSortOptions} {...selectProps()}>
+                    <SelectItem value="no-sorting" text="None" />
+                    <SelectItem value="name-asc" text="Name: A to Z" />
+                    <SelectItem value="name-desc" text="Name: Z to A" />
+                    <SelectItem value="pop-asc" text="Size: Low to High" />
+                    <SelectItem value="pop-desc" text="Size: High to Low" />
+                  </Select>
                 </div>
                 <br />
-                <br />
-                <div className="multiselect-filter">
-                  <MultiSelect.Filterable
-                    id="hospital-owner"
-                    {...multiSelectProps}
-                    items={owners}
-                    placeholder="Owner"
-                    itemToString={item => (item ? item.text : "")}
-                    onChange={this.handleOwners}
-                  />
-                </div>
+                <hr color="#3d70b2" />
                 <br />
                 <br />
-                <div className="slider-filter">
-                  <h6>Hospital size</h6>
-                  <div style={{ display: "inline" }}>
-                    <span>min: </span>
-                    <Slider
-                      id="min-slider"
-                      value="0"
-                      onChange={this.handleMinPop}
-                      {...sliderProps()}
+                <div className="filter-options">
+                  <h3 style={{ paddingBottom: "5px" }}>Filter By</h3>
+                  <div className="multiselect-filter">
+                    <MultiSelect.Filterable
+                      id="hospital-state"
+                      {...multiSelectProps}
+                      items={states}
+                      placeholder="State"
+                      itemToString={item => (item ? item.name : "")}
+                      onChange={this.handleStates}
                     />
                   </div>
                   <br />
-                  <div style={{ display: "inline" }}>
-                    <span>max: </span>
-                    <Slider
-                      id="max-slider"
-                      value="500"
-                      onChange={this.handleMaxPop}
-                      {...sliderProps()}
+                  <br />
+                  <div className="multiselect-filter">
+                    <MultiSelect.Filterable
+                      id="hospital-owner"
+                      {...multiSelectProps}
+                      items={owners}
+                      placeholder="Owner"
+                      itemToString={item => (item ? item.text : "")}
+                      onChange={this.handleOwners}
                     />
                   </div>
+                  <br />
+                  <br />
+                  <div className="slider-filter">
+                    <h6>Hospital size</h6>
+                    <div style={{ display: "inline" }}>
+                      <span>min: </span>
+                      <Slider
+                        id="min-slider"
+                        value="0"
+                        onChange={this.handleMinPop}
+                        {...sliderProps()}
+                      />
+                    </div>
+                    <br />
+                    <div style={{ display: "inline" }}>
+                      <span>max: </span>
+                      <Slider
+                        id="max-slider"
+                        value="500"
+                        onChange={this.handleMaxPop}
+                        {...sliderProps()}
+                      />
+                    </div>
+                  </div>
+                  <br />
                 </div>
-                <br />
               </div>
             </ModalWrapper>
           </div>

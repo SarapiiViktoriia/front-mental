@@ -12,7 +12,6 @@ import {
   TwitterVideoEmbed,
   TwitterOnAirButton
 } from "react-twitter-embed";
-import { Timeline } from 'react-twitter-widgets'
 import { Card, Navigation, modalProps, states } from "../custom";
 import {
   Tile,
@@ -67,6 +66,7 @@ export class Charities extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      key: 123,
       page: 1,
       pageSize: 3,
       charities: [],
@@ -129,6 +129,18 @@ export class Charities extends Component {
   handleMaxIncome = evt => {
     this.max_income = evt.value;
   };
+  handleSecondarySubmit = evt => {
+    this.setState({
+      key: ~this.state.key,
+    })
+    this.sort_value = 'no-sorting';
+    this.deductible = 'deductible-default';
+    this.state_filter_list = [];
+    this.min_rating = 80;
+    this.max_rating = 100;
+    this.min_income = 5;
+    this.max_income = 340;
+  }
   handleSubmit = evt => {
     query_object.filters = [];
     console.log(
@@ -205,96 +217,98 @@ export class Charities extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
-            <ModalWrapper handleSubmit={this.handleSubmit} {...modalProps()}>
-              <div className="sort-options">
-                <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
-                <Select onChange={this.handleSortOptions} {...selectProps()}>
-                  <SelectItem value="no-sorting" text="None" />
-                  <SelectItem value="name-asc" text="Name: A to Z" />
-                  <SelectItem value="name-desc" text="Name: Z to A" />
-                  <SelectItem value="rating-asc" text="Rating: Low to High" />
-                  <SelectItem value="rating-desc" text="Rating: High to Low" />
-                  <SelectItem value="income-asc" text="Income: Low to High" />
-                  <SelectItem value="income-desc" text="Income: High to Low" />
-                </Select>
-              </div>
-              <br />
-              <hr color="#3d70b2" />
-              <br />
-              <br />
-              <div className="filter-options">
-                <h3 style={{ paddingBottom: "5px" }}>Filter By</h3>
-                <div className="select-filter">
-                  <Select
-                    onChange={this.handleDeductible}
-                    labelText="Deductible"
-                    inline="true"
-                    defaultValue="deductible-default"
-                  >
-                    <SelectItem value="deductible-default" text="None" />
-                    <SelectItem value="deductible-true" text="Yes" />
-                    <SelectItem value="deductible-false" text="No" />
+            <ModalWrapper handleSubmit={this.handleSubmit} onSecondarySubmit={this.handleSecondarySubmit} {...modalProps()}>
+              <div key={this.state.key}>
+                <div className="sort-options">
+                  <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
+                  <Select onChange={this.handleSortOptions} {...selectProps()}>
+                    <SelectItem value="no-sorting" text="None" />
+                    <SelectItem value="name-asc" text="Name: A to Z" />
+                    <SelectItem value="name-desc" text="Name: Z to A" />
+                    <SelectItem value="rating-asc" text="Rating: Low to High" />
+                    <SelectItem value="rating-desc" text="Rating: High to Low" />
+                    <SelectItem value="income-asc" text="Income: Low to High" />
+                    <SelectItem value="income-desc" text="Income: High to Low" />
                   </Select>
                 </div>
                 <br />
-                <div className="multiselect-filter">
-                  <MultiSelect.Filterable
-                    id="charity-state"
-                    {...multiSelectProps}
-                    items={states}
-                    placeholder="State"
-                    itemToString={item => (item ? item.name : "")}
-                    onChange={this.handleStates}
-                  />
-                </div>
+                <hr color="#3d70b2" />
                 <br />
                 <br />
-                <div className="slider-filter">
-                  <h6>Rating</h6>
-                  <div style={{ display: "inline" }}>
-                    <text>min: </text>
-                    <Slider
-                      id="min-slider"
-                      value="80"
-                      onChange={this.handleMinRating}
-                      {...sliderPropsRating()}
+                <div className="filter-options">
+                  <h3 style={{ paddingBottom: "5px" }}>Filter By</h3>
+                  <div className="select-filter">
+                    <Select
+                      onChange={this.handleDeductible}
+                      labelText="Deductible"
+                      inline="true"
+                      defaultValue="deductible-default"
+                    >
+                      <SelectItem value="deductible-default" text="None" />
+                      <SelectItem value="deductible-true" text="Yes" />
+                      <SelectItem value="deductible-false" text="No" />
+                    </Select>
+                  </div>
+                  <br />
+                  <div className="multiselect-filter">
+                    <MultiSelect.Filterable
+                      id="charity-state"
+                      {...multiSelectProps}
+                      items={states}
+                      placeholder="State"
+                      itemToString={item => (item ? item.name : "")}
+                      onChange={this.handleStates}
                     />
                   </div>
                   <br />
-                  <div style={{ display: "inline" }}>
-                    <text>max: </text>
-                    <Slider
-                      id="max-slider"
-                      value="100"
-                      onChange={this.handleMaxRating}
-                      {...sliderPropsRating()}
-                    />
-                  </div>
-                </div>
-                <br />
-                <div className="slider-filter">
-                  <h6>Income ($100000s)</h6>
-                  <div style={{ display: "inline" }}>
-                    <text>min: </text>
-                    <Slider
-                      id="min-slider"
-                      value="5"
-                      onChange={this.handleMinIncome}
-                      {...sliderPropsIncome()}
-                    />
+                  <br />
+                  <div className="slider-filter">
+                    <h6>Rating</h6>
+                    <div style={{ display: "inline" }}>
+                      <text>min: </text>
+                      <Slider
+                        id="min-slider"
+                        value="80"
+                        onChange={this.handleMinRating}
+                        {...sliderPropsRating()}
+                      />
+                    </div>
+                    <br />
+                    <div style={{ display: "inline" }}>
+                      <text>max: </text>
+                      <Slider
+                        id="max-slider"
+                        value="100"
+                        onChange={this.handleMaxRating}
+                        {...sliderPropsRating()}
+                      />
+                    </div>
                   </div>
                   <br />
-                  <div style={{ display: "inline" }}>
-                    <text>max: </text>
-                    <Slider
-                      id="max-slider"
-                      value="340"
-                      onChange={this.handleMaxIncome}
-                      {...sliderPropsIncome()}
-                    />
+                  <div className="slider-filter">
+                    <h6>Income ($100000s)</h6>
+                    <div style={{ display: "inline" }}>
+                      <text>min: </text>
+                      <Slider
+                        id="min-slider"
+                        value="5"
+                        onChange={this.handleMinIncome}
+                        {...sliderPropsIncome()}
+                      />
+                    </div>
+                    <br />
+                    <div style={{ display: "inline" }}>
+                      <text>max: </text>
+                      <Slider
+                        id="max-slider"
+                        value="340"
+                        onChange={this.handleMaxIncome}
+                        {...sliderPropsIncome()}
+                      />
+                    </div>
                   </div>
+                  <br />
                 </div>
-                <br />
               </div>
             </ModalWrapper>
           </div>
@@ -382,17 +396,11 @@ export class Charity extends Component {
                   height="400"
                 />
               </div>
-              {}
-               <Timeline
-                  dataSource={{
-                    sourceType: 'profile',
-                    screenName:this.state.charity.twitter
-                  }}
-                  options={{
-                    username: 'TwitterDev',
-                    height: '400'
-                  }}
-                />
+              <TwitterTimelineEmbed
+                sourceType="profile"
+                screenName="saurabhnemade"
+                options={{ height: 400 }}
+              />
             </div>
             <div
               style={{
