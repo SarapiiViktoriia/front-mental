@@ -12,6 +12,7 @@ import {
   TwitterVideoEmbed,
   TwitterOnAirButton
 } from "react-twitter-embed";
+import { Timeline } from 'react-twitter-widgets'
 import { Card, Navigation, modalProps, states } from "../custom";
 import {
   Tile,
@@ -396,11 +397,17 @@ export class Charity extends Component {
                   height="400"
                 />
               </div>
-              <TwitterTimelineEmbed
-                sourceType="profile"
-                screenName="saurabhnemade"
-                options={{ height: 400 }}
-              />
+              {}
+               <Timeline
+                  dataSource={{
+                    sourceType: 'profile',
+                    screenName:this.state.charity.twitter
+                  }}
+                  options={{
+                    username: 'TwitterDev',
+                    height: '400'
+                  }}
+                />
             </div>
             <div
               style={{
