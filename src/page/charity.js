@@ -1,17 +1,5 @@
 import "./basic.css";
 import React, { Component } from "react";
-import {
-  TwitterTimelineEmbed,
-  TwitterShareButton,
-  TwitterFollowButton,
-  TwitterHashtagButton,
-  TwitterMentionButton,
-  TwitterTweetEmbed,
-  TwitterMomentShare,
-  TwitterDMButton,
-  TwitterVideoEmbed,
-  TwitterOnAirButton
-} from "react-twitter-embed";
 import { Timeline } from 'react-twitter-widgets'
 import { Card, Navigation, modalProps, states } from "../custom";
 import {
@@ -388,16 +376,26 @@ export class Charity extends Component {
                 justifyContent: "space-around"
               }}
             >
-              <div
-              >
+              <div >
                 {}
                 <img
                   src={this.state.charity.image_url}
                   width="500"
                   height="400"
+                  alt='twitter-img'
                 />
               </div>
               {}
+               <Timeline
+                  dataSource={{
+                    sourceType: 'profile',
+                    screenName:this.state.charity.twitter
+                  }}
+                  options={{
+                    username: 'TwitterDev',
+                    height: '400'
+                  }}
+                />
             </div>
             <div
               style={{
@@ -486,18 +484,6 @@ export class Charity extends Component {
                   }}
                 />
               </FormLabel>
-              <div>
-               <Timeline
-                  dataSource={{
-                    sourceType: 'profile',
-                    screenName:this.state.charity.twitter
-                  }}
-                  options={{
-                    username: 'TwitterDev',
-                    height: '400'
-                  }}
-                />
-              </div>
             </div>
           </Tile>
         </div>
