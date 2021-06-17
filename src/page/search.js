@@ -25,6 +25,8 @@ class SearchPage extends Component{
     .then(data => {
       this.setState({charities: data.objects});
     })
+    query_object.filters = [{'or':[{'name':'city', 'op':'like', 'val':'%'+this.props.value+'%'}, 
+                                   {'name':'name', 'op':'like', 'val':'%'+this.props.value+'%'}]}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
