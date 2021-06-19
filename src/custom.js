@@ -1,6 +1,8 @@
 import './page/basic.css'
 import React, { Component } from 'react';
-import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable, Search } from "carbon-components-react";
+import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, DataTable, Search, MultiSelect } from "carbon-components-react";
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+const { TableContainer, Table, TableHead, TableRow, TableBody, TableCell, TableHeader } = DataTable;
 var Highlight = require('react-highlighter');
 export const modalProps = () => ({
   id: 'input-modal',
@@ -77,7 +79,7 @@ export class Card extends Component {
     return (
       <ClickableTile className="cards" href={this.props.href} style={this.props.style}>
         <div>
-          <img src={this.props.image} width="350" height="370" alt='card-pic'/>
+          <img src={this.props.image} width="350" height="370" />
         </div>
         <br />
         <div>
@@ -140,6 +142,45 @@ export class Card extends Component {
           </center>
         </div>
       </ClickableTile>
+    );
+  }
+}
+export class MyTable extends Component {
+  render() {
+    function onChange() {}
+    return (
+      <DataTable
+        rows={this.props.rows}
+        headers={this.props.headers}
+        render={({ rows, headers }) => (
+          <TableContainer
+            style={{
+              "padding-top": "30px",
+              "padding-left": "47px",
+              "padding-right": "47px"
+            }}
+          >
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {headers.map(header => (
+                    <TableHeader>{header.header}</TableHeader>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {rows.map(row => (
+                  <TableRow key={row.id}>
+                    {row.cells.map(cell => (
+                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      />
     );
   }
 }

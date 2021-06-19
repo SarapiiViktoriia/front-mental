@@ -1,6 +1,7 @@
 import "./App.css";
+import logo from "./logo.svg";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Tile } from 'carbon-components-react';
 import Home from './page/home';
 import About from './page/about';
@@ -8,6 +9,7 @@ import SearchPage from './page/search';
 import { Hospitals, Hospital } from './page/hospital';
 import { Illnesses, Illness } from './page/illness';
 import { Charities, Charity } from './page/charity';
+import { Navigation } from './custom';
 class App extends Component {
   render() {
     const queryString = require("query-string");
