@@ -1,8 +1,6 @@
 import './basic.css'
 import React, { Component } from 'react';
 import { Navigation, Card } from '../custom';
-import { Tile, PaginationV2 } from 'carbon-components-react';
-var Highlight = require('react-highlighter');
 const query_object = {
   filters: []
 };
@@ -22,11 +20,17 @@ class SearchPage extends Component{
     .then(data => {
       this.setState({illnesses: data.objects});
     })
+    query_object.filters = [{'or':[{'name':'city', 'op':'like', 'val':'%'+this.props.value+'%'}, 
+                                  {'name':'state', 'op':'like', 'val':'%'+this.props.value+'%'}]}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
       this.setState({charities: data.objects});
     })
+    query_object.filters = [{'or':[{'name':'city', 'op':'like', 'val':'%'+this.props.value+'%'}, 
+                                   {'name':'name', 'op':'like', 'val':'%'+this.props.value+'%'},
+                                  {'name':'state', 'op':'like', 'val':'%'+this.props.value+'%'},
+                                  {'name':'owner', 'op':'like', 'val':'%'+this.props.value+'%'}]}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
@@ -36,19 +40,19 @@ class SearchPage extends Component{
   render() {
     const { charities, hospitals, illnesses } = this.state;
     let noCharities;
-    if (charities.length == 0) {
+    if (charities.length === 0) {
       noCharities = <h1 style={{ fontSize: '1.0rem' }}>No results in charities.</h1>
     } else {
       noCharities = null;
     }
     let noHospitals;
-    if (hospitals.length == 0) {
+    if (hospitals.length === 0) {
       noHospitals = <h1 style={{ fontSize: '1.0rem' }}>No results in hospitals.</h1>
     } else {
       noHospitals = null;
     }
     let noIllnesses;
-    if (illnesses.length == 0) {
+    if (illnesses.length === 0) {
       noIllnesses = <h1 style={{ fontSize: '1.0rem' }}>No results in illnesses.</h1>
     } else {
       noIllnesses = null;
