@@ -119,14 +119,20 @@ export class Card extends Component {
             {"label2" in this.props && (
               <center>
                 <FormLabel className="title" style={{ fontSize: "0.9rem" }}>
-                  {this.props.label2_heading}: {this.props.label2}
+                {this.props.label2_heading !== undefined
+                    ? this.props.label2_heading + ":"
+                    : ""}{" "}
+                  <Highlight search={this.props.searchValue}>{this.props.label2}</Highlight>
                 </FormLabel>
               </center>
             )}
             {"label3" in this.props && (
               <center>
                 <FormLabel className="title" style={{ fontSize: "0.9rem" }}>
-                  {this.props.label3_heading}: {this.props.label3}
+                {this.props.label3_heading !== undefined
+                    ? this.props.label3_heading + ":"
+                    : ""}{" "}
+                  <Highlight search={this.props.searchValue}>{this.props.label3}</Highlight>
                 </FormLabel>
               </center>
             )}
