@@ -386,16 +386,6 @@ export class Charity extends Component {
                 />
               </div>
               {}
-               <Timeline
-                  dataSource={{
-                    sourceType: 'profile',
-                    screenName:this.state.charity.twitter
-                  }}
-                  options={{
-                    username: 'TwitterDev',
-                    height: '400'
-                  }}
-                />
             </div>
             <div
               style={{
@@ -484,6 +474,18 @@ export class Charity extends Component {
                   }}
                 />
               </FormLabel>
+              <div>
+               <Timeline
+                  dataSource={{
+                    sourceType: 'profile',
+                    screenName:this.state.charity.twitter
+                  }}
+                  options={{
+                    username: 'TwitterDev',
+                    height: '400'
+                  }}
+                />
+              </div>
             </div>
           </Tile>
         </div>
