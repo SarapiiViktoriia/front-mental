@@ -20,7 +20,7 @@ class SearchPage extends Component{
     .then(data => {
       this.setState({illnesses: data.objects});
     })
-    query_object.filters = [{'or':[{'name':'city', 'op':'like', 'val':'%'+this.props.value+'%'}, 
+    query_object.filters = [{'or':[{'name':'name', 'op':'like', 'val':'%'+this.props.value+'%'},
                                   {'name':'state', 'op':'like', 'val':'%'+this.props.value+'%'}]}];
     fetch("http:
     .then(results => results.json())
@@ -38,25 +38,13 @@ class SearchPage extends Component{
     })
   }
   render() {
-    const { charities, hospitals, illnesses } = this.state;
-    let noCharities;
-    if (charities.length === 0) {
-      noCharities = <h1 style={{ fontSize: '1.0rem' }}>No results in charities.</h1>
-    } else {
-      noCharities = null;
-    }
-    let noHospitals;
-    if (hospitals.length === 0) {
-      noHospitals = <h1 style={{ fontSize: '1.0rem' }}>No results in hospitals.</h1>
-    } else {
-      noHospitals = null;
-    }
-    let noIllnesses;
-    if (illnesses.length === 0) {
-      noIllnesses = <h1 style={{ fontSize: '1.0rem' }}>No results in illnesses.</h1>
-    } else {
-      noIllnesses = null;
-    }
+    const { illnesses, hospitals, charities } = this.state;
+    let noCharities = (charities === undefined || charities.length === 0)? 
+        <h1 style={{ fontSize: '1.0rem' }}>No results in charities.</h1>: null;
+    let noHospitals = (hospitals === undefined || hospitals.length === 0)?
+        <h1 style={{ fontSize: '1.0rem' }}>No results in hospitals.</h1>: null;
+    let noIllnesses = (illnesses === undefined || illnesses.length === 0)?
+        <h1 style={{ fontSize: '1.0rem' }}>No results in illnesses.</h1>: null;
     return (
       <div className='search-page'>
         <div className="navbar">

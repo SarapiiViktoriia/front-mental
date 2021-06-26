@@ -2,6 +2,7 @@ import "./App.css";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Tile } from 'carbon-components-react';
+import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
 import Home from './page/home';
 import About from './page/about';
 import SearchPage from './page/search';
@@ -24,10 +25,9 @@ class App extends Component {
           render={props => <Illness {...props} id={parsed.id} />}/>;
     }
     let search_path = <Route path='/search' component={SearchPage} />;
-    if ("value" in parsed){
+    if ("value" in parsed)
       search_path = <Route path="/search" 
         render={props => <SearchPage {...props} value={parsed.value}/>}/>;
-    }
     return (
       <div className="page">
         <div className="page-body">
@@ -41,6 +41,9 @@ class App extends Component {
               {search_path}
             </div>
           </Router>
+        </div>
+        <div>
+          <ScrollUpButton/>
         </div>
         <div className="footer">
           <Tile style={{
