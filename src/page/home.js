@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Card, Navigation } from '../custom';
 import Typing from 'react-typing-animation';
 import Plx from 'react-plx';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import illnessesImage from "../assets/images/Mental-Illness-Prevalence-in-Adults.png";
 import charitiesImage from "../assets/images/charities.png";
 import hospitalsImage from "../assets/images/hospitals.png";
