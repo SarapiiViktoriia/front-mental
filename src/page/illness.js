@@ -294,7 +294,8 @@ export class Illness extends Component {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-around"
+                justifyContent: "space-around",
+                flexWrap: "wrap"
               }}
             >
               <div>
@@ -316,9 +317,11 @@ export class Illness extends Component {
             <br />
             <div
               style={{
+                display: "flex",
                 justifyContent: "flex-start",
                 flexDirection: "column",
-                flexWrap: "wrap"
+                flexWrap: "wrap",
+                marginLeft: "20px"
               }}
             >
               <p>
@@ -327,12 +330,7 @@ export class Illness extends Component {
                 <FormLabel
                   className="title"
                   style={{
-                    position: "relative",
-                    marginLeft: "50px",
-                    marginTop: "40px",
                     fontSize: "1.475rem",
-                    display: "inline-block",
-                    "vertical-align": "top"
                   }}
                 >
                   {this.state.illness.name}
@@ -342,18 +340,16 @@ export class Illness extends Component {
                 <FormLabel
                   className="title"
                   style={{
-                    position: "relative",
-                    marginLeft: "50px",
-                    marginTop: "0px",
-                    fontSize: "1.0rem",
-                    display: "inline-block",
-                    "vertical-align": "top"
+                    fontSize: "1.2rem",
                   }}
                 >
                   Symptoms:
-                  <div
+                  <p
                     dangerouslySetInnerHTML={{
                       __html: this.state.illness.symptoms
+                    }}
+                    style={{
+                      marginTop: "20px"
                     }}
                   />
                   {}
@@ -363,18 +359,16 @@ export class Illness extends Component {
                 <FormLabel
                   className="title"
                   style={{
-                    position: "relative",
-                    marginLeft: "50px",
-                    marginTop: "0px",
-                    fontSize: "1.0rem",
-                    display: "inline-block",
-                    "vertical-align": "top"
+                    fontSize: "1.2rem",
                   }}
                 >
                   Treatments:
-                  <div
+                  <p
                     dangerouslySetInnerHTML={{
                       __html: this.state.illness.treatments
+                    }}
+                    style={{
+                      marginTop: "20px"
                     }}
                   />
                   {}

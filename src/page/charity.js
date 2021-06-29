@@ -373,7 +373,8 @@ export class Charity extends Component {
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-around"
+                flexWrap: "wrap",
+                justifyContent: "space-between"
               }}
             >
               <div >
@@ -385,24 +386,34 @@ export class Charity extends Component {
                   alt='twitter-img'
                 />
               </div>
-              {}
+              <div
+                style={{
+                  marginLeft: "50px",
+                }}
+              >
+                <a 
+                  class="twitter-timeline" 
+                  data-width="350" data-height="500" 
+                  data-theme="light" href="https:
+                >
+                  Tweets by afspnational
+                </a>
+                <script async src="https:
+              </div>
             </div>
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                marginTop: "2%"
+                flexWrap: "wrap",
+                marginTop: "20px",
+                marginLeft: "20px"
               }}
             >
               <FormLabel
                 className="title"
                 style={{
-                  position: "relative",
-                  marginLeft: "50px",
-                  marginTop: "0px",
                   fontSize: "1.475rem",
-                  display: "inline-block",
-                  "vertical-align": "top"
                 }}
               >
                 {this.state.charity.name}
@@ -411,12 +422,7 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  position: "relative",
-                  marginLeft: "50px",
-                  marginTop: "0px",
                   fontSize: "1.0rem",
-                  display: "inline-block",
-                  "vertical-align": "top"
                 }}
               >
                 Tagline: "{this.state.charity.tagLine}"
@@ -425,12 +431,7 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  position: "relative",
-                  marginLeft: "50px",
-                  marginTop: "0px",
                   fontSize: "1.0rem",
-                  display: "inline-block",
-                  "vertical-align": "top"
                 }}
               >
                 Asset Amount: ${this.state.charity.assetAmount}
@@ -439,18 +440,13 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  position: "relative",
-                  marginLeft: "50px",
-                  marginTop: "0px",
                   fontSize: "1.0rem",
-                  display: "inline-block",
-                  "vertical-align": "top"
                 }}
               >
-                URL:
+                <a style={{ color: "#000000" }} >URL: </a>
                 <a
                   href={this.state.charity.website_url}
-                  style={{ color: "#cc0000" }}
+                  style={{ color: "#000000" }}
                 >
                   {this.state.charity.website_url}
                 </a>
@@ -459,33 +455,20 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  position: "relative",
-                  marginLeft: "50px",
-                  marginTop: "0px",
                   fontSize: "1.0rem",
-                  display: "inline-block",
-                  "vertical-align": "top"
                 }}
               >
                 Mission:
-                <div
+                <p
                   dangerouslySetInnerHTML={{
                     __html: this.state.charity.mission
                   }}
+                  style={{
+                    marginTop: "20px",
+                  }}
                 />
               </FormLabel>
-              <div>
-               <Timeline
-                  dataSource={{
-                    sourceType: 'profile',
-                    screenName:this.state.charity.twitter
-                  }}
-                  options={{
-                    username: 'TwitterDev',
-                    height: '400'
-                  }}
-                />
-              </div>
+               {}
             </div>
           </Tile>
         </div>
