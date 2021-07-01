@@ -394,9 +394,9 @@ export class Charity extends Component {
                 <a 
                   class="twitter-timeline" 
                   data-width="350" data-height="500" 
-                  data-theme="light" href="https:
+                  data-theme="light" href={"https:
                 >
-                  Tweets by afspnational
+                  Tweets by {this.state.charity.twitter}
                 </a>
                 <script async src="https:
               </div>
