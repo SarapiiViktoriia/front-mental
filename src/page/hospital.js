@@ -1,7 +1,7 @@
 import "./basic.css";
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import { Card, Navigation, modalProps, states } from "../custom";
+import { Card, TinyCard, Navigation, modalProps, states } from "../custom";
 import {
   Tile,
   FormLabel,
@@ -111,14 +111,14 @@ export class Hospitals extends Component {
   };
   handleSecondarySubmit = evt => {
     this.setState({
-      key: ~this.state.key,
-    })
-    this.sort_value = 'no-sorting';
+      key: ~this.state.key
+    });
+    this.sort_value = "no-sorting";
     this.owner_filter_list = [];
     this.state_filter_list = [];
     this.min_pop = 0;
     this.max_pop = 500;
-  }
+  };
   handleSubmit = evt => {
     query_object.filters = [];
     console.log(
@@ -183,7 +183,11 @@ export class Hospitals extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
-            <ModalWrapper handleSubmit={this.handleSubmit} onSecondarySubmit={this.handleSecondarySubmit} {...modalProps()}>
+            <ModalWrapper
+              handleSubmit={this.handleSubmit}
+              onSecondarySubmit={this.handleSecondarySubmit}
+              {...modalProps()}
+            >
               <div key={this.state.key}>
                 <div className="sort-options">
                   <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
@@ -288,7 +292,9 @@ export class Hospital extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hospital: {}
+      hospital: {},
+      charity: {},
+      illness: {}
     };
   }
   componentWillMount() {
@@ -307,6 +313,22 @@ export class Hospital extends Component {
         </div>
       );
     };
+    const { charity } = fetch(
+      `http:
+    )
+      .then(results => results.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ charity: data });
+      });
+    const { illness } = fetch(
+      `http:
+    )
+      .then(results => results.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ illness: data });
+      });
     return (
       <div>
         <div className="navbar">
@@ -471,6 +493,42 @@ export class Hospital extends Component {
                 />
               </GoogleMapReact>
             </div>
+            <center>
+              <h3>
+                If you are interested in this Hospital, you may also be
+                interested this Illness and Charity
+              </h3>
+              <div className="instance-grid">
+                <TinyCard
+                  title={this.state.illness.name}
+                  image={this.state.illness.image_url}
+                  style={{
+                    marginLeft: "15px",
+                    marginRight: "15px",
+                    marginTop: "30px",
+                    maxWidth: "235px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between"
+                  }}
+                  href={`/illnesses?id=${this.state.illness.id}`}
+                />
+                <TinyCard
+                  title={this.state.charity.name}
+                  image={this.state.charity.image_url}
+                  style={{
+                    marginLeft: "15px",
+                    marginRight: "15px",
+                    marginTop: "30px",
+                    maxWidth: "235px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between"
+                  }}
+                  href={`/charities?id=${this.state.charity.id}`}
+                />
+              </div>
+            </center>
           </Tile>
         </div>
       </div>
