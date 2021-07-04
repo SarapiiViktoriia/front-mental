@@ -431,19 +431,10 @@ export class Charity extends Component {
                   marginLeft: "50px"
                 }}
               >
-<<<<<<< HEAD
                 <a 
                   class="twitter-timeline" 
                   data-width="350" data-height="500" 
                   data-theme="light" href={"https:
-=======
-                <a
-                  class="twitter-timeline"
-                  data-width="350"
-                  data-height="500"
-                  data-theme="light"
-                  href="https:
->>>>>>> dev
                 >
                   Tweets by {this.state.charity.twitter}
                 </a>
