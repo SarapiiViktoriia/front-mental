@@ -1,24 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Card, Navigation } from '../custom';
-import Typing from 'react-typing-animation';
-import Plx from 'react-plx';
 import illnessesImage from "../assets/images/Mental-Illness-Prevalence-in-Adults.png";
 import charitiesImage from "../assets/images/charities.png";
 import hospitalsImage from "../assets/images/hospitals.png";
-const parallaxData = [
-  {
-    start: 0,
-    duration: 100,
-    properties: [
-      {
-        startValue: 1,
-        endValue: 0,
-        property: 'opacity'
-      }
-    ]
-  }
-]
 class Home extends Component {
   render() {
     return (
@@ -27,22 +11,51 @@ class Home extends Component {
         <div className="navbar" style={{position: 'relative', zIndex: '1000'}}>
           <Navigation selected={0}/>
         </div>
-        <div className='pics'>
-          <Plx className='parallax' parallaxData={parallaxData} style={{position: 'relative', zIndex: '1'}}>
-            <Typing speed={10}>
-              <span style={{fontSize:"35px"}}>This page is currently under construction. In the meantime, check out 
-                our <Link to='/illnesses'>illnesses</Link>, <Link to='/hospitals'>hospitals</Link>, 
-                and <Link to='/charities'>charities</Link>.</span>
-            </Typing>
-          </Plx>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            flexWrap: "wrap"
+          }}
+        >
+          <Card
+            title="Illnesses"
+            buttonTitle="Learn More"
+            buttonHref="/illnesses"
+            image={illnessesImage}
+            style={{
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px"
+            }}
+          />
+          <Card
+            title="Charities"
+            buttonTitle="Learn More"
+            buttonHref="/charities"
+            image={charitiesImage}
+            style={{
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px"
+            }}
+          />
+          <Card
+            title="Hospitals"
+            buttonTitle="Learn More"
+            buttonHref="/hospitals"
+            image={hospitalsImage}
+            style={{
+              marginLeft: "15px",
+              marginRight: "15px",
+              marginTop: "40px",
+              maxWidth: "385px"
+            }}
+          />
         </div>
-        <div className="illness-image">
-          <img src={illnessesImage} alt="illness image" width='100%' style={{position: 'relative', zIndex: 'auto'}}/>
-        </div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
       </div>
     );
   }
