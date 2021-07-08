@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Card, Navigation } from "../custom";
 import { Tile } from "carbon-components-react";
-import Caleb from "../img/team/Caleb.jpg";
-import Shreyas from "../img/team/Shreyas.jpg";
-import Taher from "../img/team/Taher.jpg";
-import Weihan from "../img/team/Weihan.jpg";
-import Jason from "../img/team/Jason.jpg";
+import Caleb from "../assets/team/Caleb.jpg";
+import Shreyas from "../assets/team/Shreyas.jpg";
+import Taher from "../assets/team/Taher.jpg";
+import Weihan from "../assets/team/Weihan.jpg";
+import Jason from "../assets/team/Jason.jpg";
 class About extends Component {
   constructor(props) {
     super(props);
