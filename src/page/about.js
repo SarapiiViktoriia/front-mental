@@ -295,7 +295,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.shreyas_i1 + this.state.shreyas_i2}
             label4_heading="Unit Tests"
-            label4={"0"}
+            label4={"2"}
             image={Shreyas}
             style={{
               marginLeft: "15px",
@@ -342,7 +342,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.weihan_i1 + this.state.weihan_i2}
             label4_heading="Unit Tests"
-            label4={"0"}
+            label4={"2"}
             image={Weihan}
             style={{
               marginLeft: "15px",
@@ -393,7 +393,7 @@ class About extends Component {
               and <a href="https:
               = {this.state.total_i1 + this.state.total_i2}.<br />
               <br />
-              Total Unit Tests: 33.
+              Total Unit Tests: 37.
             </p>
           </div>
           <br />
