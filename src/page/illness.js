@@ -440,3 +440,4 @@ export class Illness extends Component {
     event.target.pauseVideo();
   }
 }
+export default Illness;

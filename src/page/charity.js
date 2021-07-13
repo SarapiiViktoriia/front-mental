@@ -556,3 +556,4 @@ export class Charity extends Component {
     );
   }
 }
+export default Charity;
