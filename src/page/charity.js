@@ -514,12 +514,17 @@ export class Charity extends Component {
               </FormLabel>
               {}
             </div>
-            <center>
+            <center style={{ marginTop: '30px' }}>
               <h3>
                 If you are interested in this Charity, you may also be
-                interested this Hospital and Illness
+                interested in the following
               </h3>
-              <div className="instance-grid">
+              <div 
+                className="instance-grid"
+                style={{
+                  marginBottom: '30px'
+                }}
+              >
                 <TinyCard
                   title={this.state.hospital.name}
                   image={this.state.hospital.image_url}

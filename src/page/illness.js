@@ -398,9 +398,14 @@ export class Illness extends Component {
             <center>
               <h3>
                 If you are interested in this Illness, you may also be
-                interested this Hospital and Charity
+                interested in the following
               </h3>
-              <div className="instance-grid">
+              <div 
+                className="instance-grid"
+                style={{
+                  marginBottom: '30px'
+                }}
+              >
                 <TinyCard
                   title={this.state.hospital.name}
                   image={this.state.hospital.image_url}

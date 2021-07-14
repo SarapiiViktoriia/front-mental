@@ -493,12 +493,17 @@ export class Hospital extends Component {
                 />
               </GoogleMapReact>
             </div>
-            <center>
+            <center style={{ marginTop: '30px' }}>
               <h3>
                 If you are interested in this Hospital, you may also be
-                interested this Illness and Charity
+                interested in the following
               </h3>
-              <div className="instance-grid">
+              <div 
+                className="instance-grid"
+                style={{
+                  marginBottom: '30px'
+                }}
+              >
                 <TinyCard
                   title={this.state.illness.name}
                   image={this.state.illness.image_url}
