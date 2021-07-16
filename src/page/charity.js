@@ -417,13 +417,14 @@ export class Charity extends Component {
                 justifyContent: "space-between"
               }}
             >
-              <div >
+              <div 
+              >
                 {}
                 <img
                   src={this.state.charity.image_url}
                   width="500"
                   height="400"
-                  alt='twitter-img'
+                  alt="twitter-img"
                 />
               </div>
               <div
@@ -431,10 +432,14 @@ export class Charity extends Component {
                   marginLeft: "50px"
                 }}
               >
-                <a 
-                  class="twitter-timeline" 
-                  data-width="350" data-height="500" 
-                  data-theme="light" href={"https:
+                <a
+                  class="twitter-timeline"
+                  data-width="350"
+                  data-height="500"
+                  data-theme="light"
+                  href={
+                    "https:
+                  }
                 >
                   Tweets by {this.state.charity.twitter}
                 </a>
@@ -514,15 +519,15 @@ export class Charity extends Component {
               </FormLabel>
               {}
             </div>
-            <center style={{ marginTop: '30px' }}>
+            <center style={{ marginTop: "30px" }}>
               <h3>
                 If you are interested in this Charity, you may also be
                 interested in the following
               </h3>
-              <div 
+              <div
                 className="instance-grid"
                 style={{
-                  marginBottom: '30px'
+                  marginBottom: "30px"
                 }}
               >
                 <TinyCard
