@@ -13,34 +13,10 @@ import {
   TwitterOnAirButton
 } from "react-twitter-embed";
 import { Timeline } from "react-twitter-widgets";
-import { Card, TinyCard, Navigation, modalProps, states } from "../custom";
-import {
-  Tile,
-  FormLabel,
-  PaginationV2,
-  ModalWrapper,
-  MultiSelect,
-  Slider,
-  Select,
-  SelectItem
-} from "carbon-components-react";
-const multiSelectProps = () => ({
-  filterable: true,
-  disabled: false,
-  light: false,
-  useTitleInItem: false,
-  label: "",
-  invalid: false,
-  invalidText: "Invalid selection"
-});
-const selectProps = () => ({
-  labelText: "Sort By",
-  hideLabel: true,
-  light: false,
-  inline: false,
-  helperText: "",
-  defaultValue: "no-sorting"
-});
+import Plx from 'react-plx';
+import { Card, TinyCard, Navigation } from "../custom";
+import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../assets/static';
+import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
 const sliderPropsIncome = () => ({
   light: false,
   hideTextInput: false,
@@ -200,7 +176,7 @@ export class Charities extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={3} />
+          <Navigation selected={2} />
         </div>
         <div className="page-title">
           <h1>Charities</h1>
@@ -210,13 +186,14 @@ export class Charities extends Component {
         </div>
         <br />
         <Tile className="filter_pagination-bar">
-          <PaginationV2
-            className="pagination"
-            totalItems={this.state.charity_count}
-            pageSize={3}
-            pageSizes={[3, 6, 9, 10]}
-            onChange={this.handlePageChange}
-          />
+          <Plx className="pagination" parallaxData={pagination_parallax}>
+            <PaginationV2
+              totalItems={this.state.charity_count}
+              pageSize={3}
+              pageSizes={[3, 6, 9, 10]}
+              onChange={this.handlePageChange}
+            />
+          </Plx>
           <div className="filter-button">
             <ModalWrapper
               handleSubmit={this.handleSubmit}
@@ -393,7 +370,7 @@ export class Charity extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={3} />
+          <Navigation selected={2} />
         </div>
         <div>
           <Tile
@@ -417,14 +394,13 @@ export class Charity extends Component {
                 justifyContent: "space-between"
               }}
             >
-              <div 
-              >
+              <div >
                 {}
                 <img
                   src={this.state.charity.image_url}
                   width="500"
                   height="400"
-                  alt="twitter-img"
+                  alt='twitter-img'
                 />
               </div>
               <div
@@ -432,14 +408,11 @@ export class Charity extends Component {
                   marginLeft: "50px"
                 }}
               >
-                <a
-                  class="twitter-timeline"
-                  data-width="350"
-                  data-height="500"
-                  data-theme="light"
-                  href={
-                    "https:
-                  }
+                <a 
+                  class="twitter-timeline" 
+                  data-width="350" data-height="500" 
+                  data-theme="light" href={"https:
+                }
                 >
                   Tweets by {this.state.charity.twitter}
                 </a>
@@ -519,17 +492,12 @@ export class Charity extends Component {
               </FormLabel>
               {}
             </div>
-            <center style={{ marginTop: "30px" }}>
+            <center>
               <h3>
                 If you are interested in this Charity, you may also be
                 interested in the following
               </h3>
-              <div
-                className="instance-grid"
-                style={{
-                  marginBottom: "30px"
-                }}
-              >
+              <div className="instance-grid" style={{marginBottom: '30px'}}>
                 <TinyCard
                   title={this.state.hospital.name}
                   image={this.state.hospital.image_url}
@@ -566,4 +534,3 @@ export class Charity extends Component {
     );
   }
 }
-export default Charity;

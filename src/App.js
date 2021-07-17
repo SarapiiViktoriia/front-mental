@@ -2,13 +2,13 @@ import "./App.css";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Tile } from 'carbon-components-react';
-import { CircleArrow as ScrollUpButton } from 'react-scroll-up-button';
-import Home from './page/home';
-import About from './page/about';
-import SearchPage from './page/search';
-import { Hospitals, Hospital } from './page/hospital';
-import { Illnesses, Illness } from './page/illness';
-import { Charities, Charity } from './page/charity';
+import { TinyButton as ScrollUpButton } from 'react-scroll-up-button';
+import Home from './pages/home';
+import About from './pages/about';
+import SearchPage from './pages/search';
+import { Hospitals, Hospital } from './pages/hospital';
+import { Illnesses, Illness } from './pages/illness';
+import { Charities, Charity } from './pages/charity';
 class App extends Component {
   render() {
     const queryString = require("query-string");
@@ -43,7 +43,7 @@ class App extends Component {
           </Router>
         </div>
         <div>
-          <ScrollUpButton/>
+          <ScrollUpButton style={{zIndex: '2'}}/>
         </div>
         <div className="footer">
           <Tile style={{

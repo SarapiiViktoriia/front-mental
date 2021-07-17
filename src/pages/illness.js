@@ -1,7 +1,9 @@
 import "./basic.css";
 import React, { Component } from "react";
 import YouTube from "react-youtube";
-import { Card, TinyCard, Navigation, modalProps } from "../custom";
+import Plx from 'react-plx';
+import { Card, TinyCard, Navigation } from "../custom";
+import { modalProps, pagination_parallax } from '../assets/static';
 import {
   Tile,
   FormLabel,
@@ -70,24 +72,12 @@ export class Illnesses extends Component {
       illnesses_slice: this.state.illnesses.slice(slice1, slice2)
     });
   };
-  handleSortOptions = evt => {
-    this.sort_value = evt.target.value;
-  };
-  handleCurable = evt => {
-    this.curable = evt.target.value;
-  };
-  handleGenetic = evt => {
-    this.genetic = evt.target.value;
-  };
-  handleChronic = evt => {
-    this.chronic = evt.target.value;
-  };
-  handleMinAge = evt => {
-    this.min_age = evt.value;
-  };
-  handleMaxAge = evt => {
-    this.max_age = evt.value;
-  };
+  handleSortOptions = evt => { this.sort_value = evt.target.value; };
+  handleCurable = evt => { this.curable = evt.target.value; };
+  handleGenetic = evt => { this.genetic = evt.target.value; };
+  handleChronic = evt => { this.chronic = evt.target.value; };
+  handleMinAge = evt => { this.min_age = evt.value; };
+  handleMaxAge = evt => { this.max_age = evt.value; };
   handleSecondarySubmit = evt => {
     this.setState({
       key: ~this.state.key
@@ -144,7 +134,7 @@ export class Illnesses extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={1} />
+          <Navigation selected={0} />
         </div>
         <div className="page-title">
           <h1>Illnesses</h1>
@@ -154,13 +144,14 @@ export class Illnesses extends Component {
         </div>
         <br />
         <Tile className="filter_pagination-bar">
-          <PaginationV2
-            className="pagination"
-            totalItems={this.state.illness_count}
-            pageSize={3}
-            pageSizes={[3, 6, 9, 10]}
-            onChange={this.handlePageChange}
-          />
+          <Plx className="pagination" parallaxData={pagination_parallax}>
+            <PaginationV2
+              totalItems={this.state.illness_count}
+              pageSize={3}
+              pageSizes={[3, 6, 9, 10]}
+              onChange={this.handlePageChange}
+            />
+          </Plx>
           <div className="filter-button">
             <ModalWrapper handleSubmit={this.handleSubmit} onSecondarySubmit={this.handleSecondarySubmit} {...modalProps()}>
               <div key={this.state.key}>
@@ -292,7 +283,7 @@ export class Illness extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={1} />
+          <Navigation selected={0} />
         </div>
         <div>
           <Tile
@@ -400,12 +391,7 @@ export class Illness extends Component {
                 If you are interested in this Illness, you may also be
                 interested in the following
               </h3>
-              <div 
-                className="instance-grid"
-                style={{
-                  marginBottom: '30px'
-                }}
-              >
+              <div className="instance-grid" style={{marginBottom: '30px'}}>
                 <TinyCard
                   title={this.state.hospital.name}
                   image={this.state.hospital.image_url}
@@ -445,4 +431,3 @@ export class Illness extends Component {
     event.target.pauseVideo();
   }
 }
-export default Illness;
