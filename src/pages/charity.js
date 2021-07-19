@@ -394,13 +394,14 @@ export class Charity extends Component {
                 justifyContent: "space-between"
               }}
             >
-              <div >
+              <div 
+              >
                 {}
                 <img
                   src={this.state.charity.image_url}
                   width="500"
                   height="400"
-                  alt='twitter-img'
+                  alt="twitter-img"
                 />
               </div>
               <div
@@ -492,7 +493,7 @@ export class Charity extends Component {
               </FormLabel>
               {}
             </div>
-            <center>
+            <center style={{ marginTop: "30px" }}>
               <h3>
                 If you are interested in this Charity, you may also be
                 interested in the following
@@ -534,3 +535,4 @@ export class Charity extends Component {
     );
   }
 }
+export default Charity;

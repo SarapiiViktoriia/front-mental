@@ -460,7 +460,7 @@ export class Hospital extends Component {
                 />
               </GoogleMapReact>
             </div>
-            <center>
+            <center style={{ marginTop: '30px' }}>
               <h3>
                 If you are interested in this Hospital, you may also be
                 interested in the following
@@ -502,3 +502,4 @@ export class Hospital extends Component {
     );
   }
 }
+export default Hospital;
