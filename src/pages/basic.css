@@ -59,7 +59,7 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
   display: inline-flex;
   width: 100%;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-around;
   flex-wrap: wrap;
   background-color: inherit;
   vertical-align: middle;
