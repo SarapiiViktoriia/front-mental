@@ -20,7 +20,7 @@ class Home extends Component {
         </div>
         <div className='section bg-1'>
           <Tile className='section-text'>
-            <h1 style={{fontWeight: 'bold'}}>Discover your <Link to='/illnesses'>afflictions</Link></h1>
+            <h1 style={{fontWeight: 'bold'}}>Discover common <Link to='/illnesses'>afflictions</Link></h1>
           </Tile> 
         </div>
         <div className='section bg-2'>

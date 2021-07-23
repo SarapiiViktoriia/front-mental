@@ -295,6 +295,7 @@ export class Illness extends Component {
               marginBottom: "38px",
               display: "flex",
               flexDirection: "column",
+              alignItems: "center",
               flexWrap: "wrap",
               opacity: ".8"
             }}
