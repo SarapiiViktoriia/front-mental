@@ -39,26 +39,11 @@ class SearchPage extends Component{
   }
   render() {
     const { illnesses, hospitals, charities } = this.state;
-    let noCharities = (charities === undefined || charities.length === 0)? 
-        <h1 style={{ fontSize: '1.0rem' }}>No results in charities.</h1>: null;
-    let noHospitals = (hospitals === undefined || hospitals.length === 0)?
-        <h1 style={{ fontSize: '1.0rem' }}>No results in hospitals.</h1>: null;
-    let noIllnesses = (illnesses === undefined || illnesses.length === 0)?
-        <h1 style={{ fontSize: '1.0rem' }}>No results in illnesses.</h1>: null;
-    return (
-      <div className='search-page'>
-        <div className="navbar">
-          <Navigation selected={-1}/>
-        </div>
-        <div className="page-title">
-            <h1>Showing search results for "{this.props.value}"</h1>
-        </div>
-        <br/>
+    let noCharities = (charities === undefined || charities.length === 0)? null:
+    (
+      <div className='element-render'>
         <div className="page-title">
           <h1 style={{ fontSize: '1.5rem' }}>Charities</h1>
-        </div>
-        <div className="page-title" style={{ marginTop: '10px' }}>
-          {noCharities}
         </div>
         <div className="instance-grid">
           {}
@@ -88,11 +73,13 @@ class SearchPage extends Component{
             />
           ))}
         </div>
+      </div>
+    ); 
+    let noHospitals = (hospitals === undefined || hospitals.length === 0)? null:
+    (
+      <div className='element-render'>
         <div className="page-title">
           <h1 style={{ fontSize: '1.5rem' }}>Hospitals</h1>
-        </div>
-        <div className="page-title" style={{ marginTop: '10px' }}>
-          {noHospitals}
         </div>
         <div className="instance-grid">
           {}
@@ -122,11 +109,13 @@ class SearchPage extends Component{
             />
           ))}
         </div>
+      </div>
+    );
+    let noIllnesses = (illnesses === undefined || illnesses.length === 0)? null:
+    (
+      <div className='element-render'>
         <div className="page-title">
           <h1 style={{ fontSize: '1.5rem' }}>Illnesses</h1>
-        </div>
-        <div className="page-title" style={{ marginTop: '10px' }}>
-          {noIllnesses}
         </div>
         <div className="instance-grid">
           {}
@@ -156,6 +145,19 @@ class SearchPage extends Component{
             />
           ))}
         </div>
+      </div>
+    );
+    return (
+      <div className='search-page'>
+        <div className="navbar">
+          <Navigation selected={-1}/>
+        </div>
+        <div className="page-title">
+            <h1>Showing search results for "{this.props.value}"</h1>
+        </div><br/>
+        {noCharities}
+        {noHospitals}
+        {noIllnesses}
       </div>
     );
   }

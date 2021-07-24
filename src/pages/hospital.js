@@ -112,16 +112,8 @@ export class Hospitals extends Component {
         temp.push(this.owner_filter_list[i].text);
       query_object.filters.push({ name: "owner", op: "in", val: temp });
     }
-    query_object.filters.push({
-      name: "population",
-      op: "ge",
-      val: this.min_pop
-    });
-    query_object.filters.push({
-      name: "population",
-      op: "le",
-      val: this.max_pop
-    });
+    query_object.filters.push({ name: "population", op: "ge", val: this.min_pop });
+    query_object.filters.push({ name: "population", op: "le", val: this.max_pop });
     console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;
@@ -502,4 +494,3 @@ export class Hospital extends Component {
     );
   }
 }
-export default Hospital;

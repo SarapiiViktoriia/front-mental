@@ -143,30 +143,15 @@ export class Charities extends Component {
         temp.push(this.state_filter_list[i].abbreviation);
       query_object.filters.push({ name: "state", op: "in", val: temp });
     }
-    if (this.deductible === "deductible-true")
+    if (this.deductible === "deductible-default") query_object.filters = [];
+    else if (this.deductible === "deductible-true")
       query_object.filters.push({ name: "deductible", op: "eq", val: "Yes" });
     else if (this.deductible === "deductible-false")
       query_object.filters.push({ name: "deductible", op: "eq", val: "No" });
-    query_object.filters.push({
-      name: "rating",
-      op: "ge",
-      val: this.min_rating
-    });
-    query_object.filters.push({
-      name: "rating",
-      op: "le",
-      val: this.max_rating
-    });
-    query_object.filters.push({
-      name: "incomeAmount",
-      op: "ge",
-      val: this.min_income * 100000
-    });
-    query_object.filters.push({
-      name: "incomeAmount",
-      op: "le",
-      val: this.max_income * 100000
-    });
+    query_object.filters.push({ name: "rating", op: "ge", val: this.min_rating });
+    query_object.filters.push({ name: "rating", op: "le", val: this.max_rating });
+    query_object.filters.push({ name: "incomeAmount", op: "ge", val: this.min_income * 100000 });
+    query_object.filters.push({ name: "incomeAmount", op: "le", val: this.max_income * 100000 });
     console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;

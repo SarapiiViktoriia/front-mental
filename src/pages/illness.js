@@ -103,28 +103,23 @@ export class Illnesses extends Component {
       query_object.order_by = [{ field: "average_age", direction: "asc" }];
     else if (this.sort_value === "age-desc")
       query_object.order_by = [{ field: "average_age", direction: "desc" }];
-    if (this.curable === "curable-true")
+    if (this.curable === "curable-default") query_object.filters = [];
+    else if (this.curable === "curable-true")
       query_object.filters.push({ name: "curable", op: "eq", val: "Yes" });
     else if (this.curable === "curable-false")
       query_object.filters.push({ name: "curable", op: "eq", val: "No" });
-    if (this.chronic === "chronic-true")
+    if (this.chronic === "chronic-default") query_object.filters = [];
+    else if (this.chronic === "chronic-true")
       query_object.filters.push({ name: "chronic", op: "eq", val: "Yes" });
     else if (this.chronic === "chronic-false")
       query_object.filters.push({ name: "chronic", op: "eq", val: "No" });
-    if (this.genetic === "genetic-true")
+    if (this.genetic === "genetic-default") query_object.filters = [];
+    else if (this.genetic === "genetic-true")
       query_object.filters.push({ name: "genetic", op: "eq", val: "Yes" });
     else if (this.genetic === "genetic-false")
       query_object.filters.push({ name: "genetic", op: "eq", val: "No" });
-    query_object.filters.push({
-      name: "average_age",
-      op: "ge",
-      val: this.min_age
-    });
-    query_object.filters.push({
-      name: "average_age",
-      op: "le",
-      val: this.max_age
-    });
+    query_object.filters.push({ name: "average_age", op: "ge", val: this.min_age });
+    query_object.filters.push({ name: "average_age", op: "le", val: this.max_age });
     console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;
