@@ -1,6 +1,7 @@
 import './basic.css'
 import React, { Component } from 'react';
 import { Navigation, Card } from '../custom';
+import Highlight from 'react-highlighter';
 const query_object = {
   filters: []
 };
@@ -14,23 +15,36 @@ class SearchPage extends Component{
     };
   }
   componentDidMount() {
-    query_object.filters = [{'name':'name', 'op':'like', 'val':'%'+this.props.value+'%'}];
+    var queries = this.props.value.replace(/ *, */g, ',').split(",");
+    var ors = [];
+    for (let i=0; i<queries.length; i++){
+      ors.push({'name':'name', 'op':'like', 'val':'%'+queries[i]+'%'});
+    }
+    query_object.filters = [{'or': ors}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
       this.setState({illnesses: data.objects});
     })
-    query_object.filters = [{'or':[{'name':'name', 'op':'like', 'val':'%'+this.props.value+'%'},
-                                  {'name':'state', 'op':'like', 'val':'%'+this.props.value+'%'}]}];
+    ors = [];
+    for (let i=0; i<queries.length; i++){
+      ors.push({'name':'name', 'op':'like', 'val':'%'+queries[i]+'%'});
+      ors.push({'name':'state', 'op':'like', 'val':'%'+queries[i]+'%'});
+    }
+    query_object.filters = [{'or': ors}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
       this.setState({charities: data.objects});
     })
-    query_object.filters = [{'or':[{'name':'city', 'op':'like', 'val':'%'+this.props.value+'%'}, 
-                                   {'name':'name', 'op':'like', 'val':'%'+this.props.value+'%'},
-                                  {'name':'state', 'op':'like', 'val':'%'+this.props.value+'%'},
-                                  {'name':'owner', 'op':'like', 'val':'%'+this.props.value+'%'}]}];
+    ors = [];
+    for (let i=0; i<queries.length; i++){
+      ors.push({'name':'name', 'op':'like', 'val':'%'+queries[i]+'%'});
+      ors.push({'name':'state', 'op':'like', 'val':'%'+queries[i]+'%'});
+      ors.push({'name':'owner', 'op':'like', 'val':'%'+queries[i]+'%'});
+      ors.push({'name':'city', 'op':'like', 'val':'%'+queries[i]+'%'});
+    }
+    query_object.filters = [{'or': ors}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
@@ -60,7 +74,7 @@ class SearchPage extends Component{
                 flexDirection: "column",
                 justifyContent: "space-between"
               }}
-              searchValue={this.props.value}
+              searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
               label1_heading="Rating"
               label1={String(charity.rating)}
               label2_heading="State"
@@ -96,7 +110,7 @@ class SearchPage extends Component{
                 flexDirection: "column",
                 justifyContent: "space-between"
               }}
-              searchValue={this.props.value}
+              searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
               label1_heading="City"
               label1={hospital.city}
               label2_heading="State"
@@ -132,7 +146,7 @@ class SearchPage extends Component{
                 flexDirection: "column",
                 justifyContent: "space-between"
               }}
-              searchValue={this.props.value}
+              searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
               label1_heading="Curable"
               label1={illness.curable}
               label2_heading="Chronic"
@@ -153,7 +167,7 @@ class SearchPage extends Component{
           <Navigation selected={-1}/>
         </div>
         <div className="page-title">
-            <h1>Showing search results for "{this.props.value}"</h1>
+            <h1>Showing search results for "{(this.props.value.replace(/ *, */g, ',').replace(/,/g, ", "))}"</h1>
         </div><br/>
         {noCharities}
         {noHospitals}

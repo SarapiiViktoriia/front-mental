@@ -494,3 +494,4 @@ export class Hospital extends Component {
     );
   }
 }
+export default Hospital;
