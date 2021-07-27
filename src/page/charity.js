@@ -12,11 +12,35 @@ import {
   TwitterVideoEmbed,
   TwitterOnAirButton
 } from "react-twitter-embed";
-import { Timeline } from "react-twitter-widgets";
-import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../custom";
-import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../assets/static';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
+import { Timeline } from 'react-twitter-widgets'
+import { Card, Navigation, modalProps, states } from "../custom";
+import {
+  Tile,
+  FormLabel,
+  PaginationV2,
+  ModalWrapper,
+  MultiSelect,
+  Slider,
+  Select,
+  SelectItem
+} from "carbon-components-react";
+const multiSelectProps = () => ({
+  filterable: true,
+  disabled: false,
+  light: false,
+  useTitleInItem: false,
+  label: "",
+  invalid: false,
+  invalidText: "Invalid selection"
+});
+const selectProps = () => ({
+  labelText: "Sort By",
+  hideLabel: true,
+  light: false,
+  inline: false,
+  helperText: "",
+  defaultValue: "no-sorting"
+});
 const sliderPropsIncome = () => ({
   light: false,
   hideTextInput: false,
@@ -108,16 +132,16 @@ export class Charities extends Component {
   };
   handleSecondarySubmit = evt => {
     this.setState({
-      key: ~this.state.key
-    });
-    this.sort_value = "no-sorting";
-    this.deductible = "deductible-default";
+      key: ~this.state.key,
+    })
+    this.sort_value = 'no-sorting';
+    this.deductible = 'deductible-default';
     this.state_filter_list = [];
     this.min_rating = 80;
     this.max_rating = 100;
     this.min_income = 5;
     this.max_income = 340;
-  };
+  }
   handleSubmit = evt => {
     query_object.filters = [];
     console.log(
@@ -143,15 +167,30 @@ export class Charities extends Component {
         temp.push(this.state_filter_list[i].abbreviation);
       query_object.filters.push({ name: "state", op: "in", val: temp });
     }
-    if (this.deductible === "deductible-default") query_object.filters = [];
-    else if (this.deductible === "deductible-true")
+    if (this.deductible === "deductible-true")
       query_object.filters.push({ name: "deductible", op: "eq", val: "Yes" });
     else if (this.deductible === "deductible-false")
       query_object.filters.push({ name: "deductible", op: "eq", val: "No" });
-    query_object.filters.push({ name: "rating", op: "ge", val: this.min_rating });
-    query_object.filters.push({ name: "rating", op: "le", val: this.max_rating });
-    query_object.filters.push({ name: "incomeAmount", op: "ge", val: this.min_income * 100000 });
-    query_object.filters.push({ name: "incomeAmount", op: "le", val: this.max_income * 100000 });
+    query_object.filters.push({
+      name: "rating",
+      op: "ge",
+      val: this.min_rating
+    });
+    query_object.filters.push({
+      name: "rating",
+      op: "le",
+      val: this.max_rating
+    });
+    query_object.filters.push({
+      name: "incomeAmount",
+      op: "ge",
+      val: this.min_income * 100000
+    });
+    query_object.filters.push({
+      name: "incomeAmount",
+      op: "le",
+      val: this.max_income * 100000
+    });
     console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;
@@ -161,7 +200,7 @@ export class Charities extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={2} />
+          <Navigation selected={3} />
         </div>
         <div className="page-title">
           <h1>Charities</h1>
@@ -171,20 +210,15 @@ export class Charities extends Component {
         </div>
         <br />
         <Tile className="filter_pagination-bar">
-          <Plx className="pagination" parallaxData={pagination_parallax}>
-            <PaginationV2
-              totalItems={this.state.charity_count}
-              pageSize={3}
-              pageSizes={[3, 6, 9, 10]}
-              onChange={this.handlePageChange}
-            />
-          </Plx>
+          <PaginationV2
+            className="pagination"
+            totalItems={this.state.charity_count}
+            pageSize={3}
+            pageSizes={[3, 6, 9, 10]}
+            onChange={this.handlePageChange}
+          />
           <div className="filter-button">
-            <ModalWrapper
-              handleSubmit={this.handleSubmit}
-              onSecondarySubmit={this.handleSecondarySubmit}
-              {...modalProps()}
-            >
+            <ModalWrapper handleSubmit={this.handleSubmit} onSecondarySubmit={this.handleSecondarySubmit} {...modalProps()}>
               <div key={this.state.key}>
                 <div className="sort-options">
                   <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
@@ -193,15 +227,9 @@ export class Charities extends Component {
                     <SelectItem value="name-asc" text="Name: A to Z" />
                     <SelectItem value="name-desc" text="Name: Z to A" />
                     <SelectItem value="rating-asc" text="Rating: Low to High" />
-                    <SelectItem
-                      value="rating-desc"
-                      text="Rating: High to Low"
-                    />
+                    <SelectItem value="rating-desc" text="Rating: High to Low" />
                     <SelectItem value="income-asc" text="Income: Low to High" />
-                    <SelectItem
-                      value="income-desc"
-                      text="Income: High to Low"
-                    />
+                    <SelectItem value="income-desc" text="Income: High to Low" />
                   </Select>
                 </div>
                 <br />
@@ -322,8 +350,6 @@ export class Charity extends Component {
     super(props);
     this.state = {
       id: this.props.id,
-      hospital: {},
-      illness: {},
       charity: {}
     };
   }
@@ -336,26 +362,10 @@ export class Charity extends Component {
       });
   }
   render() {
-    const { illness } = fetch(
-      `http:
-    )
-      .then(results => results.json())
-      .then(data => {
-        console.log(data);
-        this.setState({ illness: data });
-      });
-    const { hospital } = fetch(
-      `http:
-    )
-      .then(results => results.json())
-      .then(data => {
-        console.log(data);
-        this.setState({ hospital: data });
-      });
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={2} />
+          <Navigation selected={3} />
         </div>
         <div>
           <Tile
@@ -379,34 +389,26 @@ export class Charity extends Component {
                 justifyContent: "space-between"
               }}
             >
-              <div 
-              >
-                {}
+              <div>
                 <img
                   src={this.state.charity.image_url}
                   width="500"
-                  height="400"
-                  alt="twitter-img"
+                  height="500"
                 />
               </div>
               <div
                 style={{
-                  marginLeft: "50px"
+                  marginLeft: "50px",
                 }}
               >
                 <a 
                   class="twitter-timeline" 
                   data-width="350" data-height="500" 
-                  data-theme="light" href={"https:
-                }
+                  data-theme="light" href="https:
                 >
-                  Tweets by {this.state.charity.twitter}
+                  Tweets by afspnational
                 </a>
-                <script
-                  async
-                  src="https:
-                  charset="utf-8"
-                />
+                <script async src="https:
               </div>
             </div>
             <div
@@ -421,7 +423,7 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  fontSize: "1.475rem"
+                  fontSize: "1.475rem",
                 }}
               >
                 {this.state.charity.name}
@@ -430,7 +432,7 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  fontSize: "1.0rem"
+                  fontSize: "1.0rem",
                 }}
               >
                 Tagline: "{this.state.charity.tagLine}"
@@ -439,7 +441,7 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  fontSize: "1.0rem"
+                  fontSize: "1.0rem",
                 }}
               >
                 Asset Amount: ${this.state.charity.assetAmount}
@@ -448,10 +450,10 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  fontSize: "1.0rem"
+                  fontSize: "1.0rem",
                 }}
               >
-                <a style={{ color: "#000000" }}>URL: </a>
+                <a style={{ color: "#000000" }} >URL: </a>
                 <a
                   href={this.state.charity.website_url}
                   style={{ color: "#000000" }}
@@ -463,7 +465,7 @@ export class Charity extends Component {
               <FormLabel
                 className="title"
                 style={{
-                  fontSize: "1.0rem"
+                  fontSize: "1.0rem",
                 }}
               >
                 Mission:
@@ -472,52 +474,15 @@ export class Charity extends Component {
                     __html: this.state.charity.mission
                   }}
                   style={{
-                    marginTop: "20px"
+                    marginTop: "20px",
                   }}
                 />
               </FormLabel>
-              {}
+               {}
             </div>
-            <center style={{ marginTop: "30px" }}>
-              <h3>
-                If you are interested in this Charity, you may also be
-                interested in the following
-              </h3>
-              <div className="instance-grid" style={{marginBottom: '30px'}}>
-                <TinyCard
-                  title={this.state.hospital.name}
-                  image={this.state.hospital.image_url}
-                  style={{
-                    marginLeft: "15px",
-                    marginRight: "15px",
-                    marginTop: "30px",
-                    maxWidth: "235px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between"
-                  }}
-                  href={`/hospitals?id=${this.state.hospital.id}`}
-                />
-                <TinyCard
-                  title={this.state.illness.name}
-                  image={this.state.illness.image_url}
-                  style={{
-                    marginLeft: "15px",
-                    marginRight: "15px",
-                    marginTop: "30px",
-                    maxWidth: "235px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between"
-                  }}
-                  href={`/illnesses?id=${this.state.illness.id}`}
-                />
-              </div>
-            </center>
           </Tile>
         </div>
       </div>
     );
   }
 }
-export default Charity;

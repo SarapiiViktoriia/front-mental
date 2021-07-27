@@ -1,7 +1,8 @@
 import './basic.css'
 import React, { Component } from 'react';
 import { Navigation, Card } from '../custom';
-import Highlight from 'react-highlighter';
+import { Tile, PaginationV2 } from 'carbon-components-react';
+var Highlight = require('react-highlighter');
 const query_object = {
   filters: []
 };
@@ -15,36 +16,17 @@ class SearchPage extends Component{
     };
   }
   componentDidMount() {
-    var queries = this.props.value.replace(/ *, */g, ',').split(",");
-    var ors = [];
-    for (let i=0; i<queries.length; i++){
-      ors.push({'name':'name', 'op':'like', 'val':'%'+queries[i]+'%'});
-    }
-    query_object.filters = [{'or': ors}];
+    query_object.filters = [{'name':'name', 'op':'like', 'val':'%'+this.props.value+'%'}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
       this.setState({illnesses: data.objects});
     })
-    ors = [];
-    for (let i=0; i<queries.length; i++){
-      ors.push({'name':'name', 'op':'like', 'val':'%'+queries[i]+'%'});
-      ors.push({'name':'state', 'op':'like', 'val':'%'+queries[i]+'%'});
-    }
-    query_object.filters = [{'or': ors}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
       this.setState({charities: data.objects});
     })
-    ors = [];
-    for (let i=0; i<queries.length; i++){
-      ors.push({'name':'name', 'op':'like', 'val':'%'+queries[i]+'%'});
-      ors.push({'name':'state', 'op':'like', 'val':'%'+queries[i]+'%'});
-      ors.push({'name':'owner', 'op':'like', 'val':'%'+queries[i]+'%'});
-      ors.push({'name':'city', 'op':'like', 'val':'%'+queries[i]+'%'});
-    }
-    query_object.filters = [{'or': ors}];
     fetch("http:
     .then(results => results.json())
     .then(data => {
@@ -52,12 +34,39 @@ class SearchPage extends Component{
     })
   }
   render() {
-    const { illnesses, hospitals, charities } = this.state;
-    let noCharities = (charities === undefined || charities.length === 0)? null:
-    (
-      <div className='element-render'>
+    const { charities, hospitals, illnesses } = this.state;
+    let noCharities;
+    if (charities.length == 0) {
+      noCharities = <h1 style={{ fontSize: '1.0rem' }}>No results in charities.</h1>
+    } else {
+      noCharities = null;
+    }
+    let noHospitals;
+    if (hospitals.length == 0) {
+      noHospitals = <h1 style={{ fontSize: '1.0rem' }}>No results in hospitals.</h1>
+    } else {
+      noHospitals = null;
+    }
+    let noIllnesses;
+    if (illnesses.length == 0) {
+      noIllnesses = <h1 style={{ fontSize: '1.0rem' }}>No results in illnesses.</h1>
+    } else {
+      noIllnesses = null;
+    }
+    return (
+      <div className='search-page'>
+        <div className="navbar">
+          <Navigation selected={-1}/>
+        </div>
+        <div className="page-title">
+            <h1>Showing search results for "{this.props.value}"</h1>
+        </div>
+        <br/>
         <div className="page-title">
           <h1 style={{ fontSize: '1.5rem' }}>Charities</h1>
+        </div>
+        <div className="page-title" style={{ marginTop: '10px' }}>
+          {noCharities}
         </div>
         <div className="instance-grid">
           {}
@@ -74,7 +83,7 @@ class SearchPage extends Component{
                 flexDirection: "column",
                 justifyContent: "space-between"
               }}
-              searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
+              searchValue={this.props.value}
               label1_heading="Rating"
               label1={String(charity.rating)}
               label2_heading="State"
@@ -87,13 +96,11 @@ class SearchPage extends Component{
             />
           ))}
         </div>
-      </div>
-    ); 
-    let noHospitals = (hospitals === undefined || hospitals.length === 0)? null:
-    (
-      <div className='element-render'>
         <div className="page-title">
           <h1 style={{ fontSize: '1.5rem' }}>Hospitals</h1>
+        </div>
+        <div className="page-title" style={{ marginTop: '10px' }}>
+          {noHospitals}
         </div>
         <div className="instance-grid">
           {}
@@ -110,7 +117,7 @@ class SearchPage extends Component{
                 flexDirection: "column",
                 justifyContent: "space-between"
               }}
-              searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
+              searchValue={this.props.value}
               label1_heading="City"
               label1={hospital.city}
               label2_heading="State"
@@ -123,13 +130,11 @@ class SearchPage extends Component{
             />
           ))}
         </div>
-      </div>
-    );
-    let noIllnesses = (illnesses === undefined || illnesses.length === 0)? null:
-    (
-      <div className='element-render'>
         <div className="page-title">
           <h1 style={{ fontSize: '1.5rem' }}>Illnesses</h1>
+        </div>
+        <div className="page-title" style={{ marginTop: '10px' }}>
+          {noIllnesses}
         </div>
         <div className="instance-grid">
           {}
@@ -146,7 +151,7 @@ class SearchPage extends Component{
                 flexDirection: "column",
                 justifyContent: "space-between"
               }}
-              searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
+              searchValue={this.props.value}
               label1_heading="Curable"
               label1={illness.curable}
               label2_heading="Chronic"
@@ -159,19 +164,6 @@ class SearchPage extends Component{
             />
           ))}
         </div>
-      </div>
-    );
-    return (
-      <div className='search-page'>
-        <div className="navbar">
-          <Navigation selected={-1}/>
-        </div>
-        <div className="page-title">
-            <h1>Showing search results for "{(this.props.value.replace(/ *, */g, ',').replace(/,/g, ", "))}"</h1>
-        </div><br/>
-        {noCharities}
-        {noHospitals}
-        {noIllnesses}
       </div>
     );
   }
