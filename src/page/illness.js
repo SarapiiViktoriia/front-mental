@@ -162,6 +162,58 @@ export class Illnesses extends Component {
             onChange={this.handlePageChange}
           />
           <div className="filter-button">
+<<<<<<< HEAD
+            <ModalWrapper handleSubmit={this.handleSubmit} onSecondarySubmit={this.handleSecondarySubmit} {...modalProps()}>
+              <div key={this.state.key}>
+                <div className='sort-options'>
+                  <h3 style={{paddingBottom: '5px'}}>Sort By</h3>
+                  <Select onChange={this.handleSortOptions} hideLabel='true'>
+                    <SelectItem value='no-sorting' text="None"/>
+                    <SelectItem value='name-asc' text="Name: A to Z"/>
+                    <SelectItem value='name-desc' text="Name: Z to A"/>
+                    <SelectItem value='age-asc' text="Average Age: Low to High"/>
+                    <SelectItem value='age-desc' text="Average Age: High to Low"/>
+                  </Select>
+                </div>
+                <br/>
+                <hr color='#3d70b2'/>
+                <br/><br/>
+                <div className='filter-options'>
+                  <h3 style={{paddingBottom: '5px'}}>Filter By</h3>
+                  <div className='select-filter'>
+                    <Select onChange={this.handleCurable} labelText='Curable' inline='true' defaultValue='curable-default'>
+                      <SelectItem value='curable-default' text="None"/>
+                      <SelectItem value='curable-true' text="Yes"/>
+                      <SelectItem value='curable-false' text="No"/>
+                    </Select>
+                  </div>
+                  <div className='select-filter'>
+                    <Select onChange={this.handleChronic} labelText='Chronic' inline='true' defaultValue='chronic-default'>
+                      <SelectItem value='chronic-default' text="None"/>
+                      <SelectItem value='chronic-true' text="Yes"/>
+                      <SelectItem value='chronic-false' text="No"/>
+                    </Select>
+                  </div>
+                  <div className='select-filter'>
+                    <Select onChange={this.handleGenetic} labelText='Genetic' inline='true' defaultValue='genetic-default'>
+                      <SelectItem value='genetic-default' text="None"/>
+                      <SelectItem value='genetic-true' text="Yes"/>
+                      <SelectItem value='genetic-false' text="No"/>
+                    </Select>
+                  </div><br/>
+                  <div className='slider-filter'>
+                    <h6>Average Age</h6>
+                    <div style={{display: 'inline'}}>
+                      <text>min: </text>
+                      <Slider id="min-slider" value='0' onChange={this.handleMinAge} {...sliderProps()}/>
+                    </div><br/>
+                    <div style={{display: 'inline'}}>
+                      <text>max: </text>
+                      <Slider id="max-slider" value='50' onChange={this.handleMaxAge} {...sliderProps()}/>
+                    </div>
+                  </div><br/>
+                </div>
+=======
             <ModalWrapper handleSubmit={this.handleSubmit} {...modalProps()}>
               <div className="sort-options">
                 <h3 style={{ paddingBottom: "5px" }}>Sort By</h3>
@@ -242,6 +294,7 @@ export class Illnesses extends Component {
                   </div>
                 </div>
                 <br />
+>>>>>>> 526cdb38523b5121d75e4241efbd5e8aa92c90b0
               </div>
             </ModalWrapper>
           </div>
