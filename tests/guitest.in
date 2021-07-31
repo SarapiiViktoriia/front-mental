@@ -6,3 +6,7 @@ m_About m_Illnesses m_Hospitals m_Charities
 m_Illnesses i_ADHD m_Illnesses f_ i_Bipolar_Disorder
 m_Hospitals i_ROLLING_HILLS_HOSPITAL m_Hospitals f_ i_AUSTIN_STATE_HOSPITAL
 m_Charities i_NAMI m_Charities f_ i_Mental_Health_Association
+m_Illnesses fi
+m_Hospitals fi
+m_Charities fi
+s_schizophrenia c_highlight
