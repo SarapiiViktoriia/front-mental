@@ -1,7 +1,7 @@
 import "./basic.css";
 import React, { Component } from "react";
 import YouTube from "react-youtube";
-import { Card, Navigation, modalProps } from "../custom";
+import { Card, TinyCard, Navigation, modalProps } from "../custom";
 import {
   Tile,
   FormLabel,
@@ -90,15 +90,15 @@ export class Illnesses extends Component {
   };
   handleSecondarySubmit = evt => {
     this.setState({
-      key: ~this.state.key,
-    })
-    this.sort_value = 'no-sorting';
-    this.curable = 'curable-default';
-    this.chronic = 'chronic-default';
-    this.genetic = 'genetic-default';
+      key: ~this.state.key
+    });
+    this.sort_value = "no-sorting";
+    this.curable = "curable-default";
+    this.chronic = "chronic-default";
+    this.genetic = "genetic-default";
     this.min_age = 0;
     this.max_age = 50;
-  }
+  };
   handleSubmit = evt => {
     console.log(
       "Here is the query string before I do shit: " +
@@ -282,7 +282,9 @@ export class Illness extends Component {
     super(props);
     this.state = {
       id: this.props.id,
-      illness: {}
+      illness: {},
+      charity: {},
+      hospital: {}
     };
   }
   componentWillMount() {
@@ -301,6 +303,22 @@ export class Illness extends Component {
         autoplay: 1
       }
     };
+    const { charity } = fetch(
+      `http:
+    )
+      .then(results => results.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ charity: data });
+      });
+    const { hospital } = fetch(
+      `http:
+    )
+      .then(results => results.json())
+      .then(data => {
+        console.log(data);
+        this.setState({ hospital: data });
+      });
     return (
       <div>
         <div className="navbar">
@@ -360,7 +378,7 @@ export class Illness extends Component {
                 <FormLabel
                   className="title"
                   style={{
-                    fontSize: "1.475rem",
+                    fontSize: "1.475rem"
                   }}
                 >
                   {this.state.illness.name}
@@ -370,7 +388,7 @@ export class Illness extends Component {
                 <FormLabel
                   className="title"
                   style={{
-                    fontSize: "1.2rem",
+                    fontSize: "1.2rem"
                   }}
                 >
                   Symptoms:
@@ -389,7 +407,7 @@ export class Illness extends Component {
                 <FormLabel
                   className="title"
                   style={{
-                    fontSize: "1.2rem",
+                    fontSize: "1.2rem"
                   }}
                 >
                   Treatments:
@@ -404,7 +422,44 @@ export class Illness extends Component {
                   {}
                 </FormLabel>
                 <br />
+                <br />
               </p>
+            </div>
+            <center>
+              <h3>
+                If you are interested in this Illness, you may also be
+                interested this Hospital and Charity
+              </h3>
+            </center>
+            <div className="instance-grid">
+              <TinyCard
+                title={this.state.hospital.name}
+                image={this.state.hospital.image_url}
+                style={{
+                  marginLeft: "15px",
+                  marginRight: "15px",
+                  marginTop: "30px",
+                  maxWidth: "235px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between"
+                }}
+                href={`/hospitals?id=${this.state.hospital.id}`}
+              />
+              <TinyCard
+                title={this.state.charity.name}
+                image={this.state.charity.image_url}
+                style={{
+                  marginLeft: "15px",
+                  marginRight: "15px",
+                  marginTop: "30px",
+                  maxWidth: "235px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between"
+                }}
+                href={`/charities?id=${this.state.charity.id}`}
+              />
             </div>
           </Tile>
         </div>
