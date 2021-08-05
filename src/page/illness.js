@@ -430,37 +430,37 @@ export class Illness extends Component {
                 If you are interested in this Illness, you may also be
                 interested this Hospital and Charity
               </h3>
+              <div className="instance-grid">
+                <TinyCard
+                  title={this.state.hospital.name}
+                  image={this.state.hospital.image_url}
+                  style={{
+                    marginLeft: "15px",
+                    marginRight: "15px",
+                    marginTop: "30px",
+                    maxWidth: "235px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between"
+                  }}
+                  href={`/hospitals?id=${this.state.hospital.id}`}
+                />
+                <TinyCard
+                  title={this.state.charity.name}
+                  image={this.state.charity.image_url}
+                  style={{
+                    marginLeft: "15px",
+                    marginRight: "15px",
+                    marginTop: "30px",
+                    maxWidth: "235px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between"
+                  }}
+                  href={`/charities?id=${this.state.charity.id}`}
+                />
+              </div>
             </center>
-            <div className="instance-grid">
-              <TinyCard
-                title={this.state.hospital.name}
-                image={this.state.hospital.image_url}
-                style={{
-                  marginLeft: "15px",
-                  marginRight: "15px",
-                  marginTop: "30px",
-                  maxWidth: "235px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between"
-                }}
-                href={`/hospitals?id=${this.state.hospital.id}`}
-              />
-              <TinyCard
-                title={this.state.charity.name}
-                image={this.state.charity.image_url}
-                style={{
-                  marginLeft: "15px",
-                  marginRight: "15px",
-                  marginTop: "30px",
-                  maxWidth: "235px",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between"
-                }}
-                href={`/charities?id=${this.state.charity.id}`}
-              />
-            </div>
           </Tile>
         </div>
       </div>
