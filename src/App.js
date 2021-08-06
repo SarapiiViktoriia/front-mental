@@ -1,15 +1,14 @@
 import "./App.css";
-import logo from "./logo.svg";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Tile } from 'carbon-components-react';
-import Home from './page/home';
-import About from './page/about';
-import SearchPage from './page/search';
-import { Hospitals, Hospital } from './page/hospital';
-import { Illnesses, Illness } from './page/illness';
-import { Charities, Charity } from './page/charity';
-import { Navigation } from './custom';
+import { TinyButton as ScrollUpButton } from 'react-scroll-up-button';
+import Home from './pages/home';
+import About from './pages/about';
+import SearchPage from './pages/search';
+import { Hospitals, Hospital } from './pages/hospital';
+import { Illnesses, Illness } from './pages/illness';
+import { Charities, Charity } from './pages/charity';
 class App extends Component {
   render() {
     const queryString = require("query-string");
@@ -26,10 +25,9 @@ class App extends Component {
           render={props => <Illness {...props} id={parsed.id} />}/>;
     }
     let search_path = <Route path='/search' component={SearchPage} />;
-    if ("value" in parsed){
+    if ("value" in parsed)
       search_path = <Route path="/search" 
         render={props => <SearchPage {...props} value={parsed.value}/>}/>;
-    }
     return (
       <div className="page">
         <div className="page-body">
@@ -43,6 +41,9 @@ class App extends Component {
               {search_path}
             </div>
           </Router>
+        </div>
+        <div>
+          <ScrollUpButton style={{zIndex: '2'}}/>
         </div>
         <div className="footer">
           <Tile style={{
