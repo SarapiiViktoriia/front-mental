@@ -160,6 +160,12 @@ class SearchPage extends Component{
         </div>
       </div>
     );
+    let nothing = (noCharities !== null || noIllnesses !== null || noHospitals !== null)? null:
+    (
+      <div className="page-title">
+        <h1 style={{ fontSize: '2rem' }}>Nothing to show</h1>
+      </div>
+    );
     return (
       <div className='search-page'>
         <div className="navbar">
@@ -168,6 +174,7 @@ class SearchPage extends Component{
         <div className="page-title">
             <h1>Showing search results for "{(this.props.value.replace(/ *, */g, ',').replace(/,/g, ", "))}"</h1>
         </div><br/>
+        {nothing}
         {noCharities}
         {noHospitals}
         {noIllnesses}

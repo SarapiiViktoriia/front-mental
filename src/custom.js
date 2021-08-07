@@ -1,4 +1,4 @@
-import "./page/basic.css";
+import "./pages/basic.css";
 import React, { Component } from "react";
 import {
   Button,
