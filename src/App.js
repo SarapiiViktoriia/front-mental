@@ -6,6 +6,7 @@ import { TinyButton as ScrollUpButton } from 'react-scroll-up-button';
 import Home from './pages/home';
 import About from './pages/about';
 import SearchPage from './pages/search';
+import { MyVis, YourVis} from './pages/visualization';
 import { Hospitals, Hospital } from './pages/hospital';
 import { Illnesses, Illness } from './pages/illness';
 import { Charities, Charity } from './pages/charity';
@@ -39,11 +40,13 @@ class App extends Component {
               {hospital_path}
               {charity_path}
               {search_path}
+              <Route path="/myvis" component={MyVis} />
+              <Route path="/yourvis" component={YourVis} />
             </div>
           </Router>
         </div>
         <div>
-          <ScrollUpButton style={{zIndex: '2'}}/>
+          <ScrollUpButton style={{zIndex: '200'}}/>
         </div>
         <div className="footer">
           <Tile style={{

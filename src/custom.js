@@ -8,7 +8,9 @@ import {
   ClickableTile,
   FormLabel,
   DataTable,
-  Search
+  Search,
+  Dropdown,
+  DropdownItem
 } from "carbon-components-react";
 import { Link } from "react-router-dom";
 import Highlight from 'react-highlighter';
@@ -212,6 +214,12 @@ export class Navigation extends Component {
   handleCharitiesTabClick = evt => {
     window.location.assign("/charities");
   };
+  handleMyVisClick = evt => {
+    window.location.assign("/myvis");
+  };
+  handleYourVisClick = evt => {
+    window.location.assign("/yourvis");
+  };
   handleSearch = evt => {
     if (evt.key === "Enter")
       window.location.assign("/search?value=" + evt.target.value);
@@ -252,6 +260,12 @@ export class Navigation extends Component {
               onClick={this.handleAboutTabClick}
             />
           </Tabs>
+        </div>
+        <div>
+          <Dropdown className='vis-dropdown' defaultText='Visualizations'>
+            <DropdownItem itemText="Our Site" value='us' onClick={this.handleMyVisClick}/>
+            <DropdownItem itemText="Their Site" value='them' onClick={this.handleYourVisClick}/>
+          </Dropdown>
         </div>
       </Tile>
     );
