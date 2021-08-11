@@ -144,10 +144,16 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
 .bg-3 {
   background-image: url("../assets/images/helping.jpeg");
 }
-.vis-dropdown {
+.bx--dropdown {
   background-color: transparent;
+  box-shadow: 0 1px 0 0 white;
+}
+.bx--list-box__menu-icon{
+  padding: 0
+}
+.bx--list-box__label{
   color: white;
 }
-.bx--dropdown-link{
-  color: black;
+.bx--list-box__menu-icon > svg{
+  fill: white;
 }

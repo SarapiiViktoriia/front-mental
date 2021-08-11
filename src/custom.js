@@ -1,28 +1,14 @@
 import "./pages/basic.css";
 import React, { Component } from "react";
-import {
-  Button,
-  Tile,
-  Tab,
-  Tabs,
-  ClickableTile,
-  FormLabel,
-  DataTable,
-  Search,
-  Dropdown,
-  DropdownItem
-} from "carbon-components-react";
+import { Button, Tile, Tab, Tabs, ClickableTile, FormLabel, Search, DropdownV2 } from "carbon-components-react";
 import { Link } from "react-router-dom";
 import Highlight from 'react-highlighter';
-const {
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-  TableCell,
-  TableHeader
-} = DataTable;
+const ddprops = () => ({
+  items: [{text: "Our Site", route: "/myvis"},
+          {text: "Their Site", route: "/yourvis"}],
+  itemToString: item => (item? item.text: ''),
+  label: 'Visualizations'
+});
 export class Card extends Component {
   render() {
     return (
@@ -214,11 +200,8 @@ export class Navigation extends Component {
   handleCharitiesTabClick = evt => {
     window.location.assign("/charities");
   };
-  handleMyVisClick = evt => {
-    window.location.assign("/myvis");
-  };
-  handleYourVisClick = evt => {
-    window.location.assign("/yourvis");
+  handleVisClick = evt => {
+    window.location.assign(evt.selectedItem.route);
   };
   handleSearch = evt => {
     if (evt.key === "Enter")
@@ -262,10 +245,7 @@ export class Navigation extends Component {
           </Tabs>
         </div>
         <div>
-          <Dropdown className='vis-dropdown' defaultText='Visualizations'>
-            <DropdownItem itemText="Our Site" value='us' onClick={this.handleMyVisClick}/>
-            <DropdownItem itemText="Their Site" value='them' onClick={this.handleYourVisClick}/>
-          </Dropdown>
+          <DropdownV2 {...ddprops()} onChange={this.handleVisClick}/>
         </div>
       </Tile>
     );

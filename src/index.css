@@ -2052,7 +2052,7 @@ input:not(output):not([data-invalid]):-moz-ui-invalid {
 .bx--list-box__field:focus,
 .bx--list-box__field[aria-expanded='true'] {
   outline: none;
-  box-shadow: 0 2px 0 0 #3d70b2;
+  box-shadow: 0 2px 0 0 #f1f1f1;
 }
 .bx--list-box__field[disabled] {
   outline: none;
