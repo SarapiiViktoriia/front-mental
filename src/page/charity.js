@@ -13,10 +13,34 @@ import {
   TwitterOnAirButton
 } from "react-twitter-embed";
 import { Timeline } from "react-twitter-widgets";
-import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../custom";
-import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../assets/static';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
+import { Card, TinyCard, Navigation, modalProps, states } from "../custom";
+import {
+  Tile,
+  FormLabel,
+  PaginationV2,
+  ModalWrapper,
+  MultiSelect,
+  Slider,
+  Select,
+  SelectItem
+} from "carbon-components-react";
+const multiSelectProps = () => ({
+  filterable: true,
+  disabled: false,
+  light: false,
+  useTitleInItem: false,
+  label: "",
+  invalid: false,
+  invalidText: "Invalid selection"
+});
+const selectProps = () => ({
+  labelText: "Sort By",
+  hideLabel: true,
+  light: false,
+  inline: false,
+  helperText: "",
+  defaultValue: "no-sorting"
+});
 const sliderPropsIncome = () => ({
   light: false,
   hideTextInput: false,
@@ -143,15 +167,30 @@ export class Charities extends Component {
         temp.push(this.state_filter_list[i].abbreviation);
       query_object.filters.push({ name: "state", op: "in", val: temp });
     }
-    if (this.deductible === "deductible-default") query_object.filters = [];
-    else if (this.deductible === "deductible-true")
+    if (this.deductible === "deductible-true")
       query_object.filters.push({ name: "deductible", op: "eq", val: "Yes" });
     else if (this.deductible === "deductible-false")
       query_object.filters.push({ name: "deductible", op: "eq", val: "No" });
-    query_object.filters.push({ name: "rating", op: "ge", val: this.min_rating });
-    query_object.filters.push({ name: "rating", op: "le", val: this.max_rating });
-    query_object.filters.push({ name: "incomeAmount", op: "ge", val: this.min_income * 100000 });
-    query_object.filters.push({ name: "incomeAmount", op: "le", val: this.max_income * 100000 });
+    query_object.filters.push({
+      name: "rating",
+      op: "ge",
+      val: this.min_rating
+    });
+    query_object.filters.push({
+      name: "rating",
+      op: "le",
+      val: this.max_rating
+    });
+    query_object.filters.push({
+      name: "incomeAmount",
+      op: "ge",
+      val: this.min_income * 100000
+    });
+    query_object.filters.push({
+      name: "incomeAmount",
+      op: "le",
+      val: this.max_income * 100000
+    });
     console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;
@@ -161,7 +200,7 @@ export class Charities extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={2} />
+          <Navigation selected={3} />
         </div>
         <div className="page-title">
           <h1>Charities</h1>
@@ -171,14 +210,13 @@ export class Charities extends Component {
         </div>
         <br />
         <Tile className="filter_pagination-bar">
-          <Plx className="pagination" parallaxData={pagination_parallax}>
-            <PaginationV2
-              totalItems={this.state.charity_count}
-              pageSize={3}
-              pageSizes={[3, 6, 9, 10]}
-              onChange={this.handlePageChange}
-            />
-          </Plx>
+          <PaginationV2
+            className="pagination"
+            totalItems={this.state.charity_count}
+            pageSize={3}
+            pageSizes={[3, 6, 9, 10]}
+            onChange={this.handlePageChange}
+          />
           <div className="filter-button">
             <ModalWrapper
               handleSubmit={this.handleSubmit}
@@ -355,7 +393,7 @@ export class Charity extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={2} />
+          <Navigation selected={3} />
         </div>
         <div>
           <Tile
@@ -379,14 +417,11 @@ export class Charity extends Component {
                 justifyContent: "space-between"
               }}
             >
-              <div 
-              >
-                {}
+              <div>
                 <img
                   src={this.state.charity.image_url}
                   width="500"
-                  height="400"
-                  alt="twitter-img"
+                  height="500"
                 />
               </div>
               <div
@@ -394,13 +429,14 @@ export class Charity extends Component {
                   marginLeft: "50px"
                 }}
               >
-                <a 
-                  class="twitter-timeline" 
-                  data-width="350" data-height="500" 
-                  data-theme="light" href={"https:
-                }
+                <a
+                  class="twitter-timeline"
+                  data-width="350"
+                  data-height="500"
+                  data-theme="light"
+                  href="https:
                 >
-                  Tweets by {this.state.charity.twitter}
+                  Tweets by afspnational
                 </a>
                 <script
                   async
@@ -478,12 +514,12 @@ export class Charity extends Component {
               </FormLabel>
               {}
             </div>
-            <center style={{ marginTop: "30px" }}>
+            <center>
               <h3>
                 If you are interested in this Charity, you may also be
-                interested in the following
+                interested this Hospital and Illness
               </h3>
-              <div className="instance-grid" style={{marginBottom: '30px'}}>
+              <div className="instance-grid">
                 <TinyCard
                   title={this.state.hospital.name}
                   image={this.state.hospital.image_url}
@@ -520,4 +556,3 @@ export class Charity extends Component {
     );
   }
 }
-export default Charity;

@@ -16,11 +16,13 @@ a:hover {
   text-align: center;
   vertical-align: middle;
 }
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 4;
-  background-color: black;
+.home-page {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
 }
 .instance-grid {
   display: flex;
@@ -45,8 +47,8 @@ a:hover {
   justify-content: center;
   position: -webkit-sticky; 
   position: sticky;
-  top: 80px;
-  z-index: 5;
+  top: 0;
+  z-index: 3;
 }
 Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
   display: flex;
@@ -56,12 +58,11 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
   position: relative;
 }
 .navbar-top {
-  display: inline-flex;
-  width: 100%;
+  display: flex;
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
-  background-color: inherit;
+  background-color: transparent;
   vertical-align: middle;
   border-color: transparent;
 }
@@ -88,8 +89,7 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
 .filter-modal {
   position: relative;
   display: flex;
-  flex-direction: column;
-  opacity: 1;
+  flex-direction: column; 
 }
 .modal-trigger-btn {
   background-color: white;
@@ -107,53 +107,4 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
 }
 .filter-options {
   justify-content: space-around;
-}
-.section {
-  color: white;
-  display: flex;
-  position: relative;
-  z-index: 2;
-  height: 25%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-}
-.section-text{
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  text-align: center;
-  opacity: 1;
-  position: absolute;
-  font-size: 2em;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0,0,0,0.5);
-  border-radius: 25px;
-}
-.bg-0{
-  background-image: url("../assets/images/head.jpg");
-}
-.bg-1{
-  background-image: url("../assets/images/pill.jpeg");
-}
-.bg-2{
-  background-image: url("../assets/images/place.jpg");
-}
-.bg-3 {
-  background-image: url("../assets/images/helping.jpeg");
-}
-.bx--dropdown {
-  background-color: transparent;
-  box-shadow: 0 1px 0 0 white;
-}
-.bx--list-box__menu-icon{
-  padding: 0
-}
-.bx--list-box__label{
-  color: white;
-}
-.bx--list-box__menu-icon > svg{
-  fill: white;
 }

@@ -1,10 +1,32 @@
 import "./basic.css";
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
-import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../custom";
-import { modalProps, multiSelectProps, states, pagination_parallax, owners } from '../assets/static';
-import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Select, SelectItem, Slider } from "carbon-components-react";
+import { Card, TinyCard, Navigation, modalProps, states } from "../custom";
+import {
+  Tile,
+  FormLabel,
+  PaginationV2,
+  ModalWrapper,
+  MultiSelect,
+  Select,
+  SelectItem,
+  Slider
+} from "carbon-components-react";
+const owners = [
+  { text: "PROPRIETARY" },
+  { text: "NON-PROFIT" },
+  { text: "GOVERNMENT - STATE" },
+  { text: "GOVERNMENT - DISTRICT/AUTHORITY" }
+];
+const multiSelectProps = () => ({
+  filterable: true,
+  disabled: false,
+  light: false,
+  useTitleInItem: false,
+  label: "none",
+  invalid: false,
+  invalidText: "Invalid selection"
+});
 const selectProps = () => ({
   labelText: "Sort By",
   hideLabel: true,
@@ -72,13 +94,25 @@ export class Hospitals extends Component {
       hospitals_slice: this.state.hospitals.slice(slice1, slice2)
     });
   };
-  handleSortOptions = evt => { this.sort_value = evt.target.value; };
-  handleStates = evt => { this.state_filter_list = evt.selectedItems; };
-  handleOwners = evt => { this.owner_filter_list = evt.selectedItems; };
-  handleMinPop = evt => { this.min_pop = evt.value; };
-  handleMaxPop = evt => { this.max_pop = evt.value; };
+  handleSortOptions = evt => {
+    this.sort_value = evt.target.value;
+  };
+  handleStates = evt => {
+    this.state_filter_list = evt.selectedItems;
+  };
+  handleOwners = evt => {
+    this.owner_filter_list = evt.selectedItems;
+  };
+  handleMinPop = evt => {
+    this.min_pop = evt.value;
+  };
+  handleMaxPop = evt => {
+    this.max_pop = evt.value;
+  };
   handleSecondarySubmit = evt => {
-    this.setState({ key: ~this.state.key  });
+    this.setState({
+      key: ~this.state.key
+    });
     this.sort_value = "no-sorting";
     this.owner_filter_list = [];
     this.state_filter_list = [];
@@ -112,8 +146,16 @@ export class Hospitals extends Component {
         temp.push(this.owner_filter_list[i].text);
       query_object.filters.push({ name: "owner", op: "in", val: temp });
     }
-    query_object.filters.push({ name: "population", op: "ge", val: this.min_pop });
-    query_object.filters.push({ name: "population", op: "le", val: this.max_pop });
+    query_object.filters.push({
+      name: "population",
+      op: "ge",
+      val: this.min_pop
+    });
+    query_object.filters.push({
+      name: "population",
+      op: "le",
+      val: this.max_pop
+    });
     console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;
@@ -123,7 +165,7 @@ export class Hospitals extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={1} />
+          <Navigation selected={2} />
         </div>
         <div className="page-title">
           <h1>Hospitals</h1>
@@ -132,17 +174,16 @@ export class Hospitals extends Component {
           </p>
         </div>
         <br />
-        <Tile className="filter_pagination-bar round" >
-          <Plx className="pagination" parallaxData={pagination_parallax}>
-            <PaginationV2 className='lol'
-              totalItems={this.state.hospital_count}
-              pageSize={3}
-              pageSizes={[3, 6, 9, 10]}
-              onChange={this.handlePageChange}
-            />
-          </Plx>  
-          <div className="filter-modal">
-            <ModalWrapper 
+        <Tile className="filter_pagination-bar">
+          <PaginationV2
+            className="pagination"
+            totalItems={this.state.hospital_count}
+            pageSize={3}
+            pageSizes={[3, 6, 9, 10]}
+            onChange={this.handlePageChange}
+          />
+          <div className="filter-button">
+            <ModalWrapper
               handleSubmit={this.handleSubmit}
               onSecondarySubmit={this.handleSecondarySubmit}
               {...modalProps()}
@@ -291,7 +332,7 @@ export class Hospital extends Component {
     return (
       <div>
         <div className="navbar">
-          <Navigation selected={1} />
+          <Navigation selected={2} />
         </div>
         <div>
           <Tile
@@ -452,12 +493,12 @@ export class Hospital extends Component {
                 />
               </GoogleMapReact>
             </div>
-            <center style={{ marginTop: '30px' }}>
+            <center>
               <h3>
                 If you are interested in this Hospital, you may also be
-                interested in the following
+                interested this Illness and Charity
               </h3>
-              <div className="instance-grid" style={{marginBottom: '30px'}}>
+              <div className="instance-grid">
                 <TinyCard
                   title={this.state.illness.name}
                   image={this.state.illness.image_url}
@@ -494,4 +535,3 @@ export class Hospital extends Component {
     );
   }
 }
-export default Hospital;
