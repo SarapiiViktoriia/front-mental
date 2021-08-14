@@ -2052,7 +2052,7 @@ input:not(output):not([data-invalid]):-moz-ui-invalid {
 .bx--list-box__field:focus,
 .bx--list-box__field[aria-expanded='true'] {
   outline: none;
-  box-shadow: 0 2px 0 0 #3d70b2;
+  box-shadow: 0 2px 0 0 #f1f1f1;
 }
 .bx--list-box__field[disabled] {
   outline: none;
@@ -6245,7 +6245,7 @@ span.flatpickr-weekday {
   visibility: hidden;
 }
 .bx--modal.is-visible {
-  z-index: 9000;
+  z-index: 90;
   opacity: 1;
   transition: opacity 200ms;
   visibility: visible;
@@ -6266,6 +6266,7 @@ span.flatpickr-weekday {
   max-height: 100%;
   height: 100%;
   padding: 2rem 3% 0rem 3%;
+  opacity: 1 !important;
 }
 @media (min-width: 600px) {
   .bx--modal-container {

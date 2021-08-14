@@ -21,9 +21,9 @@
 html,
 body {
   height: 100%;
-  background: #780206;  
-  background: -webkit-linear-gradient(to left, #061161, #780206);  
-  background: linear-gradient(to left, #061161, #780206); 
+  background: #000000;  
+  background: -webkit-linear-gradient(to top, #434343, #000000);  
+  background: linear-gradient(to top, #434343, #000000); 
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
@@ -43,9 +43,9 @@ div.title {
 }
 .page-body {
   padding-top: 0px;
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
-  padding-bottom: 150px;
+  padding-bottom: 142px; 
 }
 .footer {
   opacity: 0.6;

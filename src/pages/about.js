@@ -1,11 +1,12 @@
+import './basic.css';
 import React, { Component } from 'react';
 import { Card, Navigation } from '../custom';
 import { Tile } from 'carbon-components-react';
-import Caleb from "../img/team/Caleb.jpg";
-import Shreyas from "../img/team/Shreyas.jpg";
-import Taher from "../img/team/Taher.jpg";
-import Weihan from "../img/team/Weihan.jpg";
-import Jason from "../img/team/Jason.jpg";
+import Caleb from "../assets/profiles/Caleb.jpg";
+import Shreyas from "../assets/profiles/Shreyas.jpg";
+import Taher from "../assets/profiles/Taher.jpg";
+import Weihan from "../assets/profiles/Weihan.jpg";
+import Jason from "../assets/profiles/Jason.jpg";
 class About extends Component {
   constructor(props) {
     super(props);
@@ -204,7 +205,7 @@ class About extends Component {
     return (
       <div className="about-page">
       <div className="navbar">
-        <Navigation selected={4}/>
+        <Navigation selected={3}/>
       </div>
         <div className="title">
           <br />
@@ -274,7 +275,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.caleb_i1 + this.state.caleb_i2}
             label4_heading="Unit Tests"
-            label4={"8"}
+            label4={"12"}
             image={Caleb}
             style={{
               marginLeft: "15px",
@@ -295,7 +296,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.shreyas_i1 + this.state.shreyas_i2}
             label4_heading="Unit Tests"
-            label4={"0"}
+            label4={"2"}
             image={Shreyas}
             style={{
               marginLeft: "15px",
@@ -314,7 +315,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.taher_i1 + this.state.taher_i2}
             label4_heading="Unit Tests"
-            label4={"8"}
+            label4={"11"}
             image={Taher}
             style={{
               marginLeft: "15px",
@@ -342,7 +343,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.weihan_i1 + this.state.weihan_i2}
             label4_heading="Unit Tests"
-            label4={"0"}
+            label4={"2"}
             image={Weihan}
             style={{
               marginLeft: "15px",
@@ -361,7 +362,7 @@ class About extends Component {
             label3_heading="Issues"
             label3={this.state.jason_i1 + this.state.jason_i2}
             label4_heading="Unit Tests"
-            label4={"8"}
+            label4={"10"}
             image={Jason}
             style={{
               marginLeft: "15px",
@@ -393,7 +394,7 @@ class About extends Component {
               and <a href="https:
               = {this.state.total_i1 + this.state.total_i2}.<br />
               <br />
-              Total Unit Tests: 24.
+              Total Unit Tests: 37.
             </p>
           </div>
           <br />
@@ -440,7 +441,7 @@ class About extends Component {
               Flask-Restless &nbsp; &nbsp; GUnicorn &nbsp; &nbsp; Enzyme
               <br />
               <br />
-              Mocha &nbsp; &nbsp; Selenium &nbsp; &nbsp; PlantUML
+              Jest &nbsp; &nbsp; Selenium &nbsp; &nbsp; PlantUML
               <br />
               <br />
               IBM carbon-components-react
