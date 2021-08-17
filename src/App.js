@@ -46,7 +46,7 @@ class App extends Component {
           </Router>
         </div>
         <div>
-          <ScrollUpButton style={{zIndex: '200'}}/>
+          <ScrollUpButton style={{backgroundColor: 'transparent', mixBlendMode: 'difference', fill: 'white'}}/>
         </div>
         <div className="footer">
           <Tile style={{
