@@ -49,20 +49,9 @@ class App extends Component {
           <ScrollUpButton style={{backgroundColor: 'transparent', mixBlendMode: 'difference', fill: 'white'}}/>
         </div>
         <div className="footer">
-          <Tile style={{
-              display: "flex",
-              flexDirection: "column",
-              textAlign: "center",
-              maxHeight: "20px",
-          }}>
-            <div style={{
-                display: "flex",
-                flexDirection: "column",
-                textAlign: "center",
-                marginTop: "7px",
-            }}>Mental Health Help
+          <Tile style={{ paddingTop: '25px' }}>
+            Mental Health Help
               &copy; {new Date().getFullYear()}: CS 373 Group 11am-9
-            </div> 
           </Tile> 
         </div>
       </div>
