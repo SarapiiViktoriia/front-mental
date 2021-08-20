@@ -157,3 +157,18 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
 .bx--list-box__menu-icon > svg{
   fill: white;
 }
+.bar{
+  fill: steelblue;
+}
+.bar:hover{
+  fill: brown;
+}
+.axis {
+  font: 10px sans-serif;
+}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
