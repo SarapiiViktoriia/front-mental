@@ -258,8 +258,8 @@ export class BarChart extends Component {
   }
   drawChart() {
     var margin = { top: 20, right: 20, bottom: 150, left: 60 },
-    width = 600 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    width = 1200 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
     var x = d3.scaleBand().rangeRound([0, width]).padding(0.05);
     var y = d3.scaleLinear().range([height, 0]);
     var xAxis = d3.axisBottom(x);
@@ -330,6 +330,161 @@ export class BarChart extends Component {
   render() {
     return (
       <div id="area1">
+      </div>
+    );
+  }
+}
+export class BubbleChart extends Component {
+  componentDidMount() {
+    this.drawChart();
+  }
+  drawChart() {
+    fetch(`http:
+      .then(results => results.json())
+      .then(data => {
+      var dataset = {
+          "children": data.objects
+      };
+      console.log(dataset);
+      var diameter = 1100;
+      var bubble = d3.pack(dataset)
+          .size([diameter, diameter])
+          .padding(1.5);
+      var svg = d3.select("#area2")
+          .append("svg")
+          .attr("width", diameter)
+          .attr("height", diameter)
+          .attr("class", "bubble");
+      var nodes = d3.hierarchy(dataset)
+          .sum(function(d) { return d.incomeAmount; });
+      var node = svg.selectAll(".node")
+          .data(bubble(nodes).descendants())
+          .enter()
+          .filter(function(d){
+              return  !d.children
+          })
+          .append("g")
+          .attr("class", "node")
+          .attr("transform", function(d) {
+              return "translate(" + d.x + "," + d.y + ")";
+          });
+      node.append("title")
+          .text(function(d) {
+              return d.name + ": " + d.Count;
+          });
+      node.append("circle")
+          .attr("r", function(d) {
+              return d.r;
+          })
+          .style("fill", function(d,i) {
+          });
+      node.append("text")
+          .attr("dy", ".2em")
+          .style("text-anchor", "middle")
+          .text(function(d) {
+              return d.data.name.substring(0, d.r / 3);
+          })
+          .attr("font-family", "sans-serif")
+          .attr("font-size", function(d){
+              return d.r/10;
+          })
+          .attr("fill", "white");
+      node.append("text")
+          .attr("dy", "1.3em")
+          .style("text-anchor", "middle")
+          .text(function(d) {
+              return d.data.incomeAmount;
+          })
+          .attr("font-family",  "Gill Sans", "Gill Sans MT")
+          .attr("font-size", function(d){
+              return d.r/5;
+          })
+          .attr("fill", "white");
+      d3.select(window.frameElement)
+          .style("height", diameter + "px");
+      });
+  }
+  render() {
+    return (
+      <div id="area2">
+      </div>
+    );
+  }
+}
+export class PieChart extends Component {
+  componentDidMount() {
+    this.drawChart();
+  }
+  drawChart() {
+    var w = 900,                        
+    h = 900,                            
+    r = 300;                            
+    var colors = [];
+    while (colors.length < 100) {
+        do {
+            var color = Math.floor((Math.random()*1000000)+1);
+        } while (colors.indexOf(color) >= 0);
+        colors.push("#" + ("000000" + color.toString(16)).slice(-6));
+    }
+    fetch(`http:
+      .then(results => results.json())
+      .then(dataset => {
+        var proprietary = 0;
+        var nonprofit = 0;
+        var state = 0;
+        var notavail = 0;
+        dataset.objects.forEach(function(d) {
+            if(d.owner == "PROPRIETARY"){proprietary++;}
+            if(d.owner == "NON-PROFIT"){nonprofit++;}
+            if(d.owner == "GOVERNMENT - STATE"){state++;}
+            if(d.owner == "NOT AVAILABLE"){notavail++;}
+        })
+        var data = [{"label":"PROPRIETARY", "value":proprietary}, 
+                {"label":"NON-PROFIT", "value":nonprofit}, 
+                {"label":"GOVERNMENT - STATE", "value":state},
+                {"label":"NOT AVAILABLE", "value":notavail}];
+        console.log(data);
+    var vis = d3.select("#area3")
+        .append("svg:svg")              
+        .data([data])                   
+            .attr("width", w)           
+            .attr("height", h)
+        .append("svg:g")                
+            .attr("transform", "translate(" + r + "," + r + ")")    
+    var arc = d3.arc()              
+        .outerRadius(r);
+    var pie = d3.pie()           
+        .value(function(d) { return d.value; });    
+    var arcs = vis.selectAll("g.slice")     
+        .data(pie)                          
+        .enter()                            
+            .append("svg:g")                
+                .attr("class", "slice");    
+        arcs.append("svg:path")
+                .attr("fill", function(d, i) { return colors[i]; } ) 
+                .attr("d", arc);                                    
+        arcs.append("svg:text")                                     
+                .attr("transform", function(d) {                    
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                return "translate(" + arc.centroid(d) + ")";        
+            })
+            .attr("text-anchor", "middle")                          
+            .text(function(d, i) { return data[i].label; });        
+        arcs.append("svg:text")                                     
+                .attr("dy", "1.3em")
+                .attr("transform", function(d) {                    
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                return "translate(" + arc.centroid(d) + ")";        
+            })
+            .attr("text-anchor", "middle")                          
+            .text(function(d, i) { return data[i].value; });        
+        });
+  }
+  render() {
+    return (
+      <div id="area3">
       </div>
     );
   }

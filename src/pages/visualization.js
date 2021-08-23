@@ -1,7 +1,7 @@
 import './basic.css';
 import React, { Component } from 'react';
-import { Navigation, BarChart } from '../custom';
-import {Tile} from 'carbon-components-react';
+import { Navigation, BarChart, BubbleChart, PieChart } from '../custom';
+import { Tile } from 'carbon-components-react';
 export class MyVis extends Component {
   render(){
     return (
@@ -11,6 +11,12 @@ export class MyVis extends Component {
         </div>
         <Tile>
           <BarChart/>
+          <br/>
+          <br/>
+          <BubbleChart/>
+          <br/>
+          <br/>
+          <PieChart/>
         </Tile>
         <div className='page-title'>
           <h1>Hello from my vis page</h1>
