@@ -1,18 +1,10 @@
-import "./basic.css";
+import "../css/basic.css";
 import React, { Component } from "react";
 import YouTube from "react-youtube";
 import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../custom";
-import { modalProps, pagination_parallax } from '../assets/static';
-import {
-  Tile,
-  FormLabel,
-  PaginationV2,
-  ModalWrapper,
-  Slider,
-  Select,
-  SelectItem
-} from "carbon-components-react";
+import { Card, TinyCard, Navigation } from "../components";
+import { modalProps, pagination_parallax } from '../static';
+import { Tile, FormLabel, PaginationV2, ModalWrapper, Slider, Select, SelectItem } from "carbon-components-react";
 const sliderProps = () => ({
   light: false,
   hideTextInput: false,

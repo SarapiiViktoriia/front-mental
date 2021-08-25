@@ -1,8 +1,9 @@
+import '../css/basic.css';
 import React, { Component } from 'react';
 import { Tile } from 'carbon-components-react';
 import { Link } from 'react-router-dom';
 import Typing from 'react-typing-animation';
-import { Navigation } from '../custom';
+import { Navigation } from '../components';
 class Home extends Component {
   render() {
     return (

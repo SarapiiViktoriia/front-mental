@@ -1,4 +1,4 @@
-import "./basic.css";
+import "../css/basic.css";
 import React, { Component } from "react";
 import {
   TwitterTimelineEmbed,
@@ -14,8 +14,8 @@ import {
 } from "react-twitter-embed";
 import { Timeline } from "react-twitter-widgets";
 import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../custom";
-import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../assets/static';
+import { Card, TinyCard, Navigation } from "../components";
+import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../static';
 import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
 const sliderPropsIncome = () => ({
   light: false,

@@ -1,7 +1,7 @@
-import './basic.css';
+import '../css/basic.css';
 import React, { Component } from 'react';
-import { Navigation, BarChart, BubbleChart, PieChart } from '../custom';
 import { Tile } from 'carbon-components-react';
+import { Navigation, IllnessBar, CharityBubble, HospitalPie } from '../components/';
 export class MyVis extends Component {
   render(){
     return (
@@ -9,14 +9,16 @@ export class MyVis extends Component {
         <div className='navbar'>
           <Navigation selected={-1}/>
         </div>
+        <Tile className='illness-vis'>
+          <IllnessBar/>
+        </Tile>
         <Tile>
-          <BarChart/>
           <br/>
           <br/>
-          <BubbleChart/>
+          <CharityBubble/>
           <br/>
           <br/>
-          <PieChart/>
+          <HospitalPie/>
         </Tile>
         <div className='page-title'>
           <h1>Hello from my vis page</h1>

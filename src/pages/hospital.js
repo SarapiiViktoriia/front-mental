@@ -1,9 +1,9 @@
-import "./basic.css";
+import "../css/basic.css";
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../custom";
-import { modalProps, multiSelectProps, states, pagination_parallax, owners } from '../assets/static';
+import { Card, TinyCard, Navigation } from "../components";
+import { modalProps, multiSelectProps, states, pagination_parallax, owners } from '../static';
 import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Select, SelectItem, Slider } from "carbon-components-react";
 const selectProps = () => ({
   labelText: "Sort By",

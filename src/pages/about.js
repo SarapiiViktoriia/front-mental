@@ -1,6 +1,6 @@
-import './basic.css';
+import '../css/basic.css';
 import React, { Component } from 'react';
-import { Card, Navigation } from '../custom';
+import { Card, Navigation } from '../components'
 import { Tile } from 'carbon-components-react';
 import Caleb from "../assets/profiles/Caleb.jpg";
 import Shreyas from "../assets/profiles/Shreyas.jpg";

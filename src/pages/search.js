@@ -1,10 +1,10 @@
-import './basic.css'
+import '../css/basic.css'
 import React, { Component } from 'react';
-import { Navigation, Card } from '../custom';
+import { Card, Navigation } from "../components";
 const query_object = {
   filters: []
 };
-class SearchPage extends Component{
+class Search extends Component{
   constructor(props){
     super(props);
     this.state = {
@@ -182,4 +182,4 @@ class SearchPage extends Component{
     );
   }
 }
-export default SearchPage;
+export default Search;

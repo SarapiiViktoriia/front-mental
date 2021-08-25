@@ -9,7 +9,7 @@ import About from '../src/pages/about';
 import Hospital from '../src/pages/hospital';
 import Charity from '../src/pages/charity';
 import Illness from '../src/pages/illness';
-import { Navigation } from '../src/custom';
+import { Navigation } from '../src/components';
 configure({ adapter: new Adapter() }); 
 global.fetch = require('jest-fetch-mock');
 test('<Home> should contain <Navigation>.', ()=>{
