@@ -61,18 +61,9 @@ class Search extends Component{
         <div className="instance-grid">
           {}
           {charities.map(charity => (
-            <Card
+            <Card className='search-card'
               title={charity.name}
               image={charity.image_url}
-              style={{
-                marginLeft: "15px",
-                marginRight: "15px",
-                marginTop: "30px",
-                maxWidth: "385px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between"
-              }}
               searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
               label1_heading="Rating"
               label1={String(charity.rating)}
@@ -97,18 +88,9 @@ class Search extends Component{
         <div className="instance-grid">
           {}
           {hospitals.map(hospital => (
-            <Card
+            <Card className='search-card'
               title={hospital.name}
               image={hospital.image_url}
-              style={{
-                marginLeft: "15px",
-                marginRight: "15px",
-                marginTop: "30px",
-                maxWidth: "385px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between"
-              }}
               searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
               label1_heading="City"
               label1={hospital.city}
@@ -133,18 +115,9 @@ class Search extends Component{
         <div className="instance-grid">
           {}
           {illnesses.map(illness => (
-            <Card
+            <Card className='search-card'
               title={illness.name}
               image={illness.image_url}
-              style={{
-                marginLeft: "15px",
-                marginRight: "15px",
-                marginTop: "40px",
-                maxWidth: "385px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between"
-              }}
               searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
               label1_heading="Curable"
               label1={illness.curable}

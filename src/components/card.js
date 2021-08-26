@@ -6,9 +6,8 @@ export class Card extends Component {
   render() {
     return (
       <ClickableTile
-        className="cards"
+        className={"cards " + this.props.className}
         href={this.props.href}
-        style={this.props.style}
       >
         <div>
           <img src={this.props.image} width="350" height="370" alt="card-pic" />

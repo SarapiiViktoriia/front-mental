@@ -23,10 +23,10 @@ export class PieChart extends Component {
           var state = 0;
           var notavail = 0;
           dataset.objects.forEach(function(d) {
-              if(d.owner == "PROPRIETARY"){proprietary++;}
-              if(d.owner == "NON-PROFIT"){nonprofit++;}
-              if(d.owner == "GOVERNMENT - STATE"){state++;}
-              if(d.owner == "NOT AVAILABLE"){notavail++;}
+              if(d.owner === "PROPRIETARY"){proprietary++;}
+              if(d.owner === "NON-PROFIT"){nonprofit++;}
+              if(d.owner === "GOVERNMENT - STATE"){state++;}
+              if(d.owner === "NOT AVAILABLE"){notavail++;}
           })
           var data = [{"label":"PROPRIETARY", "value":proprietary}, 
                   {"label":"NON-PROFIT", "value":nonprofit}, 

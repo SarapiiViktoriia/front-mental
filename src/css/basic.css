@@ -172,3 +172,12 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
   stroke: #000;
   shape-rendering: crispEdges;
 }
+.search-card {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 30px;
+  max-width: 385px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

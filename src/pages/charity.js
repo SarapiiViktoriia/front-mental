@@ -1,18 +1,5 @@
 import "../css/basic.css";
 import React, { Component } from "react";
-import {
-  TwitterTimelineEmbed,
-  TwitterShareButton,
-  TwitterFollowButton,
-  TwitterHashtagButton,
-  TwitterMentionButton,
-  TwitterTweetEmbed,
-  TwitterMomentShare,
-  TwitterDMButton,
-  TwitterVideoEmbed,
-  TwitterOnAirButton
-} from "react-twitter-embed";
-import { Timeline } from "react-twitter-widgets";
 import Plx from 'react-plx';
 import { Card, TinyCard, Navigation } from "../components";
 import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../static';
