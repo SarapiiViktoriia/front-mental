@@ -5,10 +5,7 @@ import Highlight from 'react-highlighter';
 export class Card extends Component {
   render() {
     return (
-      <ClickableTile
-        className={"cards " + this.props.className}
-        href={this.props.href}
-      >
+      <ClickableTile className={"cards " + this.props.className} href={this.props.href} style={this.props.style}>
         <div>
           <img src={this.props.image} width="350" height="370" alt="card-pic" />
         </div>
@@ -93,11 +90,7 @@ export class Card extends Component {
 export class TinyCard extends Component {
   render() {
     return (
-      <ClickableTile
-        className="cards"
-        href={this.props.href}
-        style={this.props.style}
-      >
+      <ClickableTile className={"cards " + this.props.className} href={this.props.href} style={this.props.style}>
         <div>
           <img src={this.props.image} width="200" height="190" alt=''/>
         </div>

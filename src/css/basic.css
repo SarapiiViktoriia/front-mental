@@ -172,7 +172,7 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
   stroke: #000;
   shape-rendering: crispEdges;
 }
-.search-card {
+.grid-card {
   margin-left: 15px;
   margin-right: 15px;
   margin-top: 30px;

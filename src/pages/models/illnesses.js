@@ -1,9 +1,9 @@
-import "../css/basic.css";
+import "../../css/basic.css";
 import React, { Component } from "react";
 import YouTube from "react-youtube";
 import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../components";
-import { modalProps, pagination_parallax } from '../static';
+import { Card, TinyCard, Navigation } from "../../components";
+import { modalProps, pagination_parallax } from '../../static';
 import { Tile, FormLabel, PaginationV2, ModalWrapper, Slider, Select, SelectItem } from "carbon-components-react";
 const sliderProps = () => ({
   light: false,
@@ -195,20 +195,10 @@ export class Illnesses extends Component {
           </div>
         </Tile>
         <div className="instance-grid">
-          {}
           {illnesses_slice.map(illness => (
-            <Card
+            <Card className='grid-card'
               title={illness.name}
               image={illness.image_url}
-              style={{
-                marginLeft: "15px",
-                marginRight: "15px",
-                marginTop: "40px",
-                maxWidth: "385px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between"
-              }}
               label1_heading="Curable"
               label1={illness.curable}
               label2_heading="Chronic"

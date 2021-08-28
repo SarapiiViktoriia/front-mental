@@ -61,7 +61,7 @@ class Search extends Component{
         <div className="instance-grid">
           {}
           {charities.map(charity => (
-            <Card className='search-card'
+            <Card className='grid-card'
               title={charity.name}
               image={charity.image_url}
               searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
@@ -88,7 +88,7 @@ class Search extends Component{
         <div className="instance-grid">
           {}
           {hospitals.map(hospital => (
-            <Card className='search-card'
+            <Card className='grid-card'
               title={hospital.name}
               image={hospital.image_url}
               searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}
@@ -115,7 +115,7 @@ class Search extends Component{
         <div className="instance-grid">
           {}
           {illnesses.map(illness => (
-            <Card className='search-card'
+            <Card className='grid-card'
               title={illness.name}
               image={illness.image_url}
               searchValue={new RegExp(this.props.value.replace(/ *, */g, ',').replace(/,/g, "|"), 'i')}

@@ -1,9 +1,9 @@
-import "../css/basic.css";
+import "../../css/basic.css";
 import React, { Component } from "react";
 import GoogleMapReact from "google-map-react";
 import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../components";
-import { modalProps, multiSelectProps, states, pagination_parallax, owners } from '../static';
+import { Card, TinyCard, Navigation } from "../../components";
+import { modalProps, multiSelectProps, states, pagination_parallax, owners } from '../../static';
 import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Select, SelectItem, Slider } from "carbon-components-react";
 const selectProps = () => ({
   labelText: "Sort By",
@@ -217,20 +217,10 @@ export class Hospitals extends Component {
           </div>
         </Tile>
         <div className="instance-grid">
-          {}
           {hospitals_slice.map(hospital => (
-            <Card
+            <Card className='grid-card'
               title={hospital.name}
               image={hospital.image_url}
-              style={{
-                marginLeft: "15px",
-                marginRight: "15px",
-                marginTop: "30px",
-                maxWidth: "385px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between"
-              }}
               label1_heading="City"
               label1={hospital.city}
               label2_heading="State"

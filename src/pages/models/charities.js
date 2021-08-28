@@ -1,8 +1,8 @@
-import "../css/basic.css";
+import "../../css/basic.css";
 import React, { Component } from "react";
 import Plx from 'react-plx';
-import { Card, TinyCard, Navigation } from "../components";
-import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../static';
+import { Card, TinyCard, Navigation } from "../../components";
+import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../../static';
 import { Tile, FormLabel, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
 const sliderPropsIncome = () => ({
   light: false,
@@ -274,20 +274,10 @@ export class Charities extends Component {
           </div>
         </Tile>
         <div className="instance-grid">
-          {}
           {charities_slice.map(charity => (
-            <Card
+            <Card className='grid-card'
               title={charity.name}
               image={charity.image_url}
-              style={{
-                marginLeft: "15px",
-                marginRight: "15px",
-                marginTop: "30px",
-                maxWidth: "385px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between"
-              }}
               label1_heading="Rating"
               label1={String(charity.rating)}
               label2_heading="State"

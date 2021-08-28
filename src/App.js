@@ -7,9 +7,10 @@ import Home from './pages/home';
 import About from './pages/about';
 import Search from './pages/search';
 import { MyVis, YourVis} from './pages/visualization';
-import { Hospitals, Hospital } from './pages/hospital';
-import { Illnesses, Illness } from './pages/illness';
-import { Charities, Charity } from './pages/charity';
+import { Illnesses, Charities } from './pages/models';
+import { Hospitals, Hospital } from './pages/models/hospitals';
+import { Illness } from './pages/models/illnesses';
+import { Charity } from './pages/models/charities';
 class App extends Component {
   render() {
     const queryString = require("query-string");
