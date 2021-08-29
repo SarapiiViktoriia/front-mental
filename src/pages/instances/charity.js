@@ -21,17 +21,13 @@ export class Charity extends Component {
         });
     }
     render() {
-      const { illness } = fetch(
-        `http:
-      )
+      fetch(`http:
         .then(results => results.json())
         .then(data => {
           console.log(data);
           this.setState({ illness: data });
         });
-      const { hospital } = fetch(
-        `http:
-      )
+      fetch(`http:
         .then(results => results.json())
         .then(data => {
           console.log(data);
@@ -136,7 +132,7 @@ export class Charity extends Component {
                     fontSize: "1.0rem"
                   }}
                 >
-                  <a style={{ color: "#000000" }}>URL: </a>
+                  <text style={{ color: "#000000" }}>URL: </text>
                   <a
                     href={this.state.charity.website_url}
                     style={{ color: "#000000" }}

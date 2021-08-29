@@ -1,16 +1,14 @@
 import "./css/App.css";
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Tile } from 'carbon-components-react';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { TinyButton as ScrollUpButton } from 'react-scroll-up-button';
 import Home from './pages/home';
 import About from './pages/about';
 import Search from './pages/search';
 import { MyVis, YourVis} from './pages/visualization';
-import { Illnesses, Charities } from './pages/models';
-import { Hospitals, Hospital } from './pages/models/hospitals';
-import { Illness } from './pages/models/illnesses';
-import { Charity } from './pages/models/charities';
+import { Hospitals, Illnesses, Charities } from './pages/models';
+import { Hospital,  Illness,   Charity }   from './pages/instances';
 class App extends Component {
   render() {
     const queryString = require("query-string");
