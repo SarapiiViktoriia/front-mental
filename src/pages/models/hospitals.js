@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Plx from 'react-plx';
 import { Card, Navigation } from "../../components";
 import { modalProps, multiSelectProps, states, pagination_parallax, owners } from '../../static';
-import { Tile, PaginationV2, ModalWrapper, MultiSelect, Select, SelectItem, Slider } from "carbon-components-react";
+import { Tile, PaginationV2, ModalWrapper, MultiSelect, Select, SelectItem, Slider, Search } from "carbon-components-react";
 const selectProps = () => ({
   labelText: "Sort By",
   hideLabel: true,
@@ -86,10 +86,6 @@ export class Hospitals extends Component {
   };
   handleSubmit = evt => {
     query_object.filters = [];
-    console.log(
-      "Here is the query string before I do shit: " +
-        JSON.stringify(query_object)
-    );
     if (this.sort_value === "no-sorting") query_object.order_by = [];
     else if (this.sort_value === "name-asc")
       query_object.order_by = [{ field: "name", direction: "asc" }];
@@ -113,9 +109,10 @@ export class Hospitals extends Component {
     }
     query_object.filters.push({ name: "population", op: "ge", val: this.min_pop });
     query_object.filters.push({ name: "population", op: "le", val: this.max_pop });
-    console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;
+  };
+  handleSearch = evt => {
   };
   render() {
     const { hospitals_slice } = this.state;
@@ -139,7 +136,10 @@ export class Hospitals extends Component {
               pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
             />
-          </Plx>  
+          </Plx>
+          <Plx className='instance-search' parallaxData={pagination_parallax}>
+            <Search onKeyPress={this.handleSearch} labelText="" placeHolderText="Search Charities"/>
+          </Plx>
           <div className="filter-modal">
             <ModalWrapper 
               handleSubmit={this.handleSubmit}

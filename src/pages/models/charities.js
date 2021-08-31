@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Plx from 'react-plx';
 import { Card, Navigation } from "../../components";
 import { modalProps, multiSelectProps, selectProps, states, pagination_parallax } from '../../static';
-import { Tile, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem } from "carbon-components-react";
+import { Tile, PaginationV2, ModalWrapper, MultiSelect, Slider, Select, SelectItem, Search } from "carbon-components-react";
 const sliderPropsIncome = () => ({
   light: false,
   hideTextInput: false,
@@ -107,10 +107,6 @@ export class Charities extends Component {
   };
   handleSubmit = evt => {
     query_object.filters = [];
-    console.log(
-      "Here is the query string before I do shit: " +
-        JSON.stringify(query_object)
-    );
     if (this.sort_value === "no-sorting") query_object.order_by = [];
     else if (this.sort_value === "name-asc")
       query_object.order_by = [{ field: "name", direction: "asc" }];
@@ -139,9 +135,10 @@ export class Charities extends Component {
     query_object.filters.push({ name: "rating", op: "le", val: this.max_rating });
     query_object.filters.push({ name: "incomeAmount", op: "ge", val: this.min_income * 100000 });
     query_object.filters.push({ name: "incomeAmount", op: "le", val: this.max_income * 100000 });
-    console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;
+  };
+  handleSearch = evt => {
   };
   render() {
     const { charities_slice } = this.state;
@@ -166,6 +163,9 @@ export class Charities extends Component {
               onChange={this.handlePageChange}
             />
           </Plx>
+          <Plx className='instance-search' parallaxData={pagination_parallax}>
+            <Search onKeyPress={this.handleSearch} labelText="" placeHolderText="Search Charities"/>
+          </Plx>
           <div className="filter-button">
             <ModalWrapper
               handleSubmit={this.handleSubmit}
@@ -180,15 +180,9 @@ export class Charities extends Component {
                     <SelectItem value="name-asc" text="Name: A to Z" />
                     <SelectItem value="name-desc" text="Name: Z to A" />
                     <SelectItem value="rating-asc" text="Rating: Low to High" />
-                    <SelectItem
-                      value="rating-desc"
-                      text="Rating: High to Low"
-                    />
+                    <SelectItem value="rating-desc" text="Rating: High to Low"/>
                     <SelectItem value="income-asc" text="Income: Low to High" />
-                    <SelectItem
-                      value="income-desc"
-                      text="Income: High to Low"
-                    />
+                    <SelectItem value="income-desc" text="Income: High to Low"/>
                   </Select>
                 </div>
                 <br />
@@ -198,12 +192,8 @@ export class Charities extends Component {
                 <div className="filter-options">
                   <h3 style={{ paddingBottom: "5px" }}>Filter By</h3>
                   <div className="select-filter">
-                    <Select
-                      onChange={this.handleDeductible}
-                      labelText="Deductible"
-                      inline="true"
-                      defaultValue="deductible-default"
-                    >
+                    <Select onChange={this.handleDeductible} labelText="Deductible" 
+                            inline="true" defaultValue="deductible-default">
                       <SelectItem value="deductible-default" text="None" />
                       <SelectItem value="deductible-true" text="Yes" />
                       <SelectItem value="deductible-false" text="No" />
@@ -226,8 +216,7 @@ export class Charities extends Component {
                     <h6>Rating</h6>
                     <div style={{ display: "inline" }}>
                       <text>min: </text>
-                      <Slider
-                        id="min-slider"
+                      <Slider id="min-slider"
                         value="80"
                         onChange={this.handleMinRating}
                         {...sliderPropsRating()}
@@ -236,8 +225,7 @@ export class Charities extends Component {
                     <br />
                     <div style={{ display: "inline" }}>
                       <text>max: </text>
-                      <Slider
-                        id="max-slider"
+                      <Slider id="max-slider"
                         value="100"
                         onChange={this.handleMaxRating}
                         {...sliderPropsRating()}
@@ -249,8 +237,7 @@ export class Charities extends Component {
                     <h6>Income ($100000s)</h6>
                     <div style={{ display: "inline" }}>
                       <text>min: </text>
-                      <Slider
-                        id="min-slider"
+                      <Slider id="min-slider"
                         value="5"
                         onChange={this.handleMinIncome}
                         {...sliderPropsIncome()}
@@ -259,8 +246,7 @@ export class Charities extends Component {
                     <br />
                     <div style={{ display: "inline" }}>
                       <text>max: </text>
-                      <Slider
-                        id="max-slider"
+                      <Slider id="max-slider"
                         value="340"
                         onChange={this.handleMaxIncome}
                         {...sliderPropsIncome()}

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Plx from 'react-plx';
 import { Card, Navigation } from "../../components";
 import { modalProps, pagination_parallax } from '../../static';
-import { Tile, PaginationV2, ModalWrapper, Slider, Select, SelectItem } from "carbon-components-react";
+import { Tile, PaginationV2, ModalWrapper, Slider, Select, SelectItem, Search } from "carbon-components-react";
 const sliderProps = () => ({
   light: false,
   hideTextInput: false,
@@ -81,10 +81,6 @@ export class Illnesses extends Component {
     this.max_age = 50;
   };
   handleSubmit = evt => {
-    console.log(
-      "Here is the query string before I do shit: " +
-        JSON.stringify(query_object)
-    );
     if (this.sort_value === "no-sorting") query_object.order_by = [];
     else if (this.sort_value === "name-asc")
       query_object.order_by = [{ field: "name", direction: "asc" }];
@@ -111,9 +107,10 @@ export class Illnesses extends Component {
       query_object.filters.push({ name: "genetic", op: "eq", val: "No" });
     query_object.filters.push({ name: "average_age", op: "ge", val: this.min_age });
     query_object.filters.push({ name: "average_age", op: "le", val: this.max_age });
-    console.log("Here is the reloaded query: " + JSON.stringify(query_object));
     this.setState({ query: JSON.stringify(query_object) });
     return true;
+  };
+  handleSearch = evt => {
   };
   render() {
     const { illnesses_slice } = this.state;
@@ -137,6 +134,9 @@ export class Illnesses extends Component {
               pageSizes={[3, 6, 9, 10]}
               onChange={this.handlePageChange}
             />
+          </Plx>
+          <Plx className='instance-search' parallaxData={pagination_parallax}>
+            <Search onKeyPress={this.handleSearch} labelText="" placeHolderText="Search Charities"/>
           </Plx>
           <div className="filter-button">
             <ModalWrapper handleSubmit={this.handleSubmit} onSecondarySubmit={this.handleSecondarySubmit} {...modalProps()}>
