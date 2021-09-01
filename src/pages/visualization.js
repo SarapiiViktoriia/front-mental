@@ -12,12 +12,14 @@ export class MyVis extends Component {
         <Tile className='illness-vis'>
           <IllnessBar/>
         </Tile>
-        <Tile>
-          <br/>
-          <br/>
+        <br/>
+        <br/>
+        <Tile className='charity-vis'>
           <CharityBubble/>
-          <br/>
-          <br/>
+        </Tile>
+        <br/>
+        <br/>
+        <Tile className='hospital-vis'>
           <HospitalPie/>
         </Tile>
         <div className='page-title'>
