@@ -23,8 +23,6 @@ export class BarChart extends Component {
         .then(results => results.json())
         .then(data => {
           data.objects.forEach(function(d) {
-          d.name = d.name;
-          d.population = d.population;
           });
           x.domain(
           data.objects.map(function(d) {

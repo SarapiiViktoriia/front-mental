@@ -1,6 +1,6 @@
 import '../css/basic.css';
 import React, { Component } from 'react';
-import { Tile } from 'carbon-components-react';
+import { Tile, ContentSwitcher, Switch } from 'carbon-components-react';
 import { Navigation, IllnessBar, CharityBubble, HospitalPie } from '../components/';
 export class MyVis extends Component {
   render(){
@@ -9,22 +9,27 @@ export class MyVis extends Component {
         <div className='navbar'>
           <Navigation selected={-1}/>
         </div>
-        <Tile className='illness-vis'>
+        <div className='page-title'>
+          <h1>Visualizations of our site</h1>
+        </div>
+        <ContentSwitcher className='vis-switcher' onChange={this.onChange}>
+          <Switch text="Illness Bar" name='bar'/>
+          <Switch text="Charity Bubble" name='bubble'/>
+          <Switch text="Hospital Pie" name='pie'/>
+        </ContentSwitcher>
+        <Tile className='illness-vis vis-container'>
           <IllnessBar/>
         </Tile>
         <br/>
         <br/>
-        <Tile className='charity-vis'>
+        <Tile className='charity-vis vis-container'>
           <CharityBubble/>
         </Tile>
         <br/>
         <br/>
-        <Tile className='hospital-vis'>
+        <Tile className='hospital-vis vis-container'>
           <HospitalPie/>
         </Tile>
-        <div className='page-title'>
-          <h1>Hello from my vis page</h1>
-        </div>
       </div>
     )
   }

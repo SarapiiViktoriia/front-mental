@@ -166,6 +166,32 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
 .bg-3 {
   background-image: url("../assets/images/helping.jpeg");
 }
+.vis-switcher {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  justify-content: center;
+}
+.vis-container {
+  background-color:  rgb(255,255,255,0.8);
+}
+.bx--content-switcher-btn {
+  color: white;
+  border: 1px solid white;
+}
+.bx--content-switcher-btn:hover {
+  color: black;
+  background-color: white;
+}
+.bx--content-switcher-btn:focus {
+  color: white;
+  background-color: white;
+}
+.bx--content-switcher-btn.bx--content-switcher--selected {
+  background-color: rgb(255,255,255, 0.25)
+}
+.bx--content-switcher-btn:not(:first-of-type) {
+    border-left: 1px solid white;
+}
 .bx--dropdown {
   background-color: transparent;
   box-shadow: 0 1px 0 0 white;
