@@ -5,8 +5,8 @@ export class PieChart extends Component {
       this.drawChart();
     }
     drawChart() {
-      var w = 900,                        
-      h = 900,                            
+      var w = 600,                        
+      h = 600,                            
       r = 300;                            
       var colors = [];
       while (colors.length < 100) {
@@ -73,7 +73,7 @@ export class PieChart extends Component {
     }
     render() {
       return (
-        <div id="area3"/>
+        <div id="area3" className="vis-area"/>
       );
     }
   }

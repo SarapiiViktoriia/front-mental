@@ -173,6 +173,12 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
 }
 .vis-container {
   background-color:  rgb(255,255,255,0.8);
+  justify-content: center;
+}
+.vis-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 .bx--content-switcher-btn {
   color: white;

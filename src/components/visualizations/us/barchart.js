@@ -75,7 +75,7 @@ export class BarChart extends Component {
     }
     render() {
       return (
-        <div id="area1"/>
+        <div id="area1" className="vis-area"/>
       );
     }
   }

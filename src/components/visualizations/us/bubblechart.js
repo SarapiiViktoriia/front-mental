@@ -72,7 +72,7 @@ export class BubbleChart extends Component {
     }
     render() {
       return (
-        <div id="area2"/>
+        <div id="area2" className="vis-area"/>
       );
     }
   }
