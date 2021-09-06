@@ -1,14 +1,12 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import { shallow, mount, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import { expect } from 'chai';
 import App from '../src/App';
 import Home from '../src/pages/home';
 import About from '../src/pages/about';
-import Hospital from '../src/pages/hospital';
-import Charity from '../src/pages/charity';
-import Illness from '../src/pages/illness';
+import { Hospital, Charity, Illness} from '../src/pages/instances';
 import { Navigation } from '../src/components';
 configure({ adapter: new Adapter() }); 
 global.fetch = require('jest-fetch-mock');
