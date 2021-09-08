@@ -196,11 +196,11 @@ Tile.hospital-instance Tile.illness-instance Tile.charity-instance {
   background-color: rgb(255,255,255, 0.25)
 }
 .bx--content-switcher-btn:not(:first-of-type) {
-    border-left: 1px solid white;
+  border-left: 1px solid white;
 }
 .bx--dropdown {
   background-color: transparent;
-  box-shadow: 0 1px 0 0 white;
+  box-shadow: none;
 }
 .bx--list-box__menu-icon{
   padding: 0
